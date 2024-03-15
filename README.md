@@ -11,15 +11,18 @@ Gerardo Sandoval - A01721732<br>
 CVForge.ai es un SaaS que ayuda al usuario a crear un CV apto para la posición que quiera aplicar con la ayuda de IA. Esta aplicación utiliza nuestra base de datos para buscar CVs que fueron aceptados en la posición deseada por el usuario y utilizando la información del usuario brindada por el mismo usuario vía subiendo su CV, permitiendo al usuario vincular su cuenta de LinkedIn o ingresar su información manualmente. CVForge.ai utiliza inteligencia artificial para generar un CV adaptado a la posición específica que el usuario desea solicitar. Además, proporciona retroalimentación sobre el CV generado, ayudando al usuario a mejorar su presentación. Apis de GPT y de Linkedin son utilizadas.
 
 ## Table of Contents
-- [Introduction](#introduction)
+- [Stack](#stack)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Features](#features)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Introduction
-En este repo se tiene los avances actuales.
+## Stack
+Front-end: Next.js, <br> 
+Back-end: Node.js, Express.js <br>
+DB: PostgresSql <br>
+Model: OpenAi API
 
 ## Installation
 ```bash
