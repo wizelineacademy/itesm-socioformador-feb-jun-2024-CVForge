@@ -37,6 +37,4 @@ npm start
 ```
 
 ## License
-Include a section for the license of your project. For example:
-
 [MIT](https://choosealicense.com/licenses/mit/)
