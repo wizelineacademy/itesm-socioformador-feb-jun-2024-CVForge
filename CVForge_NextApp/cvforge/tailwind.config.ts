@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        koh_santepheap: ["Koh-Santepheap", "serif"],
+        koh_santepheap: ["Koh-Santepheap"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
