@@ -3,23 +3,23 @@ import React from 'react'
 
 function Navbar() {
     return (
-        <div className='text-black px-24 py-5 bg-white shadow-md flex'>
-            <h1 className='font-koh_santepheap text-4xl font-bold'>CVForge<span className='text-green-400'>.ai</span></h1>
-            <div className='text-right px-20 menu'>
+        <div className='text-normaltext py-4 px-10 gap-[40%] bg-white shadow-md flex'>
+            <h1 className='font-koh_santepheap px-10 text-4xl font-bold'>CVForge<span className='text-gptgreen'>.ai</span></h1>
+            <div className=''>
                 <nav>
-                    <ul className='flex gap-[30%] py-3'>
-                        <li href=''>
+                    <ul className='flex gap-[30%]'>
+                        <li className='py-2' href=''>
                             Home
                         </li>
-                        <li>
+                        <li className='py-2'>
                             Editor
                         </li>
-                        <li>
+                        <li className='py-2'>
                             Roadmap
                         </li>
-                        <li>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                button
+                        <li className=''>
+                            <button class="object-right bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold w-40 py-2 px-4 rounded">
+                                Login/Sign up
                             </button>
                         </li>
                     </ul>

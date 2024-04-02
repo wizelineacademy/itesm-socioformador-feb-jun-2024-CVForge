@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        'gptgreen': "#74AA9C",
+        'normaltext': "#474646"
+      },
       fontFamily: {
         koh_santepheap: ["Koh-Santepheap"],
       },
