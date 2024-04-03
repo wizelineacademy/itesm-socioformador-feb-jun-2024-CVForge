@@ -3,7 +3,7 @@ import React from 'react'
 
 function Navbar() {
     return (
-        <div className='text-normaltext py-4 px-10 gap-[40%] bg-white shadow-md flex'>
+        <div className='text-normaltext py-5 px-10 gap-[40%] bg-white shadow-md flex'>
             <h1 className='font-koh_santepheap px-10 text-4xl font-bold'>CVForge<span className='text-gptgreen'>.ai</span></h1>
             <div className=''>
                 <nav>
