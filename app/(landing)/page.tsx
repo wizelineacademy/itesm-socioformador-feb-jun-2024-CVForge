@@ -1,9 +1,8 @@
-// Icon imports
-import MainLogo from "@/public/assets/MainLogo"
+"use client";
 export default function Home() {
   return (
     <main className="w-full h-full">
-      <MainLogo />
+      Landing
     </main>
   );
 }
