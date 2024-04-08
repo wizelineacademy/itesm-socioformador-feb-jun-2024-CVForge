@@ -1,10 +1,16 @@
-import Image from "next/image";
-import Navbar from "./components/Navbar"
+import React from "react";
+import Navbar from "./components/Navbar";
+import LandingContent from "./components/LandingContent";
+import LandingFeature from "./components/LandingFeature";
 
-export default function Home() {
+const Home: React.FC = () => {
   return (
-    <main className="flex min-h-screen flex-col justify-between bg-slate-100">
+    <div className="flex flex-col min-h-screen bg-slate-100">
       <Navbar />
-    </main>
+      <LandingContent />
+      <LandingFeature />
+    </div>
   );
-}
+};
+
+export default Home;
