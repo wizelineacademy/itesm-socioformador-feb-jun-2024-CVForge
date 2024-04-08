@@ -33,8 +33,11 @@ npm i
 
 ## Usage
 ```bash
-npm start
+npm run dev
 ```
+
+## Plugins
+[Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
