@@ -1,7 +1,9 @@
 import React from "react";
 import Navbar from "./components/Navbar";
-import LandingContent from "./components/LandingContent";
-import LandingFeature from "./components/LandingFeature";
+import LandingContent from "./Landing/LandingContent";
+import LandingFeature from "./Landing/LandingFeature";
+import LandingPosition from "./Landing/LandingPosition";
+
 
 const Home: React.FC = () => {
   return (
@@ -9,6 +11,8 @@ const Home: React.FC = () => {
       <Navbar />
       <LandingContent />
       <LandingFeature />
+      <LandingPosition/>
+      
     </div>
   );
 };
