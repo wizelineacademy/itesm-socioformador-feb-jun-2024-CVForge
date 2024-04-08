@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import LandingContent from "./Landing/LandingContent";
 import LandingFeature from "./Landing/LandingFeature";
 import LandingPosition from "./Landing/LandingPosition";
+import Footer from "./components/Footer";
 
 
 const Home: React.FC = () => {
@@ -12,7 +13,8 @@ const Home: React.FC = () => {
       <LandingContent />
       <LandingFeature />
       <LandingPosition/>
-      
+
+      <Footer />
     </div>
   );
 };
