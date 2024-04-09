@@ -104,7 +104,7 @@ model technology {
 }
 
 model user {
-  user_id        String    @id @db.Uuid
+  user_id        String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   first_name     String    @db.VarChar(50)
   last_name      String    @db.VarChar(50)
   email          String    @unique @db.VarChar(255)
@@ -120,8 +120,8 @@ model user {
   verification   Boolean?
   is_active      Boolean?
   last_login     DateTime? @db.Timestamptz(6)
-  created_at     DateTime  @db.Timestamptz(6)
-  updated_at     DateTime? @db.Timestamptz(6)
+  created_at     DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at     DateTime? @default(now()) @updatedAt @db.Timestamptz(6)
   cv             cv[]
 }
 

@@ -1,9 +1,17 @@
+// Default imports
+import "@/style/globals.css";
+
+// Providers
+import ReduxProvider from "./ReduxProvider";
+
+// Components
+import LeftSidebar from "./layoutComponents/LeftSidebar";
+
 export const metadata = {
   title: 'CVForge',
   description: 'CVForge',
   keywords: ['CV, Resume, AI, ai, Linkedin, Google']
 }
-
 
 export default function RootLayout({
   children,
@@ -12,7 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html className="scroll-smooth" lang="en">
-      <body>layout{children}</body>
+      <ReduxProvider>
+        <LeftSidebar />
+        <body className="ml-64">layout{children}</body>
+      </ReduxProvider>
     </html>
   )
 }

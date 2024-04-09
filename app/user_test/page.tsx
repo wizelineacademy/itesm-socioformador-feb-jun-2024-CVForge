@@ -7,9 +7,9 @@ export default function Home() {
 
   const createUser = async () => {
     const userData = {
-      user_id: "5da644ba-b969-4d6e-9417-b88865464ffb",
+      first_name: "Test",
       email: "example@mail.com",
-      first_name: "Test"
+      password: "123"
     };
 
     const response = await fetch('/api/user', {
