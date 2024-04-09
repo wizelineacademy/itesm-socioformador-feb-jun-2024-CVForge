@@ -1,6 +1,4 @@
 
-
-
 @import url('https://fonts.googleapis.com/css2?family=Koh+Santepheap:wght@100;300;400;700;900&display=swap');
 
 @tailwind base;
@@ -36,4 +34,10 @@ body {
     text-wrap: balance;
   }
 }
+
+.border-gradient {
+  border: 2px solid;
+  border-image: linear-gradient(to right, #10b981, #22d3ee) 1;
+}
+
 
