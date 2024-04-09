@@ -5,7 +5,7 @@ const Menu: React.FC = ({ }) => {
     return (
         <>
         Menu
-        </>
+                </>
     )
 }
 
