@@ -29,11 +29,11 @@ const Login = () => {
             <div className="w-1/2 flex justify-center items-center">
                 {/* Right side - Login form */}
                 <div className="text-center">
-                    <h2 className="text-2xl font-bold mb-4">Try CVForge.ai now!</h2>
+                    <h2 className="text-3xl text-inter font-bold mb-4 underline ">Try CVForge.ai now!</h2>
                     {/* Signup buttons */}
                     <div className="mb-21">
                         <div className="mb-6">
-                            <button className="text-gptgreen font-bold border-gradient rounded-full" style={buttonStyle}>
+                            <button className="text-gptgreen font-bold border-gradient rounded-lg" style={buttonStyle}>
                                 <img src="/assets/googleicon.png" className="mr-2" style={iconStyle} /> Sign up with Google
                             </button>
                         </div>
@@ -57,7 +57,7 @@ const Login = () => {
                         </button>
                     </div>
                     {/* Already have an account? */}
-                    <p className="mb-2 my-20">Already have an account?</p>
+                    <p className="mb-2 my-20 text-inter font-bold">Already have an account?</p>
                     {/* Sign in button */}
                     <button className="bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold rounded-full" style={buttonStyle}>
                         Sign In

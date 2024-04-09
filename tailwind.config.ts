@@ -14,6 +14,7 @@ const config: Config = {
       },
       fontFamily: {
         koh_santepheap: ["Koh-Santepheap"],
+        inter: ["Inter"],
         
       },
       backgroundImage: {
