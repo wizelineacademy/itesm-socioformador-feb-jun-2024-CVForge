@@ -11,6 +11,13 @@ const Login = () => {
         justifyContent: 'center', // Align items horizontally in the button
     };
 
+    // Style for the Google icon image
+    const iconStyle = {
+        width: '24px', // Adjust as needed
+        height: '24px', // Adjust as needed
+        marginRight: '8px', // Add some spacing between icon and text
+    };
+
     return (
         <div className="flex h-screen" style={{backgroundImage: 'url(/assets/bgimg.png)', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat'}}>
             <div className="w-1/2 flex justify-center items-center">
@@ -27,25 +34,30 @@ const Login = () => {
                     <div className="mb-21">
                         <div className="mb-6">
                             <button className="text-gptgreen font-bold border-gradient rounded-full" style={buttonStyle}>
-                                <img src="path_to_google_icon"className="mr-2" /> Sign up with Google
+                                <img src="/assets/googleicon.png" className="mr-2" style={iconStyle} /> Sign up with Google
                             </button>
                         </div>
-                        <div className="mb-2">
+                        <div className="mb-6"> {/* Add margin bottom for spacing */}
                             <button className="text-gptgreen font-bold border-gradient rounded-full" style={buttonStyle}>
-                                <img src="path_to_linkedin_icon"className="mr-2" /> Sign up with LinkedIn
+                                <img src="/assets/linkedinicon.png" className="mr-2" style={iconStyle} /> Sign up with LinkedIn
                             </button>
                         </div>
                     </div>
                     {/* Line between Sign up with LinkedIn and Create Account */}
-                    <hr className="my-10 border-gray-400"/>
+                    <div className = "flex"> 
+                        <hr className="my-3 w-[80%] border-gray-400 flex"/>
+                        <p className = "mx-2">or</p>
+                        <hr className="my-3 w-[80%] border-gray-400 flex"/>
+                    </div>
+
                     {/* Create account button */}
-                    <div className="mb-6">
+                    <div className="mb-6 my-5">
                         <button className="bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold rounded-full mb-4" style={buttonStyle}>
                             Create Account
                         </button>
                     </div>
                     {/* Already have an account? */}
-                    <p className="mb-2">Already have an account?</p>
+                    <p className="mb-2 my-20">Already have an account?</p>
                     {/* Sign in button */}
                     <button className="bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold rounded-full" style={buttonStyle}>
                         Sign In
