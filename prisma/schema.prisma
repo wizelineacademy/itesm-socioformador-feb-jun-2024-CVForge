@@ -15,7 +15,6 @@ model cv {
   education_id         String?                @db.Uuid
   personal_id          String?                @db.Uuid
   education            education?             @relation(fields: [education_id], references: [education_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cv_education_id")
-  cv_insight           cv_insight?            @relation(fields: [insight_id], references: [cv_insight_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cv_insight_id")
   personal_information personal_information?  @relation(fields: [personal_id], references: [personal_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cv_personal_id")
   position             position?              @relation(fields: [position_id], references: [position_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cv_position_id")
   user                 user?                  @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cv_user_id")
@@ -27,15 +26,14 @@ model cv {
 
 model cv_insight {
   cv_insight_id  String           @id @db.Uuid
-  score          Int?
-  cv             cv[]
+  score          Int
   recommendation recommendation[]
 }
 
 model education {
   education_id        String                @id @db.Uuid
-  school              String?               @db.VarChar(255)
-  degree              String?               @db.VarChar(255)
+  school              String                @db.VarChar(255)
+  degree              String                @db.VarChar(255)
   gpa                 Decimal?              @db.Decimal(5, 2)
   start_date          DateTime?             @db.Timestamptz(6)
   end_date            DateTime?             @db.Timestamptz(6)
@@ -45,37 +43,38 @@ model education {
 
 model personal_information {
   personal_id    String  @id @db.Uuid
-  first_name     String? @db.VarChar(50)
-  last_name      String? @db.VarChar(50)
-  email          String? @db.VarChar(50)
+  first_name     String  @db.VarChar(50)
+  last_name      String  @db.VarChar(50)
+  email          String  @unique @db.VarChar(255)
   phone          String? @db.VarChar(20)
-  github_link    String? @db.VarChar(70)
-  linkedin_link  String? @db.VarChar(70)
-  portfolio_link String? @db.VarChar(70)
+  github_link    String? @db.VarChar(255)
+  linkedin_link  String? @db.VarChar(255)
+  portfolio_link String? @db.VarChar(255)
   cv             cv[]
 }
 
 model position {
-  position_id      String  @id @db.Uuid
-  title            String? @db.VarChar(255)
-  description      String? @db.VarChar(1000)
-  company          String? @db.VarChar(255)
+  position_id      String   @id @db.Uuid
+  title            String   @db.VarChar(255)
+  description      String?  @db.VarChar(1000)
+  company_id       String?  @db.Uuid
   years_experience Int?
   cv               cv[]
+  company          company? @relation(fields: [company_id], references: [company_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model programming_language {
   language_id   String  @id @db.Uuid
   cv_id         String? @db.Uuid
-  language_name String? @db.VarChar(255)
-  proficiency   String? @db.VarChar(50)
+  language_name String  @db.VarChar(255)
+  proficiency   String  @db.VarChar(50)
   cv            cv?     @relation(fields: [cv_id], references: [cv_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_programming_language_cv_id")
 }
 
 model project {
   project_id  String    @id @db.Uuid
   cv_id       String?   @db.Uuid
-  name        String?   @db.VarChar(255)
+  name        String    @db.VarChar(255)
   description String?   @db.VarChar(1000)
   start_date  DateTime? @db.Timestamptz(6)
   end_date    DateTime? @db.Timestamptz(6)
@@ -85,43 +84,43 @@ model project {
 model recommendation {
   recommendation_id String      @id @db.Uuid
   insight_id        String?     @db.Uuid
-  title             String?     @db.VarChar(255)
-  text              String?     @db.VarChar(1000)
+  title             String      @db.VarChar(255)
+  text              String      @db.VarChar(1000)
   cv_insight        cv_insight? @relation(fields: [insight_id], references: [cv_insight_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_recommendation_insight_id")
 }
 
 model relevant_coursework {
   coursework_id String     @id @db.Uuid
   education_id  String?    @db.Uuid
-  course        String?    @db.VarChar(255)
+  course        String     @db.VarChar(255)
   education     education? @relation(fields: [education_id], references: [education_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_relevant_coursework_education_id")
 }
 
 model technology {
   technology_id   String  @id @db.Uuid
   cv_id           String? @db.Uuid
-  technology_name String? @db.VarChar(255)
+  technology_name String  @db.VarChar(255)
   cv              cv?     @relation(fields: [cv_id], references: [cv_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_technology_cv_id")
 }
 
 model user {
   user_id        String    @id @db.Uuid
-  first_name     String?   @db.VarChar(50)
-  last_name      String?   @db.VarChar(50)
-  email          String?   @db.VarChar(255)
+  first_name     String    @db.VarChar(50)
+  last_name      String    @db.VarChar(50)
+  email          String    @unique @db.VarChar(255)
   phone          String?   @db.VarChar(20)
   github_link    String?   @db.VarChar(255)
   linkedin_link  String?   @db.VarChar(255)
   portfolio_link String?   @db.VarChar(255)
   location       String?   @db.VarChar(255)
   birth_date     DateTime? @db.Timestamptz(6)
-  gender         String?   @db.Char(1)
-  password       String?   @db.VarChar(255)
+  gender         String?   @db.VarChar(10)
+  password       String    @db.VarChar(255)
   newsletter     Boolean?
   verification   Boolean?
   is_active      Boolean?
   last_login     DateTime? @db.Timestamptz(6)
-  created_at     DateTime? @db.Timestamptz(6)
+  created_at     DateTime  @db.Timestamptz(6)
   updated_at     DateTime? @db.Timestamptz(6)
   cv             cv[]
 }
@@ -129,10 +128,17 @@ model user {
 model work_experience {
   experience_id String    @id @db.Uuid
   cv_id         String?   @db.Uuid
-  company       String?   @db.VarChar(255)
-  position      String?   @db.VarChar(255)
+  company       String    @db.VarChar(255)
+  position      String    @db.VarChar(255)
   description   String?   @db.VarChar(1000)
   start_date    DateTime? @db.Timestamptz(6)
   end_date      DateTime? @db.Timestamptz(6)
   cv            cv?       @relation(fields: [cv_id], references: [cv_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_work_experience_cv_id")
+}
+
+model company {
+  company_id String     @id @db.Uuid
+  name       String     @db.VarChar(255)
+  location   String?    @db.VarChar(255)
+  position   position[]
 }

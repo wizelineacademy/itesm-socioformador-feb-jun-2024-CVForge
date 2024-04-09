@@ -15,14 +15,16 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
     // Await the resolution of the promise returned by `req.json()`
-    const { user_id, email, first_name } = await req.json();
+    const { user_id, email, first_name, last_name, password } = await req.json();
 
     try {
         const newUser = await prisma.user.create({
             data: {
                 user_id,
                 email,
-                first_name
+                first_name,
+                last_name,
+                password
             },
         });
 
