@@ -1,21 +1,27 @@
-import React from 'react';
-import MainLogo from '@/public/assets/MainLogo'; // Import the MainLogo component
+import React, { useState } from 'react';
+import MainLogo from '@/public/assets/MainLogo'; 
+import Popup from './Popup';
 
-const Login = () => {
-    // Extracted width and height from the Google button's styles
+const Login: React.FC= () => {
+
+    const [isPopupVisible, setPopupVisible] = useState(false); 
+
+    const togglePopup = () => {
+        setPopupVisible(!isPopupVisible);
+    };
     const buttonStyle = {
         width: '350px',
         height: '48px',
         display: 'flex',
-        alignItems: 'center', // Align items vertically in the button
-        justifyContent: 'center', // Align items horizontally in the button
+        alignItems: 'center', 
+        justifyContent: 'center', 
     };
 
-    // Style for the Google icon image
+    
     const iconStyle = {
-        width: '24px', // Adjust as needed
-        height: '24px', // Adjust as needed
-        marginRight: '8px', // Add some spacing between icon and text
+        width: '24px', 
+        height: '24px', 
+        marginRight: '8px',
     };
 
     return (
@@ -52,8 +58,7 @@ const Login = () => {
 
                     {/* Create account button */}
                     <div className="mb-6 my-5">
-                        <button className="bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold rounded-full mb-4" style={buttonStyle}>
-                            Create Account
+                    <button onClick={togglePopup} className="bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold rounded-full mb-4" style={buttonStyle}>                            Create Account
                         </button>
                     </div>
                     {/* Already have an account? */}
@@ -64,6 +69,7 @@ const Login = () => {
                     </button>
                 </div>
             </div>
+            {isPopupVisible && <Popup onClose={togglePopup} />}
         </div>
     );
 };
