@@ -9,7 +9,7 @@ export default function Home() {
     const userData = {
       first_name: "Test",
       last_name: "lol",
-      email: "example@mail.com",
+      email: "example2@mail.com",
       password: "123"
     };
 
@@ -34,13 +34,12 @@ export default function Home() {
 
   return (
     <main className="w-full h-full">
-      {/* <MainLogo /> */}
       <button onClick={createUser}>Create User</button>
       <button onClick={fetchUsers}>Get Users</button>
       <div>
         {users.map((user: any, index: number) => (
           <div key={index}>
-            {user.email} - {user.first_name}
+            {user.email} - {user.first_name} - {user.password}
           </div>
         ))}
       </div>
