@@ -1,6 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server';
 import prisma from '@/lib/prisma';
-import 
 
 export async function GET(req: NextRequest) {
     try {
@@ -21,7 +20,7 @@ export async function POST(req: NextRequest) {
                 email,
                 first_name,
                 last_name,
-                password
+                password // Store the hashed password
             },
         });
 
