@@ -8,6 +8,7 @@ export default function Home() {
   const createUser = async () => {
     const userData = {
       first_name: "Test",
+      last_name: "lol",
       email: "example@mail.com",
       password: "123"
     };

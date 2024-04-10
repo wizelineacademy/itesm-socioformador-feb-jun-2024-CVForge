@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux"
 import SecondaryLogo from "@/public/assets/SecondaryLogo"
 import CV_icon from "@/public/assets/cv/CV_icon"
 import PersonalInfo_icon from "@/public/assets/cv/PersonalInfo_icon"
-import { setCurrentTab } from "@/contexts/cv/sidebar/currentTab"
 import { RootState } from "@/contexts/cv/RootState"
 import Link from "next/link";
 
