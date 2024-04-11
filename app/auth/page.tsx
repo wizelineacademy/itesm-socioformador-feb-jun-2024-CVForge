@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import '../../style/globals.css'
-import Useroptions from "./Useroptions/components/useroptions";
+import Useroptions from "./Useroptions/components/Useroptions";
 
 const auth: React.FC = ({ }) => {
     return (

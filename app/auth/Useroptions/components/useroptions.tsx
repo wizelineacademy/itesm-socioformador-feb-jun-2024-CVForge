@@ -10,33 +10,35 @@ const Useroptions = () => {
         alignItems: 'center', // Align items vertically in the button
         justifyContent: 'center', // Align items horizontally in the button
     };
+    
+
+
     return (
-        <div className="flex h-screen" style={{backgroundImage: 'url(/assets/bgimg.png)', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat'}}>
-            <div className="w-1/2 flex justify-center items-center">
-                {/* Left side - Logo */}
-                <div style={{ marginLeft: '40px' }}>
-                    <MainLogo />
-                </div>
-            </div>
-            <div className="w-1/2 flex justify-center items-center">
-                {/* Right side - Login form */}
-                <form className="text-center">
-                <h1 className="text-7xl font-koh_santepheap mb-8">CVForge<span className="text-gptgreen">.ai</span></h1>
-                    <p className="text-left font-inter"> Email</p>
-                    <input type="email" placeholder="  Email" className="block w-96 h-12 border bg-transparent border-gradient rounded-md mb-4" />
-                    {/* Increased width from w-80 to w-96 */}
-                    <p className="text-left font-inter"> Password</p>
-                    <input type="password" placeholder="  Password" className="block w-96 h-12 bg-transparent border border-gradient rounded-md mb-4" />
-                    {/* Increased width from w-80 to w-96 */}
-                    <a href="#" className="block text-gptgreen mb-4">Forgot password?</a>
-                    <button className="bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold rounded-full" style={buttonStyle}>
-                        Sign In
+        <div className="flex h-screen justify-center items-center" style={{backgroundImage: 'url(/assets/bgimg.png)', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat'}}>
+            {/* Centered Content */}
+            <div className="text-center">
+
+                {/* Text and button to upload */}
+                <div>
+                <h1 className="text-4xl font-koh_santepheap mb-8"> Start creating your Professional<br/> CV with the help of our AI now!</h1>
+
+                    <button className="bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold rounded-full bg-transparent mb-8" style={buttonStyle}>
+                        Upload CV
                     </button>
-                </form>
+                </div>
+
+                {/* Two additional buttons */}
+                <div>
+                    <button className="bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold rounded-full mb-4" style={buttonStyle}>
+                        Button 1
+                    </button>
+                    <button className="bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold rounded-full" style={buttonStyle}>
+                        Button 2
+                    </button>
+                </div>
             </div>
         </div>
     );
 };
 
 export default Useroptions;
-
