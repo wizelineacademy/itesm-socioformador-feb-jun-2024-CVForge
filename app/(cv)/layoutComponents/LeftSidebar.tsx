@@ -32,7 +32,8 @@ const SidebarListElement: React.FC<SidebarListElementProps> = ({ title, currentT
                 <div className="w-10 h-10">
                     {IconComponent}
                 </div>
-                <p className={`ml-2 text-[${color}]`}>
+                <p className="ml-2"
+                    style={{ color: color }}>
                     {title}
                 </p>
             </Link>
