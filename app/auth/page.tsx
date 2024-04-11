@@ -1,14 +1,17 @@
 "use client";
 import React from "react";
-import '../../style/globals.css'
+import Login from "./login/components/Login";
 import Useroptions from "./Useroptions/components/Useroptions";
 
-const auth: React.FC = ({ }) => {
+import '../../style/globals.css'
+
+
+const Auth: React.FC = ({ }) => {
     return (
         <main className="w-full h-full">
-            <Useroptions/>
+        <Login />
       </main>
     )
 }
 
-export default auth;
+export default Auth;

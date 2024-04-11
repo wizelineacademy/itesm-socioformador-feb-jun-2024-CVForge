@@ -6,7 +6,7 @@ interface LiveIconProps extends SVGProps<SVGSVGElement> {
 }
 
 const SvgComponent = ({ strokeColor = "#3C3C3C", ...props }: LiveIconProps) => (
-    <svg width="209" height="149" viewBox="0 0 209 149" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+    <svg width="700" height="600" viewBox="0 0 209 149" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
         <rect width="209" height="149" fill="url(#pattern0_565_91)" />
         <defs>
             <pattern id="pattern0_565_91" patternContentUnits="objectBoundingBox" width="1" height="1">
