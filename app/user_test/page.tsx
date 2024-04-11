@@ -9,11 +9,11 @@ export default function Home() {
     const userData = {
       first_name: "Test",
       last_name: "lol",
-      email: "example2@mail.com",
+      email: "example@mail.com",
       password: "123"
     };
 
-    const response = await fetch('/api/user', {
+    const response = await fetch('/api/db/user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ export default function Home() {
   };
 
   const fetchUsers = async () => {
-    const response = await fetch('/api/user');
+    const response = await fetch('/api/db/user');
     const data = await response.json();
     setUsers(data);
     console.log(data);
