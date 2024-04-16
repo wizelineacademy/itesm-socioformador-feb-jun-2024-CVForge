@@ -41,8 +41,22 @@ body {
 
 }
 
+
 @layer components {
-  .txt_regular{
-    @apply font-inter text-lg justify-left mb-4 text-primarygray;
+  .txt_regular_s{
+    @apply font-inter text-base mb-4 text-primarygray;
+  }
+  .txt_regular_m{
+    @apply font-inter text-xl mb-4 text-primarygray;
+  }
+  .title{
+    @apply font-koh_santepheap text-4xl mb-4 text-primarygray font-bold;
+  }
+  .large_title{
+    @apply font-koh_santepheap text-6xl mb-4 text-primarygray font-bold;
+  }
+  .sub_title{
+    @apply font-koh_santepheap text-2xl mb-4 text-primarygray font-bold;
   }
 }
+/*font-inter text-3xl justify-left mb-4 */
