@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
     <footer className="bg-gray-800 text-white p-8">
       <div className="container mx-auto flex flex-col md:flex-row items-center">
         <div className="flex-shrink-0 mr-8">
-          <Image src="/logo.png" alt="Logo" width={100} height={100} />
+          <Image src="/assets/logo.png" alt="Logo" width={100} height={100} />
         </div>
         <div className="flex-grow flex flex-col md:flex-row justify-center md:justify-between items-center">
           <div className="text-center md:text-left mb-4 md:mb-0 md:mr-20">
@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
             <div className="flex flex-col md:flex-row items-center md:items-start">
               <a href="#" className="block mb-2 md:mb-0 md:mr-4">
                 <Image
-                  src="/linkedin.svg"
+                  src="/assets/linkedin.svg"
                   alt="LinkedIn"
                   width={30}
                   height={30}
@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
                 href="mailto:contact@cvforge.ai"
                 className="block mb-2 md:mb-0 md:mr-4"
               >
-                <Image src="/x.png" alt="X" width={30} height={30} />
+                <Image src="/assets/x.png" alt="X" width={30} height={30} />
               </a>
               <a href="#" className="block mb-2 md:mb-0">
                 <Image src="/assets/github.png" alt="GitHub" width={30} height={30} />
@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
                 className="block mr-4"
               >
                 <Image
-                  src="/tec.png"
+                  src="/assets/tec.png"
                   alt="Tecnológico de Monterrey"
                   width={110}
                   height={110}
@@ -62,7 +62,7 @@ const Footer: React.FC = () => {
                 className="block"
               >
                 <Image
-                  src="/wizeline.png"
+                  src="/assets/wizeline.png"
                   alt="Wizeline"
                   width={90}
                   height={90}
