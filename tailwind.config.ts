@@ -9,8 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'gptgreen': "#74AA9C",
-        'normaltext': "#474646"
+        'whitefo': "#F0F0F0",       /* white used in background */
+        'bg': "#F6FBFF",            /* light gray used in background */
+        'editorgray': "#ECF1F4",    /* editor background */
+        'gptgreen': "#74AA9C",      /* gpt green */
+        'aiblue': "#83BFEB",        /* blue used in gradient */
+        'primarygray': "#474646",   /* dark gray text */
+        'secondarygray': "#7E7E7E", /* light gray text, used in descriptions */
+        'outlinegray': "#D9D9D9",   /* used for borders */
+        'acceptgreen': "#98C887",   /* green used in meter */
       },
       fontFamily: {
         koh_santepheap: ["Koh-Santepheap"],
@@ -28,3 +35,5 @@ const config: Config = {
   plugins: [],
 };
 export default config;
+
+//https://nerdcave.com/tailwind-cheat-sheet
