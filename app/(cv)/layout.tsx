@@ -22,7 +22,7 @@ export default function RootLayout({
     <html className="scroll-smooth" lang="en">
       <ReduxProvider>
         <LeftSidebar />
-        <body className="ml-64">layout{children}</body>
+        <body className="ml-64">{children}</body>
       </ReduxProvider>
     </html>
   )

@@ -1,5 +1,5 @@
-import axios from 'axios';
-import prisma from '@/lib/prisma';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { PrismaClient } from '@prisma/client';
 
 const baseUrl = process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_API_URL : 'http://localhost:3001';
 
