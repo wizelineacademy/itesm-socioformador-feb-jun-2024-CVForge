@@ -25,7 +25,6 @@ const createUser = async (userData: User) => {
   return user;
  };
 
-
 export default {
   findUserById, 
   createUser,
