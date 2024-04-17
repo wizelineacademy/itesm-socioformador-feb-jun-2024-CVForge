@@ -1,3 +1,4 @@
+/*
 import { NextResponse, NextRequest } from 'next/server';
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcrypt';
@@ -33,4 +34,4 @@ export async function POST(req: NextRequest) {
         console.error("Error creating user:", error);
         return NextResponse.json({ error: 'Error creating user', detail: error.message }, { status: 500 });
     }
-}
+}*/

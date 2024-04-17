@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html className="scroll-smooth" lang="en">
-      <body>layout{children}</body>
+      <body>{children}</body>
     </html>
   )
 }
