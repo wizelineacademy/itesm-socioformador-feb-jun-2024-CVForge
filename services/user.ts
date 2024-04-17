@@ -1,11 +1,31 @@
-import axios from 'axios';
-import prisma from '@/lib/prisma';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { PrismaClient } from '@prisma/client';
 
-const baseUrl = process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_API_URL : 'http://localhost:3001';
+const prisma = new PrismaClient();
 
-export async function findUserById(userId: string) {
-  const user = await prisma.user.findUnique({
-    where: { user_id: userId },
-  });
-  return user;
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+ if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method not allowed' });
+ }
+
+ const { email, password, verification, is_active } = req.body;
+
+ try {
+    const newUser = await prisma.users.create({
+      data: {
+        email,
+        password, // Consider hashing the password before storing it
+        verification,
+        is_active,
+        last_login: new Date(), // Assuming you want to set the last login to the current time
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+    });
+
+    return res.status(201).json(newUser);
+ } catch (error) {
+    console.error('Error creating user:', error);
+    return res.status(500).json({ message: 'Error creating user' });
+ }
 }

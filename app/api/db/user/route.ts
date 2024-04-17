@@ -1,37 +1,31 @@
-/*
-import { NextResponse, NextRequest } from 'next/server';
-import prisma from '@/lib/prisma';
-import bcrypt from 'bcrypt';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { PrismaClient } from '@prisma/client';
 
-export async function GET(req: NextRequest) {
-    try {
-        const users = await prisma.user.findMany();
-        return NextResponse.json(users, { status: 200 });
-    } catch (error: any) {
-        console.error("Error fetching users:", error);
-        return NextResponse.json({ error: 'Error fetching users', detail: error.message }, { status: 500 });
-    }
+const prisma = new PrismaClient();
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+ if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method not allowed' });
+ }
+
+ const { email, password, verification, is_active } = req.body;
+
+ try {
+    const newUser = await prisma.users.create({
+      data: {
+        email,
+        password, // Consider hashing the password before storing it
+        verification,
+        is_active,
+        last_login: new Date(), // Assuming you want to set the last login to the current time
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+    });
+
+    return res.status(201).json(newUser);
+ } catch (error) {
+    console.error('Error creating user:', error);
+    return res.status(500).json({ message: 'Error creating user' });
+ }
 }
-
-export async function POST(req: NextRequest) {
-    const { email, first_name, last_name, password } = await req.json();
-
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-
-    try {
-        const newUser = await prisma.user.create({
-            data: {
-                email,
-                first_name,
-                last_name,
-                password: hashedPassword // Store the hashed password
-            },
-        });
-
-        return NextResponse.json(newUser, { status: 200 });
-    } catch (error: any) {
-        console.error("Error creating user:", error);
-        return NextResponse.json({ error: 'Error creating user', detail: error.message }, { status: 500 });
-    }
-}*/
