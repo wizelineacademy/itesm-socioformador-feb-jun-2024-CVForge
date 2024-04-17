@@ -24,7 +24,6 @@ body {
   background: linear-gradient(
       to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
     )
 }
 
@@ -36,7 +35,7 @@ body {
 
 .border-gradient {
   border: 2px solid;
-  border-image: linear-gradient(to right, #10b981, #22d3ee) 1;
+  border-image: linear-gradient(to right, #74AA9C, #83BFEB) 1;
 
 }
 

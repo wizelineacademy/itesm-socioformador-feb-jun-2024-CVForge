@@ -12,7 +12,7 @@ const LandingContent: React.FC = () => {
         <br />
         <br />
         <br />
-        <button className="object-right bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold w-full md:w-auto py-3 px-20 rounded-full">
+        <button className="object-right bg-gradient-to-r from-gptgreen to-aiblue text-white font-bold w-full md:w-auto py-3 px-20 rounded-full">
           Try our Service
         </button>
       </div>
