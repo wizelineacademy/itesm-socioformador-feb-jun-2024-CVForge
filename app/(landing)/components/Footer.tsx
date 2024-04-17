@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-800 text-white p-8">
+    <footer className="bg-primarygray text-white p-8">
       <div className="container mx-auto flex flex-col md:flex-row items-center">
         <div className="flex-shrink-0 mr-8">
           <Image src="/assets/logo.png" alt="Logo" width={100} height={100} />
