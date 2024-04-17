@@ -1,6 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '@/lib/prisma';
-import { Prisma } from '@prisma/client';
 import {User} from '@/types/user'
 
 const findUserById = async (userId: string) => {
@@ -10,7 +8,7 @@ const findUserById = async (userId: string) => {
   return user;
 };
 
-const findUsers = async() => {
+const getAllUsers = async() => {
   const users = await prisma.users.findMany();
   return users;
 }
@@ -31,5 +29,5 @@ const createUser = async (userData: User) => {
 export default {
   findUserById, 
   createUser,
-  findUsers
+  getAllUsers
 }
