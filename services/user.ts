@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { PrismaClient } from '@prisma/client';
-
-const baseUrl = process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_API_URL : 'http://localhost:3001';
+import prisma from '@/lib/prisma';
 
 const findUserById = async (userId: string) => {
   const user = await prisma.user.findUnique({
@@ -10,4 +8,6 @@ const findUserById = async (userId: string) => {
   return user;
 }
 
-
+export default {
+  findUserById
+}
