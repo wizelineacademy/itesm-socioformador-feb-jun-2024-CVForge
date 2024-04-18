@@ -6,5 +6,5 @@ export type DesiredPosition = {
     description?: string | null;
     company?: string | null;
     years_experience?: number | null;
-    cv?: CV | null;
+    //cv?: CV | null;
 }
