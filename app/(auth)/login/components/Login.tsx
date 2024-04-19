@@ -35,7 +35,7 @@ const Login: React.FC= () => {
             <div className="w-1/2 flex justify-center items-center">
                 {/* Right side - Login form */}
                 <div className="text-center">
-                    <h2 className="text-3xl text-inter font-bold mb-4 underline text-primarygray ">Try CVForge.ai now!</h2>
+                    <h2 className="text-3xl text-inter font-bold mb-4 underline ">Try CVForge.ai now!</h2>
                     {/* Signup buttons */}
                     <div className="mb-21">
                         <div className="mb-6">
