@@ -1,69 +1,82 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import Percent from "../components/Percent";
 import Sections from "../components/Sections";
 
 const GeneralInfo: React.FC = () => {
+    // State hooks for managing input values
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [pronouns, setPronouns] = useState("");
+    const [dob, setDOB] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [country, setCountry] = useState("");
+    const [address, setAddress] = useState("");
+    const [nationality, setNationality] = useState("");
+    const [postalCode, setPostalCode] = useState("");
+
     return (
-        <div className="flex h-screen">
+        <div className="flex h-screen bg-editorgray">
             <div className="flex justify-center w-full">
-                <div className="bg-white shadow-lg p-8 rounded-md w-11/12 max-w-4xl mx-auto pt-4">
+            <div className="bg-white shadow-lg p-8 rounded-md w-11/12 max-w-4xl mx-auto pt-4" style={{ height: "106vh" }}>
                     {/* Content of the first container */}
-                    <div className="text-2xl font-bold mb-4">General Information</div>
+                    <div className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-4">General Information</div>
                     <div className="border-b-2 border-gray-300 mb-4"></div>
                     <div className="pl-4">
                         {/* Your content */}
-                        <div className="text-3xl font-bold mb-2">Identity</div>
-                        <p className="text-lg font-light mb-4">Personal information that will be shown regardless of desired position</p>
+                        <div className="text-4xl font-koh_santepheap font-bold mb-2 text-primarygray font-bold">Identity</div>
+                        <p className="text-lg font-light mb-4 text-primarygray">Personal information that will be shown regardless of desired position</p>
                         
                         {/* IDENTITY */}
                         <div className="flex">
-                            <div className="flex flex-col mr-20 flex-grow">
-                                <label htmlFor="firstName" className="mb-2">First Name:</label>
-                                <input type="text" id="firstName" className="border border-gray-300 p-2 w-full mb-4" />
+                            <div className="flex flex-col mr-20 flex-grow ">
+                                <label htmlFor="firstName" className="mb-2 text-primarygray">First Name:</label>
+                                <input type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray" />
                                 
-                                <label htmlFor="pronouns" className="mb-2">Pronouns:</label>
-                                <input type="text" id="pronouns" className="border border-gray-300 p-2 w-full mb-4" />
+                                <label htmlFor="pronouns" className="mb-2 text-primarygray">Pronouns:</label>
+                                <input type="text" id="pronouns" value={pronouns} onChange={(e) => setPronouns(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray" />
                             </div>
                             <div className="flex flex-col flex-grow">
-                                <label htmlFor="lastName" className="mb-2">Last Name:</label>
-                                <input type="text" id="lastName" className="border border-gray-300 p-2 w-full mb-4" />
+                                <label htmlFor="lastName" className="mb-2 text-primarygray">Last Name:</label>
+                                <input type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray" />
                                 
-                                <label htmlFor="dob" className="mb-2">Date of Birth:</label>
-                                <input type="text" id="dob" className="border border-gray-300 p-2 w-full mb-4" />
+                                <label htmlFor="dob" className="mb-2 text-primarygray">Date of Birth:</label>
+                                <input type="text" id="dob" value={dob} onChange={(e) => setDOB(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray" />
                             </div>
                         </div>
 
                         {/* CONTACT INFO */}
-                        <div className="text-3xl font-bold mb-2">Contact Info</div>
-                        <p className="text-lg font-light mb-4">Information on how to contact the user in case of desiring contact</p>
+                        <div className="text-3xl font-bold mb-2 text-primarygray">Contact Info</div>
+                        <p className="text-lg font-light mb-4 text-primarygray">Information on how to contact the user in case of desiring contact</p>
                         <div className="flex">
                             <div className="flex flex-col mr-20 flex-grow">
-                                <label htmlFor="email" className="mb-2">Email:</label>
-                                <input type="text" id="email" className="border border-gray-300 p-2 w-full mb-4" />
+                                <label htmlFor="email" className="mb-2 text-primarygray">Email:</label>
+                                <input type="text" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray" />
                             </div>
                             <div className="flex flex-col flex-grow">
-                                <label htmlFor="phone" className="mb-2">Phone:</label>
-                                <input type="text" id="phone" className="border border-gray-300 p-2 w-full mb-4" />
+                                <label htmlFor="phone" className="mb-2 text-primarygray">Phone:</label>
+                                <input type="text" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray" />
                             </div>
                         </div>
 
                         {/* NATIONALITY */}
-                        <div className="text-3xl font-bold mb-2">Nationality</div>
-                        <p className="text-lg font-light mb-4">Any information regarding your residency, nationality, etc</p>
+                        <div className="text-3xl font-bold mb-2 text-primarygray font-bold">Nationality</div>
+                        <p className="text-lg font-light mb-4 text-primarygray">Any information regarding your residency, nationality, etc</p>
                         <div className="flex">
                             <div className="flex flex-col mr-20 flex-grow">
-                                <label htmlFor="country" className="mb-2">Country:</label>
-                                <input type="text" id="country" className="border border-gray-300 p-2 w-full mb-4" />
+                                <label htmlFor="country" className="mb-2 text-primarygray">Country:</label>
+                                <input type="text" id="country" value={country} onChange={(e) => setCountry(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray" />
                                 
-                                <label htmlFor="address" className="mb-2">Address:</label>
-                                <input type="text" id="address" className="border border-gray-300 p-2 w-full mb-4" />
+                                <label htmlFor="address" className="mb-2 text-primarygray">Address:</label>
+                                <input type="text" id="address" value={address} onChange={(e) => setAddress(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray"  />
                             </div>
                             <div className="flex flex-col flex-grow">
-                                <label htmlFor="nationality" className="mb-2">Nationality:</label>
-                                <input type="text" id="nationality" className="border border-gray-300 p-2 w-full mb-4" />
+                                <label htmlFor="nationality" className="mb-2 text-primarygray">Nationality:</label>
+                                <input type="text" id="nationality" value={nationality} onChange={(e) => setNationality(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray" />
                                 
-                                <label htmlFor="postalcode" className="mb-2">Postal Code:</label>
-                                <input type="text" id="postalcode" className="border border-gray-300 p-2 w-full mb-4" />
+                                <label htmlFor="postalcode" className="mb-2 text-primarygray">Postal Code:</label>
+                                <input type="text" id="postalcode" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray" />
                             </div>
                         </div>
                     </div>

@@ -14,14 +14,14 @@ const Sections: React.FC = () => {
     return (
         <div className="bg-white shadow-lg p-8 rounded-md w-240 h-272 mr-10 mt-10">
             {/* Text section */}
-            <div className="text-xl font-bold mb-4">Sections</div>
+            <div className="text-xl font-bold mb-4 text-primarygray">Sections</div>
             
             {/* List of text buttons */}
             <ul>
                 {sectionNames.map((name, index) => (
                     <li key={index}>
                         {/* Button for each section name */}
-                        <button className="text-black text-base py-1 px-2">
+                        <button className="text-black text-base py-1 px-2 ">
                             {name}
                         </button>
                     </li>
