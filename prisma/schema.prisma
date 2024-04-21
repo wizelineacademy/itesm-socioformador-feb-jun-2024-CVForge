@@ -8,19 +8,19 @@ datasource db {
 }
 
 model ai_response {
-  ai_response_id String    @id @default(uuid())
+  ai_response_id String    @id @default(uuid()) @db.Uuid
   plain_text     String?
-  cv_id          String?   @unique @db.Uuid
+  cv_id          String?   @unique(map: "unique_cv_id") @db.Uuid
   tokens         Decimal?  @db.Decimal
   request_date   DateTime? @db.Timestamptz(6)
   cv             cv?       @relation(fields: [cv_id], references: [cv_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model cv {
-  cv_id               String            @id @default(uuid())
+  cv_id               String            @id @default(uuid()) @db.Uuid
   user_id             String?           @db.Uuid
-  cv_insight_id       String?           @unique @db.Uuid
-  desired_position_id String?           @unique @db.Uuid
+  cv_insight_id       String?           @unique(map: "unique_cv_insight_id") @db.Uuid
+  desired_position_id String?           @unique(map: "unique_desired_position_id") @db.Uuid
   ai_response         ai_response?
   cv_insight          cv_insight?       @relation(fields: [cv_insight_id], references: [cv_insight_id], onDelete: NoAction, onUpdate: NoAction)
   desired_position    desired_position? @relation(fields: [desired_position_id], references: [desired_position_id], onDelete: NoAction, onUpdate: NoAction)
@@ -35,7 +35,7 @@ model cv_insight {
 }
 
 model desired_position {
-  desired_position_id String  @id @default(uuid())
+  desired_position_id String  @id @default(uuid()) @db.Uuid
   title               String? @db.VarChar(25)
   description         String? @db.VarChar(500)
   company             String? @db.VarChar(20)
@@ -44,7 +44,7 @@ model desired_position {
 }
 
 model education {
-  education_id         String                @id @default(uuid())
+  education_id         String                @id @default(uuid()) @db.Uuid
   school               String?               @db.VarChar(50)
   education_degree     String?               @db.VarChar(50)
   gpa                  Int?
@@ -56,18 +56,19 @@ model education {
 }
 
 model professional_info {
-  professional_info_id String                 @id @default(uuid())
-  user_id              String?                @unique @db.Uuid
+  professional_info_id String            @id @default(uuid()) @db.Uuid
+  user_id              String?           @unique(map: "unique_user_id") @db.Uuid
+  achievement          achievement[]
+  certificate          certificate[]
   education            education[]
-  users                users?                 @relation(fields: [user_id], references: [users_id], onDelete: NoAction, onUpdate: NoAction)
-  programming_language programming_language[]
+  users                users?            @relation(fields: [user_id], references: [users_id], onDelete: NoAction, onUpdate: NoAction)
   project              project[]
-  technology           technology[]
+  skill                skill[]
   work_experience      work_experience[]
 }
 
 model profile {
-  profile_id    String    @id @default(uuid())
+  profile_id    String    @id @default(uuid()) @db.Uuid
   user_id       String?   @unique @db.Uuid
   first_name    String?   @db.VarChar(50)
   last_name     String?   @db.VarChar(50)
@@ -81,16 +82,8 @@ model profile {
   users         users?    @relation(fields: [user_id], references: [users_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model programming_language {
-  programming_language_id   String             @id @default(uuid())
-  programming_language_name String?            @db.VarChar(50)
-  proficiency               String?            @db.VarChar(50)
-  professional_info_id      String?            @db.Uuid
-  professional_info         professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: NoAction, onUpdate: NoAction)
-}
-
 model project {
-  project_id           String             @id @default(uuid())
+  project_id           String             @id @default(uuid()) @db.Uuid
   name                 String?            @db.VarChar(50)
   description          String?            @db.VarChar(500)
   start_date           DateTime?          @db.Timestamptz(6)
@@ -100,7 +93,7 @@ model project {
 }
 
 model recommendation {
-  recommendation_id String      @id @default(uuid())
+  recommendation_id String      @id @default(uuid()) @db.Uuid
   cv_insight_id     String?     @db.Uuid
   title             String?     @db.VarChar(50)
   main_content      String?
@@ -108,20 +101,14 @@ model recommendation {
 }
 
 model relevant_coursework {
-  relevant_coursework_id String     @id @default(uuid())
+  relevant_coursework_id String     @id @default(uuid()) @db.Uuid
   education_id           String?    @db.Uuid
   course                 String?    @db.VarChar(100)
   education              education? @relation(fields: [education_id], references: [education_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model technology {
-  technology_id        String             @id @default(uuid())
-  professional_info_id String?            @db.Uuid
-  professional_info    professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: NoAction, onUpdate: NoAction)
-}
-
 model users {
-  users_id          String             @id @default(uuid())
+  users_id          String             @id @default(uuid()) @db.Uuid
   email             String             @db.VarChar(50)
   password          String             @db.VarChar(60)
   verification      Boolean?
@@ -135,11 +122,40 @@ model users {
 }
 
 model work_experience {
-  work_experience_id   String             @id @default(uuid())
+  work_experience_id   String             @id @default(uuid()) @db.Uuid
   work_position        String?            @db.VarChar(50)
   description          String?            @db.VarChar(1000)
   start_date           DateTime?          @db.Date
   end_date             DateTime?          @db.Date
   professional_info_id String?            @db.Uuid
+  professional_info    professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model achievement {
+  achievement_id       String             @id @db.Uuid
+  professional_info_id String?            @db.Uuid
+  name                 String?            @db.VarChar(255)
+  description          String?            @db.VarChar(1000)
+  professional_info    professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model certificate {
+  certificate_id       String             @id @db.Uuid
+  professional_info_id String?            @db.Uuid
+  title                String?            @db.VarChar(255)
+  organization         String?            @db.VarChar(255)
+  start_date           DateTime?          @db.Date
+  end_date             DateTime?          @db.Date
+  url                  String?
+  professional_info    professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model skill {
+  skill_id             String             @id @db.Uuid
+  professional_info_id String?            @db.Uuid
+  title                String?            @db.VarChar(100)
+  duration             String?            @db.VarChar(100)
+  proficiency          String?            @db.VarChar(100)
+  tag                  String?            @db.VarChar(100)
   professional_info    professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: NoAction, onUpdate: NoAction)
 }
