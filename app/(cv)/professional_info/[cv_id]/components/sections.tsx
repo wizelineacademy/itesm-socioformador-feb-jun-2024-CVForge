@@ -1,15 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const Sections: React.FC = () => {
-    // Define an array of section names and their corresponding paths
-    const sections = [
-        { name: "< General Info", path: "#" },
-        { name: "< Achievements", path: "#" },
-        { name: "< Work Experience", path: "#" },
-        { name: "< Certificates", path: "#" },
-        { name: "< Skills", path: "#" }
-        // Add more section names and paths as needed
+    // Define an array of section names
+    const sectionNames = [
+        "< General Info",
+        "< Achievments",
+        "< Work Experience",
+        "< Certficates",
+        "< Skills"
+        // Add more section names as needed
     ];
 
     return (
@@ -19,12 +18,12 @@ const Sections: React.FC = () => {
             
             {/* List of text buttons */}
             <ul>
-                {sections.map(({ name, path }, index) => (
+                {sectionNames.map((name, index) => (
                     <li key={index}>
-                        {/* Link for each section */}
-                        <Link to={path} className="text-black text-base py-1 px-2">
+                        {/* Button for each section name */}
+                        <button className="text-black text-base py-1 px-2 ">
                             {name}
-                        </Link>
+                        </button>
                     </li>
                 ))}
             </ul>

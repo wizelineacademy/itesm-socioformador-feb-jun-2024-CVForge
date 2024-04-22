@@ -15,8 +15,8 @@ const Achievement: React.FC = () => {
 
     const handleAddJob = () => {
         if (achievementName && achievementDescription) {
-            const newJob: AchievementEntry = { achievementName, achievementDescription };
-            setAchievementEntries([...achievementEntries, newJob]);
+            const newAchievment: AchievementEntry = { achievementName, achievementDescription };
+            setAchievementEntries([...achievementEntries, newAchievment]);
             // Clear the form fields
             setAchievementName("");
             setAchievementDescription("");
