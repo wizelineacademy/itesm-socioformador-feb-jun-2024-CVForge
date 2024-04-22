@@ -1,85 +1,71 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import Percent from "../components/Percent";
 import Sections from "../components/Sections";
 
-const Achievments: React.FC = () => {
+interface AchievementEntry {
+    achievementName: string;
+    achievementDescription: string;
+}
+
+const Achievement: React.FC = () => {
+    const [achievementEntries, setAchievementEntries] = useState<AchievementEntry[]>([]);
+    const [achievementName, setAchievementName] = useState("");
+    const [achievementDescription, setAchievementDescription] = useState("");
+
+    const handleAddJob = () => {
+        if (achievementName && achievementDescription) {
+            const newJob: AchievementEntry = { achievementName, achievementDescription };
+            setAchievementEntries([...achievementEntries, newJob]);
+            // Clear the form fields
+            setAchievementName("");
+            setAchievementDescription("");
+        } else {
+            alert("Please fill in all fields.");
+        }
+    };
+
     return (
-        <div className="flex h-screen">
-            <div className="flex justify-center w-full">
-                <div className="bg-white shadow-lg p-8 rounded-md w-11/12 max-w-4xl mx-auto pt-4">
-                    {/* Content of the first container */}
-                    <div className="text-2xl font-bold mb-4">Achievments</div>
+        <div className="flex h-screen bg-editorgray">
+            <div className="flex justify-center w-full bg-editorgray">
+                <div className="bg-white shadow-lg p-8 rounded-md w-11/12 max-w-4xl mx-auto pt-4" style={{ height: "106vh" }}>
+                    <div className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-4">Achievement</div>
                     <div className="border-b-2 border-gray-300 mb-4"></div>
                     <div className="pl-4">
-                        {/* Your content */}
-                        <div className="text-3xl font-bold mb-2">Identity</div>
-                        <p className="text-lg font-light mb-4">Personal information that will be shown regardless of desired position</p>
-                        
-                        {/* IDENTITY */}
+                        <p className="text-lg font-light mb-4 text-primarygray">Highlights professional accomplishments and successes to showcase expertise and value to potential employers.</p>
+                        {achievementEntries.map((entry, index) => (
+                            <div key={index}>
+                                <div className="flex">
+                                    <div className="flex flex-col mr-20 flex-grow">
+                                        <p><strong>Name:</strong> {entry.achievementName}</p>
+                                        <p><strong>Description:</strong> {entry.achievementDescription}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                        {/* Achievement entry form */}
                         <div className="flex">
                             <div className="flex flex-col mr-20 flex-grow">
-                                <label htmlFor="firstName" className="mb-2">First Name:</label>
-                                <input type="text" id="firstName" className="border border-gray-300 p-2 w-full mb-4" />
+                                <label htmlFor="achievementName" className="mb-2 text-primarygray">Achievment Name:</label>
+                                <input type="text" id="achievementName" value={achievementName} onChange={(e) => setAchievementName(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray" />
                                 
-                                <label htmlFor="pronouns" className="mb-2">Pronouns:</label>
-                                <input type="text" id="pronouns" className="border border-gray-300 p-2 w-full mb-4" />
-                            </div>
-                            <div className="flex flex-col flex-grow">
-                                <label htmlFor="lastName" className="mb-2">Last Name:</label>
-                                <input type="text" id="lastName" className="border border-gray-300 p-2 w-full mb-4" />
-                                
-                                <label htmlFor="dob" className="mb-2">Date of Birth:</label>
-                                <input type="text" id="dob" className="border border-gray-300 p-2 w-full mb-4" />
+                                <label htmlFor="achievementDescription" className="mb-2 text-primarygray">Achievment Description:</label>
+                                <textarea id="achievementDescription" value={achievementDescription} onChange={(e) => setAchievementDescription(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray" />
                             </div>
                         </div>
 
-                        {/* CONTACT INFO */}
-                        <div className="text-3xl font-bold mb-2">Contact Info</div>
-                        <p className="text-lg font-light mb-4">Information on how to contact the user in case of desiring contact</p>
-                        <div className="flex">
-                            <div className="flex flex-col mr-20 flex-grow">
-                                <label htmlFor="email" className="mb-2">Email:</label>
-                                <input type="text" id="email" className="border border-gray-300 p-2 w-full mb-4" />
-                            </div>
-                            <div className="flex flex-col flex-grow">
-                                <label htmlFor="phone" className="mb-2">Phone:</label>
-                                <input type="text" id="phone" className="border border-gray-300 p-2 w-full mb-4" />
-                            </div>
-                        </div>
-
-                        {/* NATIONALITY */}
-                        <div className="text-3xl font-bold mb-2">Nationality</div>
-                        <p className="text-lg font-light mb-4">Any information regarding your residency, nationality, etc</p>
-                        <div className="flex">
-                            <div className="flex flex-col mr-20 flex-grow">
-                                <label htmlFor="country" className="mb-2">Country:</label>
-                                <input type="text" id="country" className="border border-gray-300 p-2 w-full mb-4" />
-                                
-                                <label htmlFor="address" className="mb-2">Address:</label>
-                                <input type="text" id="address" className="border border-gray-300 p-2 w-full mb-4" />
-                            </div>
-                            <div className="flex flex-col flex-grow">
-                                <label htmlFor="nationality" className="mb-2">Nationality:</label>
-                                <input type="text" id="nationality" className="border border-gray-300 p-2 w-full mb-4" />
-                                
-                                <label htmlFor="postalcode" className="mb-2">Postal Code:</label>
-                                <input type="text" id="postalcode" className="border border-gray-300 p-2 w-full mb-4" />
-                            </div>
-                        </div>
+                        <button onClick={handleAddJob} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Add Achievement</button>
                     </div>
                 </div>
             </div>
             <div className="flex flex-col justify-start items-end text-1xl">
-                {/* Container with dynamic width */}
                 <div className="w-72">
-                    {/* Call Percent component with a percent prop */}
                     <Percent percent={90} />
-                    {/* Call Sections component */}
                     <Sections />
                 </div>
             </div>
         </div>
     );
-}
+};
 
-export default Achievments;
+export default Achievement;

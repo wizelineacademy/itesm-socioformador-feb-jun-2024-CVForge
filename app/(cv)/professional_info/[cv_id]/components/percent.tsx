@@ -13,8 +13,8 @@ const Percent: React.FC<{ percent: number }> = ({ percent }) => {
     };
 
     return (
-        <div className="bg-white shadow-lg p-8 rounded-lg w-251 h-35 mr-10 mt-10">
-            <div className="text-center text-primarygray">Complete Percent</div>
+        <div className="bg-white shadow-lg p-8 rounded-lg w-251 h-35 mr-10 mt-10 fixed">
+            <div className="text-center">Complete Percent</div>
             <div className={`text-center mt-2 ${getPercentColor(percent)}`}>
                 {percent}%
             </div>

@@ -29,11 +29,7 @@ const Register = () => {
             <div className="w-1/2 flex justify-center items-center">
                 {/* Right side - Login form */}
                 <form className="text-center">
-<<<<<<< HEAD
                 <h1 className="text-7xl font-koh_santepheap mb-8 text-primarygray">CVForge<span className="text-gptgreen">.ai</span></h1>
-=======
-                <h1 id="register-h1" className="text-7xl font-koh_santepheap mb-8">CVForge<span className="text-gptgreen">.ai</span></h1>
->>>>>>> ab7a1cc5b08ed655b6dbc791f65ec8881b384334
                     <p className="text-left font-inter"> Email</p>
                     <input type="email" placeholder="  Email" className="block w-96 h-12 border bg-transparent border-gradient rounded-md mb-4" />
                     {/* Increased width from w-80 to w-96 */}
