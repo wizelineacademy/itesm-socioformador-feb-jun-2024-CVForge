@@ -44,7 +44,7 @@ type RecommendationSectionProps = {
 }
 const ReccomendationSection: React.FC<RecommendationSectionProps> = ({ recommendations }) => {
     return (
-        <>
+        <div className="min-w-[350px] 2xl:min-w-[500px]">
             <h2 className="font-bold text-lg">
                 Recommendations
             </h2>
@@ -53,7 +53,7 @@ const ReccomendationSection: React.FC<RecommendationSectionProps> = ({ recommend
                     <Recommendation title={recommendation.title} mainContent={recommendation.mainContent} />
                 )
             }
-        </>
+        </div>
     )
 
 }

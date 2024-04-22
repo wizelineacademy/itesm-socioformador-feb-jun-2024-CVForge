@@ -38,3 +38,10 @@ export const RECOMMENDATIONS = [
         mainContent: "Reduce stress and increase your concentration by practicing mindfulness meditation regularly."
     }
 ];
+
+
+export const RECOMMENDED_CHANGES = [
+    "lorem ipsum asdasdasdasdas asd asd saa sda dssd asa sda sda s asdasd sad asd a asd sd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asda sdas d ",
+    "lorem ipsum",
+    "lorem ipsum",
+]
