@@ -4,7 +4,7 @@ import Percent from "../components/Percent";
 import Sections from "../components/Sections";
 
 const levelOptions = ["Beginner", "Intermediate", "Advanced"];
-const tagOptions = ["Option 1", "Option 2", "Option 3"];
+const tagOptions = ["Soft Skills", "Programming Langugaes", "Tools", "Technologies"];
 
 interface SkillEntry {
     skillTitle: string;
@@ -78,7 +78,7 @@ const Skills: React.FC = () => {
 
                         <div className="flex">
                             <div className="flex flex-col mr-20 flex-grow">
-                                <label htmlFor="startDate" className="mb-2 text-primarygray">Start Date:</label>
+                                <label htmlFor="startDate" className="mb-2 text-primarygray">Tag:</label>
                                 <select id="startDate" value={skillTag} onChange={(e) => setSkillTag(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray">
                                     <option value="">Select Tag</option>
                                     {tagOptions.map((option, index) => (
