@@ -2,6 +2,8 @@
 
 // Default imports
 import { useDispatch, useSelector } from "react-redux"
+import { BsArrowLeftShort } from 'react-icons/bs';
+
 
 // Icon imports
 import SecondaryLogo from "@/public/assets/SecondaryLogo"
@@ -46,25 +48,9 @@ const LeftSidebar = () => {
     const currentTab = useSelector((state: RootState) => state.currentTab)
 
     return (
-        <aside className="fixed top-0 left-0 h-screen w-64 bg-[#474646] text-white flex flex-col p-10">
-            <div className="w-full h-10"><SecondaryLogo /></div>
-            <div className="mt-6">
-                <ul>
-                    <SidebarListElement
-                        title="CVs"
-                        icon={<CV_icon />}
-                        currentTab={currentTab}
-                        href="/cv_gallery"
-                        itemTab="cv_gallery"
-                    />
-                    <SidebarListElement
-                        title="Information Editor"
-                        icon={<PersonalInfo_icon />}
-                        currentTab={currentTab}
-                        href="/info"
-                        itemTab="info"
-                    />
-                </ul>
+        <aside className="flex">
+            <div className="flex h-screen w-72 bg-aiblue text-white p-5 pt-8">
+
             </div>
         </aside>
     )
