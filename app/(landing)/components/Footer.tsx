@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
     <footer className="bg-primarygray text-white p-8">
       <div className="container mx-auto flex flex-col md:flex-row items-center">
         <div className="flex-shrink-0 mr-8">
-          <Image src="/assets/logo.png" alt="Logo" width={100} height={100} />
+          <img src="/assets/logo.png" alt="Logo" width={100} height={100} />
         </div>
         <div className="flex-grow flex flex-col md:flex-row justify-center md:justify-between items-center">
           <div className="text-center md:text-left mb-4 md:mb-0 md:mr-20">
@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
             </h3>
             <div className="flex flex-col md:flex-row items-center md:items-start">
               <a href="#" className="block mb-2 md:mb-0 md:mr-4">
-                <Image
+                <img
                   src="/assets/linkedin.svg"
                   alt="LinkedIn"
                   width={30}
@@ -32,10 +32,10 @@ const Footer: React.FC = () => {
                 href="mailto:contact@cvforge.ai"
                 className="block mb-2 md:mb-0 md:mr-4"
               >
-                <Image src="/assets/x.png" alt="X" width={30} height={30} />
+                <img src="/assets/x.png" alt="X" width={30} height={30} />
               </a>
               <a href="#" className="block mb-2 md:mb-0">
-                <Image src="/assets/github.png" alt="GitHub" width={30} height={30} />
+                <img src="/assets/github.png" alt="GitHub" width={30} height={30} />
               </a>
             </div>
           </div>
@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="block mr-4"
               >
-                <Image
+                <img
                   src="/assets/tec.png"
                   alt="Tecnológico de Monterrey"
                   width={110}
@@ -61,7 +61,7 @@ const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="block"
               >
-                <Image
+                <img
                   src="/assets/wizeline.png"
                   alt="Wizeline"
                   width={90}
