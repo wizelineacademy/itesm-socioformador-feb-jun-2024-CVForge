@@ -3,7 +3,7 @@ import '@/style/globals.css'
 import React from "react";
 
 // Component imports
-import UserOptions from "./components/Useroptions";
+import UserOptions from "./components/UserOptions";
 
 const Auth: React.FC = ({ }) => {
     return (

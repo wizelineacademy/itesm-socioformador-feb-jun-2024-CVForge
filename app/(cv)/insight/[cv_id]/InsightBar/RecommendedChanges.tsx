@@ -16,7 +16,7 @@ const RecommendedChanges: React.FC<RecommendedChangesProps> = ({ recommendedChan
             <ul className="list-disc pl-4">
                 {
                     recommendedChangesList.map((recommendation) =>
-                        <li>{recommendation}</li>
+                        <li key={crypto.randomUUID()}>{recommendation}</li>
                     )
                 }
             </ul>

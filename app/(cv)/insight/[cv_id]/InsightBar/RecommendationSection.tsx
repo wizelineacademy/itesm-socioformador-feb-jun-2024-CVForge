@@ -50,7 +50,7 @@ const ReccomendationSection: React.FC<RecommendationSectionProps> = ({ recommend
             </h2>
             {
                 recommendations.map((recommendation) =>
-                    <Recommendation title={recommendation.title} mainContent={recommendation.mainContent} />
+                    <Recommendation key={crypto.randomUUID()} title={recommendation.title} mainContent={recommendation.mainContent} />
                 )
             }
         </div>

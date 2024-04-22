@@ -21,8 +21,6 @@ export default function RootLayout({
   return (
     <html className="scroll-smooth" lang="en">
       <ReduxProvider>
-        <div className = "fixed"> 
-        <LeftSidebar />
         <body className="pl-64 w-full h-screen">{children}</body>
       </ReduxProvider>
     </html>
