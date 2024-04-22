@@ -40,22 +40,48 @@
 
 }
 
-
 @layer components {
-  .txt_regular_s{
+  .txt_regular_s {
     @apply font-inter text-base mb-4 text-primarygray;
   }
-  .txt_regular_m{
+
+  .txt_regular_m {
     @apply font-inter text-xl mb-4 text-primarygray;
   }
-  .title{
+
+  .title {
     @apply font-koh_santepheap text-4xl mb-4 text-primarygray font-bold;
   }
-  .large_title{
+
+  .large_title {
     @apply font-koh_santepheap text-6xl mb-4 text-primarygray font-bold;
   }
-  .sub_title{
+
+  .sub_title {
     @apply font-koh_santepheap text-2xl mb-4 text-primarygray font-bold;
   }
 }
+
 /*font-inter text-3xl justify-left mb-4 */
+
+
+/* Firefox Scrollbar */
+.scroller {
+  overflow-y: scroll;
+  scrollbar-color: #0A4C95 #C2D2E4;
+}
+
+/* Chrome scrollbar */
+.scroller::-webkit-scrollbar {
+  width: 15px;
+  height: 15px;
+}
+
+.scroller::-webkit-scrollbar-track-piece {
+  background-color: #C2D2E4;
+}
+
+.scroller::-webkit-scrollbar-thumb:vertical {
+  height: 30px;
+  background-color: #0A4C95;
+}

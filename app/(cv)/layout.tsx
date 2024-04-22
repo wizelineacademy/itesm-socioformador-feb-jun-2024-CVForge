@@ -23,9 +23,7 @@ export default function RootLayout({
       <ReduxProvider>
         <div className = "fixed"> 
         <LeftSidebar />
-        </div>
-        
-        <body className="ml-64">{children}</body>
+        <body className="pl-64 w-full h-screen">{children}</body>
       </ReduxProvider>
     </html>
   )
