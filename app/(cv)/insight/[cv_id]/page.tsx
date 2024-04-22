@@ -24,8 +24,8 @@ const MyApp = () => {
     }
 
     return (
-        <div className="w-full h-full flex flex-row overflow-hidden">
-            <div className="w-2/3 flex justify-center overflow-y-scroll bg-bg">
+        <div className="w-full h-full flex flex-row overflow-hidden bg-bg">   
+            <div className="w-[calc(100%_-_400px)] flex justify-center overflow-y-scroll">
                 <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
                     {Array.from(
                         new Array(numPages),
@@ -37,7 +37,7 @@ const MyApp = () => {
                     )}
                 </Document>
             </div>
-            <div className="w-1/3 z-10">
+            <div className="absolute right-0 z-10">
                 <InsightBar />
             </div>
         </div>

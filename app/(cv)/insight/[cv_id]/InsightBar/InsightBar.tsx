@@ -23,7 +23,10 @@ const InsightBar = ({ }) => {
     }
 
     return (
-        <div className='w-full h-full shadow-lg font-inter text-primarygray'>
+        <div className={`
+        ${isOpen ? "w-[900px]" : "w-[400px]"}
+        h-full transition-all duration-500 right-0
+        shadow-lg font-inter bg-white text-primarygray`}>
             <div className="w-full h-[calc(100vh_-_30px)] px-4 overflow-y-auto">
                 <div className="w-full flex flex-row items-center mt-8 mb-2">
                     <button onClick={handleOpenInsightBar} >
