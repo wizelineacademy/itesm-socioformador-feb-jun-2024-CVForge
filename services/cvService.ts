@@ -14,6 +14,17 @@ export const getAllCVs = async() => {
   return cvs;
 }
 
+export const createCV = async(data : {title?: string;
+  desired_position_id?: string;}) => {
+  const newCV = await prisma.cv.create({
+    data : {
+      ...data,
+    }
+  })
+};
+
+
+
 /*
 export const createCV = async (cvBody: CVCreateBody) => {
   const post = await prisma.post.create({ data: postBody })

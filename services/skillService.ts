@@ -1,3 +1,4 @@
+/*
 import prisma from '@/lib/prisma';
 import { Skill } from '@/types/skill';
 
@@ -23,3 +24,4 @@ const createSkill = async (skillData: Skill) => {
 
     return skill;
 }
+*/
