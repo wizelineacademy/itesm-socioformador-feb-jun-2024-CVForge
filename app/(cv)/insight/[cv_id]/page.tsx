@@ -14,7 +14,7 @@ if (typeof window !== 'undefined') {
     ).toString();
 }
 
-const MyApp = () => {
+const Insight = () => {
     const [numPages, setNumPages] = useState<number>();
     const [pageNumber, setPageNumber] = useState<number>(1);
     const file = '/pdf/q_learning_notes.pdf';
@@ -44,4 +44,4 @@ const MyApp = () => {
     );
 }
 
-export default MyApp;
+export default Insight;

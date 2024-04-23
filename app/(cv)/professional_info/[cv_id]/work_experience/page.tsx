@@ -41,7 +41,7 @@ const GeneralInfo: React.FC = () => {
                     <div className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-4">Work Experience</div>
                     <div className="border-b-2 border-gray-300 mb-4"></div>
                     <div className="pl-4">
-                        <div className="text-4xl font-koh_santepheap font-bold mb-2 text-primarygray font-bold">Previous Jobs</div>
+                        <div className="text-4xl font-koh_santepheap font-bold mb-2 text-primarygray">Previous Jobs</div>
                         <p className="text-lg font-light mb-4 text-primarygray">Personal information that will be shown regardless of desired position</p>
                         {jobEntries.map((entry, index) => (
                             <div key={index}>
