@@ -2,13 +2,18 @@
 import React from "react";
 import NewCv from "./NewCv";
 import ExistingCV from "./ExistingCV";
-import { getAllCVs, createCV } from "@/services/cvService";
+import { getAllCVs, createCV, findCVById} from "@/services/cvService";
 import { useEffect, useState } from "react";
 import { getAllPositions } from "@/services/positionServices";
+import {cv, desired_position} from "@prisma/client"
 
 interface Cv {
   cv_id: string;
   title: string;
+}
+
+interface CvDetail extends Cv {
+  desired_position_id: string;
 }
 
 interface Position {
@@ -17,13 +22,20 @@ interface Position {
 }
 
 const Gallery: React.FC = () => {
-
-  const [cvs, setCvs] = useState<Cv[]>([]); 
-  const [positions, setPositions] = useState<Position[]>([]);
-  const [selectedPosition, setSelectedPosition] = useState<string>("");
-  const [isFormVisible, setIsFormVisible] = useState(false);
+  //useState for CV
+  const [cvs, setCvs] = useState<cv[]>([]); 
   const [title, setTitle] = useState<string>('');
+  //useState for positions
+  const [positions, setPositions] = useState<desired_position[]>([]);
+  const [selectedPosition, setSelectedPosition] = useState<string>("");
+  //useState for CV creation pop-up
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  //useState for CV previsualization pop-up
+  const [isDetailVisible, setIsDetailVisible] = useState(false);
+  const [selectedCv, setSelectedCV] = useState<cv | null>(null);
 
+
+  //Fetching all CV information
   useEffect(() => {
     const fetchCvs = async () => {
       try {
@@ -38,6 +50,14 @@ const Gallery: React.FC = () => {
     fetchCvs();
   }, []);
 
+  //Fecthing CV individual information
+  const handleCVSelection = async (cvId: string) => {
+    const cvSelected = await findCVById(cvId);
+    setIsDetailVisible(true);
+    setSelectedCV(cvSelected);
+  }
+
+  //Fetching all Positions Information
   useEffect(() => {
     const fetchPositions = async () => {
       try {
@@ -56,15 +76,21 @@ const Gallery: React.FC = () => {
     setIsFormVisible(!isFormVisible);
   };
 
+  
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
         if (selectedPosition) {
-            await createCV({
+           const newCv =  await createCV({
                 title: title,
                 desired_position_id: selectedPosition,
             });
-            console.log('New CV created successfully');
+   
+            setCvs((cvs) => [...cvs, newCv])
+            setIsFormVisible(false);
+            setTitle('');
+            setSelectedPosition('');
+            
             // Handle successful form submission (e.g., close form, reset form)
         } else {
             console.error('No position selected. Please choose a position.');
@@ -91,7 +117,7 @@ const Gallery: React.FC = () => {
       <div className="grid grid-cols-5 gap-10 overflow-y-auto">
         <NewCv handleFormToggle={handleFormToggle} />
         {cvs.map((cv, index) => (
-          <ExistingCV key={index} title={cv.title} />
+          <ExistingCV key={index} cvProp={cv} />
         ))}
       </div>
 

@@ -21,6 +21,7 @@ export const createCV = async(data : {title?: string;
       ...data,
     }
   })
+  return newCV
 };
 
 
