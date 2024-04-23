@@ -11,9 +11,10 @@ import SignOut from "@/public/assets/svg/SignOut_Icon"
 import Account from "@/public/assets/svg/Account_Icon"
 import { RootState } from "@/contexts/cv/RootState"
 import Link from "next/link";
-import React, { ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode, use, useEffect } from "react";
 import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
+import { useWindowSize } from "@/hooks/useWindowSize";
 
 
 
@@ -79,56 +80,68 @@ const LeftSidebar = () => {
     // Context that stores the current tab being displayed, to add styling accordingly
     const currentTab = useSelector((state: RootState) => state.currentTab)
     const [open, setOpen] = useState(true);
+    const windowSize = useWindowSize();
+    useEffect(() => {
+        if (windowSize.width < 800){
+            setOpen(false)
+        }
+        if (windowSize.width > 800){
+            setOpen(true)
+        }
+    }, [windowSize])
+
     return (
         <aside className="flex z-10 pr-7 bg-editorgray">
-            <div className={`bg-primarygray h-screen pt-8 ${open ? "w-72" : "w-0"} duration-300 relative`}>
+            <div className={`bg-primarygray h-screen pt-8 ${open ? "w-64" : "w-0"} duration-200 relative`}>
                 <div className="p-5 h-full">
                     <IoIosArrowForward className={`flex flex-col h-screen items-center justify-center text-primarygray text-3xl absolute -right-7 cursor-pointer hover:text-secondarygray ${!open && "rotate-180"}`} 
                         onClick={() => setOpen(!open)}
                     />
-                    <div className="inline-flex pl-3">
-                        <div className={`w-full h-10 ${!open && "hidden"} `}><SecondaryLogo /></div>
-                    </div>
-                    <div className="flex h-full flex-col justify-between py-7 px-2">
-                        <div>
-                            <ul>
-                                <SidebarMenuElement
-                                    title="CVs"
-                                    icon={<CV_icon />}
-                                    currentTab={currentTab}
-                                    href="/cv_gallery"
-                                    itemTab="cv_gallery"
-                                    open= {open}
-                                />
-                                <SidebarMenuElement
-                                    title="Editor"
-                                    icon={<PersonalInfo_icon />}
-                                    currentTab={currentTab}
-                                    href="/info"
-                                    itemTab="info"
-                                    open= {open}
-                                />
-                            </ul>
+                    <div className={`${!open && "hidden"}`}>
+                        <div className="inline-flex">
+                            <div className="w-full h-10"><SecondaryLogo /></div>
                         </div>
-                        <div>
-                            <ul>
-                                <SidebarSettingsElement
-                                    title="Account"
-                                    icon={<Account />}
-                                    currentTab={currentTab}
-                                    href=""
-                                    itemTab=""
-                                    open= {open}
-                                />
-                                <SidebarSettingsElement
-                                    title="Sign Out"
-                                    icon={<SignOut />}
-                                    currentTab={currentTab}
-                                    href=""
-                                    itemTab=""
-                                    open= {open}
-                                />
-                            </ul>
+                        <div className="w-full px-2">
+                            <div className="pt-3">
+                                <ul>
+                                    <SidebarMenuElement
+                                        title="CVs"
+                                        icon={<CV_icon />}
+                                        currentTab={currentTab}
+                                        href="/cv_gallery"
+                                        itemTab="cv_gallery"
+                                        open= {open}
+                                    />
+                                    <SidebarMenuElement
+                                        title="Editor"
+                                        icon={<PersonalInfo_icon />}
+                                        currentTab={currentTab}
+                                        href="/info"
+                                        itemTab="info"
+                                        open= {open}
+                                    />
+                                </ul>
+                            </div>
+                            <div className="absolute bottom-0 pb-6">
+                                <ul>
+                                    <SidebarSettingsElement
+                                        title="Account"
+                                        icon={<Account />}
+                                        currentTab={currentTab}
+                                        href=""
+                                        itemTab=""
+                                        open= {open}
+                                    />
+                                    <SidebarSettingsElement
+                                        title="Sign Out"
+                                        icon={<SignOut />}
+                                        currentTab={currentTab}
+                                        href=""
+                                        itemTab=""
+                                        open= {open}
+                                    />
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
