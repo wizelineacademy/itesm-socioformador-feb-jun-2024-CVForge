@@ -4,11 +4,11 @@ const Percent: React.FC<{ percent: number }> = ({ percent }) => {
     // Define a function to determine the color based on the percent value
     const getPercentColor = (percent: number): string => {
         if (percent >= 75) {
-            return "text-gptgreen"; // Green color for percentages 75% and above
+            return "text-gptgreen";
         } else if (percent >= 50) {
-            return "text-yellow-500"; // Yellow color for percentages between 50% and 74%
+            return "text-yellow-500"; 
         } else {
-            return "text-red-500"; // Red color for percentages below 50%
+            return "text-red-500"; 
         }
     };
 
