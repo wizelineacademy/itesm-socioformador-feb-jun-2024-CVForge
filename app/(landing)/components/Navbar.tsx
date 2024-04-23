@@ -24,10 +24,10 @@ const Navbar: React.FC = () => {
                         </li>
                     </ul>
                 </nav>
-                <button className="hidden md:block bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold w-40 py-2 px-4 rounded">
+                <button className="hidden md:block bg-gradient-to-r from-gptgreen to-aiblue text-white font-bold w-40 py-2 px-4 rounded">
                     Login/Sign up
                 </button>
-                <button className="md:hidden bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold py-2 px-4 rounded">
+                <button className="md:hidden bg-gradient-to-r from-gptgreen to-aiblue text-white font-bold py-2 px-4 rounded">
                     Menu
                 </button>
             </div>
