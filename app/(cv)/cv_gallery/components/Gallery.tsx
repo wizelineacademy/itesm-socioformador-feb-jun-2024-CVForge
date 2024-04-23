@@ -113,7 +113,7 @@ const Gallery: React.FC = () => {
   
 
   return (
-    <div className="flex flex-row items-center min-h-screen bg-editorgray py-10 pt-32">
+    <div className="flex flex-row items-center min-h-screen bg-transparent py-10 pt-32">
       <div className="grid grid-cols-5 gap-10 overflow-y-auto">
         <NewCv handleFormToggle={handleFormToggle} />
         {cvs.map((cv, index) => (

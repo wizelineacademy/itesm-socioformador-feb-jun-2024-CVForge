@@ -17,10 +17,14 @@ export default function RootLayout({
   return (
     <html className="scroll-smooth" lang="en">
       <ReduxProvider>
-        <body className = "flex flex-row w-full h-screen overflow-hidden"> 
-          <LeftSidebar></LeftSidebar>
-          {children}
-        </body>
+          <body>
+            <div className="wrapper">
+              <div className = "flex flex-row w-full h-screen overflow-hidden"> 
+                <LeftSidebar></LeftSidebar>
+                {children}
+              </div>
+            </div>
+          </body>
       </ReduxProvider>
     </html>
   )

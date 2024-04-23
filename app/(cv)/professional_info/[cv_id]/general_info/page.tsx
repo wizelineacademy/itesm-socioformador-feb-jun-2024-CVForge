@@ -34,7 +34,7 @@ const GeneralInfo: React.FC = () => {
     };
 
     return (
-        <div className="flex h-screen bg-editorgray">
+        <div className="flex h-screen bg-transparent">
             <div className="flex justify-center w-full">
                 <div className="bg-white shadow-lg p-8 rounded-md w-11/12 max-w-4xl mx-auto pt-4" style={{ height: "106vh" }}>
                     {/* Content of the first container */}
