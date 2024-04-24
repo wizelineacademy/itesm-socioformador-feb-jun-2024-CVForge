@@ -1,4 +1,3 @@
-"use client"
 // Default imports
 import "@/style/globals.css";
 
@@ -17,9 +16,11 @@ export default function RootLayout({
   return (
     <html className="scroll-smooth" lang="en">
       <ReduxProvider>
-        <body className="pl-64 w-full h-screen">{children}</body>
-        <LeftSidebar/>
+        <body className="flex bg-editorgray">
+          <LeftSidebar />
+          <div style={{ flex: "1" }}>{children}</div>
+        </body>
       </ReduxProvider>
     </html>
-  )
+  );
 }

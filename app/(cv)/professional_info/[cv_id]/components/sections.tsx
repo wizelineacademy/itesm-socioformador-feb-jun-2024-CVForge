@@ -14,23 +14,23 @@ const Sections: React.FC = () => {
 
     return (
         <div className="bg-white shadow-lg p-8 rounded-md w-240 h-272 mt-10">
-            {/* Text section */}
-            <div className="text-xl font-bold mb-4">Sections</div>
-            
-            {/* List of text buttons */}
-            <ul>
-                {sectionPaths.map(({ name, path }, index) => (
-                    <li key={index}>
-                        {/* Link for each section name */}
-                        <Link href={path}>
-                            <button className="text-black text-base py-1 px-2 cursor-pointer">
-                                {name}
-                            </button>
-                        </Link>
-                    </li>
-                ))}
-            </ul>
-        </div>
+                {/* Text section */}
+                <div className="text-xl font-bold mb-4">Sections</div>
+                
+                {/* List of text buttons */}
+                <ul>
+                    {sectionPaths.map(({ name, path }, index) => (
+                        <li key={index}>
+                            {/* Link for each section name */}
+                            <Link href={path}>
+                                <button className="text-black text-base py-1 px-2 cursor-pointer">
+                                    {name}
+                                </button>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
     );
 }
 

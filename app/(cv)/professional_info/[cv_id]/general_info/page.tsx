@@ -23,7 +23,7 @@ const GeneralInfo: React.FC = () => {
 
     return (
         <div className="flex h-screen bg-editorgray">
-            <div className="flex justify-center w-full">
+            <div className="flex justify-center w-full mt-10 bg-editorgray">
                 <div className="bg-white shadow-lg p-8 rounded-md w-11/12 max-w-4xl mx-auto pt-4" style={{ height: "106vh" }}>
                     {/* Content of the first container */}
                     <div className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-4">General Information</div>
