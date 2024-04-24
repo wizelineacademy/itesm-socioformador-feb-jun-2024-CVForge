@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html className="scroll-smooth" lang="en">
       <ReduxProvider>
-        <body className="flex bg-editorgray">
+        <body className="flex wrapper bg-transparent">
           <LeftSidebar />
           <div style={{ flex: "1" }}>{children}</div>
         </body>
