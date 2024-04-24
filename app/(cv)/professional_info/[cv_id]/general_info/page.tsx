@@ -2,6 +2,9 @@
 import React, { useState } from "react";
 import Percent from "../components/Percent";
 import Sections from "../components/Sections";
+import { setCurrentTab } from "@/contexts/cv/sidebar/currentTab";
+import { useDispatch } from "react-redux";
+
 
 const GeneralInfo: React.FC = () => {
     // State hooks for managing input values
@@ -15,6 +18,9 @@ const GeneralInfo: React.FC = () => {
     const [address, setAddress] = useState("");
     const [nationality, setNationality] = useState("");
     const [postalCode, setPostalCode] = useState("");
+    // Set the current tab context
+    const dispatch = useDispatch()
+    dispatch(setCurrentTab("professional_info"))
     
     // State hooks for tracking focus and text input
     const [isFocused, setIsFocused] = useState(false);

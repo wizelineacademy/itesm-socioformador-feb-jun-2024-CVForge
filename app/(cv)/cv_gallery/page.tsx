@@ -2,6 +2,8 @@
 import { setCurrentTab } from "@/contexts/cv/sidebar/currentTab";
 import React from "react";
 import { useDispatch } from "react-redux";
+import Gallery from "./components/Gallery";
+import SearchBar from "./components/SearchBar";
 
 const Menu: React.FC = ({ }) => {
     // Set the current tab context
@@ -9,9 +11,10 @@ const Menu: React.FC = ({ }) => {
     dispatch(setCurrentTab("cv_gallery"))
 
     return (
-        <>
-            cv_gallery
-        </>
+        <div className="w-full h-screen overflow-y-scroll">
+            <SearchBar/>
+            <Gallery/>
+        </div>
     )
 }
 

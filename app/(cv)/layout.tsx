@@ -1,3 +1,4 @@
+"use client"
 // Default imports
 import "@/style/globals.css";
 
@@ -6,12 +7,7 @@ import ReduxProvider from "./ReduxProvider";
 
 // Components
 import LeftSidebar from "./layoutComponents/LeftSidebar";
-
-export const metadata = {
-  title: 'CVForge',
-  description: 'CVForge',
-  keywords: ['CV, Resume, AI, ai, Linkedin, Google']
-}
+import { useState } from "react";
 
 export default function RootLayout({
   children,
