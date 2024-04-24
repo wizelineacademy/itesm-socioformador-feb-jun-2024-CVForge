@@ -19,8 +19,9 @@ model ai_response {
 model cv {
   cv_id               String            @id @default(uuid()) @db.Uuid
   user_id             String?           @db.Uuid
+  title               String?           @db.VarChar(50)
   cv_insight_id       String?           @unique(map: "unique_cv_insight_id") @db.Uuid
-  desired_position_id String?           @unique(map: "unique_desired_position_id") @db.Uuid
+  desired_position_id String?           @db.Uuid
   ai_response         ai_response?
   cv_insight          cv_insight?       @relation(fields: [cv_insight_id], references: [cv_insight_id], onDelete: NoAction, onUpdate: NoAction)
   desired_position    desired_position? @relation(fields: [desired_position_id], references: [desired_position_id], onDelete: NoAction, onUpdate: NoAction)
@@ -40,7 +41,7 @@ model desired_position {
   description         String? @db.VarChar(500)
   company             String? @db.VarChar(20)
   years_experience    Int?
-  cv                  cv?
+  cv                  cv[]
 }
 
 model education {

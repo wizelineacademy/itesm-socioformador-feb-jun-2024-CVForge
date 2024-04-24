@@ -92,12 +92,12 @@ const LeftSidebar = () => {
 
     return (
         <aside className="flex z-10 pr-7 bg-editorgray">
-            <div className={`bg-primarygray h-screen pt-8 ${open ? "w-64" : "w-0"} duration-200 relative`}>
+            <div className={`bg-primarygray h-screen ${open ? "w-64" : "w-0"} duration-200 relative`}>
                 <div className="p-5 h-full">
                     <IoIosArrowForward className={`flex flex-col h-screen items-center justify-center text-primarygray text-3xl absolute -right-7 cursor-pointer hover:text-secondarygray ${!open && "rotate-180"}`} 
                         onClick={() => setOpen(!open)}
                     />
-                    <div className={`${!open && "hidden"}`}>
+                    <div className={`${!open && "hidden"} py-8 `}>
                         <div className="inline-flex">
                             <div className="w-full h-10"><SecondaryLogo /></div>
                         </div>
@@ -116,13 +116,13 @@ const LeftSidebar = () => {
                                         title="Editor"
                                         icon={<PersonalInfo_icon />}
                                         currentTab={currentTab}
-                                        href="/info"
-                                        itemTab="info"
+                                        href="/professional_info/1/general_info"
+                                        itemTab="professional_info"
                                         open= {open}
                                     />
                                 </ul>
                             </div>
-                            <div className="absolute bottom-0 pb-6">
+                            <div className="absolute bottom-0 w-48">
                                 <ul>
                                     <SidebarSettingsElement
                                         title="Account"

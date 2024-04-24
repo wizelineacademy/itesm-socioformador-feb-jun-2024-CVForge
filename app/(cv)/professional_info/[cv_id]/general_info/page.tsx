@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import Percent from "../components/Percent";
 import Sections from "../components/Sections";
+import { setCurrentTab } from "@/contexts/cv/sidebar/currentTab";
+import { useDispatch } from "react-redux";
 
 const GeneralInfo: React.FC = () => {
     // State hooks for managing input values
@@ -15,21 +17,13 @@ const GeneralInfo: React.FC = () => {
     const [address, setAddress] = useState("");
     const [nationality, setNationality] = useState("");
     const [postalCode, setPostalCode] = useState("");
-    
-    // State hooks for tracking focus and text input
-    const [isFocused, setIsFocused] = useState(false);
-
-    const handleFocus = () => {
-        setIsFocused(true);
-    };
-
-    const handleBlur = () => {
-        setIsFocused(false);
-    };
+    // Set the current tab context
+    const dispatch = useDispatch()
+    dispatch(setCurrentTab("professional_info"))
 
     return (
         <div className="flex h-screen bg-editorgray">
-            <div className="flex justify-center w-full">
+            <div className="flex justify-center w-full mt-10 bg-editorgray">
                 <div className="bg-white shadow-lg p-8 rounded-md w-11/12 max-w-4xl mx-auto pt-4" style={{ height: "106vh" }}>
                     {/* Content of the first container */}
                     <div className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-4">General Information</div>
@@ -43,17 +37,17 @@ const GeneralInfo: React.FC = () => {
                         <div className="flex">
                             <div className="flex flex-col mr-20 flex-grow ">
                                 <label htmlFor="firstName" className="mb-2 text-primarygray font-bold">First Name:</label>
-                                <input type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} onFocus={handleFocus} onBlur={handleBlur} className={`border p-2 w-full mb-4 text-primarygray ${isFocused || firstName ? 'block w-96 h-12 border bg-transparent border-gradient rounded-md mb-4' : ''}`} />
+                                <input type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="border p-2 w-full mb-4 text-primarygray" />
                                 
                                 <label htmlFor="pronouns" className="mb-2 text-primarygray font-bold">Pronouns:</label>
-                                <input type="text" id="pronouns" value={pronouns} onChange={(e) => setPronouns(e.target.value)} onFocus={handleFocus} onBlur={handleBlur} className={`border p-2 w-full mb-4 text-primarygray ${isFocused || pronouns ? 'block w-96 h-12 border bg-transparent border-gradient rounded-md mb-4' : ''}`} />
+                                <input type="text" id="pronouns" value={pronouns} onChange={(e) => setPronouns(e.target.value)} className="border p-2 w-full mb-4 text-primarygray" />
                             </div>
                             <div className="flex flex-col flex-grow">
                                 <label htmlFor="lastName" className="mb-2 text-primarygray font-bold">Last Name:</label>
-                                <input type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} onFocus={handleFocus} onBlur={handleBlur} className={`border p-2 w-full mb-4 text-primarygray ${isFocused || lastName ? 'block w-96 h-12 border bg-transparent border-gradient rounded-md mb-4' : ''}`} />
+                                <input type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} className="border p-2 w-full mb-4 text-primarygray" />
                                 
                                 <label htmlFor="dob" className="mb-2 text-primarygray font-bold">Date of Birth:</label>
-                                <input type="text" id="dob" value={dob} onChange={(e) => setDOB(e.target.value)} onFocus={handleFocus} onBlur={handleBlur} className={`border p-2 w-full mb-4 text-primarygray ${isFocused || dob ? 'block w-96 h-12 border bg-transparent border-gradient rounded-md mb-4' : ''}`} />
+                                <input type="text" id="dob" value={dob} onChange={(e) => setDOB(e.target.value)} className="border p-2 w-full mb-4 text-primarygray" />
                             </div>
                         </div>
 
@@ -63,11 +57,11 @@ const GeneralInfo: React.FC = () => {
                         <div className="flex">
                             <div className="flex flex-col mr-20 flex-grow">
                                 <label htmlFor="email" className="mb-2 text-primarygray font-bold">Email:</label>
-                                <input type="text" id="email" value={email} onChange={(e) => setEmail(e.target.value)} onFocus={handleFocus} onBlur={handleBlur} className={`border p-2 w-full mb-4 text-primarygray ${isFocused || email ? 'block w-96 h-12 border bg-transparent border-gradient rounded-md mb-4' : ''}`} />
+                                <input type="text" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="border p-2 w-full mb-4 text-primarygray" />
                             </div>
                             <div className="flex flex-col flex-grow">
                                 <label htmlFor="phone" className="mb-2 text-primarygray font-bold">Phone:</label>
-                                <input type="text" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} onFocus={handleFocus} onBlur={handleBlur} className={`border p-2 w-full mb-4 text-primarygray ${isFocused || phone ? 'block w-96 h-12 border bg-transparent border-gradient rounded-md mb-4' : ''}`} />
+                                <input type="text" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} className="border p-2 w-full mb-4 text-primarygray" />
                             </div>
                         </div>
 
@@ -77,31 +71,28 @@ const GeneralInfo: React.FC = () => {
                         <div className="flex">
                             <div className="flex flex-col mr-20 flex-grow">
                                 <label htmlFor="country" className="mb-2 text-primarygray font-bold">Country:</label>
-                                <input type="text" id="country" value={country} onChange={(e) => setCountry(e.target.value)} onFocus={handleFocus} onBlur={handleBlur} className={`border p-2 w-full mb-4 text-primarygray ${isFocused || country ? 'block w-96 h-12 border bg-transparent border-gradient rounded-md mb-4' : ''}`} />
+                                <input type="text" id="country" value={country} onChange={(e) => setCountry(e.target.value)} className="border p-2 w-full mb-4 text-primarygray" />
                                 
                                 <label htmlFor="address" className="mb-2 text-primarygray font-bold">Address:</label>
-                                <input type="text" id="address" value={address} onChange={(e) => setAddress(e.target.value)} onFocus={handleFocus} onBlur={handleBlur} className={`border p-2 w-full mb-4 text-primarygray ${isFocused || address ? 'block w-96 h-12 border bg-transparent border-gradient rounded-md mb-4' : ''}`} />
+                                <input type="text" id="address" value={address} onChange={(e) => setAddress(e.target.value)} className="border p-2 w-full mb-4 text-primarygray" />
                             </div>
                             <div className="flex flex-col flex-grow">
                                 <label htmlFor="nationality" className="mb-2 text-primarygray font-bold">Nationality:</label>
-                                <input type="text" id="nationality" value={nationality} onChange={(e) => setNationality(e.target.value)} onFocus={handleFocus} onBlur={handleBlur} className={`border p-2 w-full mb-4 text-primarygray ${isFocused || nationality ? 'block w-96 h-12 border bg-transparent border-gradient rounded-md mb-4' : ''}`} />
+                                <input type="text" id="nationality" value={nationality} onChange={(e) => setNationality(e.target.value)} className="border p-2 w-full mb-4 text-primarygray" />
                                 
                                 <label htmlFor="postalcode" className="mb-2 text-primarygray font-bold">Postal Code:</label>
-                                <input type="text" id="postalcode" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} onFocus={handleFocus} onBlur={handleBlur} className={`border p-2 w-full mb-4 text-primarygray ${isFocused || postalCode ? 'block w-96 h-12 border bg-transparent border-gradient rounded-md mb-4' : ''}`} />
+                                <input type="text" id="postalcode" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} className="border p-2 w-full mb-4 text-primarygray" />
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
-            <div className="flex flex-col justify-start items-end text-1xl">
-                {/* Container with dynamic width */}
-                <div className="w-72">
-                    {/* Call Percent component with a percent prop */}
-                    <Percent percent={90} />
-                    {/* Call Sections component */}
-                    <Sections />
-                </div>
+            <div className="flex flex-col items-center justify-start w-72 text-xl">
+                <Percent percent={90} />
+                <Sections />
             </div>
+
         </div>
     );
 }

@@ -27,7 +27,7 @@ const Certificate: React.FC = () => {
 
     return (
         <div className="flex h-screen bg-editorgray">
-            <div className="flex justify-center w-full bg-editorgray">
+            <div className="flex justify-center w-full mt-10 bg-editorgray">
                 <div className="bg-white shadow-lg p-8 rounded-md w-11/12 max-w-4xl mx-auto pt-4" style={{ height: "106vh" }}>
                     <div className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-4">Certificate</div>
                     <div className="border-b-2 border-gray-300 mb-4"></div>
@@ -59,11 +59,9 @@ const Certificate: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="flex flex-col justify-start items-end text-1xl">
-                <div className="w-72">
-                    <Percent percent={90} />
-                    <Sections />
-                </div>
+            <div className="flex flex-col items-center justify-start w-72 text-xl">
+                <Percent percent={90} />
+                <Sections />
             </div>
         </div>
     );
