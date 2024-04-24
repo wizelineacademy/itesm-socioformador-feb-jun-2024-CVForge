@@ -43,7 +43,7 @@ const RoadmapItem: React.FC<RoadmapItemProps> = ({ title, mainContent, isLast, i
 
 const Roadmap: React.FC = () => {
     return (
-        <div className="w-full min-h-screen font-inter text-primarygray bg-bg">
+        <div className="w-full min-h-screen font-inter text-primarygray bg-bg px-16 overflow-y-auto">
             <Link href={"/"}
                 className="sticky top-0 w-full h-10 flex items-center text-secondarygray bg-bg">
                 <OpenArrow_icon flipDegree={270} />
@@ -52,7 +52,7 @@ const Roadmap: React.FC = () => {
 
 
             {/* Roadmap description */}
-            <div className="w-full h-full flex flex-col text-center mt-4">
+            <div className="w-full flex flex-col text-center mt-4">
                 <h1 className="font-black text-3xl">
                     Roadmap
                 </h1>
