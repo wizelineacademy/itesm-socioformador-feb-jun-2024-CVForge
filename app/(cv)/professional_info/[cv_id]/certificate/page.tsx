@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react";
-import Percent from "../components/Percent";
-import Sections from "../components/Sections";
+import Percent from "../components/percent";
+import Sections from "../components/sections";
 
 interface CertificateEntry {
     certificateName: string;

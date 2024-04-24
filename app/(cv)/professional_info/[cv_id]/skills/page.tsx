@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react";
-import Percent from "../components/Percent";
-import Sections from "../components/Sections";
+import Percent from "../components/percent";
+import Sections from "../components/sections";
 
 const levelOptions = ["Beginner", "Intermediate", "Advanced"];
 const tagOptions = ["Soft Skills", "Programming Langugaes", "Tools", "Technologies"];

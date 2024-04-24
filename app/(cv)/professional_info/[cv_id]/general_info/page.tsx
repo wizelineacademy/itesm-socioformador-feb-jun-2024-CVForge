@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react";
-import Percent from "../components/Percent";
-import Sections from "../components/Sections";
+import Percent from "../components/percent";
+import Sections from "../components/sections";
 import { setCurrentTab } from "@/contexts/cv/sidebar/currentTab";
 import { useDispatch } from "react-redux";
 
