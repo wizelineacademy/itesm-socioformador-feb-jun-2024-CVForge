@@ -11,7 +11,7 @@ interface JobEntry {
     endDate: string;
 }
 
-const GeneralInfo: React.FC = () => {
+const work_experience: React.FC = () => {
     const [jobEntries, setJobEntries] = useState<JobEntry[]>([]);
     const [jobName, setJobName] = useState("");
     const [jobDescription, setJobDescription] = useState("");
@@ -98,4 +98,4 @@ const GeneralInfo: React.FC = () => {
     );
 };
 
-export default GeneralInfo;
+export default work_experience;

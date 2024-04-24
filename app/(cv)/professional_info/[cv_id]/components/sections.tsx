@@ -1,14 +1,15 @@
 import React from "react";
+import Link from "next/link";
 
 const Sections: React.FC = () => {
-    // Define an array of section names
-    const sectionNames = [
-        "< General Info",
-        "< Achievments",
-        "< Work Experience",
-        "< Certficates",
-        "< Skills"
-        // Add more section names as needed
+    // Define an array of section names and their respective paths
+    const sectionPaths = [
+        { name: "General Info", path: "/professional_info/1/general_info" },
+        { name: "Achievements", path: "/professional_info/1/achievments" },
+        { name: "Work Experience", path: "/professional_info/1/work_experience" },
+        { name: "Certificates", path: "/professional_info/1//certificate" },
+        { name: "Skills", path: "/professional_info/1/skills" }
+        // Add more section names and paths as needed
     ];
 
     return (
@@ -18,12 +19,14 @@ const Sections: React.FC = () => {
             
             {/* List of text buttons */}
             <ul>
-                {sectionNames.map((name, index) => (
+                {sectionPaths.map(({ name, path }, index) => (
                     <li key={index}>
-                        {/* Button for each section name */}
-                        <button className="text-black text-base py-1 px-2">
-                            {name}
-                        </button>
+                        {/* Link for each section name */}
+                        <Link href={path}>
+                            <button className="text-black text-base py-1 px-2 cursor-pointer">
+                                {name}
+                            </button>
+                        </Link>
                     </li>
                 ))}
             </ul>
