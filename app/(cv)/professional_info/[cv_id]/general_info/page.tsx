@@ -89,21 +89,23 @@ const GeneralInfo: React.FC = () => {
                                 <label htmlFor="postalcode" className="mb-2 text-primarygray font-bold">Postal Code:</label>
                                 <input type="text" id="postalcode" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} onFocus={handleFocus} onBlur={handleBlur} className={`border p-2 w-full mb-4 text-primarygray ${isFocused || postalCode ? 'block w-96 h-12 border bg-transparent border-gradient rounded-md mb-4' : ''}`} />
                             </div>
+                        
+
                         </div>
+                        
                     </div>
                 </div>
             </div>
-            <div className="flex flex-col justify-start items-end text-1xl">
+            <div className="flex flex-col items-center w-72 text-xl ">
                 {/* Container with dynamic width */}
-                <div className="w-72">
                     {/* Call Percent component with a percent prop */}
                     <Percent percent={90} />
                     {/* Call Sections component */}
                     <Sections />
                 </div>
             </div>
-        </div>
     );
 }
+
 
 export default GeneralInfo;
