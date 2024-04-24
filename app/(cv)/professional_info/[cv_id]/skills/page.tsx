@@ -92,11 +92,9 @@ const Skills: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="flex flex-col justify-start items-end text-1xl">
-                <div className="w-72">
-                    <Percent percent={90} />
-                    <Sections />
-                </div>
+            <div className="flex flex-col items-center justify-start w-72 text-xl">
+                <Percent percent={90} />
+                <Sections />
             </div>
         </div>
     );

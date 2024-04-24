@@ -88,13 +88,11 @@ const GeneralInfo: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="flex flex-col items-center w-72 text-xl ">
-                {/* Container with dynamic width */}
-                {/* Call Percent component with a percent prop */}
+            <div className="flex flex-col items-center justify-start w-72 text-xl">
                 <Percent percent={90} />
-                {/* Call Sections component */}
                 <Sections />
             </div>
+
         </div>
     );
 }
