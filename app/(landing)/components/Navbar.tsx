@@ -1,6 +1,7 @@
 
 import Link from 'next/link';
 import React from 'react';
+import SignInOutButton from './SignInOutButton';
 
 const Navbar: React.FC = () => {
     return (
@@ -24,9 +25,7 @@ const Navbar: React.FC = () => {
                         </li>
                     </ul>
                 </nav>
-                <button className="hidden md:block bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold w-40 py-2 px-4 rounded">
-                    Login/Sign up
-                </button>
+                <SignInOutButton/>
                 <button className="md:hidden bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold py-2 px-4 rounded">
                     Menu
                 </button>
