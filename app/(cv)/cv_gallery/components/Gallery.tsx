@@ -46,6 +46,8 @@ const Gallery: React.FC = () => {
   //Deleting a CV
   const handleCVDelete = async(cvId: string) => {
     const deletedCV = await deleteCV(cvId);
+    setIsDetailVisible(false);
+    setCvs((prevCvs) => prevCvs.filter(cv => cv.cv_id !== cvId));
     console.log("cv deleted");
   };
 
