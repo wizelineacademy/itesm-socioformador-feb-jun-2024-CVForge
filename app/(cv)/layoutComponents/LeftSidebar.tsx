@@ -91,10 +91,10 @@ const LeftSidebar = () => {
     }, [windowSize])
 
     return (
-        <aside className="flex z-10 pr-7 bg-editorgray">
+        <aside className="flex z-10">
             <div className={`bg-primarygray h-screen ${open ? "w-64" : "w-0"} duration-200 relative`}>
                 <div className="p-5 h-full">
-                    <IoIosArrowForward className={`flex flex-col h-screen items-center justify-center text-primarygray text-3xl absolute -right-7 cursor-pointer hover:text-secondarygray ${!open && "rotate-180"}`} 
+                    <IoIosArrowForward className={`flex flex-col h-screen items-center justify-center text-primarygray text-3xl absolute -right-7 cursor-pointer hover:text-secondarygray ${open && "rotate-180"}`} 
                         onClick={() => setOpen(!open)}
                     />
                     <div className={`${!open && "hidden"} py-8 `}>
