@@ -4,7 +4,7 @@ import Filter_Icon from '@/public/assets/svg/Filter_Icon.tsx';
 
 const SearchBar: React.FC = () => {
  return (
-    <div className="flex flex-row justify-center border border-aiblue w-full">
+    <div className="flex flex-row justify-center w-full">
       <div className="flex flex-auto my-10">
         <div className="flex items-center px-2 py-2 bg-white rounded-lg w-full shadow-md">
           <div className='w-5 h-5'>

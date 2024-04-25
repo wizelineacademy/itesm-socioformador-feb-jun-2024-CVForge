@@ -82,10 +82,10 @@ const LeftSidebar = () => {
     const [open, setOpen] = useState(true);
     const windowSize = useWindowSize();
     useEffect(() => {
-        if (windowSize.width < 800){
+        if (windowSize.width < 900){
             setOpen(false)
         }
-        if (windowSize.width > 800){
+        if (windowSize.width > 900){
             setOpen(true)
         }
     }, [windowSize])

@@ -19,7 +19,7 @@ const ExistingCV: React.FC<ExistingCVProps> = ({
       <div className="w-44 h-60 bg-white shadow-md flex items-center justify-center rounded-md">
         {/* You can add content here */}
       </div>
-      <p className="mt-2 text-center text-primarygray">{cvProp.title}</p>
+      <p className="mt-2 w-28 text-center text-primarygray truncate ...">{cvProp.title}</p>
     </div>
   );
 };
