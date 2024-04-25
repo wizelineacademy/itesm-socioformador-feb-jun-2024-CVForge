@@ -104,7 +104,7 @@ const Gallery: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent">
+    <div className="min-h-screen bg-transparent border border-red-200">
       <div className="grid grid-cols-5 gap-10 overflow-y-auto top-0">
         <NewCv handleFormToggle={handleFormToggle} />
         {cvs.map((cv, index) => (
