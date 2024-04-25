@@ -22,9 +22,9 @@ const GeneralInfo: React.FC = () => {
     dispatch(setCurrentTab("professional_info"))
 
     return (
-        <div className="flex h-screen bg-transparent">
+        <div className="flex h-screen bg-transparent overflow-y-scroll">
             <div className="flex justify-center w-full mt-10 bg-transparent">
-                <div className="bg-white shadow-lg p-8 rounded-md w-11/12 max-w-4xl mx-auto pt-4" style={{ height: "106vh" }}>
+                <div className="bg-white shadow-lg p-8 rounded-md w-11/12 max-w-4xl mx-auto pt-4" style={{ height: "115vh" }}>
                     {/* Content of the first container */}
                     <div className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-4">General Information</div>
                     <div className="border-b-2 border-gray-300 mb-4"></div>
