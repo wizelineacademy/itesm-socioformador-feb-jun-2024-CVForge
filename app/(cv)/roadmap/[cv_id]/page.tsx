@@ -106,10 +106,6 @@ const Roadmap: React.FC = () => {
         }
     };
 
-    useEffect(() => {
-        
-    }, [modifiedRecommendations])
-
     return (
         <div className="w-full min-h-screen font-inter text-primarygray bg-bg px-16">
             <Link href={"/"}
