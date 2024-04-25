@@ -1,5 +1,14 @@
 "use client"
 
+// !Delete
+type recommendation_fake = {
+    recommendation_id: string,
+    cv_insight_id: string,
+    title: string,
+    main_content: string,
+    completed: boolean,
+}
+
 // Package imports
 import { useState } from "react";
 
@@ -40,7 +49,7 @@ const Recommendation: React.FC<RecommendationProps> = ({ title, mainContent }) =
 }
 
 type RecommendationSectionProps = {
-    recommendations: RecommendationProps[]
+    recommendations: recommendation_fake[]
 }
 const ReccomendationSection: React.FC<RecommendationSectionProps> = ({ recommendations }) => {
     return (
@@ -50,7 +59,7 @@ const ReccomendationSection: React.FC<RecommendationSectionProps> = ({ recommend
             </h2>
             {
                 recommendations.map((recommendation) =>
-                    <Recommendation key={crypto.randomUUID()} title={recommendation.title} mainContent={recommendation.mainContent} />
+                    <Recommendation key={recommendation.recommendation_id} title={recommendation.title} mainContent={recommendation.main_content} />
                 )
             }
         </div>
