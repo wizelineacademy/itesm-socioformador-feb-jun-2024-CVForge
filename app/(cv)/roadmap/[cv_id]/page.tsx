@@ -19,18 +19,7 @@ type RecommendationItem = {
 const RecommendationItem: React.FC<RecommendationItem> = ({ recommendationItemData, isLast, completedStatusChange }) => {
     const [completed, setCompleted] = useState<boolean>(recommendationItemData.completed);
 
-    // const handleCompletedStatusChange = () => {
-    //     const newCompletedStatus = !completed;
-
-    //     setCompleted(newCompletedStatus);
-
-    //     const newRoadmapItemData: recommendation = {
-    //         ...recommendationItemData,
-    //         completed: newCompletedStatus
-    //     };
-    //     completedStatusChange(newRoadmapItemData);
-    // }
-
+    // Change the completed status, sends to the parent and also updates internally to reflect visually
     const handleCompletedStatusChange = () => {
         const newCompletedStatus = !completed;
         setCompleted(newCompletedStatus);
