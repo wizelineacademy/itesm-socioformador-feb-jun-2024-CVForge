@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react";
-import Percent from "../components/Percent";
-import Sections from "../components/Sections";
+import Percent from "../components/percent";
+import Sections from "../components/sections";
 
 interface JobEntry {
     jobName: string;
@@ -35,8 +35,8 @@ const work_experience: React.FC = () => {
     };
 
     return (
-        <div className="flex h-screen bg-editorgray">
-            <div className="flex justify-center mt-10 bg-editorgray w-full">
+        <div className="flex h-screen bg-transparent">
+            <div className="flex justify-center mt-10 bg-transparent w-full">
                 <div className="bg-white shadow-lg p-8 rounded-md w-11/12 max-w-4xl mx-auto pt-4" style={{ height: "106vh" }}>
                     <div className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-4">Work Experience</div>
                     <div className="border-b-2 border-gray-300 mb-4"></div>

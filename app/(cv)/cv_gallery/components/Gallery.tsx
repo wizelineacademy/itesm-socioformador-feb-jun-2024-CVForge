@@ -2,29 +2,16 @@
 import React from "react";
 import NewCv from "./NewCv";
 import ExistingCV from "./ExistingCV";
-import { getAllCVs, createCV, findCVById} from "@/services/cvService";
+import { getAllCVs, createCV, findCVById, deleteCV} from "@/services/cvService";
 import { useEffect, useState } from "react";
 import { getAllPositions } from "@/services/positionServices";
-import {cv, desired_position} from "@prisma/client"
-
-interface Cv {
-  cv_id: string;
-  title: string;
-}
-
-interface CvDetail extends Cv {
-  desired_position_id: string;
-}
-
-interface Position {
-  title: string;
-  desired_position_id: string;
-}
+import { cv, desired_position } from "@prisma/client";
+import { CVDetail } from "./CVDetail";
 
 const Gallery: React.FC = () => {
   //useState for CV
-  const [cvs, setCvs] = useState<cv[]>([]); 
-  const [title, setTitle] = useState<string>('');
+  const [cvs, setCvs] = useState<cv[]>([]);
+  const [title, setTitle] = useState<string>("");
   //useState for positions
   const [positions, setPositions] = useState<desired_position[]>([]);
   const [selectedPosition, setSelectedPosition] = useState<string>("");
@@ -33,7 +20,6 @@ const Gallery: React.FC = () => {
   //useState for CV previsualization pop-up
   const [isDetailVisible, setIsDetailVisible] = useState(false);
   const [selectedCv, setSelectedCV] = useState<cv | null>(null);
-
 
   //Fetching all CV information
   useEffect(() => {
@@ -53,15 +39,23 @@ const Gallery: React.FC = () => {
   //Fecthing CV individual information
   const handleCVSelection = async (cvId: string) => {
     const cvSelected = await findCVById(cvId);
-    setIsDetailVisible(true);
     setSelectedCV(cvSelected);
-  }
+    setIsDetailVisible(true);
+  };
+
+  //Deleting a CV
+  const handleCVDelete = async(cvId: string) => {
+    const deletedCV = await deleteCV(cvId);
+    setIsDetailVisible(false);
+    setCvs((prevCvs) => prevCvs.filter(cv => cv.cv_id !== cvId));
+    console.log("cv deleted");
+  };
 
   //Fetching all Positions Information
   useEffect(() => {
     const fetchPositions = async () => {
       try {
-        const positionsArray = await getAllPositions(); 
+        const positionsArray = await getAllPositions();
 
         setPositions(positionsArray);
       } catch (error) {
@@ -76,30 +70,28 @@ const Gallery: React.FC = () => {
     setIsFormVisible(!isFormVisible);
   };
 
-  
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-        if (selectedPosition) {
-           const newCv =  await createCV({
-                title: title,
-                desired_position_id: selectedPosition,
-            });
-   
-            setCvs((cvs) => [...cvs, newCv])
-            setIsFormVisible(false);
-            setTitle('');
-            setSelectedPosition('');
-            
-            // Handle successful form submission (e.g., close form, reset form)
-        } else {
-            console.error('No position selected. Please choose a position.');
-        }
-    } catch (error) {
-        console.error('Failed to create new CV:', error);
-    }
-};
+      if (selectedPosition) {
+        const newCv = await createCV({
+          title: title,
+          desired_position_id: selectedPosition,
+        });
 
+        setCvs((cvs) => [...cvs, newCv]);
+        setIsFormVisible(false);
+        setTitle("");
+        setSelectedPosition("");
+
+        // Handle successful form submission (e.g., close form, reset form)
+      } else {
+        console.error("No position selected. Please choose a position.");
+      }
+    } catch (error) {
+      console.error("Failed to create new CV:", error);
+    }
+  };
 
   const handlePositionChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -110,17 +102,26 @@ const Gallery: React.FC = () => {
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
-  
 
   return (
-    <div className="flex flex-row items-center min-h-screen bg-editorgray py-10 pt-32">
-      <div className="grid grid-cols-5 gap-10 overflow-y-auto">
+    <div className="min-h-screen bg-transparent">
+      <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-10 overflow-y-auto top-0">
         <NewCv handleFormToggle={handleFormToggle} />
         {cvs.map((cv, index) => (
-          <ExistingCV key={index} cvProp={cv} />
+          <ExistingCV
+            key={index}
+            cvProp={cv}
+            handleCVSelection={handleCVSelection}
+          />
         ))}
       </div>
-
+      {isDetailVisible && selectedCv && (
+        <CVDetail
+          cvDetail={selectedCv}
+          onClose={() => setIsDetailVisible(false)}
+          onDelete={(cvId: string) => handleCVDelete(cvId)}
+        />
+      )}
       {isFormVisible && (
         <div className="fixed top-0 left-0 w-full h-full bg-opacity-50 bg-black flex justify-center items-center">
           <div className="bg-white p-6 rounded-md shadow-md">
