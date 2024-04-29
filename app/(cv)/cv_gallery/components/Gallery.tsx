@@ -6,8 +6,6 @@ import { getAllCVs, createCV, findCVById, deleteCV} from "@/services/cvService";
 import { useEffect, useState } from "react";
 import { getAllPositions } from "@/services/positionServices";
 import { cv, desired_position } from "@prisma/client";
-import DropdownMenu from './Dropdown';
-
 
 const Gallery: React.FC = () => {
   //useState for CV
@@ -78,6 +76,12 @@ const Gallery: React.FC = () => {
       console.error("Failed to create new CV:", error);
     }
   };
+  const handleCVDelete = async(cvId: string) => {
+    const deletedCV = await deleteCV(cvId);
+    setIsDetailVisible(false);
+    setCvs((prevCvs) => prevCvs.filter(cv => cv.cv_id !== cvId));
+    console.log("cv deleted");
+  };
 
   const handlePositionChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -97,6 +101,7 @@ const Gallery: React.FC = () => {
           <ExistingCV
             key={index}
             cvProp={cv}
+            deleteFunction={handleCVDelete}
           />
         ))}
       </div>
