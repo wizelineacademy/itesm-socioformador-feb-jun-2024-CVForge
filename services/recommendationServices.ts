@@ -14,12 +14,12 @@ const getAllRecommendations = async() => {
     return recommendation;
 }
 
-const createRecommendation = async (recommendationData: Recommendation) => {
-    const recommendation = await prisma.recommendation.create({
-        data: {
-            ...recommendationData
-        }
-    });
+// const createRecommendation = async (recommendationData: Recommendation) => {
+//     const recommendation = await prisma.recommendation.create({
+//         data: {
+//             ...recommendationData
+//         }
+//     });
 
-    return recommendation;
-}
+//     return recommendation;
+// }

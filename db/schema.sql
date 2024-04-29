@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS desired_position (
 CREATE TABLE IF NOT EXISTS cv (
     cv_id uuid PRIMARY KEY,
     user_id uuid REFERENCES users(users_id),
+    title VARCHAR(255),
     desired_position_id uuid REFERENCES desired_position(desired_position_id),
     CONSTRAINT unique_desired_position_id UNIQUE (desired_position_id)
 );

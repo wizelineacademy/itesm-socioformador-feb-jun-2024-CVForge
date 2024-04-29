@@ -1,7 +1,7 @@
 "use client";
 
 // !REMOVE
-import { SCORE, RECOMMENDATIONS, RECOMMENDED_CHANGES } from "../CONSTANTS"
+import { SCORE, RECOMMENDATIONS, RECOMMENDED_CHANGES, FETCHED_RECOMMENDATIONS } from "../CONSTANTS"
 
 // Package imports
 import { useState } from 'react';
@@ -59,7 +59,7 @@ const InsightBar = ({ }) => {
                         </div>
 
                         <hr className="w-full h-[1px] my-2" />
-                        <ReccomendationSection recommendations={RECOMMENDATIONS} />
+                        <ReccomendationSection recommendations={FETCHED_RECOMMENDATIONS} />
                         <hr className={`${isOpen ? "hidden" : "visible"} w-full h-[1px] my-2`} />
                     </div>
                     <RecommendedChanges recommendedChangesList={RECOMMENDED_CHANGES} />
