@@ -31,11 +31,6 @@ model cv {
   @@index([desired_position_id], map: "idx_cv_desired_position_id")
 }
 
-model cv_insight {
-  cv_insight_id String @id @db.Uuid
-  score         Int?
-}
-
 model desired_position {
   desired_position_id String  @id @default(uuid()) @db.Uuid
   title               String? @db.VarChar(255)
@@ -63,6 +58,7 @@ model professional_info {
   achievement          achievement[]
   certificate          certificate[]
   education            education[]
+  general_info         general_info?
   users                users?            @relation(fields: [user_id], references: [users_id], onDelete: Cascade, onUpdate: NoAction)
   project              project[]
   skill                skill[]
@@ -165,4 +161,14 @@ model skill {
   proficiency          String?            @db.VarChar(255)
   tag                  String?            @db.VarChar(255)
   professional_info    professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model general_info {
+  general_info_id      String            @id @db.Uuid
+  professional_info_id String            @unique @db.Uuid
+  school               String?           @db.VarChar(255)
+  education_degree     String?           @db.VarChar(255)
+  gpa                  Decimal?          @db.Decimal
+  start_date           DateTime?         @db.Date
+  professional_info    professional_info @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: Cascade, onUpdate: NoAction)
 }

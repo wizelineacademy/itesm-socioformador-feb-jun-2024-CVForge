@@ -1,7 +1,7 @@
 BEGIN;
 
 -- Drop tables if they exist with cascade to automatically drop any dependent objects
-DROP TABLE IF EXISTS work_experience, skill, relevant_coursework, recommendation, project, profile, education, ai_response, cv, desired_position, certificate, achievement, professional_info, users CASCADE;
+DROP TABLE IF EXISTS work_experience, skill, relevant_coursework, recommendation, project, profile, education, ai_response, cv, desired_position, certificate, achievement, professional_info, general_info, users CASCADE;
 
 -- Table for users
 CREATE TABLE IF NOT EXISTS users (
@@ -20,6 +20,16 @@ CREATE TABLE IF NOT EXISTS professional_info (
     professional_info_id uuid PRIMARY KEY,
     user_id uuid REFERENCES users(users_id) ON DELETE CASCADE,
     CONSTRAINT unique_user_id UNIQUE (user_id)
+);
+
+-- Table for the user general info in professional info
+CREATE TABLE IF NOT EXISTS general_info (
+    general_info_id uuid PRIMARY KEY,
+    professional_info_id uuid NOT NULL UNIQUE REFERENCES professional_info(professional_info_id) ON DELETE CASCADE,
+    school VARCHAR(255),
+    education_degree VARCHAR(255),
+    gpa NUMERIC,
+    start_date DATE
 );
 
 -- Table for achievements

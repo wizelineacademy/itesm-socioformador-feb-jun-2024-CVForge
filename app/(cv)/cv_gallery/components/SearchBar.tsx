@@ -1,6 +1,6 @@
 import React from 'react';
-import Search_Icon from '@/public/assets/svg/Search_Icon.tsx';
-import Filter_Icon from '@/public/assets/svg/Filter_Icon.tsx';
+import Search_Icon from '@/public/assets/svg/Search_Icon';
+import Filter_Icon from '@/public/assets/svg/Filter_Icon';
 
 const SearchBar: React.FC = () => {
  return (
