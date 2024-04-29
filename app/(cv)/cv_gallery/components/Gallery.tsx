@@ -76,6 +76,7 @@ const Gallery: React.FC = () => {
       console.error("Failed to create new CV:", error);
     }
   };
+  
   const handleCVDelete = async(cvId: string) => {
     const deletedCV = await deleteCV(cvId);
     setIsDetailVisible(false);
@@ -95,7 +96,7 @@ const Gallery: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-transparent">
-      <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-10 overflow-y-auto top-0">
+      <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-2 overflow-y-auto top-0">
         <NewCv handleFormToggle={handleFormToggle} />
         {cvs.map((cv, index) => (
           <ExistingCV
@@ -106,6 +107,7 @@ const Gallery: React.FC = () => {
         ))}
       </div>
 
+      {/*pop up to create new*/}
       {isFormVisible && (
         <div className="fixed top-0 left-0 w-full h-full bg-opacity-50 bg-black flex justify-center items-center">
           <div className="bg-white p-6 rounded-md shadow-md">

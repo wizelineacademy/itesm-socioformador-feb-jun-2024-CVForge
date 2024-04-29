@@ -12,7 +12,7 @@ const Menu: React.FC = ({ }) => {
 
     return (
         <div className="flex h-screen overflow-y-scroll justify-center">
-        <div className="flex px-7 flex-col">
+        <div className="flex flex-col">
           <SearchBar/>
           <Gallery/>
         </div>
