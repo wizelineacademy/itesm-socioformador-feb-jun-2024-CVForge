@@ -6,7 +6,8 @@ import { getAllCVs, createCV, findCVById, deleteCV} from "@/services/cvService";
 import { useEffect, useState } from "react";
 import { getAllPositions } from "@/services/positionServices";
 import { cv, desired_position } from "@prisma/client";
-import { CVDetail } from "./CVDetail";
+import DropdownMenu from './Dropdown';
+
 
 const Gallery: React.FC = () => {
   //useState for CV
@@ -41,14 +42,6 @@ const Gallery: React.FC = () => {
     const cvSelected = await findCVById(cvId);
     setSelectedCV(cvSelected);
     setIsDetailVisible(true);
-  };
-
-  //Deleting a CV
-  const handleCVDelete = async(cvId: string) => {
-    const deletedCV = await deleteCV(cvId);
-    setIsDetailVisible(false);
-    setCvs((prevCvs) => prevCvs.filter(cv => cv.cv_id !== cvId));
-    console.log("cv deleted");
   };
 
   //Fetching all Positions Information
@@ -115,13 +108,6 @@ const Gallery: React.FC = () => {
           />
         ))}
       </div>
-      {isDetailVisible && selectedCv && (
-        <CVDetail
-          cvDetail={selectedCv}
-          onClose={() => setIsDetailVisible(false)}
-          onDelete={(cvId: string) => handleCVDelete(cvId)}
-        />
-      )}
       {isFormVisible && (
         <div className="fixed top-0 left-0 w-full h-full bg-opacity-50 bg-black flex justify-center items-center">
           <div className="bg-white p-6 rounded-md shadow-md">
