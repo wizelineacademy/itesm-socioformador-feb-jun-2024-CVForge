@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import {cv} from '@prisma/client'
+import {deleteCV} from "@/services/cvService";
+
 
 const DropdownMenu: React.FC<{ cvDetail: cv}> = () => {
  const [isOpen, setIsOpen] = useState(false);
@@ -8,6 +10,12 @@ const DropdownMenu: React.FC<{ cvDetail: cv}> = () => {
  const toggleDropdown = () => {
     setIsOpen(!isOpen);
  };
+ //Deleting a CV
+ const handleCVDelete = async(cvId: string) => {
+    const deletedCV = await deleteCV(cvId);
+    setCvs((prevCvs) => prevCvs.filter(cv => cv.cv_id !== cvId));
+    console.log("cv deleted");
+  };
 
  return (
     <div className="relative inline-block text-left">

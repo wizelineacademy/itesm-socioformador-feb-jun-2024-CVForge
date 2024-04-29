@@ -37,13 +37,6 @@ const Gallery: React.FC = () => {
     fetchCvs();
   }, []);
 
-  //Fecthing CV individual information
-  const handleCVSelection = async (cvId: string) => {
-    const cvSelected = await findCVById(cvId);
-    setSelectedCV(cvSelected);
-    setIsDetailVisible(true);
-  };
-
   //Fetching all Positions Information
   useEffect(() => {
     const fetchPositions = async () => {
@@ -104,10 +97,10 @@ const Gallery: React.FC = () => {
           <ExistingCV
             key={index}
             cvProp={cv}
-            handleCVSelection={handleCVSelection}
           />
         ))}
       </div>
+
       {isFormVisible && (
         <div className="fixed top-0 left-0 w-full h-full bg-opacity-50 bg-black flex justify-center items-center">
           <div className="bg-white p-6 rounded-md shadow-md">
@@ -157,3 +150,19 @@ const Gallery: React.FC = () => {
 };
 
 export default Gallery;
+/*
+  //Deleting a CV
+  const handleCVDelete = async(cvId: string) => {
+    const deletedCV = await deleteCV(cvId);
+    setIsDetailVisible(false);
+    setCvs((prevCvs) => prevCvs.filter(cv => cv.cv_id !== cvId));
+    console.log("cv deleted");
+  };
+
+  //Fecthing CV individual information
+  const handleCVSelection = async (cvId: string) => {
+    const cvSelected = await findCVById(cvId);
+    setSelectedCV(cvSelected);
+    setIsDetailVisible(true);
+  };
+*/
