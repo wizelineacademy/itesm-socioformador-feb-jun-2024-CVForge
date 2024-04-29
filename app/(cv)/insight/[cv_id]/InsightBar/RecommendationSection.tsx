@@ -3,7 +3,7 @@
 // !Delete
 type recommendation_fake = {
     recommendation_id: string,
-    cv_id: string,
+    cv_insight_id: string,
     title: string,
     main_content: string,
     completed: boolean,
