@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma';
-import { recommendation } from '@prisma/client';
+import { Prisma, recommendation } from '@prisma/client';
 
-const createRecommendation = async (recommendationData: recommendation) => {
+const createRecommendation = async (recommendationData: Prisma.recommendationCreateInput) => {
     const recommendation = await prisma.recommendation.create({
         data: {
             ...recommendationData
@@ -20,10 +20,12 @@ const findRecommendationById = async (recommendationId: string) => {
 }
 
 const findRecommendationsByCvId = async (cvId: string) => {
- // nothing yet
+    const recommendation = await prisma.recommendation.findFirst({
+        where: { cv_id: cvId }
+    });
 }
 
-const getAllRecommendation = async() => {
+const getAllRecommendation = async () => {
     const recommendation = await prisma.recommendation.findMany();
     return recommendation;
 }
@@ -31,5 +33,6 @@ const getAllRecommendation = async() => {
 export default {
     createRecommendation,
     findRecommendationById,
+    findRecommendationsByCvId,
     getAllRecommendation
 }

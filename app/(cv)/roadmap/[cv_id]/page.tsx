@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 // Icon imports
 import OpenArrow_icon from "@/public/assets/cv/insight/OpenArrow_icon";
 import { recommendation } from "@prisma/client";
+import recommendationService from "@/services/recommendationService";
 
 type RecommendationItem = {
     recommendationItemData: recommendation,
@@ -108,7 +109,11 @@ const Roadmap: React.FC = () => {
     // call everytime the authentication token has been modified
     // set the fetched recommendation state
     useEffect(() => {
-        // setFetchedRecommendations()
+        // recommendationService.findRecommendationsByCvId("").then((res) => {
+        //     console.log("res: ", res)
+        // }).catch((error) => {
+        //     console.error("error: ", error)
+        // }) 
     }, [])
 
     return (
