@@ -1,19 +1,11 @@
 "use client"
 
-// !Delete
-type recommendation_fake = {
-    recommendation_id: string,
-    cv_insight_id: string,
-    title: string,
-    main_content: string,
-    completed: boolean,
-}
-
 // Package imports
 import { useState } from "react";
 
 // Icon imports
 import OpenArrow from "@/public/assets/cv/insight/OpenArrow_icon";
+import { recommendation } from "@prisma/client";
 
 type RecommendationProps = {
     title: string;
@@ -49,7 +41,7 @@ const Recommendation: React.FC<RecommendationProps> = ({ title, mainContent }) =
 }
 
 type RecommendationSectionProps = {
-    recommendations: recommendation_fake[]
+    recommendations: recommendation[]
 }
 const ReccomendationSection: React.FC<RecommendationSectionProps> = ({ recommendations }) => {
     return (

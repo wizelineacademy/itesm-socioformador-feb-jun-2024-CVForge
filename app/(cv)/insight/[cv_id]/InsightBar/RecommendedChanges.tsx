@@ -5,7 +5,7 @@ import { useState } from "react";
 
 
 type RecommendedChangesProps = {
-    recommendedChangesList: string[]
+    recommendedChangesList: string
 }
 const RecommendedChanges: React.FC<RecommendedChangesProps> = ({ recommendedChangesList }) => {
     return (
@@ -14,11 +14,12 @@ const RecommendedChanges: React.FC<RecommendedChangesProps> = ({ recommendedChan
                 Recommendations
             </h2>
             <ul className="list-disc pl-4">
-                {
+                {/* {
                     recommendedChangesList.map((recommendation) =>
                         <li key={crypto.randomUUID()}>{recommendation}</li>
                     )
-                }
+                } */}
+                {recommendedChangesList}
             </ul>
         </div>
     )

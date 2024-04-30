@@ -1,15 +1,7 @@
 "use client";
 import Link from "next/link";
-// !DELETE
+// !DELETE, placeholder for the recommendations, must actually fetch the recommendations
 import { FETCHED_RECOMMENDATIONS } from "../../insight/[cv_id]/CONSTANTS";
-// This type must be removed, instead, update the prisma schema
-type recommendation_fake = {
-    recommendation_id: string,
-    cv_insight_id: string,
-    title: string,
-    main_content: string,
-    completed: boolean,
-}
 
 // Package imports
 import { useEffect, useState } from "react";
@@ -19,26 +11,20 @@ import OpenArrow_icon from "@/public/assets/cv/insight/OpenArrow_icon";
 import { recommendation } from "@prisma/client";
 
 type RecommendationItem = {
-    recommendationItemData: recommendation_fake,
+    recommendationItemData: recommendation,
     isLast: boolean,
-    completedStatusChange: (recommendation_id: recommendation_fake) => void;
+    completedStatusChange: (recommendation: recommendation) => void;
 }
 
 const RecommendationItem: React.FC<RecommendationItem> = ({ recommendationItemData, isLast, completedStatusChange }) => {
     const [completed, setCompleted] = useState<boolean>(recommendationItemData.completed);
 
+    // Change the completed status, sends to the parent and also updates internally to reflect visually
     const handleCompletedStatusChange = () => {
         const newCompletedStatus = !completed;
-
         setCompleted(newCompletedStatus);
-
-        const newRoadmapItemData: recommendation_fake = {
-            ...recommendationItemData,
-            completed: newCompletedStatus
-        };
-        completedStatusChange(newRoadmapItemData);
-    }
-
+        completedStatusChange({ ...recommendationItemData, completed: newCompletedStatus });
+    };
 
     return (
         <li className="flex flex-row font-inter">
@@ -60,51 +46,70 @@ const RecommendationItem: React.FC<RecommendationItem> = ({ recommendationItemDa
 
 const Roadmap: React.FC = () => {
     // Hold fetched recommendations
-    const [fetchedRecommendations, setFetchedRecommendations] = useState<recommendation_fake[]>(FETCHED_RECOMMENDATIONS)
+    const [fetchedRecommendations, setFetchedRecommendations] = useState<recommendation[]>(FETCHED_RECOMMENDATIONS)
 
-    // Hold items marked as completed
-    // Set the initial state as the 
-    const [modifiedRecommendations, setModifiedRecommendations] = useState<recommendation_fake[]>([])
+    // Timer to handle the completed status change
+    // When the user changes the completed status of a recommendation, POST that modified status
+    // The system waits for a timer to be completed to modify the status
+    // If the user reverts the completed status back to the one that is currently posted, 
+    // the timer will be cleared to prevent sending multiple POSTs
+    const [debounceTimers, setDebounceTimers] = useState<{ [key: string]: NodeJS.Timeout }>({});
 
-    // The handler receives a recommendation which the complete field is being modified
-    // It obtains the index of the original recommendation
-    // It compares the original recommendation with the recommendation being modified
-    // The goal is to add modified recommendations in the modifiedRecommendations array, to then update them in the db
-    const handleCompletedRecommendationItem = (recommendation: recommendation_fake) => {
-        // Check if recommendation exists in fetchedRecommendations
-        if (fetchedRecommendations) {
-            const indexInFetched = fetchedRecommendations.findIndex(fetchedRecommendation => fetchedRecommendation.recommendation_id === recommendation.recommendation_id);
+    // Receives a recommendation and checks if the completed status is different from the one being stored in the state
+    // If it is different it calls a timer to POST the new status
+    // If the status reverts before the timer is completed, the timer clears
+    const handleCompletedRecommendationItem = (modifiedRecommendation: recommendation) => {
+        const { recommendation_id, completed: newCompletedStatus } = modifiedRecommendation;
+        const existingRecommendation = fetchedRecommendations.find(r => r.recommendation_id === recommendation_id);
 
-            if (indexInFetched !== -1) {
-                const fetchedItem = fetchedRecommendations[indexInFetched];
-                const isDifferentFromFetched = fetchedItem.completed !== recommendation.completed;
+        // If the recommendation differs from the current state
+        if (existingRecommendation && existingRecommendation.completed !== newCompletedStatus) {
 
-                if (modifiedRecommendations) {
-                    const indexInModified = modifiedRecommendations.findIndex(modifiedRecommendation => modifiedRecommendation.recommendation_id === recommendation.recommendation_id);
-
-                    // Modify or add the recommendation in the modified list
-                    const newModifiedRecommendations = [...modifiedRecommendations];
-
-                    if (isDifferentFromFetched) {
-                        // If different, add or update in modifiedRecommendations
-                        if (indexInModified !== -1) {
-                            newModifiedRecommendations[indexInModified] = recommendation; // Update existing
-                        } else {
-                            newModifiedRecommendations.push(recommendation); // Add new
-                        }
-                    } else if (indexInModified !== -1) {
-                        // Remove unchanged recommendation
-                        newModifiedRecommendations.splice(indexInModified, 1);
-                    }
-
-                    setModifiedRecommendations(newModifiedRecommendations);
-                } else if (isDifferentFromFetched) {
-                    // Handle case when no modified recommendations exist yet
-                    setModifiedRecommendations([recommendation]);
-                }
+            // If there is already a timer for the recommendation, clear it
+            if (debounceTimers[recommendation_id]) {
+                clearTimeout(debounceTimers[recommendation_id]);
             }
+
+            // Set a debounce timer to then call the post
+            const timer = setTimeout(() => {
+                postCompletedStatus(modifiedRecommendation);
+                // Modify the state that holds the completed status for the recommendations
+                updateRecommendationInState(modifiedRecommendation);
+            }, 2_000); // Debounce for 2 seconds
+            setDebounceTimers({ ...debounceTimers, [recommendation_id]: timer });
+        }
+        // If there is already a timer, but the new completed status is the same as the current state,
+        // remove the timer
+        else if (existingRecommendation && existingRecommendation.completed === newCompletedStatus) {
+            if (debounceTimers[recommendation_id]) {
+                // Remove timer if it exists
+                clearTimeout(debounceTimers[recommendation_id]);
+            }
+        } else {
+            console.error("No recommendation matches the id provided")
         }
     };
+
+    // Handle the POST service to update the recommendation completed status
+    const postCompletedStatus = (recommendation: recommendation) => {
+        console.log(`POST request sent for recommendation ID: ${recommendation.recommendation_id} with completed status: ${recommendation.completed}`);
+        // Replace this console.log with your actual POST request logic
+    };
+
+    // Receives a modified recommendation object to update in the recommendations state 
+    const updateRecommendationInState = (updatedRecommendation: recommendation) => {
+        const newRecommendations = fetchedRecommendations.map(rec =>
+            rec.recommendation_id === updatedRecommendation.recommendation_id ? { ...rec, completed: updatedRecommendation.completed } : rec
+        );
+        setFetchedRecommendations(newRecommendations);
+    };
+
+    // Here must fetch the recommendation data for the CV
+    // call everytime the authentication token has been modified
+    // set the fetched recommendation state
+    useEffect(() => {
+        // setFetchedRecommendations()
+    }, [])
 
     return (
         <div className="w-full min-h-screen font-inter text-primarygray bg-bg px-16">

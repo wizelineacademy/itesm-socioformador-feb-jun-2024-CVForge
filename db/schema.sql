@@ -1,7 +1,7 @@
 BEGIN;
 
 -- Drop tables if they exist with cascade to automatically drop any dependent objects
-DROP TABLE IF EXISTS work_experience, skill, relevant_coursework, recommendation, project, profile, education, ai_response, cv, desired_position, cv_insight, certificate, achievement, professional_info, users CASCADE;
+DROP TABLE IF EXISTS work_experience, skill, relevant_coursework, recommendation, project, profile, education, ai_response, cv, desired_position, certificate, achievement, professional_info, general_info, users CASCADE;
 
 -- Table for users
 CREATE TABLE IF NOT EXISTS users (
@@ -20,6 +20,16 @@ CREATE TABLE IF NOT EXISTS professional_info (
     professional_info_id uuid PRIMARY KEY,
     user_id uuid REFERENCES users(users_id) ON DELETE CASCADE,
     CONSTRAINT unique_user_id UNIQUE (user_id)
+);
+
+-- Table for the user general info in professional info
+CREATE TABLE IF NOT EXISTS general_info (
+    general_info_id uuid PRIMARY KEY,
+    professional_info_id uuid NOT NULL UNIQUE REFERENCES professional_info(professional_info_id) ON DELETE CASCADE,
+    school VARCHAR(255),
+    education_degree VARCHAR(255),
+    gpa NUMERIC,
+    start_date DATE
 );
 
 -- Table for achievements
@@ -41,12 +51,6 @@ CREATE TABLE IF NOT EXISTS certificate (
     url TEXT
 );
 
--- Table for CV insights
-CREATE TABLE IF NOT EXISTS cv_insight (
-    cv_insight_id uuid PRIMARY KEY,
-    score INTEGER
-);
-
 -- Table for desired positions
 CREATE TABLE IF NOT EXISTS desired_position (
     desired_position_id uuid PRIMARY KEY,
@@ -60,9 +64,8 @@ CREATE TABLE IF NOT EXISTS desired_position (
 CREATE TABLE IF NOT EXISTS cv (
     cv_id uuid PRIMARY KEY,
     user_id uuid REFERENCES users(users_id),
-    cv_insight_id uuid REFERENCES cv_insight(cv_insight_id),
+    title VARCHAR(255),
     desired_position_id uuid REFERENCES desired_position(desired_position_id),
-    CONSTRAINT unique_cv_insight_id UNIQUE (cv_insight_id),
     CONSTRAINT unique_desired_position_id UNIQUE (desired_position_id)
 );
 
@@ -116,7 +119,7 @@ CREATE TABLE IF NOT EXISTS project (
 -- Table for recommendations
 CREATE TABLE IF NOT EXISTS recommendation (
     recommendation_id uuid PRIMARY KEY,
-    cv_insight_id uuid REFERENCES cv_insight(cv_insight_id),
+    cv_id uuid REFERENCES cv(cv_id),
     title VARCHAR(255),
     main_content TEXT,
     completed BOOLEAN
@@ -152,7 +155,6 @@ CREATE TABLE IF NOT EXISTS work_experience (
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 CREATE INDEX IF NOT EXISTS idx_professional_info_user_id ON professional_info(user_id);
 CREATE INDEX IF NOT EXISTS idx_ai_response_cv_id ON ai_response(cv_id);
-CREATE INDEX IF NOT EXISTS idx_cv_cv_insight_id ON cv(cv_insight_id);
 CREATE INDEX IF NOT EXISTS idx_cv_desired_position_id ON cv(desired_position_id);
 
 COMMIT;
