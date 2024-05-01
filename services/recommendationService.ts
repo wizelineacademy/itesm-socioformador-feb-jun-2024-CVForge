@@ -20,10 +20,17 @@ const findRecommendationById = async (recommendationId: string) => {
 }
 
 const findRecommendationsByCvId = async (cvId: string) => {
-    const recommendation = await prisma.recommendation.findFirst({
+    const recommendation = await prisma.recommendation.findMany({
         where: { cv_id: cvId }
+        // where: {
+        //     cv: {
+        //         cv_id: cvId
+        //     }
+        // }
     });
+    return recommendation;
 }
+
 
 const getAllRecommendation = async () => {
     const recommendation = await prisma.recommendation.findMany();

@@ -1,54 +1,90 @@
 import prisma from '@/lib/prisma';
-import userServices from '@/services/userService'; // Adjust the import path to your services file
+import userService from '@/services/userService'; // Assuming you export these functions from a service file
+import { User } from '@/types/user'; // Import the User type if needed, adjust path as required
+import { expect } from '@jest/globals';
 
-// Mock the prisma client
+// Type-safe mock setup
 jest.mock('@/lib/prisma', () => ({
   users: {
-    findUnique: jest.fn(),
-    findMany: jest.fn(),
-    create: jest.fn(),
+    findUnique: jest.fn().mockImplementation((query) => {
+      if (query.where.users_id === '1') {
+        return Promise.resolve({ users_id: '1', name: 'John Doe', email: 'john@example.com' });
+      } else {
+        return Promise.resolve(null);
+      }
+    }),
+    findMany: jest.fn().mockImplementation(() => Promise.resolve([
+      { users_id: '1', name: 'John Doe', email: 'john@example.com' },
+      { users_id: '2', name: 'Jane Smith', email: 'jane@example.com' }
+    ])),
+    create: jest.fn().mockImplementation((data) => Promise.resolve({ users_id: '3', ...data.data })),
   },
 }));
 
-describe('User Services', () => {
+describe('User Service', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   test('findUserById should return a user', async () => {
     const mockUserId = '1';
-    const mockUser = { users_id: mockUserId, name: 'John Doe' };
-    prisma.users.findUnique.mockResolvedValue(mockUser);
+    const expectedUser = { users_id: mockUserId, name: 'John Doe', email: 'john@example.com' };
 
-    const user = await userServices.findUserById(mockUserId);
-    expect(user).toEqual(mockUser);
+    // Perform the function call
+    const user = await userService.findUserById(mockUserId);
+
+    // Check that the returned value matches the expected mock value
+    expect(user).toEqual(expectedUser);
+    // Verify the method was called correctly
     expect(prisma.users.findUnique).toHaveBeenCalledWith({
       where: { users_id: mockUserId },
     });
   });
 
   test('getAllUsers should return all users', async () => {
-    const mockUsers = [
-      { users_id: '1', name: 'John Doe' },
-      { users_id: '2', name: 'Jane Doe' },
+    const expectedUsers = [
+      { users_id: '1', name: 'John Doe', email: 'john@example.com' },
+      { users_id: '2', name: 'Jane Smith', email: 'jane@example.com' }
     ];
-    prisma.users.findMany.mockResolvedValue(mockUsers);
 
-    const users = await userServices.getAllUsers();
-    expect(users).toEqual(mockUsers);
-    expect(prisma.users.findMany).toHaveBeenCalled();
+    // Perform the function call
+    const users = await userService.getAllUsers();
+
+    // Check that the returned value matches the expected mock value
+    expect(users).toEqual(expectedUsers);
+    // Verify the method was called correctly
+    expect(prisma.users.findMany).toHaveBeenCalledWith();
   });
 
   test('createUser should add a new user', async () => {
-    const newUser = { name: 'New User', email: 'newuser@example.com' };
-    const mockUser = { ...newUser, users_id: '3', last_login: new Date(), created_at: new Date(), updated_at: new Date() };
-    prisma.users.create.mockResolvedValue(mockUser);
+    const newUserData = {
+      name: 'Alice Wonderland',
+      email: 'alice@example.com',
+      password: 'SecurePass123!', // Assuming a password is required
+      verification: false,        // Assuming a verification status is required
+      is_active: true             // Assuming an active status flag is required
+    };
 
-    const user = await userServices.createUser(newUser);
-    expect(user).toEqual(mockUser);
+    const expectedUser = {
+      users_id: '3',
+      name: 'Alice Wonderland',
+      email: 'alice@example.com',
+      password: 'SecurePass123!',
+      verification: false,
+      is_active: true,
+      last_login: expect.any(Date),
+      created_at: expect.any(Date),
+      updated_at: expect.any(Date),
+    };
+
+    // Call the function under test
+    const user = await userService.createUser(newUserData);
+
+    // Assertions to check both the result and the call to the Prisma create method
+    expect(user).toEqual(expectedUser);
     expect(prisma.users.create).toHaveBeenCalledWith({
       data: {
-        ...newUser,
+        ...newUserData,
         last_login: expect.any(Date),
         created_at: expect.any(Date),
         updated_at: expect.any(Date),
