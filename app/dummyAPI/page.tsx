@@ -1,5 +1,5 @@
 "use client"
-import { getAllUsers } from "@/services/userService";
+import userService from "@/services/userService";
 import { useEffect, useState } from 'react';
 
 interface User {
@@ -18,7 +18,7 @@ const TestServicesPage = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const usersData = await getAllUsers();
+      const usersData = await userService.getAllUsers();
       setUsers(usersData);
     };
 
