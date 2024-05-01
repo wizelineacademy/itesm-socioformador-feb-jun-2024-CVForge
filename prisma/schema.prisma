@@ -135,7 +135,7 @@ model work_experience {
 }
 
 model achievement {
-  achievement_id       String             @id @db.Uuid
+  achievement_id       String             @id @default(uuid()) @db.Uuid
   professional_info_id String?            @db.Uuid
   name                 String?            @db.VarChar(255)
   description          String?            @db.VarChar(1000)
