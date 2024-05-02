@@ -1,8 +1,43 @@
-import React, { useState } from 'react';
-import Google_Icon from '@/public/assets/svg/Google_Icon'
-import Linkedin_Icon from '@/public/assets/svg/Linkedin_Icon'
+import React, { FormEvent, useState } from 'react';
+import Google_Icon from '@/public/assets/svg/Google_Icon';
+import Linkedin_Icon from '@/public/assets/svg/Linkedin_Icon';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const Login: React.FC= () => {
+    const [email, setEmail] = useState(''); // State for email
+    const [password, setPassword] = useState(''); // State for password
+    const router = useRouter();
+
+    // Function to handle email input change
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value);
+    };
+
+    // Function to handle password input change
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPassword(e.target.value);
+    };
+
+    // Function to handle form submission
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+        const result = await signIn('credentials', {
+            redirect: false,
+            email,
+            password,
+        });
+
+        if (result?.error) {
+            // Handle error (e.g., show a message to the user)
+            console.error(result.error);
+        } else {
+            // Redirect the user or do something else
+            console.log('Signed in successfully');
+            router.push("/");
+        }
+    };
+
     return (
         <div className='flex items-center justify-center h-screen'>
             {/* <div className='bg-white shadow-md flex items-between justify-center rounded-lg p-10 w-3/5 h-3/5'> */}
@@ -15,7 +50,7 @@ const Login: React.FC= () => {
                             <p className='text-gptgreen'>.ai</p>
                         </div>
                         <p className='text-primarygray font-semibold font-inter text-xl p-4'>Don’t Have an Account?</p>
-                        <button className='flex felx-row text-gptgreen text-xl border border-gptgreen rounded-3xl p-1.5 border-2 w-72'>
+                        <button onClick={() => signIn('google', { callbackUrl: "/" })} className='flex felx-row text-gptgreen text-xl border border-gptgreen rounded-3xl p-1.5 border-2 w-72'>
                             <div className='px-3 pl-5'>
                                 <div className='w-7 h-7'>
                                     <Google_Icon/>
@@ -52,6 +87,8 @@ const Login: React.FC= () => {
                                 type="email"
                                 className="border-2 border-gptgreen bg-white h-10 px-3 pr-24 rounded-lg text-md focus:outline-none"
                                 placeholder="email"
+                                value={email}
+                                onChange={handleEmailChange}
                             />
                         </div>
                         <div className='p-3'/>{/* spacer */}
@@ -61,15 +98,19 @@ const Login: React.FC= () => {
                                 type="password"
                                 className="border-2 border-gptgreen bg-white h-10 px-3 pr-24 rounded-lg text-md focus:outline-none"
                                 placeholder="password"
+                                value={password}
+                                onChange={handlePasswordChange}
                             />
                         </div>
                         <div className='flex w-full justify-end py-1'>
                             <p className='flex text-xs text-gptgreen font-inter font-bold underline'>Forgot Password?</p>
                         </div>
                         <div className='p-4'/>{/* spacer */}
-                        <button className='flex items-center justify-center bg-gradient-to-r from-aiblue to-gptgreen felx-row text-white text-md rounded-3xl p-2.5 w-72'>
-                            Sign In
-                        </button> 
+                        <form onSubmit={handleSubmit}>
+                            <button type="submit" className='flex items-center justify-center bg-gradient-to-r from-aiblue to-gptgreen felx-row text-white text-md rounded-3xl p-2.5 w-72'>
+                                Sign In
+                            </button> 
+                        </form>
                     </div>
                 </div>
             </div>
