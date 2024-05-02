@@ -111,3 +111,21 @@ export const RECOMMENDED_CHANGES = [
     "lorem ipsum",
     "lorem ipsum",
 ]
+
+export const MOCK_CV = [
+    { 
+        achievement_name : "Award for Excellence in Leadership",
+        achievement_description: "Received award for outstanding leadership skills demonstrated in managing a team of 20+ members.",
+        work_experience_name: "XYZ Corporation",
+        work_experience_position: "Software Engineer",
+        work_experience_description: "Developed scalable web applications using modern technologies such as React.js and Node.js. Collaborated with cross-functional teams to deliver high-quality software solutions.",
+        work_experience_startdate: "January 2018",
+        work_experience_endate: "Present",
+        certificate_name: "AWS Certified Solutions Architect",
+        certificate_description: "Certification demonstrating proficiency in designing and deploying scalable, highly available, and fault-tolerant systems on Amazon Web Services (AWS).",
+        skills_title: "Programming Languages",
+        skills_level: "Advanced",
+        skills_duration: "5+ years",
+        skills_tag: "JavaScript, Python, Java, C++"
+    }
+]
