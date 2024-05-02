@@ -166,9 +166,11 @@ model skill {
 model general_info {
   general_info_id      String            @id @db.Uuid
   professional_info_id String            @unique @db.Uuid
-  school               String?           @db.VarChar(255)
-  education_degree     String?           @db.VarChar(255)
-  gpa                  Decimal?          @db.Decimal
-  start_date           DateTime?         @db.Date
+  first_name           String?           @db.VarChar(255)
+  last_name            String?           @db.VarChar(255)
+  email                String?           @db.VarChar(255)
+  phone                String?           @db.VarChar(255)
+  github_link          String?           @db.VarChar(255)
+  linkedin_link        String?           @db.VarChar(255)
   professional_info    professional_info @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: Cascade, onUpdate: NoAction)
 }

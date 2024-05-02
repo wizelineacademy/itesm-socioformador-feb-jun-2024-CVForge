@@ -6,7 +6,7 @@ interface NewCvProps {
 
 const NewCv: React.FC<NewCvProps> = ({ handleFormToggle }) => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center mx-5">
       {/* Button with onClick event to toggle the form */}
       <button className="w-44 h-60 bg-white shadow-md flex items-center justify-center rounded-md"
         onClick={handleFormToggle}
