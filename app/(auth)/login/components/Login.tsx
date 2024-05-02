@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import MainLogo from '@/public/Assets/MainLogo'; 
+import MainLogo from '@/public/assets/MainLogo'; 
 import Popup from './Popup';
-import SecondaryLogo from "@/public/Assets/SecondaryLogo"
+import SecondaryLogo from "@/public/assets/SecondaryLogo"
 
 
 const Login: React.FC= () => {
