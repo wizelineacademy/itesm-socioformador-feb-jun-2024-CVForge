@@ -1,7 +1,9 @@
+"use server";
 import prisma from '@/lib/prisma';
 import { Prisma, recommendation } from '@prisma/client';
 
-const createRecommendation = async (recommendationData: Prisma.recommendationCreateInput) => {
+// Exportación individual de cada función
+export const createRecommendation = async (recommendationData: Prisma.recommendationCreateInput) => {
     const recommendation = await prisma.recommendation.create({
         data: {
             ...recommendationData
@@ -11,7 +13,7 @@ const createRecommendation = async (recommendationData: Prisma.recommendationCre
     return recommendation;
 }
 
-const findRecommendationById = async (recommendationId: string) => {
+export const findRecommendationById = async (recommendationId: string) => {
     const recommendation = await prisma.recommendation.findUnique({
         where: { recommendation_id: recommendationId }
     });
@@ -19,27 +21,20 @@ const findRecommendationById = async (recommendationId: string) => {
     return recommendation;
 }
 
-const findRecommendationsByCvId = async (cvId: string) => {
-    const recommendation = await prisma.recommendation.findMany({
-        where: { cv_id: cvId }
-        // where: {
-        //     cv: {
-        //         cv_id: cvId
-        //     }
-        // }
-    });
-    return recommendation;
-}
+export const findRecommendationsByCvId = async (cvId: string): Promise<recommendation[]> => {
+    try {
+        console.log("Fetching recommendations for CV ID:", cvId)
+        const recommendations = await prisma.recommendation.findMany({
+            where: { cv_id: cvId }
+        });
+        return recommendations;
+    } catch (error) {
+        console.error("Failed to fetch recommendations for CV ID:", cvId, error);
+        throw error;
+    }
+};
 
-
-const getAllRecommendation = async () => {
-    const recommendation = await prisma.recommendation.findMany();
-    return recommendation;
-}
-
-export default {
-    createRecommendation,
-    findRecommendationById,
-    findRecommendationsByCvId,
-    getAllRecommendation
+export const getAllRecommendation = async() => {
+    const recommendations = await prisma.recommendation.findMany();
+    return recommendations;
 }

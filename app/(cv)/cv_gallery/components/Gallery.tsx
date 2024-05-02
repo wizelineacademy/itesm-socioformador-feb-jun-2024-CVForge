@@ -6,7 +6,6 @@ import { getAllCVs, createCV, findCVById, deleteCV} from "@/services/cvService";
 import { useEffect, useState } from "react";
 import { getAllPositions } from "@/services/positionServices";
 import { cv, desired_position } from "@prisma/client";
-import { CVDetail } from "./CVDetail";
 
 const Gallery: React.FC = () => {
   //useState for CV
@@ -35,21 +34,6 @@ const Gallery: React.FC = () => {
 
     fetchCvs();
   }, []);
-
-  //Fecthing CV individual information
-  const handleCVSelection = async (cvId: string) => {
-    const cvSelected = await findCVById(cvId);
-    setSelectedCV(cvSelected);
-    setIsDetailVisible(true);
-  };
-
-  //Deleting a CV
-  const handleCVDelete = async(cvId: string) => {
-    const deletedCV = await deleteCV(cvId);
-    setIsDetailVisible(false);
-    setCvs((prevCvs) => prevCvs.filter(cv => cv.cv_id !== cvId));
-    console.log("cv deleted");
-  };
 
   //Fetching all Positions Information
   useEffect(() => {
@@ -92,6 +76,13 @@ const Gallery: React.FC = () => {
       console.error("Failed to create new CV:", error);
     }
   };
+  
+  const handleCVDelete = async(cvId: string) => {
+    const deletedCV = await deleteCV(cvId);
+    setIsDetailVisible(false);
+    setCvs((prevCvs) => prevCvs.filter(cv => cv.cv_id !== cvId));
+    console.log("cv deleted");
+  };
 
   const handlePositionChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -105,23 +96,18 @@ const Gallery: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-transparent">
-      <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-10 overflow-y-auto top-0">
+      <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-2 overflow-y-auto top-0">
         <NewCv handleFormToggle={handleFormToggle} />
         {cvs.map((cv, index) => (
           <ExistingCV
             key={index}
             cvProp={cv}
-            handleCVSelection={handleCVSelection}
+            deleteFunction={handleCVDelete}
           />
         ))}
       </div>
-      {isDetailVisible && selectedCv && (
-        <CVDetail
-          cvDetail={selectedCv}
-          onClose={() => setIsDetailVisible(false)}
-          onDelete={(cvId: string) => handleCVDelete(cvId)}
-        />
-      )}
+
+      {/*pop up to create new*/}
       {isFormVisible && (
         <div className="fixed top-0 left-0 w-full h-full bg-opacity-50 bg-black flex justify-center items-center">
           <div className="bg-white p-6 rounded-md shadow-md">
@@ -171,3 +157,19 @@ const Gallery: React.FC = () => {
 };
 
 export default Gallery;
+/*
+  //Deleting a CV
+  const handleCVDelete = async(cvId: string) => {
+    const deletedCV = await deleteCV(cvId);
+    setIsDetailVisible(false);
+    setCvs((prevCvs) => prevCvs.filter(cv => cv.cv_id !== cvId));
+    console.log("cv deleted");
+  };
+
+  //Fecthing CV individual information
+  const handleCVSelection = async (cvId: string) => {
+    const cvSelected = await findCVById(cvId);
+    setSelectedCV(cvSelected);
+    setIsDetailVisible(true);
+  };
+*/
