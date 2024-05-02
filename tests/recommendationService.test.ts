@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma';
-import recommendationServices from '@/services/recommendationService';
+import {createRecommendation, findRecommendationById, findRecommendationsByCvId, getAllRecommendation} from '@/services/recommendationService';
 import { recommendation } from '@prisma/client';
 import { expect } from '@jest/globals';
 
@@ -55,7 +55,7 @@ describe('Recommendation Services', () => {
     };
 
     // Call the function under test
-    const recommendation = await recommendationServices.createRecommendation(newRecommendationData);
+    const recommendation = await createRecommendation(newRecommendationData);
 
     // Assertions to check both the result and the call to the Prisma create method
     expect(recommendation).toEqual(expectedRecommendation);
@@ -68,10 +68,10 @@ describe('Recommendation Services', () => {
     const mockRecommendationId = '1';
     const mockRecommendation = { recommendation_id: mockRecommendationId, title: 'Sample Title', main_content: 'Content here' };
 
-    const createdRecommendation = await recommendationServices.createRecommendation(mockRecommendation);
+    const createdRecommendation = await createRecommendation(mockRecommendation);
 
     // Perform the function call
-    const recommendation = await recommendationServices.findRecommendationById(mockRecommendationId);
+    const recommendation = await findRecommendationById(mockRecommendationId);
 
     // Check that the returned value matches the expected mock value
     expect(recommendation).toEqual(mockRecommendation);
@@ -89,10 +89,10 @@ describe('Recommendation Services', () => {
     ];
 
     mockRecommendations.forEach(async (recommendation) => {
-      await recommendationServices.createRecommendation(recommendation)
+      await createRecommendation(recommendation)
     })
 
-    const recommendations = await recommendationServices.findRecommendationsByCvId(mockCvId);
+    const recommendations = await findRecommendationsByCvId(mockCvId);
 
     // Check that the returned value matches the expected mock value
     expect(recommendations).toEqual(mockRecommendations);
@@ -111,10 +111,10 @@ describe('Recommendation Services', () => {
     ];
 
     mockRecommendations.forEach(async (recommendation) => {
-      await recommendationServices.createRecommendation(recommendation)
+      await createRecommendation(recommendation)
     })
 
-    const recommendations = await recommendationServices.getAllRecommendation();
+    const recommendations = await getAllRecommendation();
 
     // Check that the returned value matches the expected mock value
     expect(recommendations).toEqual(mockRecommendations);
