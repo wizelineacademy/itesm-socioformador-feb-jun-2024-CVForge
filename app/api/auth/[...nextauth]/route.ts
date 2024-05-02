@@ -1,13 +1,7 @@
-import { Prisma, PrismaClient } from "@prisma/client";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { User, Account, Profile } from "next-auth";
 import NextAuth from "next-auth"
-import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import EmailProvider from "next-auth/providers/email";
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import prisma from "@/lib/prisma";
 
 const handler = NextAuth({
