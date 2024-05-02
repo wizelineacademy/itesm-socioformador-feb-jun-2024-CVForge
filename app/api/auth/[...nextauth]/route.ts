@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { User, Account, Profile } from "next-auth";
 import NextAuth from "next-auth"
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
@@ -52,6 +53,7 @@ const handler = NextAuth({
         return null;
       },
     }),
+    /*
     EmailProvider({
       server: {
         host: process.env.EMAIL_SERVER_HOST,
@@ -64,8 +66,27 @@ const handler = NextAuth({
       },
       from: process.env.EMAIL_FROM
     }),
+    */
   ],
   callbacks: {
+    async signIn({user, account, profile}) {
+      // Check if the user exists in the "users" table
+      const existingUser = await prisma.users.findFirst({
+        where: { email: user.email ?? "" },
+      });
+
+      // If the user does not exist, create a new entry
+      if (!existingUser) {
+        await prisma.users.create({
+          data: {
+            email: user.email ?? "",
+            password: "123",
+          },
+        });
+      }
+
+      return true;
+    },
     async jwt({ token, user, account, profile, isNewUser }) {
       if (user) {
         token.id = user.id;
