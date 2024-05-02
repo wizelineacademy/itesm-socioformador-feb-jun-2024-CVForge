@@ -1,10 +1,10 @@
 "use client";
 
-// !REMOVE
-import { SCORE, RECOMMENDATIONS, RECOMMENDED_CHANGES } from "../CONSTANTS"
+// !REMOVE ONCE THE SERVICES ARE READY
+import { SCORE, RECOMMENDATIONS, RECOMMENDED_CHANGES, FETCHED_RECOMMENDATIONS, MOCK_CV } from "../CONSTANTS"
 
 // Package imports
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
 
@@ -19,9 +19,30 @@ const InsightBar = ({ }) => {
     // Open the inside bar
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
+    const [aiResponse, setAiResponse] = useState<string>("")
+    const [isLoadingFetch, setIsLoadingFetch] = useState<boolean | null>(null)
+
     const handleOpenInsightBar = () => {
         setIsOpen(!isOpen);
     }
+
+    useEffect(() => {
+        const handleCheckService = async () => {
+            setIsLoadingFetch(true)
+            try {
+                const response = await fetch('/api/py', { method: 'GET' });
+                const jsonData = await response.json();
+                const message = jsonData.message;
+                setAiResponse(message)
+            } catch (error) {
+                console.error('Failed to fetch data:', error);
+            } finally {
+                setIsLoadingFetch(false);
+            }
+        };
+
+        handleCheckService();
+    }, []);
 
     return (
         <div className={`
@@ -59,10 +80,11 @@ const InsightBar = ({ }) => {
                         </div>
 
                         <hr className="w-full h-[1px] my-2" />
-                        <ReccomendationSection recommendations={RECOMMENDATIONS} />
+                        <ReccomendationSection recommendations={FETCHED_RECOMMENDATIONS} />
                         <hr className={`${isOpen ? "hidden" : "visible"} w-full h-[1px] my-2`} />
                     </div>
-                    <RecommendedChanges recommendedChangesList={RECOMMENDED_CHANGES} />
+                    {/* <RecommendedChanges recommendedChangesList={RECOMMENDED_CHANGES} /> */}
+                    <RecommendedChanges recommendedChangesList={aiResponse} />
                 </div>
 
                 <div className="w-full bottom-0 right-0 flex justify-end items-center">

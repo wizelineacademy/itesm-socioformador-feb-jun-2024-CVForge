@@ -59,45 +59,41 @@ model ai_response {
   tokens         Decimal?  @db.Decimal
   request_date   DateTime? @db.Timestamptz(6)
   cv             cv?       @relation(fields: [cv_id], references: [cv_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([cv_id], map: "idx_ai_response_cv_id")
 }
 
 model cv {
   cv_id               String            @id @default(uuid()) @db.Uuid
   user_id             String?           @db.Uuid
-  title               String?           @db.VarChar(50)
-  cv_insight_id       String?           @unique(map: "unique_cv_insight_id") @db.Uuid
-  desired_position_id String?           @db.Uuid
+  title               String?           @db.VarChar(255)
+  desired_position_id String?           @unique(map: "unique_desired_position_id") @db.Uuid
   ai_response         ai_response?
-  cv_insight          cv_insight?       @relation(fields: [cv_insight_id], references: [cv_insight_id], onDelete: NoAction, onUpdate: NoAction)
   desired_position    desired_position? @relation(fields: [desired_position_id], references: [desired_position_id], onDelete: NoAction, onUpdate: NoAction)
   users               users?            @relation(fields: [user_id], references: [users_id], onDelete: NoAction, onUpdate: NoAction)
-}
+  recommendation      recommendation[]
 
-model cv_insight {
-  cv_insight_id  String           @id @db.Uuid
-  score          Int?
-  cv             cv?
-  recommendation recommendation[]
+  @@index([desired_position_id], map: "idx_cv_desired_position_id")
 }
 
 model desired_position {
   desired_position_id String  @id @default(uuid()) @db.Uuid
-  title               String? @db.VarChar(25)
+  title               String? @db.VarChar(255)
   description         String? @db.VarChar(500)
-  company             String? @db.VarChar(20)
+  company             String? @db.VarChar(255)
   years_experience    Int?
-  cv                  cv[]
+  cv                  cv?
 }
 
 model education {
   education_id         String                @id @default(uuid()) @db.Uuid
-  school               String?               @db.VarChar(50)
-  education_degree     String?               @db.VarChar(50)
-  gpa                  Int?
+  school               String?               @db.VarChar(255)
+  education_degree     String?               @db.VarChar(255)
+  gpa                  Decimal?              @db.Decimal
   start_date           DateTime?             @db.Date
   end_date             DateTime?             @db.Date
   professional_info_id String?               @db.Uuid
-  professional_info    professional_info?    @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: NoAction, onUpdate: NoAction)
+  professional_info    professional_info?    @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: Cascade, onUpdate: NoAction)
   relevant_coursework  relevant_coursework[]
 }
 
@@ -107,19 +103,22 @@ model professional_info {
   achievement          achievement[]
   certificate          certificate[]
   education            education[]
-  users                users?            @relation(fields: [user_id], references: [users_id], onDelete: NoAction, onUpdate: NoAction)
+  general_info         general_info?
+  users                users?            @relation(fields: [user_id], references: [users_id], onDelete: Cascade, onUpdate: NoAction)
   project              project[]
   skill                skill[]
   work_experience      work_experience[]
+
+  @@index([user_id], map: "idx_professional_info_user_id")
 }
 
 model profile {
   profile_id    String    @id @default(uuid()) @db.Uuid
   user_id       String?   @unique @db.Uuid
-  first_name    String?   @db.VarChar(50)
-  last_name     String?   @db.VarChar(50)
+  first_name    String?   @db.VarChar(255)
+  last_name     String?   @db.VarChar(255)
   email         String    @db.VarChar(255)
-  phone         String?   @db.VarChar(20)
+  phone         String?   @db.VarChar(255)
   github_link   String?   @db.VarChar(255)
   linkedin_link String?   @db.VarChar(255)
   location      String?   @db.VarChar(255)
@@ -130,32 +129,33 @@ model profile {
 
 model project {
   project_id           String             @id @default(uuid()) @db.Uuid
-  name                 String?            @db.VarChar(50)
-  description          String?            @db.VarChar(500)
+  name                 String?            @db.VarChar(255)
+  description          String?            @db.VarChar(1000)
   start_date           DateTime?          @db.Timestamptz(6)
   end_date             DateTime?          @db.Timestamptz(6)
   professional_info_id String?            @db.Uuid
-  professional_info    professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: NoAction, onUpdate: NoAction)
+  professional_info    professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model recommendation {
-  recommendation_id String      @id @default(uuid()) @db.Uuid
-  cv_insight_id     String?     @db.Uuid
-  title             String?     @db.VarChar(50)
+  recommendation_id String   @id @default(uuid()) @db.Uuid
+  cv_id             String?  @db.Uuid
+  title             String?  @db.VarChar(255)
   main_content      String?
-  cv_insight        cv_insight? @relation(fields: [cv_insight_id], references: [cv_insight_id], onDelete: NoAction, onUpdate: NoAction)
+  completed         Boolean?
+  cv                cv?      @relation(fields: [cv_id], references: [cv_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model relevant_coursework {
   relevant_coursework_id String     @id @default(uuid()) @db.Uuid
   education_id           String?    @db.Uuid
-  course                 String?    @db.VarChar(100)
+  course                 String?    @db.VarChar(255)
   education              education? @relation(fields: [education_id], references: [education_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model users {
   users_id          String             @id @default(uuid()) @db.Uuid
-  email             String             @db.VarChar(50)
+  email             String             @db.VarChar(255)
   password          String             @db.VarChar(60)
   verification      Boolean?
   is_active         Boolean?
@@ -165,24 +165,26 @@ model users {
   cv                cv[]
   professional_info professional_info?
   profile           profile?
+
+  @@index([email], map: "idx_users_email")
 }
 
 model work_experience {
   work_experience_id   String             @id @default(uuid()) @db.Uuid
-  work_position        String?            @db.VarChar(50)
+  work_position        String?            @db.VarChar(255)
   description          String?            @db.VarChar(1000)
   start_date           DateTime?          @db.Date
   end_date             DateTime?          @db.Date
   professional_info_id String?            @db.Uuid
-  professional_info    professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: NoAction, onUpdate: NoAction)
+  professional_info    professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model achievement {
-  achievement_id       String             @id @db.Uuid
+  achievement_id       String             @id @default(uuid()) @db.Uuid
   professional_info_id String?            @db.Uuid
   name                 String?            @db.VarChar(255)
   description          String?            @db.VarChar(1000)
-  professional_info    professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: NoAction, onUpdate: NoAction)
+  professional_info    professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model certificate {
@@ -193,15 +195,27 @@ model certificate {
   start_date           DateTime?          @db.Date
   end_date             DateTime?          @db.Date
   url                  String?
-  professional_info    professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: NoAction, onUpdate: NoAction)
+  professional_info    professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model skill {
   skill_id             String             @id @db.Uuid
   professional_info_id String?            @db.Uuid
-  title                String?            @db.VarChar(100)
-  duration             String?            @db.VarChar(100)
-  proficiency          String?            @db.VarChar(100)
-  tag                  String?            @db.VarChar(100)
-  professional_info    professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: NoAction, onUpdate: NoAction)
+  title                String?            @db.VarChar(255)
+  duration             String?            @db.VarChar(255)
+  proficiency          String?            @db.VarChar(255)
+  tag                  String?            @db.VarChar(255)
+  professional_info    professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model general_info {
+  general_info_id      String            @id @db.Uuid
+  professional_info_id String            @unique @db.Uuid
+  first_name           String?           @db.VarChar(255)
+  last_name            String?           @db.VarChar(255)
+  email                String?           @db.VarChar(255)
+  phone                String?           @db.VarChar(255)
+  github_link          String?           @db.VarChar(255)
+  linkedin_link        String?           @db.VarChar(255)
+  professional_info    professional_info @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: Cascade, onUpdate: NoAction)
 }

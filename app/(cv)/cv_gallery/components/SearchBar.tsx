@@ -1,12 +1,12 @@
 import React from 'react';
-import Search_Icon from '@/public/assets/svg/Search_Icon.tsx';
-import Filter_Icon from '@/public/assets/svg/Filter_Icon.tsx';
+import Search_Icon from '@/public/assets/svg/Search_Icon';
+import Filter_Icon from '@/public/assets/svg/Filter_Icon';
 
 const SearchBar: React.FC = () => {
  return (
-    <div className="flex flex-row items-left bg-transparent fixed w-full">
-      <div className="flex flex-row m-10 mx-12">
-        <div className="flex items-center px-2 py-2 bg-white rounded-lg">
+    <div className="flex flex-row justify-center w-full mx-5 pr-10">
+      <div className="flex flex-auto my-10">
+        <div className="flex items-center px-2 py-2 bg-white rounded-lg w-full shadow-md">
           <div className='w-5 h-5'>
               <Search_Icon strokeColor='#7E7E7E'/>
           </div>
@@ -16,7 +16,7 @@ const SearchBar: React.FC = () => {
             className="text-secondarygray flex-grow bg-transparent outline-none px-2"
           />
         </div>
-        <div className="flex items-center px-3 py-2 bg-white rounded-lg ml-4">
+        <div className="flex items-center px-3 py-2 bg-white rounded-lg ml-4 shadow-md"> 
           <div className='w-6 h-6'>
               <Filter_Icon strokeColor='#7E7E7E'/>
           </div>
@@ -25,7 +25,7 @@ const SearchBar: React.FC = () => {
     </div>
  );
 };
-
+//w-11/12 max-w-4xl mx-auto
 export default SearchBar;
 
 

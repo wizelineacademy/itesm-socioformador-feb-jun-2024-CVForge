@@ -11,10 +11,13 @@ const Menu: React.FC = ({ }) => {
     dispatch(setCurrentTab("cv_gallery"))
 
     return (
-        <div className="w-full h-screen overflow-y-scroll">
-            <SearchBar/>
-            <Gallery/>
+        <div className="flex h-screen overflow-y-scroll justify-center">
+        <div className="flex flex-col">
+          <SearchBar/>
+          <Gallery/>
         </div>
+      </div>
+
     )
 }
 

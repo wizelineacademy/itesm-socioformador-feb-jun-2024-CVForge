@@ -82,16 +82,16 @@ const LeftSidebar = () => {
     const [open, setOpen] = useState(true);
     const windowSize = useWindowSize();
     useEffect(() => {
-        if (windowSize.width < 800){
+        if (windowSize.width < 900){
             setOpen(false)
         }
-        if (windowSize.width > 800){
+        if (windowSize.width > 900){
             setOpen(true)
         }
     }, [windowSize])
 
     return (
-        <aside className="flex z-10 pr-7 bg-transparent">
+        <aside className="flex z-10">
             <div className={`bg-primarygray h-screen ${open ? "w-64" : "w-0"} duration-200 relative`}>
                 <div className="p-5 h-full">
                     <IoIosArrowForward className={`flex flex-col h-screen items-center justify-center text-primarygray text-3xl absolute -right-7 cursor-pointer hover:text-secondarygray ${open && "rotate-180"}`} 

@@ -5,6 +5,7 @@ import { useState } from "react";
 
 // Icon imports
 import OpenArrow from "@/public/assets/cv/insight/OpenArrow_icon";
+import { recommendation } from "@prisma/client";
 
 type RecommendationProps = {
     title: string;
@@ -40,7 +41,7 @@ const Recommendation: React.FC<RecommendationProps> = ({ title, mainContent }) =
 }
 
 type RecommendationSectionProps = {
-    recommendations: RecommendationProps[]
+    recommendations: recommendation[]
 }
 const ReccomendationSection: React.FC<RecommendationSectionProps> = ({ recommendations }) => {
     return (
@@ -50,7 +51,7 @@ const ReccomendationSection: React.FC<RecommendationSectionProps> = ({ recommend
             </h2>
             {
                 recommendations.map((recommendation) =>
-                    <Recommendation key={crypto.randomUUID()} title={recommendation.title} mainContent={recommendation.mainContent} />
+                    <Recommendation key={recommendation.recommendation_id} title={recommendation.title} mainContent={recommendation.main_content} />
                 )
             }
         </div>
