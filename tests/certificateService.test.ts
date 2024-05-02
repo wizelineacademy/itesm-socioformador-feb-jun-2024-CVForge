@@ -8,7 +8,7 @@ jest.mock('@/lib/prisma', () => ({
         create: jest.fn().mockImplementation(data => Promise.resolve({ certificate_id: '1', ...data.data })),
         findUnique: jest.fn().mockImplementation(query => {
             if (query.where.certificate_id === '1') {
-                return Promise.resolve({ certificate_id: '1', name: 'Certification in Testing', issued_by: 'Certification Body', professional_info_id: 'abc123' });
+                return Promise.resolve({ certificate_id: '1', name: 'Certification in Testing', issued_by: 'Certification Body', professional_info_id: '123' });
             } else {
                 return Promise.resolve(null);
             }
@@ -26,7 +26,7 @@ jest.mock('@/lib/prisma', () => ({
             } else {
                 // Default case: return all certificates when no specific filter is applied
                 return Promise.resolve([
-                    { certificate_id: '1', name: 'Certification in Testing', issued_by: 'Certification Body', professional_info_id: 'abc123' },
+                    { certificate_id: '1', name: 'Certification in Testing', issued_by: 'Certification Body', professional_info_id: '123' },
                     { certificate_id: '2', name: 'Advanced Testing', issued_by: 'Advanced Body', professional_info_id: 'def456' }
                 ]);
             }
@@ -45,7 +45,7 @@ describe('Certificate Services', () => {
             certificate_id: certificateId,
             name: 'Certification in Testing',
             issued_by: 'Certification Body',
-            professional_info_id: 'abc123'
+            professional_info_id: '123'
         };
 
         const expectedCertificate = {
@@ -66,7 +66,7 @@ describe('Certificate Services', () => {
             certificate_id: certificateId,
             name: 'Certification in Testing',
             issued_by: 'Certification Body',
-            professional_info_id: 'abc123'
+            professional_info_id: '123'
         };
 
         const certificate = await certificateService.findCertificateById(certificateId);
@@ -78,7 +78,7 @@ describe('Certificate Services', () => {
     });
 
     test('findCertificateByProfessionalInfoId should return certificates for a given professional info ID', async () => {
-        const professionalInfoId = 'abc123';
+        const professionalInfoId = '123';
         const expectedCertificates = [
             { certificate_id: '2', professional_info_id: professionalInfoId, name: 'Advanced Testing', issued_by: 'Advanced Body' }
         ];
@@ -93,7 +93,7 @@ describe('Certificate Services', () => {
 
     test('getAllCertificates should return all certificates', async () => {
         const expectedCertificates = [
-            { certificate_id: '1', name: 'Certification in Testing', issued_by: 'Certification Body', professional_info_id: 'abc123' },
+            { certificate_id: '1', name: 'Certification in Testing', issued_by: 'Certification Body', professional_info_id: '123' },
             { certificate_id: '2', name: 'Advanced Testing', issued_by: 'Advanced Body', professional_info_id: 'def456' }
         ];
 
