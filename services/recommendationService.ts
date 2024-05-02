@@ -1,6 +1,7 @@
 "use server";
 import prisma from '@/lib/prisma';
 import { Prisma, recommendation } from '@prisma/client';
+import { Prisma, recommendation } from '@prisma/client';
 
 // Exportación individual de cada función
 export const createRecommendation = async (recommendationData: Prisma.recommendationCreateInput) => {
