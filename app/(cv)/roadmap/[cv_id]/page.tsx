@@ -9,6 +9,9 @@ import { useEffect, useState } from "react";
 // Icon imports
 import OpenArrow_icon from "@/public/assets/cv/insight/OpenArrow_icon";
 import { recommendation } from "@prisma/client";
+import { use } from "chai";
+import { findRecommendationById, findRecommendationsByCvId, getAllRecommendation } from "@/services/recommendationService";
+
 
 type RecommendationItem = {
     recommendationItemData: recommendation,
@@ -44,9 +47,10 @@ const RecommendationItem: React.FC<RecommendationItem> = ({ recommendationItemDa
     )
 }
 
-const Roadmap: React.FC = () => {
+const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
     // Hold fetched recommendations
-    const [fetchedRecommendations, setFetchedRecommendations] = useState<recommendation[]>(FETCHED_RECOMMENDATIONS)
+    //const [fetchedRecommendations, setFetchedRecommendations] = useState<recommendation[]>(FETCHED_RECOMMENDATIONS)
+    const [fetchedRecommendations, setFetchedRecommendations] = useState<recommendation[]>([]);
 
     // Timer to handle the completed status change
     // When the user changes the completed status of a recommendation, POST that modified status
@@ -109,7 +113,17 @@ const Roadmap: React.FC = () => {
     // set the fetched recommendation state
     useEffect(() => {
         // setFetchedRecommendations()
-    }, [])
+        const fetchRecommendations = async () => {
+            try {
+                const recommendationsArray = await findRecommendationsByCvId(params.cv_id);
+                setFetchedRecommendations(recommendationsArray);
+            } catch (error) {
+                console.error("Failed to fetch recommendations", error);
+            }
+        };
+
+        fetchRecommendations();
+    }, [params.cv_id])
 
     return (
         <div className="w-full min-h-screen font-inter text-primarygray bg-bg px-16">
@@ -130,7 +144,7 @@ const Roadmap: React.FC = () => {
             {/* Roadmap points */}
             <ul className="mt-10">
                 {
-                    fetchedRecommendations ?
+                    fetchedRecommendations.length > 0 ?
                         fetchedRecommendations.map((recommendation, index) => (
                             <RecommendationItem
                                 key={recommendation.recommendation_id}
