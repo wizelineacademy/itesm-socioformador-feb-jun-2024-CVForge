@@ -1,4 +1,5 @@
 import "@/style/globals.css";
+import Providers from "./components/Providers";
 
 export const metadata = {
   title: 'CVForge',
@@ -13,7 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html className="scroll-smooth" lang="en">
-      <body>{children}</body>
+      <body>
+        <Providers>
+          {children}
+        </Providers>
+      </body>
     </html>
   )
 }
