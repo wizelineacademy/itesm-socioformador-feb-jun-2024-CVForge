@@ -4,8 +4,8 @@ BEGIN;
 DROP TABLE IF EXISTS work_experience, skill, relevant_coursework, recommendation, project, profile, education, ai_response, cv, desired_position, certificate, achievement, professional_info, general_info, users CASCADE;
 
 -- Table for Users using OAuth
-CREATE TABLE User (
-    id VARCHAR(255) PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS "User" (
+    id VARCHAR(255) PRIMARY KEY NOT NULL,
     name VARCHAR(255),
     email VARCHAR(255) UNIQUE,
     emailVerified TIMESTAMP WITH TIME ZONE,
@@ -15,7 +15,7 @@ CREATE TABLE User (
 -- Table for managing OAuth Accounts
 CREATE TABLE IF NOT EXISTS Account (
     id VARCHAR(255) PRIMARY KEY,
-    userId VARCHAR(255) NOT NULL,
+    userId VARCHAR(255) NOT NULL REFERENCES "User" (id) ON DELETE CASCADE,
     type VARCHAR(255) NOT NULL,
     provider VARCHAR(255) NOT NULL,
     providerAccountId VARCHAR(255) NOT NULL,
@@ -33,9 +33,9 @@ CREATE TABLE IF NOT EXISTS Account (
 CREATE TABLE Session (
     id VARCHAR(255) PRIMARY KEY,
     sessionToken VARCHAR(255) UNIQUE NOT NULL,
-    userId VARCHAR(255) NOT NULL,
+    userId VARCHAR(255) NOT NULL REFERENCES "User" (id) ON DELETE CASCADE,
     expires TIMESTAMP WITH TIME ZONE NOT NULL,
-    FOREIGN KEY (userId) REFERENCES User (id) ON DELETE CASCADE
+    FOREIGN KEY (userId) REFERENCES "User" (id) ON DELETE CASCADE
 );
 
 -- Table for Verification Token used by OAuth
@@ -202,9 +202,9 @@ CREATE INDEX IF NOT EXISTS idx_cv_desired_position_id ON cv(desired_position_id)
 
 CREATE INDEX IF NOT EXISTS Account_userId_key ON Account (userId);
 CREATE INDEX IF NOT EXISTS Session_userId_key ON Session (userId);
-CREATE INDEX IF NOT EXISTS User_email_key ON User (email);
-
+CREATE INDEX IF NOT EXISTS User_email_key ON "User" (email);
+/*
 ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE;
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE;
-
+*/
 COMMIT;
