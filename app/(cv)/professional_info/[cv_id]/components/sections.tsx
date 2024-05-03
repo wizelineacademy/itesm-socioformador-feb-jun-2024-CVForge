@@ -4,11 +4,11 @@ import Link from "next/link";
 const Sections: React.FC = () => {
     // Define an array of section names and their respective paths
     const sectionPaths = [
-        { name: "General Info", path: "/professional_info/1/general_info" },
-        { name: "Achievements", path: "/professional_info/1/achievments" },
-        { name: "Work Experience", path: "/professional_info/1/work_experience" },
-        { name: "Certificates", path: "/professional_info/1//certificate" },
-        { name: "Skills", path: "/professional_info/1/skills" }
+        { name: "General Info", path: "/professional_info/general_info" },
+        { name: "Achievements", path: "/professional_info/achievments" },
+        { name: "Work Experience", path: "/professional_info/work_experience" },
+        { name: "Certificates", path: "/professional_info/certificate" },
+        { name: "Skills", path: "/professional_info/skills" }
         // Add more section names and paths as needed
     ];
 

@@ -14,7 +14,11 @@ interface SkillEntry {
 }
 
 const Skills: React.FC = () => {
-    const [skillEntries, setSkillEntries] = useState<SkillEntry[]>([]);
+    const [skillEntries, setSkillEntries] = useState<SkillEntry[]>([
+        { skillTitle: "Python", skillLevel: "Intermediate", skillDuration: "2 years", skillTag: "Programming Languages" },
+        { skillTitle: "Communication", skillLevel: "Advanced", skillDuration: "5 years", skillTag: "Soft Skills" },
+        { skillTitle: "React", skillLevel: "Intermediate", skillDuration: "3 years", skillTag: "Frameworks" },
+    ]);
     const [skillTitle, setSkillTitle] = useState("");
     const [skillDuration, setSkillDuration] = useState("");
     const [skillLevel, setSkillLevel] = useState("");
@@ -22,7 +26,7 @@ const Skills: React.FC = () => {
 
     const handleAddJob = () => {
         if (skillTitle && skillDuration && skillLevel && skillTag) {
-            const newSkill: SkillEntry = { skillTitle, skillDuration, skillLevel, skillTag};
+            const newSkill: SkillEntry = { skillTitle, skillDuration, skillLevel, skillTag };
             setSkillEntries([...skillEntries, newSkill]);
             // Clear the form fields
             setSkillTitle("");
@@ -61,7 +65,7 @@ const Skills: React.FC = () => {
                             <div className="flex flex-col mr-20 flex-grow">
                                 <label htmlFor="jobName" className="mb-2 text-primarygray">Title:</label>
                                 <input type="text" id="jobName" value={skillTitle} onChange={(e) => setSkillTitle(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray" />
-                                
+
                                 <label htmlFor="jobDescription" className="mb-2 text-primarygray">Duration:</label>
                                 <input type="text" id="jobDescription" value={skillDuration} onChange={(e) => setSkillDuration(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray" />
                             </div>

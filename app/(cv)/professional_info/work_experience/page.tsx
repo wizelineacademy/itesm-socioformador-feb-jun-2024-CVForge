@@ -12,7 +12,20 @@ interface JobEntry {
 }
 
 const Work_experience: React.FC = () => {
-    const [jobEntries, setJobEntries] = useState<JobEntry[]>([]);
+    const [jobEntries, setJobEntries] = useState<JobEntry[]>([{
+        jobName: "Google",
+        jobDescription: "Worked on improving the search algorithms, making them faster and more accurate.",
+        jobPosition: "Software Engineer",
+        startDate: "January 2019",
+        endDate: "Present"
+    },
+    {
+        jobName: "Microsoft",
+        jobDescription: "Developed new features for Microsoft Office Suite with a focus on user experience enhancements.",
+        jobPosition: "Product Developer",
+        startDate: "June 2015",
+        endDate: "December 2018"
+    },]);
     const [jobName, setJobName] = useState("");
     const [jobDescription, setJobDescription] = useState("");
     const [jobPosition, setJobPosition] = useState("");
@@ -63,7 +76,7 @@ const Work_experience: React.FC = () => {
                             <div className="flex flex-col mr-20 flex-grow">
                                 <label htmlFor="jobName" className="mb-2 text-primarygray">Name:</label>
                                 <input type="text" id="jobName" value={jobName} onChange={(e) => setJobName(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray" />
-                                
+
                                 <label htmlFor="jobDescription" className="mb-2 text-primarygray">Description:</label>
                                 <input type="text" id="jobDescription" value={jobDescription} onChange={(e) => setJobDescription(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray" />
                             </div>

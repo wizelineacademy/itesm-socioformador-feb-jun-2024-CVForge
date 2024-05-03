@@ -7,16 +7,16 @@ import { useDispatch } from "react-redux";
 
 const GeneralInfo: React.FC = () => {
     // State hooks for managing input values
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [pronouns, setPronouns] = useState("");
-    const [dob, setDOB] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [country, setCountry] = useState("");
-    const [address, setAddress] = useState("");
-    const [nationality, setNationality] = useState("");
-    const [postalCode, setPostalCode] = useState("");
+    const [firstName, setFirstName] = useState("Gael");
+    const [lastName, setLastName] = useState("García");
+    const [pronouns, setPronouns] = useState("He/Him");
+    const [dob, setDOB] = useState("02/06/2003");
+    const [email, setEmail] = useState("gael@tec.mx");
+    const [phone, setPhone] = useState("818202932");
+    const [country, setCountry] = useState("México");
+    const [address, setAddress] = useState("Tec de Monterrey");
+    const [nationality, setNationality] = useState("México");
+    const [postalCode, setPostalCode] = useState("64700");
     // Set the current tab context
     const dispatch = useDispatch()
     dispatch(setCurrentTab("professional_info"))
@@ -30,7 +30,7 @@ const GeneralInfo: React.FC = () => {
                     <div className="border-b-2 border-gray-300 mb-4"></div>
                     <div className="pl-4">
                         {/* Your content */}
-                        <div className="text-4xl font-koh_santepheap font-bold mb-2 text-primarygray font-bold">Identity</div>
+                        <div className="text-4xl font-koh_santepheap font-bold mb-2 text-primarygray">Identity</div>
                         <p className="text-lg font-light mb-4 text-primarygray">Personal information that will be shown regardless of desired position</p>
 
                         {/* IDENTITY */}

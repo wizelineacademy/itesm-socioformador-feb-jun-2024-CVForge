@@ -9,7 +9,7 @@ interface CertificateEntry {
 }
 
 const Certificate: React.FC = () => {
-    const [certificateEntries, setCertificateEntries] = useState<CertificateEntry[]>([]);
+    const [certificateEntries, setCertificateEntries] = useState<CertificateEntry[]>([{certificateName: "IBM Database Engineer", certificateDescription: "Completed the IBM Database engineering course"}]);
     const [certificateName, setCertificateName] = useState("");
     const [certificateDescription, setCertificateDescription] = useState("");
 

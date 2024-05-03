@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Percent from "../components/percent";
 import Sections from "../components/sections";
 
@@ -9,7 +9,10 @@ interface AchievementEntry {
 }
 
 const Achievement: React.FC = () => {
-    const [achievementEntries, setAchievementEntries] = useState<AchievementEntry[]>([]);
+    const [achievementEntries, setAchievementEntries] = useState<AchievementEntry[]>([
+        { achievementName: "Hack Monterrey 2022", achievementDescription: "Finished top 3 in the hack, earning a prize" },
+        { achievementName: "Hack Monterrey 2023", achievementDescription: "Finished top 2 in the hack, earning a prize" }
+    ]);
     const [achievementName, setAchievementName] = useState("");
     const [achievementDescription, setAchievementDescription] = useState("");
 
@@ -48,7 +51,7 @@ const Achievement: React.FC = () => {
                             <div className="flex flex-col mr-20 flex-grow">
                                 <label htmlFor="achievementName" className="mb-2 text-primarygray">Achievment Name:</label>
                                 <input type="text" id="achievementName" value={achievementName} onChange={(e) => setAchievementName(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray" />
-                                
+
                                 <label htmlFor="achievementDescription" className="mb-2 text-primarygray">Achievment Description:</label>
                                 <textarea id="achievementDescription" value={achievementDescription} onChange={(e) => setAchievementDescription(e.target.value)} className="border border-gray-300 p-2 w-full mb-4 text-primarygray" />
                             </div>

@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Percent from "../components/percent";
 import Sections from "../components/sections";
 
@@ -9,13 +9,14 @@ interface AchievementEntry {
 }
 
 const Achievement: React.FC = () => {
-    const [achievementEntries, setAchievementEntries] = useState<AchievementEntry[]>([]);
+    const [achievementEntries, setAchievementEntries] = useState<AchievementEntry[]>([{achievementName: "Hack Monterrey 2023", achievementDescription: "Finished top 3 in the hack, earning a prize"}]);
     const [achievementName, setAchievementName] = useState("");
     const [achievementDescription, setAchievementDescription] = useState("");
 
     const handleAddJob = () => {
         if (achievementName && achievementDescription) {
             const newAchievment: AchievementEntry = { achievementName, achievementDescription };
+            console.log("--------", newAchievment)
             setAchievementEntries([...achievementEntries, newAchievment]);
             // Clear the form fields
             setAchievementName("");
@@ -24,6 +25,10 @@ const Achievement: React.FC = () => {
             alert("Please fill in all fields.");
         }
     };
+
+    useEffect(() => {
+        console.log(achievementEntries)
+    }, [achievementEntries])
 
     return (
         <div className="flex h-screen bg-transparent">

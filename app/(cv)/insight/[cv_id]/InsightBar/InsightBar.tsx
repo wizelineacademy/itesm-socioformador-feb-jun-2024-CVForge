@@ -64,7 +64,7 @@ const InsightBar = ({ }) => {
                             <Gauge width={150} height={150} value={SCORE}
                                 sx={(theme) => ({
                                     [`& .${gaugeClasses.valueText}`]: {
-                                        fontSize: 60,
+                                        fontSize: 50,
                                     },
                                     [`& .${gaugeClasses.valueArc}`]: {
                                         fill: '#98C887',

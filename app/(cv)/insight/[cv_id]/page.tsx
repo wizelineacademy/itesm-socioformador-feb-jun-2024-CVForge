@@ -17,7 +17,7 @@ if (typeof window !== 'undefined') {
 const Insight = () => {
     const [numPages, setNumPages] = useState<number>();
     const [pageNumber, setPageNumber] = useState<number>(1);
-    const file = '/pdf/q_learning_notes.pdf';
+    const file = '/pdf/Angel Gael Garcia Rangel Profesional Resume February 2024.pdf';
 
     function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
         setNumPages(numPages);
