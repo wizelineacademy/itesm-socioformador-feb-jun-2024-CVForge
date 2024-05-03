@@ -6,26 +6,23 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 0, 255, 0;
+  --background-start-rgb: 0, 255, 0;
+  --background-end-rgb: 0, 255, 0;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-rgb: 34, 34, 36;
+    --background-start-rgb: 34, 34, 36;
+    --background-end-rgb: 34, 34, 36;
   }
 }
 
-/* body {
+body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-    )
-} */
+  background: rgb( 34, 34, 36);
+}
 
 @layer utilities {
   .text-balance {
@@ -152,6 +149,7 @@
   .sub_title {
     @apply font-koh_santepheap text-2xl mb-4 text-primarygray font-bold;
   }
+  
 }
 
 /*font-inter text-3xl justify-left mb-4 */
