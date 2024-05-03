@@ -1,4 +1,4 @@
-export const SCORE = 30
+export const SCORE = 100
 
 export const RECOMMENDATIONS = [
     {
