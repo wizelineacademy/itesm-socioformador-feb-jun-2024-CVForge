@@ -17,26 +17,6 @@ export const RECOMMENDATIONS = [
         title: "Read 'Thinking, Fast and Slow' by Daniel Kahneman",
         mainContent: "Improve your decision-making and problem-solving skills by reading this insightful book on behavioral psychology."
     },
-    {
-        title: "Attend a Project Management Workshop",
-        mainContent: "Develop your project management skills by attending workshops that focus on methodologies like Agile and Scrum."
-    },
-    {
-        title: "Read 'Thinking, Fast and Slow' by Daniel Kahneman",
-        mainContent: "Improve your decision-making and problem-solving skills by reading this insightful book on behavioral psychology."
-    },
-    {
-        title: "Attend a Project Management Workshop",
-        mainContent: "Develop your project management skills by attending workshops that focus on methodologies like Agile and Scrum."
-    },
-    {
-        title: "Read 'Thinking, Fast and Slow' by Daniel Kahneman",
-        mainContent: "Improve your decision-making and problem-solving skills by reading this insightful book on behavioral psychology."
-    },
-    {
-        title: "Practice Mindfulness Meditation",
-        mainContent: "Reduce stress and increase your concentration by practicing mindfulness meditation regularly."
-    }
 ];
 
 export const FETCHED_RECOMMENDATIONS = [
@@ -66,13 +46,6 @@ export const FETCHED_RECOMMENDATIONS = [
         cv_id: "123", 
         title: "Read 'Thinking, Fast and Slow' by Daniel Kahneman",
         main_content: "Improve your decision-making and problem-solving skills by reading this insightful book on behavioral psychology.",
-        completed: false
-    },
-    {
-        recommendation_id: "4",
-        cv_id: "123", 
-        title: "Complete a new DataBase management course",
-        main_content: "Add a new skill to add accuracy through your development with relational databases",
         completed: false
     },
 ];

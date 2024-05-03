@@ -4,10 +4,11 @@ import { MOCK_CV } from '../../(cv)/insight/[cv_id]/CONSTANTS';
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
     try {
+        console.log("Getting response from the AI")
         // Pass MOCK_CV data to the Python script as a command line argument
         const cvData = JSON.stringify(MOCK_CV)
-        const jobPosition = "Data Engineer";
-//        console.log(cvData);
+        const jobPosition = "Software Engineering Internship";
+
         const result = await new Promise((resolve, reject) => {
             exec(`python3 scripts/ai_test.py '${cvData}' '${jobPosition}'`, (error, stdout, stderr) => {
                 if (error) {

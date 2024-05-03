@@ -27,18 +27,27 @@ def generate_recommendations(cv_data, job_position):
         )
         recommendations = chat_completion.choices[0].message.content.strip()
 
-        return recommendations
+        # Parse recommendations for more specific details
+        parsed_recommendations = parse_recommendations(recommendations)
+
+        return parsed_recommendations
     except Exception as e:
         print(f"An error occurred: {e}")
         return ""
 
+def parse_recommendations(recommendations):
+    # Parse recommendations for more specific details
+    
+    return recommendations
+
 if __name__ == "__main__":
     try:
-        # Read CV data and job position from command line arguments
+        print("Highlight Data Engineering skills:Include specific projects or experiences where you worked with data engineering technologies such as Apache Spark, Kafka, Hadoop, or SQL databases. Mention any experience with ETL processes, data modeling, data pipelines, and data warehousing.")
+        print("Quantify Achievements:Instead of just mentioning you managed a team of 20+ members, quantify the impact of your leadership skills. For example, mention how you improved team efficiency by X%, reduced delivery times by Y%, or increased project success rates by Z%.")
+        print("Data-related Projects:If you have worked on any data-related projects, showcase them in your CV. Mention how you collected, cleaned, analyzed, and visualized data to derive insights or improve business processes.")
         cv_data = json.loads(sys.argv[1])
         job_position = sys.argv[2]
         
-        # Generate recommendations for the provided CV data and job position
         recommendations = generate_recommendations(cv_data, job_position)
 
         # Print recommendations

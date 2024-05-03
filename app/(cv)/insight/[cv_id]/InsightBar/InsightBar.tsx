@@ -15,25 +15,44 @@ import ReccomendationSection from "./RecommendationSection";
 import OpenArrow from "@/public/assets/cv/insight/OpenArrow_icon";
 import RecommendedChanges from "./RecommendedChanges";
 
-const InsightBar = ({ }) => {
-    // Open the inside bar
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+type LoadingSpinnerProps = {}
+const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ }) => {
+    return (
+        <div
+            className="inline-block h-8 w-8 animate-spin rounded-full 
+      border-4 border-solid border-current border-r-transparent 
+      align-[-0.125em] text-success motion-reduce:animate-[spin_1.5s_linear_infinite]
+       text-orange-600"
+            role="status">
+            <span
+                className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+            >Loading...</span>
+        </div>
+    );
+}
 
-    const [aiResponse, setAiResponse] = useState<string>("")
-    const [isLoadingFetch, setIsLoadingFetch] = useState<boolean | null>(null)
+const InsightBar = () => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [aiResponse, setAiResponse] = useState<string>("");
+    const [isLoadingFetch, setIsLoadingFetch] = useState<boolean | null>(null);
+    const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
     const handleOpenInsightBar = () => {
         setIsOpen(!isOpen);
     }
 
+    const toggleContent = (index: number) => {
+        setExpandedIndex(expandedIndex === index ? null : index);
+    };
+
     useEffect(() => {
         const handleCheckService = async () => {
-            setIsLoadingFetch(true)
+            setIsLoadingFetch(true);
             try {
                 const response = await fetch('/api/py', { method: 'GET' });
                 const jsonData = await response.json();
                 const message = jsonData.message;
-                setAiResponse(message)
+                setAiResponse(message);
             } catch (error) {
                 console.error('Failed to fetch data:', error);
             } finally {
@@ -45,23 +64,22 @@ const InsightBar = ({ }) => {
     }, []);
 
     return (
-        <div className={`
-        ${isOpen ? "w-[900px]" : "w-[400px] 2xl:w-[600px]"}
-        h-full transition-all duration-500 right-0
-        shadow-lg font-inter bg-white text-primarygray`}>
+        <div className={` ${isOpen ? "w-[900px]" : "w-[400px] 2xl:w-[600px]"} h-full transition-all duration-500 right-0 shadow-lg font-inter bg-white text-primarygray`}>
             <div className="w-full h-screen px-4 overflow-y-auto">
                 <div className="w-full flex flex-row items-center mt-8 mb-2">
-                    <button onClick={handleOpenInsightBar} >
+                    <button onClick={handleOpenInsightBar}>
                         <OpenArrow flipDegree={isOpen ? 90 : 270} />
                     </button>
-
                     <h1 className="text-3xl font-black">Score</h1>
                 </div>
                 <hr className="w-full h-[1px]"></hr>
                 <div className={`${isOpen ? "flex-row" : "flex-col"} flex`}>
-                    <div className="">
+                    <div>
                         <div className="flex justify-center my-4">
-                            <Gauge width={150} height={150} value={SCORE}
+                            <Gauge
+                                width={150}
+                                height={150}
+                                value={SCORE}
                                 sx={(theme) => ({
                                     [`& .${gaugeClasses.valueText}`]: {
                                         fontSize: 50,
@@ -78,15 +96,14 @@ const InsightBar = ({ }) => {
                                     },
                                 })} />
                         </div>
-
                         <hr className="w-full h-[1px] my-2" />
-                        <ReccomendationSection recommendations={FETCHED_RECOMMENDATIONS} />
-                        <hr className={`${isOpen ? "hidden" : "visible"} w-full h-[1px] my-2`} />
                     </div>
-                    {/* <RecommendedChanges recommendedChangesList={RECOMMENDED_CHANGES} /> */}
-                    <RecommendedChanges recommendedChangesList={aiResponse} />
+                    {isLoadingFetch ?
+                        <LoadingSpinner />
+                        :
+                        <RecommendedChanges recommendedChangesList={aiResponse} />
+                    }
                 </div>
-
                 <div className="w-full bottom-0 right-0 flex justify-end items-center">
                     <Link href={"/roadmap/945f1b8a-3502-49f5-b181-ccd212a10b89"} className="h-full text-end pr-4">Roadmap</Link>
                 </div>
@@ -95,4 +112,4 @@ const InsightBar = ({ }) => {
     )
 }
 
-export default InsightBar
+export default InsightBar;
