@@ -4,10 +4,10 @@ import OpenArrow from "@/public/assets/cv/insight/OpenArrow_icon";
 
 type RecommendedChangesProps = {
     recommendedChangesList: string,
-    prompt: string
+    // prompt: string
 }
 
-const RecommendedChanges: React.FC<RecommendedChangesProps> = ({ recommendedChangesList, prompt }) => {
+const RecommendedChanges: React.FC<RecommendedChangesProps> = ({ recommendedChangesList }) => {
     // Split the recommendations into an array
     const recommendationsArray = recommendedChangesList.split('\n');
     
@@ -26,7 +26,6 @@ const RecommendedChanges: React.FC<RecommendedChangesProps> = ({ recommendedChan
             </h2>
             <div>
                 {/* Display prompt */}
-                <p className="mb-4">{prompt}</p>
                 {recommendationsArray.map((recommendation, index) => (
                     recommendation.trim() ? (
                         <div key={index} className=" border-2 border-secondarygray bg-white rounded-lg p-4 mb-4">
