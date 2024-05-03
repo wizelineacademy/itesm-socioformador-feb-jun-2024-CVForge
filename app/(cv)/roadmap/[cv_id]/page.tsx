@@ -11,6 +11,7 @@ import OpenArrow_icon from "@/public/assets/cv/insight/OpenArrow_icon";
 import { recommendation } from "@prisma/client";
 import { use } from "chai";
 import { findRecommendationById, findRecommendationsByCvId, getAllRecommendation } from "@/services/recommendationService";
+import SearchBar from "../../cv_gallery/components/SearchBar";
 
 
 type RecommendationItem = {
@@ -31,15 +32,19 @@ const RecommendationItem: React.FC<RecommendationItem> = ({ recommendationItemDa
 
     return (
         <li className="flex flex-row font-inter">
+            
+            {/* buttons */}
             <div className="flex flex-col items-center">
                 <button onClick={handleCompletedStatusChange}
                     aria-label={`Mark ${recommendationItemData.title} as ${completed ? 'incomplete' : 'complete'}`}
-                    className="w-[26px] h-[26px] border border-1 border-secondarygray rounded-full flex justify-center items-center">
-                    <span className={`w-[20px] h-[20px] rounded-full ${completed ? "bg-gptgreen" : "bg-white"}`}></span>
+                    className="w-[31px] h-[35px] border border-[3px] border-secondarygray rounded-full flex justify-center items-center">
+                    <span className={`w-[21px] h-[21px] rounded-full ${completed ? "bg-gptgreen" : "bg-transparent"}`}></span>
                 </button>
-                {!isLast && <div className="w-[1px] h-full bg-secondarygray"></div>}
+                {!isLast && <div className="w-[3px] h-full bg-secondarygray"></div>}
+                {isLast && <div className="w-[3px] h-full bg-transparent"></div>}
             </div>
-            <div className="flex flex-col mb-6 ml-4">
+            {/* text */}
+            <div className="flex flex-col mb-7 ml-4 mt-[-3px]">
                 <h3 className="font-semibold text-2xl">{recommendationItemData.title}</h3>
                 <p className="text-secondarygray text-lg">{recommendationItemData.main_content}</p>
             </div>
@@ -123,26 +128,47 @@ const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
         };
 
         fetchRecommendations();
-    }, [params.cv_id])
+    }, [params.cv_id]) 
 
     return (
-        <div className="w-full min-h-screen font-inter text-primarygray bg-bg px-16">
-            <Link href={"/"}
-                className="sticky top-0 w-full h-10 flex items-center text-secondarygray bg-bg">
-                <OpenArrow_icon flipDegree={270} />
-                Back to Menu
+        <div className="flex h-screen justify-center">
+            <div className="flex flex-col xl:w-[1000px] lg:w-[720px] md:w-[600px] sm:w-[600px]">
+                <Link href={"/cv_gallery"} className="sticky top-0 h-10 flex items-center text-secondarygray bg-transparent">
+                    <OpenArrow_icon flipDegree={270} />Back to Menu
+                </Link>
+                <div className="flex flex-row justify-center mx-5 pr-10 border border-aiblue top-0">
+                    <p>asd</p>
+                </div>
+                <ul className="mt-10 overflow-y-scroll">{
+                    fetchedRecommendations.length > 0 ? fetchedRecommendations.map((recommendation, index) => (
+                        <RecommendationItem
+                            key={recommendation.recommendation_id}
+                            recommendationItemData={recommendation}
+                            isLast={index === fetchedRecommendations.length - 1}
+                            completedStatusChange={handleCompletedRecommendationItem}
+                        />
+                    )): <p>No recommendations available</p>
+                }</ul>
+            </div>
+        </div>
+    )
+}
+
+export default Roadmap;
+/* 
+<div className="w-full font-inter text-primarygray bg-transparent px-16 overflow-y-scroll">
+            <Link href={"/cv_gallery"} className="sticky top-0 w-full h-10 flex items-center text-secondarygray bg-transparent">
+                <OpenArrow_icon flipDegree={270} />Back to Menu
             </Link>
 
-
-            {/* Roadmap description */}
             <div className="w-full flex flex-col text-center mt-4">
-                <h1 className="font-black text-3xl">
+                <h1 className="font-primarygray text-3xl">
                     Roadmap
                 </h1>
                 <p className="text-secondarygray self-center w-1/2 text-xl mt-4">This roadmap delineates recommended challenges suggested by our AI to enhance your qualifications and increase your likelihood of securing your desired position.</p>
             </div>
-            {/* Roadmap points */}
-            <ul className="mt-10">
+
+            <ul className="mt-10 overflow-y-scroll">
                 {
                     fetchedRecommendations.length > 0 ?
                         fetchedRecommendations.map((recommendation, index) => (
@@ -157,7 +183,4 @@ const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
                 }
             </ul>
         </div>
-    )
-}
-
-export default Roadmap;
+*/
