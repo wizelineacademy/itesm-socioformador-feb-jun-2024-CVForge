@@ -1,26 +1,19 @@
 "use server"
 import prisma from "@/lib/prisma";
 
-//Get General Information from an specific user_id
-const getGeneralInfo = async (userID: string) => {
-  const generalInfo = await prisma.users.findUnique({
-    where: {
-      users_id: userID,
-    },
-    include: {
-      professional_info: {
-        include: {
-          general_info: true
-        },
-      },
-    },
-  });
-  console.log(generalInfo);
+//Get General Information from an specific professional_id
+
+const getGeneralInfo = async (professionalID: string) => {
+  const generalInfo = await prisma.general_info.findUnique(
+    {where: {professional_info_id : professionalID }}
+  )
   return generalInfo;
 }
 
+const getEducation = async (professionalID: string) => {
+  const education = await prisma.education.findMany(
+    {where: {professional_info_id : professionalID}}
+  )
+}
 
-//Create the general information from an specific user_id
-
-
-export {getGeneralInfo}
+export {getGeneralInfo, getEducation}
