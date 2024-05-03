@@ -27,18 +27,24 @@ def generate_recommendations(cv_data, job_position):
         )
         recommendations = chat_completion.choices[0].message.content.strip()
 
-        return recommendations
+        # Parse recommendations for more specific details
+        parsed_recommendations = parse_recommendations(recommendations)
+
+        return parsed_recommendations
     except Exception as e:
         print(f"An error occurred: {e}")
         return ""
 
+def parse_recommendations(recommendations):
+    # Parse recommendations for more specific details
+    
+    return recommendations
+
 if __name__ == "__main__":
     try:
-        # Read CV data and job position from command line arguments
         cv_data = json.loads(sys.argv[1])
         job_position = sys.argv[2]
         
-        # Generate recommendations for the provided CV data and job position
         recommendations = generate_recommendations(cv_data, job_position)
 
         # Print recommendations
