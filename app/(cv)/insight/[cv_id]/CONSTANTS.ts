@@ -71,38 +71,10 @@ export const FETCHED_RECOMMENDATIONS = [
     {
         recommendation_id: "4",
         cv_id: "123", 
-        title: "Attend a Project Management Workshop",
-        main_content: "Develop your project management skills by attending workshops that focus on methodologies like Agile and Scrum.",
+        title: "Complete a new DataBase management course",
+        main_content: "Add a new skill to add accuracy through your development with relational databases",
         completed: false
     },
-    {
-        recommendation_id: "5",
-        cv_id: "123",
-        title: "Read 'Thinking, Fast and Slow' by Daniel Kahneman",
-        main_content: "Improve your decision-making and problem-solving skills by reading this insightful book on behavioral psychology.",
-        completed: false
-    },
-    {
-        recommendation_id: "6",
-        cv_id: "123",
-        title: "Attend a Project Management Workshop",
-        main_content: "Develop your project management skills by attending workshops that focus on methodologies like Agile and Scrum.",
-        completed: false
-    },
-    {
-        recommendation_id: "7",
-        cv_id: "123",
-        title: "Read 'Thinking, Fast and Slow' by Daniel Kahneman",
-        main_content: "Improve your decision-making and problem-solving skills by reading this insightful book on behavioral psychology.",
-        completed: false
-    },
-    {
-        recommendation_id: "8",
-        cv_id: "123",
-        title: "Practice Mindfulness Meditation",
-        main_content: "Reduce stress and increase your concentration by practicing mindfulness meditation regularly.",
-        completed: false
-    }
 ];
 
 

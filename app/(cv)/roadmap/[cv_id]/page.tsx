@@ -49,8 +49,8 @@ const RecommendationItem: React.FC<RecommendationItem> = ({ recommendationItemDa
 
 const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
     // Hold fetched recommendations
-    //const [fetchedRecommendations, setFetchedRecommendations] = useState<recommendation[]>(FETCHED_RECOMMENDATIONS)
-    const [fetchedRecommendations, setFetchedRecommendations] = useState<recommendation[]>([]);
+    const [fetchedRecommendations, setFetchedRecommendations] = useState<recommendation[]>(FETCHED_RECOMMENDATIONS)
+    // const [fetchedRecommendations, setFetchedRecommendations] = useState<recommendation[]>([]);
 
     // Timer to handle the completed status change
     // When the user changes the completed status of a recommendation, POST that modified status
@@ -111,19 +111,19 @@ const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
     // Here must fetch the recommendation data for the CV
     // call everytime the authentication token has been modified
     // set the fetched recommendation state
-    useEffect(() => {
-        // setFetchedRecommendations()
-        const fetchRecommendations = async () => {
-            try {
-                const recommendationsArray = await findRecommendationsByCvId(params.cv_id);
-                setFetchedRecommendations(recommendationsArray);
-            } catch (error) {
-                console.error("Failed to fetch recommendations", error);
-            }
-        };
+    // useEffect(() => {
+    //     // setFetchedRecommendations()
+    //     const fetchRecommendations = async () => {
+    //         try {
+    //             const recommendationsArray = await findRecommendationsByCvId(params.cv_id);
+    //             setFetchedRecommendations(recommendationsArray);
+    //         } catch (error) {
+    //             console.error("Failed to fetch recommendations", error);
+    //         }
+    //     };
 
-        fetchRecommendations();
-    }, [params.cv_id])
+    //     fetchRecommendations();
+    // }, [params.cv_id])
 
     return (
         <div className="w-full min-h-screen font-inter text-primarygray bg-bg px-16">

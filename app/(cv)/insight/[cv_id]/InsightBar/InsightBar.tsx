@@ -88,7 +88,7 @@ const InsightBar = ({ }) => {
                 </div>
 
                 <div className="w-full bottom-0 right-0 flex justify-end items-center">
-                    <Link href={"/"} className="h-full text-end pr-4">Roadmap</Link>
+                    <Link href={"/roadmap/945f1b8a-3502-49f5-b181-ccd212a10b89"} className="h-full text-end pr-4">Roadmap</Link>
                 </div>
             </div>
         </div>
