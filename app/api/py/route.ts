@@ -9,7 +9,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         const jobPosition = "Data Engineer";
 //        console.log(cvData);
         const result = await new Promise((resolve, reject) => {
-            exec(`python3 scripts/ai_test.py '${cvData}' '${jobPosition}'`, (error, stdout, stderr) => {
+            exec(`python3 scripts/ai_test.py ${cvData} '${jobPosition}'`, (error, stdout, stderr) => {
                 if (error) {
                     console.log("Execution error:", error);
                     reject(new Error('Error executing Python script: ' + error.message));

@@ -5,6 +5,7 @@ import {cv} from '@prisma/client'
 import { RiRoadMapLine } from "react-icons/ri";
 import { MdOutlineSimCardDownload } from "react-icons/md";
 import { IoTrashOutline } from "react-icons/io5";
+import Link from 'next/link';
 
 
 interface DropdownProps {
@@ -33,9 +34,9 @@ const Dropdown: React.FC<DropdownProps> = ({cvProp, deleteFunction}) => {
       {isOpen && (
         <div className="origin-top-right absolute right-2 w-44 rounded-md shadow-lg bg-white">
           <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-            <a href="#" className=" flex flex-row block px-4 py-2 text-sm text-secondarygray hover:bg-gray-100 hover:text-primarygray" role="menuitem">
+            <a href={`/roadmap/${cvProp.cv_id}`} className=" flex flex-row block px-4 py-2 text-sm text-secondarygray hover:bg-gray-100 hover:text-primarygray" role="menuitem">
               <RiRoadMapLine/>
-              <p className='pl-2'>Roadmap</p>
+              <p className='pl-2' >Roadmap</p>
             </a>
             <a href="#" className="flex flex-row block px-4 py-2 text-sm text-secondarygray hover:bg-gray-100 hover:text-primarygray" role="menuitem">
               <MdOutlineSimCardDownload />
