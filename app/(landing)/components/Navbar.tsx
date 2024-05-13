@@ -1,12 +1,16 @@
-
+"use client"
 import Link from 'next/link';
-import React from 'react';
 import SignInOutButton from './SignInOutButton';
+import React, { useRef } from 'react';
+import useScrollPosition from "@/hooks/useScrollPosition";
 
 const Navbar: React.FC = () => {
+    const ulRef = useRef(null);
+    const isNearTop = useScrollPosition(ulRef);
     return (
-        <div className='text-normaltext py-5 px-10 bg-white shadow-md'>
-            <div className='max-w-screen-xl mx-auto flex justify-between items-center'>
+        <div className={`text-normaltext py-5 px-10 bg-white w-full shadow shadow-md`}>
+        {/* <div className={`text-normaltext py-5 px-10 bg-white w-full ${isNearTop? 'shadow-md' : 'shadow-lg'}`}>*/}
+            <div className='mx-5 flex justify-between items-center'>
                 <h1 className='font-koh_santepheap text-4xl font-bold text-primarygray'>
                     <Link href='/'>
                       CVForge<span className='text-gptgreen'>.ai</span>
@@ -18,20 +22,22 @@ const Navbar: React.FC = () => {
                             <Link href='/' className="text-lg hover:text-gptgreen hover:underline px-4 py-2 text-primarygray" >Home</Link>
                         </li>
                         <li>
-                            <Link href='/editor' className="text-lg hover:text-gptgreen hover:underline px-4 py-2 text-primarygray" >Editor</Link>
+                            <Link href='/professional_info/1/general_info' className="text-lg hover:text-gptgreen hover:underline px-4 py-2 text-primarygray" >Editor</Link>
                         </li>
                         <li>
-                            <Link href='/roadmap' className="text-lg hover:text-gptgreen hover:underline px-4 py-2 text-primarygray" >Roadmap</Link>
+                            <Link href='/cv_gallery' className="text-lg hover:text-gptgreen hover:underline px-4 py-2 text-primarygray" >CV Gallery</Link>
                         </li>
                     </ul>
                 </nav>
                 <SignInOutButton/>
-                <button className="md:hidden bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold py-2 px-4 rounded">
-                    Menu
-                </button>
             </div>
         </div>
     );
 }
 
 export default Navbar;
+/*
+                <button className="md:hidden bg-gradient-to-r from-gptgreen to-aiblue text-whitefo font-bold py-2 px-4 rounded-3xl">
+                    Menu
+                </button>
+*/

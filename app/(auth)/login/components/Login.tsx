@@ -34,7 +34,7 @@ const Login: React.FC= () => {
         } else {
             // Redirect the user or do something else
             console.log('Signed in successfully');
-            router.push("/");
+            router.push("/cv_gallery");
         }
     };
 
@@ -50,7 +50,7 @@ const Login: React.FC= () => {
                             <p className='text-gptgreen'>.ai</p>
                         </div>
                         <p className='text-primarygray font-semibold font-inter text-xl p-4'>Don’t Have an Account?</p>
-                        <button onClick={() => signIn('google', { callbackUrl: "/" })} className='flex felx-row text-gptgreen text-xl border border-gptgreen rounded-3xl p-1.5 border-2 w-72'>
+                        <button onClick={() => signIn('google', { callbackUrl: "/cv_gallery" })} className='flex felx-row text-gptgreen text-xl border border-gptgreen rounded-3xl p-1.5 border-2 w-72'>
                             <div className='px-3 pl-5'>
                                 <div className='w-7 h-7'>
                                     <Google_Icon/>
