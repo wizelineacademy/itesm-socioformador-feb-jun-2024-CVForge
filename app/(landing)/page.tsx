@@ -11,14 +11,21 @@ import LandingStart from "./call_to_actions/Landing_Start";
 const Home: React.FC = () => {
   return (
     <div>
-      <LandingStart/>
+      <div className="mt-10 mb-2">
+        <LandingStart/>
+      </div>
       <LandingFeature/>
+      <LandingPosition/>
     </div>
   );
 };
 
 export default Home;
 /*
+<LandingStart/>
+      <LandingFeature/>
+
+
 <LandingStart/>
 <LandingContent/>
         <LandingFeature/>
