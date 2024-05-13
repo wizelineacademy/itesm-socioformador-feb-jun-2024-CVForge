@@ -3,6 +3,9 @@ import Google_Icon from '@/public/assets/svg/Google_Icon';
 import Linkedin_Icon from '@/public/assets/svg/Linkedin_Icon';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import OpenArrow_icon from "@/public/assets/cv/insight/OpenArrow_icon";
+import Link from 'next/link';
+
 
 const Login: React.FC= () => {
     const [email, setEmail] = useState(''); // State for email
@@ -40,7 +43,6 @@ const Login: React.FC= () => {
 
     return (
         <div className='flex items-center justify-center h-screen'>
-            {/* <div className='bg-white shadow-md flex items-between justify-center rounded-lg p-10 w-3/5 h-3/5'> */}
             <div className='bg-white shadow-md flex items-between justify-center rounded-lg p-10 w-full h-auto m-72'>
                 <div className='flex flex-row justify-between p-2 py-4'>
                     {/* Left */}

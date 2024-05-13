@@ -3,7 +3,7 @@ import React from 'react';
 interface CardProps {
     title: string;
     content: string;
-    svgImage: React.ElementType; // Assuming the SVG image is a URL string
+    svgImage: React.ElementType; 
   }
 
 const FeatureCard: React.FC<CardProps> = ({ title, content, svgImage: SvgImageComponent }) => {
