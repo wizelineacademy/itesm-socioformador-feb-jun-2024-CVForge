@@ -7,19 +7,22 @@ const SignInOutButton = () => {
 
   if (session && session.user) {
     return (
-      <div className="flex gap-4 ml-auto items-center">
-        <p className="text-sky-600">{session.user.email}</p>
+      <div className="flex gap-4 items-center">
+        <p className="text-secondarygray">{session.user.email}</p>
         
-        <button onClick={() => signOut()} className="hidden md:block bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold w-40 py-2 px-4 rounded">
+        <button onClick={() => signOut()} className="hidden md:block bg-gradient-to-r from-gptgreen to-aiblue text-whitefo font-bold w-40 py-2 px-4 rounded-3xl">
           Sign Out
         </button>
       </div>
     );
   }
   return (
-    <button onClick={() => signIn()} className="hidden md:block bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold w-40 py-2 px-4 rounded">
-      Sign In
-    </button>
+    <div className="flex gap-4 items-center">
+      <div className="w-[140px]"/>
+      <button onClick={() => signIn()} className="hidden md:block bg-gradient-to-r from-gptgreen to-aiblue text-whitefo font-bold w-40 py-2 px-4 rounded-3xl">
+        Sign In
+      </button>
+    </div>
   );
 };
 

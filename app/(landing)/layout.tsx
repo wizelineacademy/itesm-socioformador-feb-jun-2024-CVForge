@@ -1,5 +1,7 @@
 import "@/style/globals.css";
 import Providers from "./components/Providers";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 export const metadata = {
   title: 'CVForge',
@@ -16,9 +18,13 @@ export default function RootLayout({
     <html className="scroll-smooth" lang="en">
       <body>
         <Providers>
-          {children}
+          <Navbar/>
+          <main className="relative overflow-hidden">
+            {children}
+          </main>
+          <Footer/>
         </Providers>
-      </body>
+      </body> 
     </html>
   )
 }

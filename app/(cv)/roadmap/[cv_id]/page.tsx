@@ -5,6 +5,8 @@ import { FETCHED_RECOMMENDATIONS } from "../../insight/[cv_id]/CONSTANTS";
 
 // Package imports
 import { useEffect, useState } from "react";
+import React, { useRef } from 'react';
+
 
 // Icon imports
 import OpenArrow_icon from "@/public/assets/cv/insight/OpenArrow_icon";
@@ -12,7 +14,7 @@ import { recommendation } from "@prisma/client";
 import { use } from "chai";
 import { findRecommendationById, findRecommendationsByCvId, getAllRecommendation } from "@/services/recommendationService";
 import SearchBar from "../../cv_gallery/components/SearchBar";
-
+import useScrollPosition from "@/hooks/useScrollPosition";
 
 type RecommendationItem = {
     recommendationItemData: recommendation,
@@ -44,9 +46,11 @@ const RecommendationItem: React.FC<RecommendationItem> = ({ recommendationItemDa
                 {isLast && <div className="w-[3px] h-full bg-transparent"></div>}
             </div>
             {/* text */}
-            <div className="flex flex-col mb-7 ml-4 mt-[-3px]">
-                <h3 className="font-semibold text-2xl">{recommendationItemData.title}</h3>
-                <p className="text-secondarygray text-lg">{recommendationItemData.main_content}</p>
+            <div className="flex flex-col mb-7 ml-4 mt-[-3px] bg-white rounded rounded-xl shadow-lg">
+                <div className="p-3">
+                    <h3 className="font-semibold text-2xl">{recommendationItemData.title}</h3>
+                    <p className="text-secondarygray text-lg">{recommendationItemData.main_content}</p>
+                </div>
             </div>
         </li>
     )
@@ -128,17 +132,51 @@ const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
         };
 
         fetchRecommendations();
-    }, [params.cv_id]) 
+    }, [params.cv_id])  
+
+    const ulRef = useRef(null);
+    const isNearTop = useScrollPosition(ulRef);
 
     return (
-        <div className="flex h-screen justify-center">
-            <div className="flex flex-col xl:w-[1000px] lg:w-[720px] md:w-[600px] sm:w-[600px]">
-                <Link href={"/cv_gallery"} className="sticky top-0 h-10 flex items-center text-secondarygray bg-transparent">
-                    <OpenArrow_icon flipDegree={270} />Back to Menu
+        <div className="flex flex-col bg-editorgray h-screen">
+            <div className={`flex flex-col w-full ${isNearTop? '' : 'shadow-lg'}`}>
+                <Link href={"/cv_gallery"} className="sticky h-10 flex items-center text-secondarygray bg-transparent pl-8 pt-8">
+                    <OpenArrow_icon flipDegree={270} /><p className="text-md font-bold font-inter ">Back to Menu</p>
                 </Link>
-                <div className="flex flex-row justify-center mx-5 pr-10 border border-aiblue top-0">
-                    <p>asd</p>
+                <div className="flex flex-col justify-center items-center mx-[300px] pr-10 pb-5 top-0">
+                    <p className="text-4xl text-primarygray font-bold font-koh_santepheap">Roadmap</p>
+                    <p className="text-secondarygray text-center w-fill text-lg m-2 mt-5">This roadmap delineates recommended challenges suggested by our AI to enhance your qualifications and increase your likelihood of securing your desired position.</p>
                 </div>
+            </div>
+            <ul ref={ulRef} className="overflow-y-scroll mx-12">{
+                fetchedRecommendations.length > 0 ? fetchedRecommendations.map((recommendation, index) => (
+                    <RecommendationItem
+                        key={recommendation.recommendation_id}
+                        recommendationItemData={recommendation}
+                        isLast={index === fetchedRecommendations.length - 1}
+                        completedStatusChange={handleCompletedRecommendationItem}
+                    />
+                )): <p>No recommendations available</p>
+            }</ul>
+        </div>
+    )
+}
+
+export default Roadmap;
+/* 
+
+<div className="flex flex-col bg-editorgray">
+            <div className="flex h-screen justify-center">
+
+                <Link href={"/cv_gallery"} className="sticky h-10 flex items-center text-secondarygray bg-transparent p-5 pt-8">
+                    <OpenArrow_icon flipDegree={270} /><p className="text-md font-bold font-inter ">Back to Menu</p>
+                </Link>
+                <div className="flex flex-col xl:w-[1000px] lg:w-[720px] md:w-[600px] sm:w-[600px]">
+                        <div className="flex flex-col justify-center items-center mx-52 pr-10 pb-1 top-0">
+                            <p className="text-4xl text-primarygray font-bold font-koh_santepheap">Roadmap</p>
+                            <p className="text-secondarygray text-center w-fill text-lg mt-4 flex-wrap ">This roadmap delineates recommended challenges suggested by our AI to enhance your qualifications and increase your likelihood of securing your desired position.</p>
+                        </div>
+                    </div>
                 <ul className="mt-10 overflow-y-scroll">{
                     fetchedRecommendations.length > 0 ? fetchedRecommendations.map((recommendation, index) => (
                         <RecommendationItem
@@ -151,11 +189,17 @@ const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
                 }</ul>
             </div>
         </div>
-    )
-}
 
-export default Roadmap;
-/* 
+
+
+
+
+
+
+
+
+
+
 <div className="w-full font-inter text-primarygray bg-transparent px-16 overflow-y-scroll">
             <Link href={"/cv_gallery"} className="sticky top-0 w-full h-10 flex items-center text-secondarygray bg-transparent">
                 <OpenArrow_icon flipDegree={270} />Back to Menu

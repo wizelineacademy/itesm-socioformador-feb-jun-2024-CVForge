@@ -6,7 +6,6 @@ import ReduxProvider from "./ReduxProvider";
 
 // Components
 import LeftSidebar from "./layoutComponents/LeftSidebar";
-import { useState } from "react";
 
 export default function RootLayout({
   children,

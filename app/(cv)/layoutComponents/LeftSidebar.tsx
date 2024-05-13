@@ -2,6 +2,8 @@
 
 // Default imports
 import { useDispatch, useSelector } from "react-redux"
+import { signOut } from "next-auth/react";
+
 
 // Icon imports
 import SecondaryLogo from "@/public/assets/SecondaryLogo"
@@ -54,13 +56,13 @@ const SidebarMenuElement: React.FC<SidebarListElementProps> = ({ title, currentT
 
 const SidebarSettingsElement: React.FC<SidebarListElementProps> = ({ title, currentTab, href, itemTab, icon, open}) => {
     // The color to be assigned
-    const color = currentTab === itemTab ? "#D9D9D9" : "#7E7E7E";
+    const color = "#7E7E7E";
     // The icon for the item
     const IconComponent = React.cloneElement(icon, { strokeColor: color });
 
     return (
-        <li className="my-6">
-            <Link href={href} className= {`flex flex-row items-center ${!open && "hidden"} hover:bg-secondarygray hover:rounded hover:bg-opacity-30 p-1.5`} style={{ color: color }}>
+        <button className="my-4" onClick={() => signOut({callbackUrl: "/", redirect: true})}>
+            <div className= {`flex flex-row items-center ${!open && "hidden"} hover:bg-secondarygray hover:rounded hover:bg-opacity-30 p-1.5 pr-16`} style={{ color: color }}>
                 <div className="flex cursor-pointer items-center">
                     <div className="mr-1 flex flex-row items-center w-8 ">
                         <div className="w-8 h-8 text-4xl ">
@@ -71,8 +73,8 @@ const SidebarSettingsElement: React.FC<SidebarListElementProps> = ({ title, curr
                         {title}
                      </p>
                 </div>
-            </Link>
-        </li>
+            </div>
+        </button>
     );
 };
 
@@ -99,7 +101,9 @@ const LeftSidebar = () => {
                     />
                     <div className={`${!open && "hidden"} py-8 `}>
                         <div className="inline-flex">
-                            <div className="w-full h-10"><SecondaryLogo /></div>
+                            <Link href="/">
+                                <div className="w-full h-10"><SecondaryLogo /></div>
+                            </Link>
                         </div>
                         <div className="w-full px-2">
                             <div className="pt-3">
@@ -122,7 +126,7 @@ const LeftSidebar = () => {
                                     />
                                 </ul>
                             </div>
-                            <div className="absolute bottom-0 w-48">
+                            <div className="absolute bottom-0 w-48 pb-6">
                                 <ul>
                                     <SidebarSettingsElement
                                         title="Account"
