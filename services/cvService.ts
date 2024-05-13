@@ -9,8 +9,12 @@ export const findCVById = async (cvID: string) => {
   return cv;
 };
 
-export const getAllCVs = async() => {
-  const cvs = await prisma.cv.findMany();
+export const getAllCVs = async(userId: string) => {
+  const cvs = await prisma.cv.findMany({
+    where: {
+      user_id: userId,
+    },
+  });
   return cvs;
 }
 
