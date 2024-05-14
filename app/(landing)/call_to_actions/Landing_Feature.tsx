@@ -5,7 +5,7 @@ import Search_Icon from '@/public/assets/svg/Search_Icon';
 
 const LandingFeature: React.FC = () => {
   return (
-    <div className="flex flex-col justify-center items-center px-48 py-16 bg-white border border-aiblue">
+    <div className="flex flex-col justify-center items-center bg-white ">
       <h1 className="large_title pb-5">Features</h1>
         <div className="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-3 gap-10 overflow-y-auto">
           <FeatureCard

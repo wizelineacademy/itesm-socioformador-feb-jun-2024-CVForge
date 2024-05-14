@@ -20,7 +20,7 @@ export default function RootLayout({
     <html className="scroll-smooth" lang="en">
       <body className="bg-white">
         <Providers>
-          <Navbar/>
+        <Navbar/>
           <main className="relative overflow-hidden">
             {children}
           </main>

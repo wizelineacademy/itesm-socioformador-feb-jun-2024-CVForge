@@ -170,7 +170,7 @@ body {
   }
 
   .large_title {
-    @apply font-koh_santepheap text-6xl mb-4 text-primarygray font-bold;
+    @apply font-koh_santepheap mb-4 text-primarygray font-bold xl:text-6xl lg:text-6xl  md:text-6xl;
   }
 
   .sub_title {
