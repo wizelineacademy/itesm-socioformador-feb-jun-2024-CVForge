@@ -3,7 +3,7 @@ import PositionBox from '../components/PositionBox';
 
 const LandingPosition: React.FC = () => {
   return (
-    <div className="flex flex-col justify-center items-center px-48 py-16 bg-white">
+    <div className="flex flex-col justify-center items-center px-48 py-16 bg-white border border-aiblue">
       <h1 className="large_title ">Currently Available Positions</h1>
       <div className='carousel w-full'>
         <div className='carousel__inner'>

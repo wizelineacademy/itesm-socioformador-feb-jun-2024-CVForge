@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const LandingStart: React.FC = () => {
   return (
-    <div className="bg-white relative px-52 pt-20">
+    <div className="bg-white relative px-52 pt-20 border border-aiblue">
         {/* Front */}
         <div className='relative z-10'>
             {/* Big Text */}
