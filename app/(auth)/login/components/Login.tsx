@@ -61,7 +61,7 @@ const Login: React.FC= () => {
                             Sign up with Google
                         </button>
                         <div className='p-3'/>
-                        <button className='flex felx-row text-gptgreen text-xl border border-gptgreen rounded-3xl p-1.5 border-2 w-72'>
+                        <button onClick={() => signIn('linkedin', { callbackUrl: "http://localhost:3000/cv_gallery" })} className='flex felx-row text-gptgreen text-xl border border-gptgreen rounded-3xl p-1.5 border-2 w-72'>
                             <div className='px-3 pl-5'>
                                 <div className='w-7 h-7'>
                                     <Linkedin_Icon/>
