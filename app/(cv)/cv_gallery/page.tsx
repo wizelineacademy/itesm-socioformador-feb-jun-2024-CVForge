@@ -16,7 +16,7 @@ const Menu: React.FC = ({ }) => {
         const response = await fetch('/api/createCv', { method: 'POST'});
         const jsonData = await response.json();
         const message = jsonData.results;
-        console.log(message);
+        console.log("-----", message);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       }

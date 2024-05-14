@@ -43,11 +43,32 @@ openai.api_key = api_key  # Set API key for the library
 
 #     return recommendations
 
+def parse_categories(obj_str):
+    # Remove the outermost braces
+    obj_str = obj_str.strip('{}')
+
+    # Regular expression to match each category and its content
+    category_regex = r'(\w+):(\[\{.*?\}\])(?=,\w+:|\]$)'
+    
+    matches = re.finditer(category_regex, obj_str)
+    
+    categories = {}
+    for match in matches:
+        category = match.group(1)
+        content = match.group(2)
+        content = content[1:-1]
+        categories[category] = content
+    
+    return categories
+
 if __name__ == "__main__":
     try:
         # cv_data = json.loads(sys.argv[1])
         data = sys.argv[1]
+        # test = parse_object(data)
 
-        print(data)
+        categories = parse_categories(data)
+        for category, content in categories.items():
+            print(f"{category}: {content}")
     except Exception as e:
         print(f"An error occurred: {e}")

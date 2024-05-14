@@ -22,7 +22,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
                 resolve(stdout.trim());
             });
         });
-        console.log("------", data)
 
         return NextResponse.json({ message: "CV processed successfully", results: result });
     } catch (error) {
