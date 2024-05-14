@@ -18,13 +18,15 @@ export default function RootLayout({
 }) {
   return (
     <html className="scroll-smooth" lang="en">
-      <body className="bg-white">
+      <body className="flex flex-col bg-gradient-to-b from-white to-gray-300 h-screen">
         <Providers>
         <Navbar/>
-          <main className="relative overflow-hidden">
-            {children}
-          </main>
-          <Footer/>
+          <div className="overflow-y-scroll">
+            <main>
+              {children}
+            </main>
+            <Footer/>
+          </div>
         </Providers>
       </body> 
     </html>

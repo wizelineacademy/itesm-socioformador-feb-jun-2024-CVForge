@@ -8,8 +8,7 @@ const Navbar: React.FC = () => {
     const ulRef = useRef(null);
     const isNearTop = useScrollPosition(ulRef);
     return (
-        <div className={`text-normaltext py-5 px-10 bg-white w-full shadow shadow-md`}>
-        {/* <div className={`text-normaltext py-5 px-10 bg-white w-full ${isNearTop? 'shadow-md' : 'shadow-lg'}`}>*/}
+        <div className={`text-normaltext py-5 px-2 bg-white w-full shadow shadow-sm`}>
             <div className='mx-5 flex justify-between items-center'>
                 <h1 className='font-koh_santepheap text-4xl font-bold text-primarygray'>
                     <Link href='/'>
@@ -19,13 +18,13 @@ const Navbar: React.FC = () => {
                 <nav className='hidden md:block'>
                     <ul className='flex gap-6'>
                         <li>
-                            <Link href='/' className="text-lg hover:text-gptgreen hover:underline px-4 py-2 text-primarygray" >Home</Link>
+                            <Link href='/' className="text-lg hover:text-gptgreen hover:underline px-4 py-2 text-secondarygray" >Home</Link>
                         </li>
                         <li>
-                            <Link href='/professional_info/1/general_info' className="text-lg hover:text-gptgreen hover:underline px-4 py-2 text-primarygray" >Editor</Link>
+                            <Link href='/professional_info/1/general_info' className="text-lg hover:text-gptgreen hover:underline px-4 py-2 text-secondarygray" >Editor</Link>
                         </li>
                         <li>
-                            <Link href='/cv_gallery' className="text-lg hover:text-gptgreen hover:underline px-4 py-2 text-primarygray" >CV Gallery</Link>
+                            <Link href='/cv_gallery' className="text-lg hover:text-gptgreen hover:underline px-4 py-2 text-secondarygray" >CV Gallery</Link>
                         </li>
                     </ul>
                 </nav>
