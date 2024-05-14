@@ -128,7 +128,7 @@ export const MOCK_CV = {
     skills_tag: "JavaScript, Python, Java, C++"
 }
 
-export const MOCK_CV_2 = {
+export const MOCK_PROFESSIONAL_INFO = {
     education: [
         {
             school: "Tec de Monterrey",
