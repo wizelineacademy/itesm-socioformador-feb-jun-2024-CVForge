@@ -3,72 +3,79 @@ import os
 import sys
 import re
 
+# Set API key for the library
 api_key = os.environ.get("OPENAI_API_KEY")
-openai.api_key = api_key  # Set API key for the library
+if not api_key:
+    raise ValueError("OpenAI API key not found in environment variables.")
+openai.api_key = api_key
 
-# def generate_recommendations(cv_data, job_position):
-#     try:
-#         # Craft prompt
 
-#         prompt = f"Hello! I'm seeking advice on improving my CV for a {job_position} position. Below is the content of my CV:\n\n"
-#         # for section in cv_data:
-#         #     for key, value in section.items():
-#         #         prompt += f"CV section: {key}\nContent: {value}\n\n"
-#         for key, value in cv_data.items():
-#             prompt += f"CV section: {key}\nContent: {value}\n\n"
-#         prompt += "\nBased on this information and the targeted position, could you please provide recommendations on how I can enhance my CV to better align with the requirements and stand out to potential employers?"
+def generate_cv(cv_data, job_position):
+    try:
+        # Craft prompt
+        prompt = f"I will provide information about various sections of a professional's profile. Your task is to select the most relevant content for the job position: '{job_position}'. Each section includes different types of information such as education, skills, achievements, work experience, and certifications. Here is the provided information:\n\n"
 
-#         # Generate recommendations
-#         chat_completion = openai.chat.completions.create(
-#             model="gpt-3.5-turbo",
-#             messages=[
-#                 {
-#                     "role": "system",
-#                     "content": prompt
-#                 }
-#             ]
-#         )
-#         recommendations = chat_completion.choices[0].message.content.strip()
+        for section, content in cv_data.items():
+            prompt += f"Section: {section.capitalize()}\nContent: {content}\n\n"
 
-#         # Parse recommendations for more specific details
-#         parsed_recommendations = parse_recommendations(recommendations)
+        prompt += (
+            f"Based on the information provided, select only the sections and their content that are most relevant for the job position: '{job_position}'. "
+            "Do not modify any of the content. Return only the selected sections and their corresponding content."
+        )
 
-#         return parsed_recommendations
-#     except Exception as e:
-#         print(f"An error occurred: {e}")
-#         return ""
+        # Generate recommendations
+        response = openai.chat.completions.create(
+            model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}]
+        )
 
-# def parse_recommendations(recommendations):
-#     # Parse recommendations for more specific details
+        # Extract the response content
+        recommendations = response.choices[0].message.content.strip()
 
-#     return recommendations
+        return parse_recommendations(recommendations)
 
-def parse_categories(obj_str):
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return ""
+
+
+def parse_recommendations(recommendations):
+    # Assuming recommendations are returned as a structured text. Adjust parsing as needed.
+    return recommendations
+
+
+def parse_data(obj_str):
     # Remove the outermost braces
-    obj_str = obj_str.strip('{}')
+    obj_str = obj_str.strip("{}")
 
     # Regular expression to match each category and its content
-    category_regex = r'(\w+):(\[\{.*?\}\])(?=,\w+:|\]$)'
-    
+    # Modified to ensure it captures the last category
+    category_regex = r"(\w+):(\[\{.*?\}\])(?=,\w+:|$)"
+
     matches = re.finditer(category_regex, obj_str)
-    
+
     categories = {}
     for match in matches:
         category = match.group(1)
         content = match.group(2)
         content = content[1:-1]
         categories[category] = content
-    
+
     return categories
+
 
 if __name__ == "__main__":
     try:
-        # cv_data = json.loads(sys.argv[1])
         data = sys.argv[1]
-        # test = parse_object(data)
+        job_position = sys.argv[2]
 
-        categories = parse_categories(data)
-        for category, content in categories.items():
-            print(f"{category}: {content}")
+        # Parse categories from the provided data
+        parsed_data = parse_data(data)
+
+        # Generate recommendations for all categories at once
+        cv = generate_cv(parsed_data, job_position)
+
+        # Print recommendations
+        print(cv)
+
     except Exception as e:
         print(f"An error occurred: {e}")

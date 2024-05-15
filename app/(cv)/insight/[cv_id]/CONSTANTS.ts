@@ -149,13 +149,13 @@ export const MOCK_PROFESSIONAL_INFO = {
             title: "Python",
             level: "Advanced",
             duration: "3+ years",
-            tag: "JavaScript, Python, Java, C++"
+            tag: "Programming language"
         },
         {
             title: "C++",
             level: "Advanced",
             duration: "5+ years",
-            tag: "JavaScript, Python, Java, C++"
+            tag: "Programming language"
         }
     ],
     achievement: [
