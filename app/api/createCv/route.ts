@@ -106,7 +106,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         const markdown = convertToMarkdown(parsedTextToObject);
 
         // Return the parsed results as a JSON response
-        return NextResponse.json({ message: "CV processed successfully", results: markdown });
+        return NextResponse.json({ message: "CV processed successfully", results: result });
     } catch (error) {
         console.error("Error in Python script execution:", error);
         return NextResponse.json({ error: error.message });

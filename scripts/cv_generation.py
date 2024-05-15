@@ -20,7 +20,8 @@ def generate_cv(cv_data, job_position):
 
         prompt += (
             f"Based on the information provided, select only the sections and their content that are most relevant for the job position: '{job_position}'. "
-            "Do not modify any of the content. Return only the selected sections and their corresponding content."
+            "You must return it in markdown format and include all possible content that fits the job position, like the following: #Section, -**Content**, -**Content**"
+            "Do not modify any of the content. If necessary, use many Content fields. Do not return the content in curly braces. Return only the selected sections and their corresponding content."
         )
 
         # Generate recommendations
