@@ -127,3 +127,56 @@ export const MOCK_CV = {
     skills_duration: "5+ years",
     skills_tag: "JavaScript, Python, Java, C++"
 }
+
+export const MOCK_PROFESSIONAL_INFO = {
+    education: [
+        {
+            school: "Tec de Monterrey",
+            education_degree: "B.S. in Computer Science",
+            gpa: "4",
+            start_date: "August 2021",
+            end_date: "May 2025"
+        }
+    ],
+    skill: [
+        {
+            title: "JavaScript",
+            level: "Advanced",
+            duration: "2+ years",
+            tag: "Programming language"
+        },
+        {
+            title: "Python",
+            level: "Advanced",
+            duration: "3+ years",
+            tag: "JavaScript, Python, Java, C++"
+        },
+        {
+            title: "C++",
+            level: "Advanced",
+            duration: "5+ years",
+            tag: "JavaScript, Python, Java, C++"
+        }
+    ],
+    achievement: [
+        {
+            achievement_name: "Award for Excellence in Leadership",
+            achievement_description: "Received award for outstanding leadership skills demonstrated in managing a team of 20+ members.",
+        }
+    ],
+    work_experience: [
+        {
+            name: "XYZ Corporation",
+            position: "Software Engineer",
+            description: "Developed scalable web applications using modern technologies such as React.js and Node.js. Collaborated with cross-functional teams to deliver high-quality software solutions.",
+            startdate: "January 2018",
+            endate: "Present",
+        }
+    ],
+    certificate: [
+        {
+            name: "AWS Certified Solutions Architect",
+            description: "Certification demonstrating proficiency in designing and deploying scalable, highly available, and fault-tolerant systems on Amazon Web Services (AWS).",
+        }
+    ]
+}

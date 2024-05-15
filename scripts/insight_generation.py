@@ -1,6 +1,5 @@
 import openai
 import os
-import json
 import sys
 import re
 
