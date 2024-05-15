@@ -21,11 +21,39 @@ const handler = NextAuth({
     LinkedInProvider({
       clientId: process.env.LINKEDIN_CLIENT_ID! as string,
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET! as string,
+      authorization: {
+        url: 'https://www.linkedin.com/oauth/v2/authorization',
+        params: { scope: 'openid profile email' }, // Specify the scope here
+      },
+      token: {
+        url: 'https://www.linkedin.com/oauth/v2/accessToken',
+      },
+      userinfo: {
+        url: 'https://api.linkedin.com/v2/userinfo',
+        params: {
+          projection: '', // Adjust according to your needs
+        },
+      },
+      issuer: 'https://www.linkedin.com/oauth',
+      jwks_endpoint: 'https://www.linkedin.com/oauth/openid/jwks',
+      profile(profile) {
+        return {
+          id: profile.sub,
+          name: profile.name,
+          givenName: profile.given_name,
+          familyName: profile.family_name,
+          email: profile.email,
+          image: profile.picture,
+        };
+      },
+      allowDangerousEmailAccountLinking: true,
+      /*
       client: { token_endpoint_auth_method: 'client_secret_post' },
       authorization: {
         url: 'https://www.linkedin.com/oauth/v2/authorization',
         params: { scope: 'openid profile email' },
       },
+      */
     }),
     CredentialsProvider({
       name: "Credentials",
