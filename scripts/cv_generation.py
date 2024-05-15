@@ -16,7 +16,7 @@ def generate_cv(cv_data, job_position):
         prompt = f"I will provide information about various sections of a professional's profile. Your task is to select the most relevant content for the job position: '{job_position}'. Each section includes different types of information such as education, skills, achievements, work experience, and certifications. Here is the provided information:\n\n"
 
         for section, content in cv_data.items():
-            prompt += f"Section: {section.capitalize()}\nContent: {content}\n\n"
+            prompt += f"Section: {section.capitalize()}\nContent (can contain multiple elements): {content}\n\n"
 
         prompt += (
             f"Based on the information provided, select only the sections and their content that are most relevant for the job position: '{job_position}'. "

@@ -2,7 +2,7 @@
 import React from "react";
 import NewCv from "./NewCv";
 import ExistingCV from "./ExistingCV";
-import { getAllCVs, createCV, findCVById, deleteCV} from "@/services/cvService";
+import { getAllCVs, createCV, findCVById, deleteCV } from "@/services/cvService";
 import { useEffect, useState } from "react";
 import { getAllPositions } from "@/services/positionServices";
 import { cv, desired_position } from "@prisma/client";
@@ -67,6 +67,18 @@ const Gallery: React.FC = () => {
     event.preventDefault();
     try {
       if (selectedPosition) {
+        // Call the api endpoint that calls the llm
+        const response = await fetch('/api/createCv', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ selectedPosition }),
+        });
+        const jsonData = await response.json();
+        const message = jsonData.results;
+        console.log(message);
+
         const newCv = await createCV({
           title: title,
           desired_position_id: selectedPosition,
@@ -85,8 +97,8 @@ const Gallery: React.FC = () => {
       console.error("Failed to create new CV:", error);
     }
   };
-  
-  const handleCVDelete = async(cvId: string) => { 
+
+  const handleCVDelete = async (cvId: string) => {
     const deletedCV = await deleteCV(cvId);
     setIsDetailVisible(false);
     setCvs((prevCvs) => prevCvs.filter(cv => cv.cv_id !== cvId));
@@ -117,7 +129,7 @@ const Gallery: React.FC = () => {
             />
           ))}
         </div>
-  
+
         {/*pop up to create new*/}
         {isFormVisible && (
           <div className="fixed top-0 left-0 w-full h-full bg-opacity-50 bg-black flex justify-center items-center">
@@ -133,7 +145,7 @@ const Gallery: React.FC = () => {
                   value={title}
                   onChange={handleTitleChange}
                   required
-                  // Add more form fields as needed
+                // Add more form fields as needed
                 />
                 <div className="form-group">
                   <label htmlFor="position">Select a position:</label>
