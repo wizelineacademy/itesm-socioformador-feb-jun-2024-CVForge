@@ -21,6 +21,11 @@ const handler = NextAuth({
     LinkedInProvider({
       clientId: process.env.LINKEDIN_CLIENT_ID! as string,
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET! as string,
+      client: { token_endpoint_auth_method: 'client_secret_post' },
+      authorization: {
+        url: 'https://www.linkedin.com/oauth/v2/authorization',
+        params: { scope: 'openid profile email' },
+      },
     }),
     CredentialsProvider({
       name: "Credentials",
