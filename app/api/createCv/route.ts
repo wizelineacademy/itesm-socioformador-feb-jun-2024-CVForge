@@ -1,36 +1,57 @@
-import { exec } from 'child_process';
-import { NextRequest, NextResponse } from 'next/server';
-import { MOCK_PROFESSIONAL_INFO } from '../../(cv)/cv/[cv_id]/CONSTANTS';
+import { NextRequest, NextResponse } from "next/server";
+import { MOCK_PROFESSIONAL_INFO } from "../../(cv)/cv/[cv_id]/CONSTANTS";
+import generateCV from "@/scripts/cv_generation";
 
 // Handle POST requests
+// export async function POST(req: NextRequest): Promise<NextResponse> {
+//     try {
+//         // Extract data from the request
+//         const data = req.body;
+//         const cvData = JSON.stringify(MOCK_PROFESSIONAL_INFO);
+//         const jobPosition = "Data Engineer";
+
+//         // Execute a Python script with the given parameters
+//         const result: string = await new Promise((resolve, reject) => {
+//             exec(`python3 scripts/cv_generation.py ${cvData} "${jobPosition}"`, (error, stdout, stderr) => {
+//                 if (error) {
+//                     console.log("Execution error:", error);
+//                     reject(new Error('Error executing Python script: ' + error.message));
+//                     return;
+//                 }
+//                 if (stderr) {
+//                     console.log("Script error output:", stderr);
+//                     reject(new Error('Python script reported an error: ' + stderr));
+//                     return;
+//                 }
+//                 resolve(stdout);
+//             });
+//         });
+
+//         // Return the parsed results as a JSON response
+//         return NextResponse.json({ message: "CV processed successfully", results: result });
+//     } catch (error) {
+//         console.error("Error in Python script execution:", error);
+//         return NextResponse.json({ error: error.message });
+//     }
+// }
+
 export async function POST(req: NextRequest): Promise<NextResponse> {
-    try {
-        // Extract data from the request
-        const data = req.body;
-        const cvData = JSON.stringify(MOCK_PROFESSIONAL_INFO);
-        const jobPosition = "Data Engineer";
+  try {
+    // Extract data from the request
+    const data = req.body;
+    const cvData = JSON.stringify(MOCK_PROFESSIONAL_INFO);
+    const jobPosition = "Data Engineer";
 
-        // Execute a Python script with the given parameters
-        const result: string = await new Promise((resolve, reject) => {
-            exec(`python3 scripts/cv_generation.py ${cvData} "${jobPosition}"`, (error, stdout, stderr) => {
-                if (error) {
-                    console.log("Execution error:", error);
-                    reject(new Error('Error executing Python script: ' + error.message));
-                    return;
-                }
-                if (stderr) {
-                    console.log("Script error output:", stderr);
-                    reject(new Error('Python script reported an error: ' + stderr));
-                    return;
-                }
-                resolve(stdout);
-            });
-        });
+    // Call the generateCV function
+    const result = await generateCV(cvData, jobPosition);
 
-        // Return the parsed results as a JSON response
-        return NextResponse.json({ message: "CV processed successfully", results: result });
-    } catch (error) {
-        console.error("Error in Python script execution:", error);
-        return NextResponse.json({ error: error.message });
-    }
+    // Return the parsed results as a JSON response
+    return NextResponse.json({
+      message: "CV processed successfully",
+      results: result,
+    });
+  } catch (error) {
+    console.error("Error in JavaScript script execution:", error);
+    return NextResponse.json({ error: error.message });
+  }
 }
