@@ -20,4 +20,3 @@ const NewCv: React.FC<NewCvProps> = ({ handleFormToggle }) => {
 
 export default NewCv;
 
-//      <div className="relative w-20 h-50 bg-white shadow-md flex items-center justify-center">
