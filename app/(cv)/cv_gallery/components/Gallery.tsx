@@ -69,18 +69,6 @@ const Gallery: React.FC = () => {
     event.preventDefault();
     try {
       if (selectedPosition) {
-        // Call the api endpoint that calls the llm
-        const response = await fetch('/api/createCv', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ selectedPosition }),
-        });
-        const jsonData = await response.json();
-        const message = jsonData.results;
-        console.log(message);
-
         const newCv = await createCV({
           title: title,
           desired_position_id: selectedPosition,
