@@ -2,6 +2,12 @@ import { exec } from 'child_process';
 import { NextRequest, NextResponse } from 'next/server';
 import { MOCK_PROFESSIONAL_INFO } from '../../(cv)/cv/[cv_id]/CONSTANTS';
 
+// Function to escape JSON string for shell
+function escapeShellArg(arg: string): string {
+    return "'" + arg.replace(/'/g, "'\\''") + "'";
+}
+
+
 // Handle POST requests
 export async function POST(req: NextRequest): Promise<NextResponse> {
     try {
@@ -10,9 +16,12 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         const cvData = JSON.stringify(MOCK_PROFESSIONAL_INFO);
         const jobPosition = "Data Engineer";
 
+        // Escape the JSON string for shell
+        const escapedCvData = escapeShellArg(cvData);
+
         // Execute a Python script with the given parameters
         const result: string = await new Promise((resolve, reject) => {
-            exec(`python3 scripts/cv_generation.py ${cvData} "${jobPosition}"`, (error, stdout, stderr) => {
+            exec(`python3 scripts/cv_generation.py ${escapedCvData} ${jobPosition}`, (error, stdout, stderr) => {
                 if (error) {
                     console.log("Execution error:", error);
                     reject(new Error('Error executing Python script: ' + error.message));
