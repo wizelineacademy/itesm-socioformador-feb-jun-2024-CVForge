@@ -16,7 +16,6 @@ const Home: React.FC = () => {
       </div>
       <div className="animation">
         <LandingFeature/>
-
       </div>
       <LandingPosition/>
     </div>
@@ -24,14 +23,3 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-/*
-<LandingStart/>
-      <LandingFeature/>
-
-
-<LandingStart/>
-<LandingContent/>
-        <LandingFeature/>
-        <LandingPosition/>
-        <Footer />
-*/
