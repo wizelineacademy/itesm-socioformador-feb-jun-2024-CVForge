@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 // !DELETE, placeholder for the recommendations, must actually fetch the recommendations
-import { FETCHED_RECOMMENDATIONS } from "../../insight/[cv_id]/CONSTANTS";
+import { FETCHED_RECOMMENDATIONS } from "../../cv/[cv_id]/CONSTANTS";
 
 // Package imports
 import { useEffect, useState } from "react";

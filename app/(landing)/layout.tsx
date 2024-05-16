@@ -1,6 +1,6 @@
 import "@/style/globals.css";
 import 'intersection-observer';
-import Providers from "./components/Providers";
+import Providers from "../components/Providers";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 

@@ -2,14 +2,17 @@
 import React from "react";
 import NewCv from "./NewCv";
 import ExistingCV from "./ExistingCV";
-import { getAllCVs, createCV, findCVById, deleteCV} from "@/services/cvService";
+import { getAllCVs, createCV, findCVById, deleteCV } from "@/services/cvService";
 import { useEffect, useState } from "react";
 import { getAllPositions } from "@/services/positionServices";
 import { cv, desired_position } from "@prisma/client";
 import { RxCross2 } from "react-icons/rx";
 
+import { useSession } from "next-auth/react";
 
 const Gallery: React.FC = () => {
+  const { data: session } = useSession();
+
   //useState for CV
   const [cvs, setCvs] = useState<cv[]>([]);
   const [title, setTitle] = useState<string>("");
@@ -26,8 +29,14 @@ const Gallery: React.FC = () => {
   useEffect(() => {
     const fetchCvs = async () => {
       try {
-        const cvArray = await getAllCVs();
-        
+        const userEmail = session?.user?.email;
+
+        const user = await prisma.users.findFirst({
+          where: { email: userEmail },
+        });
+
+        const cvArray = await getAllCVs(user.users_id);
+
         setCvs(cvArray);
       } catch (error) {
         console.error("Failed to fetch CVs:", error);
@@ -35,8 +44,8 @@ const Gallery: React.FC = () => {
     };
     
     fetchCvs();
-  }, []);
-  
+  }, [session]);
+
   //Fetching all Positions Information
   useEffect(() => {
     const fetchPositions = async () => {
@@ -60,6 +69,18 @@ const Gallery: React.FC = () => {
     event.preventDefault();
     try {
       if (selectedPosition) {
+        // Call the api endpoint that calls the llm
+        const response = await fetch('/api/createCv', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ selectedPosition }),
+        });
+        const jsonData = await response.json();
+        const message = jsonData.results;
+        console.log(message);
+
         const newCv = await createCV({
           title: title,
           desired_position_id: selectedPosition,
@@ -78,8 +99,8 @@ const Gallery: React.FC = () => {
       console.error("Failed to create new CV:", error);
     }
   };
-  
-  const handleCVDelete = async(cvId: string) => { 
+
+  const handleCVDelete = async (cvId: string) => {
     const deletedCV = await deleteCV(cvId);
     setIsDetailVisible(false);
     setCvs((prevCvs) => prevCvs.filter(cv => cv.cv_id !== cvId));
@@ -95,7 +116,7 @@ const Gallery: React.FC = () => {
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
-  
+  if (session && session.user) {
   return (
     <div className="min-h-screen bg-transparent">
       <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-2 overflow-y-auto top-0">
@@ -172,6 +193,11 @@ const Gallery: React.FC = () => {
     )}
     </div>
   );
+} else {
+  return (
+    <div>Not Logged In</div>
+  )
+}
 };
 
 export default Gallery;

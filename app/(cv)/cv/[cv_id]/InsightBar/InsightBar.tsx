@@ -33,7 +33,7 @@ const InsightBar = () => {
         const handleCheckService = async () => {
             setIsLoadingFetch(true);
             try {
-                const response = await fetch('/api/py', { method: 'GET' });
+                const response = await fetch('/api/createInsight', { method: 'GET' });
                 const jsonData = await response.json();
                 const message = jsonData.message;
                 setAiResponse(message);
