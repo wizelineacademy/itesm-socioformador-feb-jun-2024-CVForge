@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
 import { NextRequest, NextResponse } from 'next/server';
-import { MOCK_PROFESSIONAL_INFO } from '../../(cv)/insight/[cv_id]/CONSTANTS';
+import { MOCK_PROFESSIONAL_INFO } from '../../(cv)/cv/[cv_id]/CONSTANTS';
 
 // Handle POST requests
 export async function POST(req: NextRequest): Promise<NextResponse> {

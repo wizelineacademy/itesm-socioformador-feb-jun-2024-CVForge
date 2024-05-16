@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
 import { NextRequest, NextResponse } from 'next/server';
-import { MOCK_CV } from '../../(cv)/insight/[cv_id]/CONSTANTS';
+import { MOCK_CV } from '../../(cv)/cv/[cv_id]/CONSTANTS';
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
     try {
