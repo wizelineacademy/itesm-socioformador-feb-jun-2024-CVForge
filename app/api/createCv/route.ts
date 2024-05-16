@@ -42,6 +42,9 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const cvData = JSON.stringify(MOCK_PROFESSIONAL_INFO);
     const jobPosition = "Data Engineer";
 
+        // Escape the JSON string for shell
+        const escapedCvData = escapeShellArg(cvData);
+
     // Call the generateCV function
     const result = await generateCV(cvData, jobPosition);
 
