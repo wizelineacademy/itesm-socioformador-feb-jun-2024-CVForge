@@ -192,7 +192,7 @@ model certificate {
 }
 
 model skill {
-  skill_id             String             @id @db.Uuid
+  skill_id             String             @id @default(uuid()) @db.Uuid
   professional_info_id String?            @db.Uuid
   title                String?            @db.VarChar(255)
   duration             String?            @db.VarChar(255)
