@@ -5,7 +5,7 @@ import "@/style/globals.css";
 import ReduxProvider from "./ReduxProvider";
 
 // Components
-import LeftSidebar from "./layoutComponents/LeftSidebar";
+import LeftSidebar from "./(cv)/layoutComponents/LeftSidebar";
 import { useState } from "react";
 
 export default function RootLayout({

@@ -44,12 +44,12 @@ model education {
   education_id         String                @id @default(uuid()) @db.Uuid
   school               String?               @db.VarChar(255)
   education_degree     String?               @db.VarChar(255)
-  gpa                  Decimal?              @db.Decimal
+  gpa                  Float?                
   start_date           DateTime?             @db.Date
   end_date             DateTime?             @db.Date
   professional_info_id String?               @db.Uuid
   professional_info    professional_info?    @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: Cascade, onUpdate: NoAction)
-  relevant_coursework  relevant_coursework[]
+  relevant_coursework  String?                @db.VarChar(500)
 }
 
 model professional_info {
@@ -99,13 +99,6 @@ model recommendation {
   main_content      String?
   completed         Boolean?
   cv                cv?      @relation(fields: [cv_id], references: [cv_id], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model relevant_coursework {
-  relevant_coursework_id String     @id @default(uuid()) @db.Uuid
-  education_id           String?    @db.Uuid
-  course                 String?    @db.VarChar(255)
-  education              education? @relation(fields: [education_id], references: [education_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model users {
@@ -164,13 +157,13 @@ model skill {
 }
 
 model general_info {
-  general_info_id      String            @id @db.Uuid
-  professional_info_id String            @unique @db.Uuid
+  general_info_id      String            @id @default(uuid())
+  professional_info_id String?           @unique @db.Uuid
   first_name           String?           @db.VarChar(255)
   last_name            String?           @db.VarChar(255)
   email                String?           @db.VarChar(255)
   phone                String?           @db.VarChar(255)
   github_link          String?           @db.VarChar(255)
   linkedin_link        String?           @db.VarChar(255)
-  professional_info    professional_info @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: Cascade, onUpdate: NoAction)
+  professional_info    professional_info? @relation(fields: [professional_info_id], references: [professional_info_id], onDelete: Cascade, onUpdate: NoAction)
 }
