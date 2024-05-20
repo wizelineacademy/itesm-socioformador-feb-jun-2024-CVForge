@@ -120,7 +120,7 @@ const LeftSidebar = () => {
                                         title="Editor"
                                         icon={<PersonalInfo_icon />}
                                         currentTab={currentTab}
-                                        href="/professional_info/1/general_info"
+                                        href="/editor"
                                         itemTab="professional_info"
                                         open= {open}
                                     />

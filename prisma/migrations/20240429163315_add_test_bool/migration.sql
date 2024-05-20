@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "Account" (
+CREATE TABLE IF NOT EXISTS "Account" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "type" TEXT NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE "Account" (
 );
 
 -- CreateTable
-CREATE TABLE "Session" (
+CREATE TABLE IF NOT EXISTS "Session" (
     "id" TEXT NOT NULL,
     "sessionToken" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE "Session" (
 );
 
 -- CreateTable
-CREATE TABLE "User" (
+CREATE TABLE IF NOT EXISTS "User" (
     "id" TEXT NOT NULL,
     "name" TEXT,
     "email" TEXT,
@@ -39,14 +39,14 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
-CREATE TABLE "VerificationToken" (
+CREATE TABLE IF NOT EXISTS "VerificationToken" (
     "identifier" TEXT NOT NULL,
     "token" TEXT NOT NULL,
     "expires" TIMESTAMP(3) NOT NULL
 );
 
 -- CreateTable
-CREATE TABLE "ai_response" (
+CREATE TABLE IF NOT EXISTS "ai_response" (
     "ai_response_id" UUID NOT NULL,
     "plain_text" TEXT,
     "cv_id" UUID,
@@ -57,7 +57,7 @@ CREATE TABLE "ai_response" (
 );
 
 -- CreateTable
-CREATE TABLE "cv" (
+CREATE TABLE IF NOT EXISTS "cv" (
     "cv_id" UUID NOT NULL,
     "user_id" UUID,
     "cv_insight_id" UUID,
@@ -67,7 +67,7 @@ CREATE TABLE "cv" (
 );
 
 -- CreateTable
-CREATE TABLE "cv_insight" (
+CREATE TABLE IF NOT EXISTS "cv_insight" (
     "cv_insight_id" UUID NOT NULL,
     "score" INTEGER,
 
@@ -75,7 +75,7 @@ CREATE TABLE "cv_insight" (
 );
 
 -- CreateTable
-CREATE TABLE "desired_position" (
+CREATE TABLE IF NOT EXISTS "desired_position" (
     "desired_position_id" UUID NOT NULL,
     "title" VARCHAR(25),
     "description" VARCHAR(500),
@@ -86,7 +86,7 @@ CREATE TABLE "desired_position" (
 );
 
 -- CreateTable
-CREATE TABLE "education" (
+CREATE TABLE IF NOT EXISTS "education" (
     "education_id" UUID NOT NULL,
     "school" VARCHAR(50),
     "education_degree" VARCHAR(50),
@@ -99,7 +99,7 @@ CREATE TABLE "education" (
 );
 
 -- CreateTable
-CREATE TABLE "professional_info" (
+CREATE TABLE IF NOT EXISTS "professional_info" (
     "professional_info_id" UUID NOT NULL,
     "user_id" UUID,
 
@@ -107,7 +107,7 @@ CREATE TABLE "professional_info" (
 );
 
 -- CreateTable
-CREATE TABLE "profile" (
+CREATE TABLE IF NOT EXISTS "profile" (
     "profile_id" UUID NOT NULL,
     "user_id" UUID,
     "first_name" VARCHAR(50),
@@ -124,7 +124,7 @@ CREATE TABLE "profile" (
 );
 
 -- CreateTable
-CREATE TABLE "project" (
+CREATE TABLE IF NOT EXISTS "project" (
     "project_id" UUID NOT NULL,
     "name" VARCHAR(50),
     "description" VARCHAR(500),
@@ -136,7 +136,7 @@ CREATE TABLE "project" (
 );
 
 -- CreateTable
-CREATE TABLE "recommendation" (
+CREATE TABLE IF NOT EXISTS "recommendation" (
     "recommendation_id" UUID NOT NULL,
     "cv_insight_id" UUID,
     "title" VARCHAR(50),
@@ -146,7 +146,7 @@ CREATE TABLE "recommendation" (
 );
 
 -- CreateTable
-CREATE TABLE "relevant_coursework" (
+CREATE TABLE IF NOT EXISTS "relevant_coursework" (
     "relevant_coursework_id" UUID NOT NULL,
     "education_id" UUID,
     "course" VARCHAR(100),
@@ -155,7 +155,7 @@ CREATE TABLE "relevant_coursework" (
 );
 
 -- CreateTable
-CREATE TABLE "users" (
+CREATE TABLE IF NOT EXISTS "users" (
     "users_id" UUID NOT NULL,
     "email" VARCHAR(50) NOT NULL,
     "password" VARCHAR(60) NOT NULL,
@@ -169,7 +169,7 @@ CREATE TABLE "users" (
 );
 
 -- CreateTable
-CREATE TABLE "work_experience" (
+CREATE TABLE IF NOT EXISTS "work_experience" (
     "work_experience_id" UUID NOT NULL,
     "work_position" VARCHAR(50),
     "description" VARCHAR(1000),
@@ -181,7 +181,7 @@ CREATE TABLE "work_experience" (
 );
 
 -- CreateTable
-CREATE TABLE "achievement" (
+CREATE TABLE IF NOT EXISTS "achievement" (
     "achievement_id" UUID NOT NULL,
     "professional_info_id" UUID,
     "name" VARCHAR(255),
@@ -191,7 +191,7 @@ CREATE TABLE "achievement" (
 );
 
 -- CreateTable
-CREATE TABLE "certificate" (
+CREATE TABLE IF NOT EXISTS "certificate" (
     "certificate_id" UUID NOT NULL,
     "professional_info_id" UUID,
     "title" VARCHAR(255),
@@ -204,7 +204,7 @@ CREATE TABLE "certificate" (
 );
 
 -- CreateTable
-CREATE TABLE "skill" (
+CREATE TABLE IF NOT EXISTS "skill" (
     "skill_id" UUID NOT NULL,
     "professional_info_id" UUID,
     "title" VARCHAR(100),
@@ -216,34 +216,34 @@ CREATE TABLE "skill" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Account_provider_providerAccountId_key" ON "Account"("provider", "providerAccountId");
+CREATE UNIQUE INDEX IF NOT EXISTS "Account_provider_providerAccountId_key" ON "Account"("provider", "providerAccountId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Session_sessionToken_key" ON "Session"("sessionToken");
+CREATE UNIQUE INDEX IF NOT EXISTS "Session_sessionToken_key" ON "Session"("sessionToken");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+CREATE UNIQUE INDEX IF NOT EXISTS "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "VerificationToken_token_key" ON "VerificationToken"("token");
+CREATE UNIQUE INDEX IF NOT EXISTS "VerificationToken_token_key" ON "VerificationToken"("token");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationToken"("identifier", "token");
+CREATE UNIQUE INDEX IF NOT EXISTS "VerificationToken_identifier_token_key" ON "VerificationToken"("identifier", "token");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "unique_cv_id" ON "ai_response"("cv_id");
+CREATE UNIQUE INDEX IF NOT EXISTS "unique_cv_id" ON "ai_response"("cv_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "unique_cv_insight_id" ON "cv"("cv_insight_id");
+CREATE UNIQUE INDEX IF NOT EXISTS "unique_cv_insight_id" ON "cv"("cv_insight_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "unique_desired_position_id" ON "cv"("desired_position_id");
+CREATE UNIQUE INDEX IF NOT EXISTS "unique_desired_position_id" ON "cv"("desired_position_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "unique_user_id" ON "professional_info"("user_id");
+CREATE UNIQUE INDEX IF NOT EXISTS "unique_user_id" ON "professional_info"("user_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "profile_user_id_key" ON "profile"("user_id");
+CREATE UNIQUE INDEX IF NOT EXISTS "profile_user_id_key" ON "profile"("user_id");
 
 -- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -252,7 +252,7 @@ ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId"
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ai_response" ADD CONSTRAINT "ai_response_cv_id_fkey" FOREIGN KEY ("cv_id") REFERENCES "cv"("cv_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "ai_response" ADD CONSTRAINT IF NOT EXISTS "ai_response_cv_id_fkey" FOREIGN KEY ("cv_id") REFERENCES "cv"("cv_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE "cv" ADD CONSTRAINT "cv_cv_insight_id_fkey" FOREIGN KEY ("cv_insight_id") REFERENCES "cv_insight"("cv_insight_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
