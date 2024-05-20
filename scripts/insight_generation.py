@@ -50,6 +50,7 @@ if __name__ == "__main__":
 
         data_string_trimmed = data[1:-1]
 
+
         # Splitting the string on commas not followed by space using regex
         data_parts = re.split(r',(?![\s])', data_string_trimmed)
 
