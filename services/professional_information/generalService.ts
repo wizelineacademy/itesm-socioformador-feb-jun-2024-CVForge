@@ -235,6 +235,8 @@ const getSkills = async (professionalID: string): Promise<Skill[]> => {
 };
 
 
+/*
+
 const createSkill = async (professionalID: string): Promise<Skill> => {
   const createdSkill = await prisma.skill.create({
     data: {
@@ -248,7 +250,6 @@ const createSkill = async (professionalID: string): Promise<Skill> => {
   return createdSkill;
 };
 
-/*
 const createSkill = async (professionalID: string): Promise<Work> => {
   const createdWork = await prisma.skill.create({
     data: {

@@ -6,7 +6,9 @@ import ReduxProvider from "./ReduxProvider";
 
 // Components
 import LeftSidebar from "./layoutComponents/LeftSidebar";
-import { useState } from "react";
+
+// Session Provider
+import Providers from "../components/Providers";
 
 export default function RootLayout({
   children,
@@ -16,10 +18,12 @@ export default function RootLayout({
   return (
     <html className="scroll-smooth" lang="en">
       <ReduxProvider>
-        <body className="flex wrapper bg-transparent">
-          <LeftSidebar />
-          <div className="w-full">{children}</div>
-        </body>
+        <Providers>
+          <body className="flex wrapper bg-transparent">
+            <LeftSidebar />
+            <div className="w-full">{children}</div>
+          </body>
+        </Providers>
       </ReduxProvider>
     </html>
   );
