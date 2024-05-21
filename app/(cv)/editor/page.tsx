@@ -6,7 +6,13 @@ import GeneralInfo from "./(sections)/GeneralInfo";
 import Projects from "./(sections)/Projects";
 import Skills from "./(sections)/Skills";
 import WorkExperience from "./(sections)/WorkExperience";
+import { setCurrentTab } from "@/contexts/cv/sidebar/currentTab";
+import { useDispatch } from "react-redux";
+
 const ProfessionalInfo: React.FC = () => {
+  const dispatch = useDispatch()
+  dispatch(setCurrentTab("editor"))
+
   const [currentSection, setCurrentSection] = useState("general");
 
   const sectionComponents = {
@@ -20,6 +26,7 @@ const ProfessionalInfo: React.FC = () => {
   const handleSectionChange = (section: string) => {
     setCurrentSection(section);
   };
+
   return (
     <div>
       <ul className="steps">
