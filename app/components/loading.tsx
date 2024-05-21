@@ -1,7 +1,4 @@
-import { Loader2 } from "lucide-react";
-
 export default function GalleryLoading(){
-    return <div className="flex justify-center items-center w-full h-screen">
-        <Loader2 className="size-24 animate-spin text-secondarygray"></Loader2>
-        </div>
+    return <div className="loader text-primarygray font-inter text-md font-bold">Loading...</div>
 }
+//credits: https://www.youtube.com/watch?v=U5iUc8U3coI
