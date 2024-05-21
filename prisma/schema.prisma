@@ -22,13 +22,11 @@ model cv {
   cv_id               String            @id @default(uuid()) @db.Uuid
   user_id             String?           @db.Uuid
   title               String?           @db.VarChar(255)
-  desired_position_id String?           @unique(map: "unique_desired_position_id") @db.Uuid
+  desired_position_id String?           @db.Uuid
   ai_response         ai_response?
   desired_position    desired_position? @relation(fields: [desired_position_id], references: [desired_position_id], onDelete: NoAction, onUpdate: NoAction)
   users               users?            @relation(fields: [user_id], references: [users_id], onDelete: NoAction, onUpdate: NoAction)
   recommendation      recommendation[]
-
-  @@index([desired_position_id], map: "idx_cv_desired_position_id")
 }
 
 model desired_position {
@@ -37,8 +35,9 @@ model desired_position {
   description         String? @db.VarChar(500)
   company             String? @db.VarChar(255)
   years_experience    Int?
-  cv                  cv?
+  cvs                 cv[] 
 }
+
 
 model education {
   education_id         String                @id @default(uuid()) @db.Uuid

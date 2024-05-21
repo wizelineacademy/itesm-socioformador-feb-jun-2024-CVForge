@@ -9,10 +9,12 @@ import { Editor } from "@tinymce/tinymce-react";
 
 const CV = () => {
   const [cvBodyData, setCvBodyData] = useState<string>("");
+  const [editorContent, setEditorContent] = useState<string>("");
+
   useEffect(() => {
     const callApi = async () => {
       const selectedPosition = "Software Engineer";
-      // Call the api endpoint that calls the llm
+      // Call the API endpoint that calls the LLM
       const response = await fetch("/api/createCv", {
         method: "POST",
         headers: {
@@ -20,12 +22,30 @@ const CV = () => {
         },
         body: JSON.stringify({ selectedPosition }),
       });
+      
       const jsonData = await response.json();
       const message = jsonData.results;
       setCvBodyData(message);
     };
     callApi();
   }, []);
+
+  const handleSave = async () => {
+    // Call the API endpoint to save the content
+    const response = await fetch("/api/saveCv", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cvContent: editorContent }),
+    });
+
+    if (response.ok) {
+      alert("CV saved successfully!");
+    } else {
+      alert("Failed to save CV.");
+    }
+  };
 
   return (
     <div className="w-full h-full flex flex-row overflow-hidden bg-bg">
@@ -52,6 +72,7 @@ const CV = () => {
                 ),
             }}
             initialValue={cvBodyData}
+            onEditorChange={(content) => setEditorContent(content)}
           />
         ) : (
           <p>Loading...</p>
@@ -60,6 +81,12 @@ const CV = () => {
       <div className="absolute right-0 z-10">
         <InsightBar />
       </div>
+      <button
+        onClick={handleSave}
+        className="absolute bottom-4 right-4 px-4 py-2 bg-blue-600 text-white rounded"
+      >
+        Save
+      </button>
     </div>
   );
 };

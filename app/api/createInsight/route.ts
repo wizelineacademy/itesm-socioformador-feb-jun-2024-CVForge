@@ -60,13 +60,13 @@ import { MOCK_CV } from '../../(cv)/cv/[cv_id]/CONSTANTS';
           // Use MOCK_CV data directly with the JavaScript function
           const cvData = MOCK_PROFESSIONAL_INFO;
           const jobPosition = "Data Engineer";
-  
-          const result = await generate_recommendations(cvData, jobPosition);
+
+        const result = await generate_recommendations(cvData, jobPosition);
   
           return NextResponse.json({ message: result });
       } catch (error: any) {
           console.error("Error in generating recommendations:", error);
           return NextResponse.json({ error: error.message });
       }
-  }
+    }
   
