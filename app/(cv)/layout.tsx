@@ -21,7 +21,7 @@ export default function RootLayout({
         <Providers>
           <body className="flex wrapper bg-transparent">
             <LeftSidebar />
-            <div className="w-full">{children}</div>
+            <div className="w-full justify-center items-center">{children}</div>
           </body>
         </Providers>
       </ReduxProvider>

@@ -28,7 +28,7 @@ const ProfessionalInfo: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="bg-white m-10 w-auto">
       <ul className="steps">
         <li className="step"><button onClick={() => handleSectionChange("general")}>General Info</button></li>
         <li className="step"><button onClick={() => handleSectionChange("work")}>Work Experience</button></li>

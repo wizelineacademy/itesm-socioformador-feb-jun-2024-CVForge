@@ -12,7 +12,7 @@ import { createGeneralInfo, getGeneralInfo } from "@/services/professional_infor
     * actual html code
 */
 const GeneralInfo = () => {
-  const fixedProfessionalId = '2f194e12-92a2-4c91-a27c-d75ff08337b3';
+  const fixedProfessionalId = 'bc727100-e7af-48be-bdc4-07e982fb5145';
 
   const [existingGeneralInfo, setExistingGeneralInfo] = useState({
     first_name: '',

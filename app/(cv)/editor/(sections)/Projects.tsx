@@ -12,7 +12,7 @@ interface Project {
 }
 
 const Projects: React.FC = () => {
-  const staticID = "2f194e12-92a2-4c91-a27c-d75ff08337b3";
+  const staticID = "bc727100-e7af-48be-bdc4-07e982fb5145";
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
