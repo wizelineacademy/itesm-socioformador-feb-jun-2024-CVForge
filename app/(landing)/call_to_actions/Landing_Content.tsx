@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 const LandingContent: React.FC = () => {
   return (
@@ -17,7 +18,7 @@ const LandingContent: React.FC = () => {
         </button>
       </div>
       <div className="md:w-1/2 md:ml-6">
-        <img
+        <Image
           src="./assets/landingimg.png"
           alt="Your Image"
           className="w-full rounded-md"

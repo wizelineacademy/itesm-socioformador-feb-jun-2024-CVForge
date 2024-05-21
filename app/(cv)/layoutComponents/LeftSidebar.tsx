@@ -54,7 +54,7 @@ const SidebarMenuElement: React.FC<SidebarListElementProps> = ({ title, currentT
     );
 };
 
-const SidebarSettingsElement: React.FC<SidebarListElementProps> = ({ title, currentTab, href, itemTab, icon, open}) => {
+const SidebarSettingsElement: React.FC<SidebarListElementProps> = ({ title, icon, open}) => {
     // The color to be assigned
     const color = "#7E7E7E";
     // The icon for the item
@@ -121,7 +121,7 @@ const LeftSidebar = () => {
                                         icon={<PersonalInfo_icon />}
                                         currentTab={currentTab}
                                         href="/editor"
-                                        itemTab="professional_info"
+                                        itemTab="editor"
                                         open= {open}
                                     />
                                 </ul>

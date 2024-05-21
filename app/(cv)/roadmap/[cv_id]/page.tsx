@@ -139,6 +139,7 @@ const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
 
     return (
         <div className="flex flex-col bg-editorgray h-screen">
+            {/* Top part */}
             <div className={`flex flex-col w-full ${isNearTop? '' : 'shadow-lg'}`}>
                 <Link href={"/cv_gallery"} className="sticky h-10 flex items-center text-secondarygray bg-transparent pl-8 pt-8">
                     <OpenArrow_icon flipDegree={270} /><p className="text-md font-bold font-inter ">Back to Menu</p>
@@ -148,6 +149,7 @@ const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
                     <p className="text-secondarygray text-center w-fill text-lg m-2 mt-5">This roadmap delineates recommended challenges suggested by our AI to enhance your qualifications and increase your likelihood of securing your desired position.</p>
                 </div>
             </div>
+            {/* Scroll area */}
             <ul ref={ulRef} className="overflow-y-scroll mx-12">{
                 fetchedRecommendations.length > 0 ? fetchedRecommendations.map((recommendation, index) => (
                     <RecommendationItem
