@@ -1,4 +1,6 @@
 "use client";
+import { setCurrentTab } from "@/contexts/cv/sidebar/currentTab";
+import { useDispatch } from "react-redux";
 import Link from "next/link";
 // !DELETE, placeholder for the recommendations, must actually fetch the recommendations
 import { FETCHED_RECOMMENDATIONS } from "../../cv/[cv_id]/CONSTANTS";
@@ -57,6 +59,10 @@ const RecommendationItem: React.FC<RecommendationItem> = ({ recommendationItemDa
 }
 
 const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
+    // Set the current tab context
+    const dispatch = useDispatch()
+    dispatch(setCurrentTab("cv_gallery"))
+
     // Hold fetched recommendations
     //const [fetchedRecommendations, setFetchedRecommendations] = useState<recommendation[]>(FETCHED_RECOMMENDATIONS)
     const [fetchedRecommendations, setFetchedRecommendations] = useState<recommendation[]>([]);

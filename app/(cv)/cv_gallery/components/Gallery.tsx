@@ -7,13 +7,11 @@ import { useEffect, useState } from "react";
 import { getAllPositions } from "@/services/positionServices";
 import { cv, desired_position } from "@prisma/client";
 import { RxCross2 } from "react-icons/rx";
-import GalleryLoading from "../../../components/loading";
-
 import { useSession } from "next-auth/react";
+
 
 const Gallery: React.FC = () => {
   const { data: session } = useSession();
-
   //useState for CV
   const [cvs, setCvs] = useState<cv[]>([]);
   const [title, setTitle] = useState<string>("");
@@ -106,7 +104,6 @@ const Gallery: React.FC = () => {
     setTitle(event.target.value);
   };
 
-  if (session && session.user) {
   return (
     <div className="min-h-screen bg-transparent">
       <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-2 overflow-y-auto top-0">
@@ -183,11 +180,6 @@ const Gallery: React.FC = () => {
     )}
     </div>
   );
-} else {
-  return (
-    <GalleryLoading />
-  )
-}
 };
 
 export default Gallery;
