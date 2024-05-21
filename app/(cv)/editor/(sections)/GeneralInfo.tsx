@@ -63,7 +63,7 @@ const GeneralInfo = () => {
       {/* Title */}
       <div className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-1">General Info</div>
       {/* Line */}
-      <div className='w-full h-0.5 bg-outlinegray rounded-lg'></div>
+      <div className='w-full h-0.5 bg-outlinegray rounded-lg my-3'></div>
       {/* Desc */}
       <div className="text-4xl font-koh_santepheap font-bold text-primarygray font-bold">Identity</div>
       <p className="text-lg font-inter text-secondarygray text-md">Personal information that will be shown regardless of desired position</p>         
