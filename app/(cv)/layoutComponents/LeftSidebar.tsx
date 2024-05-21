@@ -90,8 +90,6 @@ const LeftSidebar = () => {
     const { data: session, status } = useSession(); 
 
     useEffect(() => {
- 
-
         if (status === 'unauthenticated' || !session) {
             router.push('/login');
         }
@@ -108,7 +106,7 @@ const LeftSidebar = () => {
     if (status === 'loading') {
         return (
             <div className="absolute w-screen h-screen top-0 left-0 bg-white flex justify-center items-center">
-                <GalleryLoading />
+                <GalleryLoading/>
             </div>
         )
     }
