@@ -105,7 +105,7 @@ const LeftSidebar = () => {
     }, [windowSize])
     if (status === 'loading') {
         return (
-            <div className="absolute w-screen h-screen top-0 left-0 bg-white flex justify-center items-center">
+            <div className="absolute w-screen h-screen top-0 left-0 bg-editorgray flex justify-center items-center">
                 <GalleryLoading/>
             </div>
         )

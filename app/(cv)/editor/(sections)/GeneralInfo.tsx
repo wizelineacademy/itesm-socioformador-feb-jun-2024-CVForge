@@ -59,8 +59,50 @@ const GeneralInfo = () => {
   };
 
   return (
-    <div>
-      <h2>Create or Update General Info</h2>
+    <>
+      {/* Title */}
+      <div className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-1">General Info</div>
+      {/* Line */}
+      <div className='w-full h-0.5 bg-outlinegray rounded-lg'></div>
+      {/* Desc */}
+      <div className="text-4xl font-koh_santepheap font-bold text-primarygray font-bold">Identity</div>
+      <p className="text-lg font-inter text-secondarygray text-md">Personal information that will be shown regardless of desired position</p>         
+      <form onSubmit={handleSubmit}>
+        {/* First name */}
+        <div className='flex flex-col justify-left pr-6 pb-4'>
+          <p className='text-primarygray font-semibold font-inter text-s pb-0.5'>First Name</p>
+          <label>
+            <input
+              type="text"
+              name="first_name"
+              className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none"
+              placeholder={existingGeneralInfo.first_name}
+              value={existingGeneralInfo.first_name} 
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        {existingGeneralInfo && (
+        <div>
+          <h3>Existing General Info</h3>
+          <p>First Name: {existingGeneralInfo.first_name}</p>
+          <p>Last Name: {existingGeneralInfo.last_name}</p>
+          <p>Email: {existingGeneralInfo.email}</p>
+          <p>Phone: {existingGeneralInfo.phone}</p>
+          <p>Github Link: {existingGeneralInfo.github_link}</p>
+          <p>LinkedIn Link: {existingGeneralInfo.linkedin_link}</p>
+        </div>
+      )}
+        <button type="submit">Submit</button>
+      </form>
+    </>
+  );
+};
+
+export default GeneralInfo;
+/*
+      <div className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-1">General Info</div>
+      <div className='w-full h-0.5 bg-outlinegray rounded-lg'></div>
       {existingGeneralInfo && (
         <div>
           <h3>Existing General Info</h3>
@@ -105,8 +147,4 @@ const GeneralInfo = () => {
         <br />
         <button type="submit">Submit</button>
       </form>
-    </div>
-  );
-};
-
-export default GeneralInfo;
+*/

@@ -119,7 +119,7 @@ const Gallery: React.FC = () => {
     
       {/*pop up to create new*/}
       {isFormVisible && (
-        <div className="fixed top-0 left-0 w-full h-full bg-opacity-50 bg-black flex justify-center items-center">
+        <div className="absolute w-screen h-screen top-0 left-0 bg-primarygray flex justify-center items-center z-10 bg-opacity-50">
           {/* Pop Up White Box */}
           <div className="bg-white px-2 rounded-md shadow-md flex flex-col">
             {/* Top */}
@@ -183,3 +183,11 @@ const Gallery: React.FC = () => {
 };
 
 export default Gallery;
+/*
+<div className="absolute w-screen h-screen top-0 left-0 bg-white flex justify-center items-center">
+                <GalleryLoading/>
+            </div>
+
+                    <div className="fixed absolute top-0 left-0 w-screen h-screen bg-opacity-50 bg-black flex justify-center items-center">
+
+*/

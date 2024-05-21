@@ -40,10 +40,7 @@ const handler = NextAuth({
         return {
           id: profile.sub,
           name: profile.name,
-          givenName: profile.given_name,
-          familyName: profile.family_name,
           email: profile.email,
-          image: profile.picture,
         };
       },
       allowDangerousEmailAccountLinking: true,

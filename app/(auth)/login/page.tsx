@@ -7,7 +7,7 @@ import Login from "./components/Login";
 
 const Auth: React.FC = ({ }) => {
     return (
-        <main className="w-full h-full">
+        <main className="flex absolute fixed w-full h-full z-10">
             <Login />
         </main>
     )

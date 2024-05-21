@@ -20,7 +20,7 @@ const Register: React.FC= () => {
                                 placeholder="first name"
                             />
                         </div>
-                        {/* first name */}
+                        {/* last name */}
                         <div className='flex flex-col justify-left pb-4'>
                             <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Last Name</p>
                             <input
