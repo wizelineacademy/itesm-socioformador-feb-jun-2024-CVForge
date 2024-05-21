@@ -3,9 +3,12 @@
 // Default imports
 import { useDispatch, useSelector } from "react-redux"
 import { signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
+
 
 
 // Icon imports
+import { useRouter } from 'next/navigation';
 import SecondaryLogo from "@/public/assets/SecondaryLogo"
 import CV_icon from "@/public/assets/svg/CV_icon"
 import PersonalInfo_icon from "@/public/assets/svg/PersonalInfo_icon"
@@ -17,7 +20,7 @@ import React, { ReactElement, ReactNode, use, useEffect } from "react";
 import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { useWindowSize } from "@/hooks/useWindowSize";
-
+import GalleryLoading from "@/app/components/loading";
 
 
 
@@ -83,6 +86,17 @@ const LeftSidebar = () => {
     const currentTab = useSelector((state: RootState) => state.currentTab)
     const [open, setOpen] = useState(true);
     const windowSize = useWindowSize();
+    const router = useRouter();
+    const { data: session, status } = useSession(); 
+
+    useEffect(() => {
+ 
+
+        if (status === 'unauthenticated' || !session) {
+            router.push('/login');
+        }
+    }, [status, session, router]);
+
     useEffect(() => {
         if (windowSize.width < 900){
             setOpen(false)
@@ -91,7 +105,13 @@ const LeftSidebar = () => {
             setOpen(true)
         }
     }, [windowSize])
-
+    if (status === 'loading') {
+        return (
+            <div className="absolute w-screen h-screen top-0 left-0 bg-white flex justify-center items-center">
+                <GalleryLoading />
+            </div>
+        )
+    }
     return (
         <aside className="flex z-10">
             <div className={`bg-primarygray h-screen ${open ? "w-64" : "w-0"} duration-200 relative`}>
