@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { getAllPositions } from "@/services/positionServices";
 import { cv, desired_position } from "@prisma/client";
 import { RxCross2 } from "react-icons/rx";
+import GalleryLoading from "../../../components/loading";
 
 import { useSession } from "next-auth/react";
 
@@ -40,9 +41,9 @@ const Gallery: React.FC = () => {
         setCvs(cvArray);
       } catch (error) {
         console.error("Failed to fetch CVs:", error);
-      }
+      } 
     };
-    
+
     fetchCvs();
   }, [session]);
 
@@ -104,6 +105,7 @@ const Gallery: React.FC = () => {
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
+
   if (session && session.user) {
   return (
     <div className="min-h-screen bg-transparent">
@@ -183,7 +185,7 @@ const Gallery: React.FC = () => {
   );
 } else {
   return (
-    <div>Not Logged In</div>
+    <GalleryLoading />
   )
 }
 };
