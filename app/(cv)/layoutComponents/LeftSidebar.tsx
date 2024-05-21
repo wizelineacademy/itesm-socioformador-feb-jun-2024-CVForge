@@ -90,7 +90,7 @@ const LeftSidebar = () => {
     const { data: session, status } = useSession(); 
 
     useEffect(() => {
-        if (status === 'unauthenticated' || !session) {
+        if (status === 'unauthenticated' && !session) {
             router.push('/login');
         }
     }, [status, session, router]);
