@@ -1,80 +1,38 @@
 import React from "react";
-import Image from "next/image";
+import SecondaryLogo from "@/public/assets/SecondaryLogo"
+import Link from "next/link";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-primarygray text-white p-8">
-      <div className="container mx-auto flex flex-col md:flex-row items-center">
-        <div className="flex-shrink-0 mr-8">
-          <img src="/assets/logo.png" alt="Logo" width={100} height={100} />
+    <footer className="bg-primarygray p-8 px-16 flex flex-col text-whitefo">
+      <div className="flex flex-row justify-between w-full px-28">
+        {/* Logo and info */}
+        <div className="flex flex-col w-40 mr-32 mb-auto">
+          <SecondaryLogo />
+          <p className="text-sm py-2 pl-1">Av. Eugenio Garza Sada 2501 Sur, Tecnológico, 64849 Monterrey, N.L.</p>
         </div>
-        <div className="flex-grow flex flex-col md:flex-row justify-center md:justify-between items-center">
-          <div className="text-center md:text-left mb-4 md:mb-0 md:mr-20">
-            <h3 className="text-lg text-gptgreen font-bold">Company</h3>
-            <a href="#" className="block text-gray-400 hover:text-white">
-              About us
-            </a>
-          </div>
-          <div className="text-center md:text-left mb-8 md:mb-0">
-            <h3 className="text-lg text-gptgreen font-bold mb-4">
-              Coming soon on
-            </h3>
-            <div className="flex flex-col md:flex-row items-center md:items-start">
-              <a href="#" className="block mb-2 md:mb-0 md:mr-4">
-                <img
-                  src="/assets/linkedin.svg"
-                  alt="LinkedIn"
-                  width={30}
-                  height={30}
-                />
-              </a>
-              <a
-                href="mailto:contact@cvforge.ai"
-                className="block mb-2 md:mb-0 md:mr-4"
-              >
-                <img src="/assets/x.png" alt="X" width={30} height={30} />
-              </a>
-              <a href="#" className="block mb-2 md:mb-0">
-                <img src="/assets/github.png" alt="GitHub" width={30} height={30} />
-              </a>
-            </div>
-          </div>
-          <div className="text-center md:text-left">
-            <h3 className="text-lg text-gptgreen font-bold">Thanks To</h3>
-            <div className="flex items-center justify-center md:justify-start">
-              <a
-                href="https://www.tec.mx"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block mr-4"
-              >
-                <img
-                  src="/assets/tec.png"
-                  alt="Tecnológico de Monterrey"
-                  width={110}
-                  height={110}
-                />
-              </a>
-              <a
-                href="https://www.wizeline.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <img
-                  src="/assets/wizeline.png"
-                  alt="Wizeline"
-                  width={90}
-                  height={90}
-                />
-              </a>
-            </div>
-          </div>
+        {/* Contact Us */}
+        <div className="flex flex-col w-40">
+          <h1 className="font-bold text-xl text-secondarygray">Contact Us</h1>
+          <Link href="https://www.linkedin.com/company/cvforge/about/">
+            <p className="text-md py-1 hover:underline">LinkedIn</p>
+          </Link>
+        </div>
+        {/* Services */}
+        <div className="flex flex-col w-40">
+          <h1 className="font-bold text-xl text-secondarygray">Services</h1>
+          <Link href="/cv_gallery">
+            <p className="text-md py-1 hover:underline">CV Creation</p>
+          </Link>
+        </div>
+        {/* Thanks */}
+        <div className="flex flex-col w-40">
+          <h1 className="font-bold text-xl text-secondarygray pb-3">Thanks To</h1>
+          <img src="/assets/tec-logo.png" alt="Tecnológico de Monterrey"/>
+          <img src="/assets/wizeline-logo.png" alt="Wizeline"/>
         </div>
       </div>
-      <div className="text-center mt-4">
-        <p>© 2024 CVForge.ai All rights reserved</p>
-      </div>
+      <div className="bg-secondarygray w-full h-0.5 rounded bg-opacity-30"/>
     </footer>
   );
 };

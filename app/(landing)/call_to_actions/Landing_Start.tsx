@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const LandingStart: React.FC = () => {
   return (
-    <div className="bg-white relative">
+    <div className="bg-transparent relative">
         {/* Front */}
         <div className='relative z-10'>
             {/* Big Text */}
@@ -13,7 +13,7 @@ const LandingStart: React.FC = () => {
                 <p className='my-1'><span className='text-gptgreen'>CV</span> with our </p>
                 <p><span className='text-gptgreen'>AI</span> Assisted Service </p>
             </div>
-            <div className='pr-72'>
+            <div className='xl:pr-72 lg:pr-24 md:pr-10 sm:pr-10'>
                 {/* Line */}
                 <div className='w-auto h-0.5 bg-primarygray rounded-xl my-3'/>
                 {/* Content */}
@@ -33,8 +33,7 @@ const LandingStart: React.FC = () => {
             <div className='bg-gradient-to-r from-gptgreen to-aiblue opacity-50 rounded ' style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}></div>
         </div>
         {/* Dotted Pattern*/}
-        {/* <div className='w-[500px] h-[450px] absolute top-12 right-52 z-0'> */}
-        <div className='w-[500px] h-[450px] absolute top-[-28px] right-0 z-0'>
+        <div className='w-[550px] h-[500px] absolute top-[-58px] right-0 z-0 opacity-40'>
             <DottedBg/>
         </div>
     </div>
