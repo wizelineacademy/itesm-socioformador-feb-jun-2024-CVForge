@@ -28,15 +28,21 @@ const ProfessionalInfo: React.FC = () => {
   };
 
   return (
-    <div className="bg-white m-10 w-auto">
-      <ul className="steps">
-        <li className="step"><button onClick={() => handleSectionChange("general")}>General Info</button></li>
-        <li className="step"><button onClick={() => handleSectionChange("work")}>Work Experience</button></li>
-        <li className="step "><button onClick={() => handleSectionChange("education")}>Education</button></li>
-        <li className="step"><button onClick={() => handleSectionChange("projects")}>Projects</button></li>
-        <li className="step"><button onClick={() => handleSectionChange("skills")}>Skills</button></li>
-      </ul>
-      {sectionComponents[currentSection]}
+    <div className="flex flex-row mx-auto justify-center">
+      {/* Form */}
+      <div className="bg-white my-10 w-[846px] h-auto rounded-lg py-5 px-8 shadow-lg">
+        {sectionComponents[currentSection]}
+      </div>
+      {/* Side Menu */}
+      <div className="bg-white my-10 ml-10 py-5 px-8 w-auto h-auto rounded-lg mb-auto shadow-lg">
+        <ul className="steps text-secondarygray space-y-2 > *">
+          <li className="step hover:text-gptgreen hover:underline"><button onClick={() => handleSectionChange("general")}>General Info</button></li>
+          <li className="step hover:text-gptgreen hover:underline"><button onClick={() => handleSectionChange("work")}>Work Experience</button></li>
+          <li className="step hover:text-gptgreen hover:underline"><button onClick={() => handleSectionChange("education")}>Education</button></li>
+          <li className="step hover:text-gptgreen hover:underline"><button onClick={() => handleSectionChange("projects")}>Projects</button></li>
+          <li className="step hover:text-gptgreen hover:underline"><button onClick={() => handleSectionChange("skills")}>Skills</button></li>
+        </ul>
+      </div>
     </div>
   );
 };
