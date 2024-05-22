@@ -76,51 +76,86 @@ const WorkExperience: React.FC = () => {
     setWorks((prevWorks) => [...prevWorks, workCreated]);
   }
 
-
   return (
     <div>
+      <div className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-1">Work Experience</div>
+      <div className='w-full h-0.5 bg-outlinegray rounded-lg mt-3'></div>
       {works.map((work, index) => (
-        <div key={work.work_experience_id}>
-          <h1>Work #{index + 1}</h1>
+        <div className='flex flex-col border border-outlinegray border-2 hover:border-editorgray hover:shadow-lg hover:bg-editorgray rounded-lg p-4 my-4 mt-6' key={work.work_experience_id}>
           <form onSubmit={(event) => handleSubmit(event, work.work_experience_id)}>
-            <label>
-              <input
-                type="text"
-                name="work_position"
-                defaultValue={work.work_position || ""}
-                placeholder="Position:: "
-              />
-            </label>
-            <label>
-              <input
-                type="text"
-                name="description"
-                defaultValue={work.description || ""}
-                placeholder="Description: "
-              />
-            </label>
-            <label>
-              <input
-                type="date"
-                name="start_date"
-                defaultValue={work.start_date ? work.start_date.toISOString().split("T")[0] : ""}
-                placeholder="Start Date: "
-              />
-            </label>
-            <label>
-              <input
-                type="date"
-                name="end_date"
-                defaultValue={work.end_date ? work.end_date.toISOString().split("T")[0] : ""}
-                placeholder="End Date: "
-              />
-            </label>
-            <button type="submit">Save</button>
+            <div className="flex flex-row w-full">
+              {/* Position */}
+              <div className="w-full">
+                <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Title</p>
+                <label>
+                  <input
+                    type="text"
+                    name="work_position"
+                    className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
+                    defaultValue={work.work_position || ""}
+                    placeholder="Title"
+                  />
+                </label>
+              </div>
+              {/* Spacer */} <div className='w-40'/>
+              {/* Start Date */}
+              <div className="w-auto">
+                <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>From</p>
+                <label>
+                  <input
+                    type="date"
+                    name="start_date"
+                    className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
+                    defaultValue={work.start_date ? work.start_date.toISOString().split("T")[0] : ""}
+                    placeholder="Start Date: "
+                  />
+                </label>
+              </div>
+              <p className='text-primarygray font-semibold font-inter text-s pt-[10px] m-4'>-</p>
+              {/* End Date */}
+              <div className="w-auto">
+                <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>To</p>
+                <label>
+                <input
+                  type="date"
+                  name="end_date"
+                  className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
+                  defaultValue={work.end_date ? work.end_date.toISOString().split("T")[0] : ""}
+                  placeholder="End Date: "
+                />
+              </label>
+              </div>
+            </div>
+            <div className="flex flex-row w-full text-secondarygray">
+              {/* Description */}
+              <div className="w-full">
+                <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Description</p>
+                <label>
+                  <input
+                    type="text"
+                    name="description"
+                    className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
+                    defaultValue={work.description || ""}
+                    placeholder="Description: "
+                  />
+                </label>
+              </div>
+            </div>
+            <div className="flex flex-row w-full mt-3">
+              <button className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-auto" 
+                type="submit">Add</button>
+              <button className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-auto" 
+                onClick={() => handleDelete(work.work_experience_id, index)}>Delete</button>
+            </div>
           </form>
-          <button onClick={() => handleDelete(work.work_experience_id, index)}>Delete</button>
         </div>
       ))}
-      <button onClick={() => handleCreation(staticID)}>Create New Work</button>
+      <div className="w-full justify-center">
+        <button onClick={() => handleCreation(staticID)} className='flex flex-row items-center justify-center text-outlinegray hover:text-secondarygray text-md'>
+           <p className='text-4xl'>+</p>
+           <p className="m-2 mt-[14px]">Add Work Experience</p>
+        </button>  
+      </div>
     </div>
   )
 }

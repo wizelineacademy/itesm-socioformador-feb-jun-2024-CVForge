@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { createGeneralInfo, getGeneralInfo } from "@/services/professional_information/generalService";
+import PhoneInput from 'react-phone-number-input';
 
-/*I want to make a a form that gets the current data that is on the general_info table for an specific professional_info id and that can update that information.
-  - Make services based on getting the current data of general_info table based on a professional_info record.
-  - Make services based on posting new data to general_info table with an specific professional_info id.
-  - Create the component general info:
-    * useState for checking the state of the form fields
-    * useEffect to make initial fetch of the possible current information
-    * handleChange
-    * handleSubmit
-    * actual html code
-*/
+
 const GeneralInfo = () => {
   const fixedProfessionalId = '2f194e12-92a2-4c91-a27c-d75ff08337b3';
 
@@ -59,7 +51,7 @@ const GeneralInfo = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='space-y-2 > *'>
       <div className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-1">General Info</div>
       <div className='w-full h-0.5 bg-outlinegray rounded-lg my-3'></div>
       {/* Identity */}<>
@@ -67,7 +59,7 @@ const GeneralInfo = () => {
         <p className="text-lg font-inter text-secondarygray text-md">Personal information that will be shown regardless of desired position</p>         
         <div className='flex flex-row'>
           {/* First name */}
-          <div className='flex flex-col justify-left pb-4 pr-14 w-full'>
+          <div className='flex flex-col justify-left pb-4 w-full'>
             <p className='text-primarygray font-semibold font-inter text-s pb-0.5'>First Name</p>
             <label>
               <input
@@ -80,6 +72,7 @@ const GeneralInfo = () => {
               />
             </label>
           </div>
+          {/* Spacer */} <div className='w-20'/>
           {/* Last name */}
           <div className='flex flex-col justify-left pb-4 w-full'>
             <p className='text-primarygray font-semibold font-inter text-s pb-0.5'>Last Name</p>
@@ -97,33 +90,69 @@ const GeneralInfo = () => {
         </div>
       </>
       {/* Contact Information */}<>
-      <div className="text-4xl font-koh_santepheap font-bold text-primarygray font-bold">Contact Information</div>
+      <div className="text-4xl font-koh_santepheap font-bold text-primarygray font-bold pt-4">Contact Information</div>
         <p className="text-lg font-inter text-secondarygray text-md">Personal information that will be shown regardless of desired position</p>         
         <div className='flex flex-row'>
           {/* Email */}
-          <div className='flex flex-col justify-left pr-6 pb-4'>
+          <div className='flex flex-col justify-left pb-4 w-full'>
             <p className='text-primarygray font-semibold font-inter text-s pb-0.5'>Email</p>
             <label>
               <input
                 type="email"
                 name="email"
-                className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none"
+                className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
                 placeholder={existingGeneralInfo.email}
                 value={existingGeneralInfo.email} 
                 onChange={handleChange}
               />
             </label>
           </div>
+          {/* Spacer */} <div className='w-20'/>
           {/* Phone Number */}
-          <div className='flex flex-col justify-left pr-6 pb-4'>
+          <div className='flex flex-col justify-left pb-4 w-full'>
             <p className='text-primarygray font-semibold font-inter text-s pb-0.5'>Phone Number</p>
             <label>
               <input
                 type="tel"
                 name="phone"
-                className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none"
+                className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
                 placeholder={existingGeneralInfo.phone}
                 value={existingGeneralInfo.phone} 
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+        </div>
+      </>
+      {/* Aditional Links */}<>
+      <div className="text-4xl font-koh_santepheap font-bold text-primarygray font-bold pt-4">Aditional Links</div>
+        <p className="text-lg font-inter text-secondarygray text-md">Personal information that will be shown regardless of desired position</p>         
+        <div className='flex flex-row'>
+          {/* Github */}
+          <div className='flex flex-col justify-left pb-4 w-full'>
+            <p className='text-primarygray font-semibold font-inter text-s pb-0.5'>Github</p>
+            <label>
+              <input
+                type="text"
+                name="github_link"
+                className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
+                placeholder={existingGeneralInfo.github_link}
+                value={existingGeneralInfo.github_link} 
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+          {/* Spacer */} <div className='w-20'/>
+          {/* Linked In */}
+          <div className='flex flex-col justify-left pb-4 w-full'>
+            <p className='text-primarygray font-semibold font-inter text-s pb-0.5'>Linkedin</p>
+            <label>
+              <input
+                type="text"
+                name="linkedin_link"
+                className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
+                placeholder={existingGeneralInfo.linkedin_link}
+                value={existingGeneralInfo.linkedin_link} 
                 onChange={handleChange}
               />
             </label>
@@ -134,17 +163,6 @@ const GeneralInfo = () => {
       <button type="submit" className='flex items-center justify-center bg-gradient-to-r from-aiblue to-gptgreen felx-row text-white text-md rounded-3xl p-2.5 w-72 delay-50 hover:scale-105 duration-200'>
         Save Info
       </button>  
-      {existingGeneralInfo && (
-        <div>
-          <h3>Existing General Info</h3>
-          <p>First Name: {existingGeneralInfo.first_name}</p>
-          <p>Last Name: {existingGeneralInfo.last_name}</p>
-          <p>Email: {existingGeneralInfo.email}</p>
-          <p>Phone: {existingGeneralInfo.phone}</p>
-          <p>Github Link: {existingGeneralInfo.github_link}</p>
-          <p>LinkedIn Link: {existingGeneralInfo.linkedin_link}</p>
-        </div>
-      )}
     </form>
   );
 };
