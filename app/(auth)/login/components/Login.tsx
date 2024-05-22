@@ -35,7 +35,7 @@ const Login: React.FC= () => {
             // Handle error (e.g., show a message to the user)
             console.error(result.error);
         } else {
-            // Redirect the user or do something else
+            // Redirect the user or do something else 
             console.log('Signed in successfully');
             router.push("/cv_gallery");
         }
