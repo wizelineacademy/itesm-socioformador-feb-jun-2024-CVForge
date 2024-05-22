@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import MainLogo from '@/public/assets/MainLogo'; // Import the MainLogo component
 import prisma from "@/lib/prisma";
 import { createNewUser } from "@/services/userService";
+import { IoIosArrowForward } from "react-icons/io";
+import Link from 'next/link';
 
 const Register: React.FC= () => {
     const [firstName, setFirstName] = useState('');
@@ -29,6 +30,64 @@ const Register: React.FC= () => {
     };
 
     return (
+        <div className='flex items-center justify-center h-screen w-screen'>
+            <div className='bg-white shadow-md flex items-between justify-center rounded-lg w-auto h-auto mx-auto'>
+                <div className='flex flex-col'>
+                    <Link href={"/login"} className="sticky h-10 flex items-center text-outlinegray hover:text-secondarygray bg-transparent pl-8 pt-8">
+                        <IoIosArrowForward className='rotate-180'/>
+                        <p className="text-md font-bold font-inter ">Back</p>
+                    </Link>
+                    <div className='flex flex-col items-center px-20 py-2 pb-6'>
+                        <div className='flex w-full justify-center'>
+                            <p className='font-koh_santepheap text-5xl p-1 text-primarygray py-3 pt-2'>Create Account</p>
+                        </div>
+                        <div className='py-4'>
+                            {/* email */}
+                            <div className='flex flex-col justify-left'>
+                                <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Email</p>
+                                <input
+                                    type="email"
+                                    className="border-2 border-gptgreen bg-white h-10 px-3 pr-60 rounded-lg text-md focus:outline-none"
+                                    placeholder="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </div>
+                            {/* password */}
+                            <div className='flex flex-col justify-left py-4'>
+                                <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Password</p>
+                                <input
+                                    type="password"
+                                    className="border-2 border-gptgreen bg-white h-10 px-3 pr-60 rounded-lg text-md focus:outline-none"
+                                    placeholder="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </div>
+                            {/* confirm password */}
+                            <div className='flex flex-col justify-left'>
+                                <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'> Confirm Password</p>
+                                <input
+                                    type="password"
+                                    className="border-2 border-gptgreen bg-white h-10 px-3 pr-60 rounded-lg text-md focus:outline-none"
+                                    placeholder="confirm password"
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        <button onClick={handleSubmit} className='flex items-center m-4 justify-center bg-gradient-to-r from-aiblue to-gptgreen felx-row text-white text-md rounded-3xl p-2.5 px-16 w-auto delay-50 hover:scale-105 duration-200'>
+                            Create Account
+                        </button>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Register;
+/*
         <div className='flex items-center justify-center h-screen mx-36'>
             <div className='bg-white shadow-md flex items-between justify-center rounded-lg p-10 w-auto h-auto m-10'>
                 <p>back</p>
@@ -37,7 +96,6 @@ const Register: React.FC= () => {
                         <p className='font-koh_santepheap text-5xl text-primarygray pb-6 pt-2'>Create Account</p>
                     </div>
                     <div className='flex flex-row'>
-                        {/* first name */}
                         <div className='flex flex-col justify-left pr-6 pb-4'>
                             <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>First Name</p>
                             <input
@@ -48,7 +106,6 @@ const Register: React.FC= () => {
                                 onChange={(e) => setFirstName(e.target.value)}
                             />
                         </div>
-                        {/* last name */}
                         <div className='flex flex-col justify-left pb-4'>
                             <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Last Name</p>
                             <input
@@ -61,7 +118,6 @@ const Register: React.FC= () => {
                         </div>
                     </div>
                     
-                    {/* email */}
                     <div className='flex flex-col justify-left'>
                         <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Email</p>
                         <input
@@ -72,7 +128,6 @@ const Register: React.FC= () => {
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
-                    {/* password */}
                     <div className='flex flex-col justify-left py-4'>
                         <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Password</p>
                         <input
@@ -83,7 +138,6 @@ const Register: React.FC= () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    {/* confirm password */}
                     <div className='flex flex-col justify-left'>
                         <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Confirm Password</p>
                         <input
@@ -94,41 +148,14 @@ const Register: React.FC= () => {
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                     </div>
-                    <div className='p-4'/> {/* spacer */}
-                    {/* confirm password */}
+                    <div className='p-4'/> 
                     <button onClick={handleSubmit} className='flex items-center justify-center bg-gradient-to-r from-aiblue to-gptgreen felx-row text-white text-md rounded-3xl p-2.5 w-full'>
                         Create Account
                     </button>  
                 </div>
             </div>
-            {/* Logo */}
             <div className=' ml-10 w-96 h-96'>
                 <MainLogo />
-            </div>
-        </div>
-    );
-};
-
-export default Register;
-/*
-<div className="flex h-screen" style={{backgroundImage: 'url(/assets/bgimg.png)', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat'}}>
-            <div className="w-1/2 flex justify-center items-center">
-                <div style={{ marginLeft: '40px' }}>
-                    <MainLogo />
-                </div>
-            </div>
-            <div className="w-1/2 flex justify-center items-center">
-                <form className="text-center">
-                <h1 className="text-7xl font-koh_santepheap mb-8 text-primarygray">CVForge<span className="text-gptgreen">.ai</span></h1>
-                    <p className="text-left font-inter"> Email</p>
-                    <input type="email" placeholder="  Email" className="block w-96 h-12 border bg-transparent border-gradient rounded-md mb-4" />
-                    <p className="text-left font-inter"> Password</p>
-                    <input type="password" placeholder="  Password" className="block w-96 h-12 bg-transparent border border-gradient rounded-md mb-4" />
-                    <a href="#" className="block text-gptgreen mb-4">Forgot password?</a>
-                    <button className="bg-gradient-to-r from-emerald-400 to-cyan-400 text-white font-bold rounded-full" style={buttonStyle}>
-                        Sign In
-                    </button>
-                </form>
             </div>
         </div>
 */ 

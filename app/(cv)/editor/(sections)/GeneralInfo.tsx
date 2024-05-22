@@ -49,7 +49,7 @@ const GeneralInfo = () => {
       }
     };
     fetchExistingGeneralInfo();
-  }, []);
+  }, [professionalID]);
 
 
   const handleSubmit = async (e) => {

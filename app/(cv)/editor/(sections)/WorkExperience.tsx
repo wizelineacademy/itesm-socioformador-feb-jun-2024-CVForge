@@ -41,7 +41,7 @@ const WorkExperience: React.FC = () => {
       }
     }
     fetchWorks();
-  }, []);
+  }, [professionalID]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, workID: string) => {
     event.preventDefault();
