@@ -14,10 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="wrapperTwo">
-          <div className="box">
-            <div/><div/><div/><div/><div/><div/><div/><div/><div/><div/>
-          </div>
+        <div className="wrapper">
           {children}
         </div>
       </body>
