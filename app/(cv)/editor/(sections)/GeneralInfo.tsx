@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createGeneralInfo, getGeneralInfo } from "@/services/professional_information/generalService";
-
+import { useSession } from "next-auth/react";
+import { getProfessionalByEmail } from "@/services/sessionService";
 /*I want to make a a form that gets the current data that is on the general_info table for an specific professional_info id and that can update that information.
   - Make services based on getting the current data of general_info table based on a professional_info record.
   - Make services based on posting new data to general_info table with an specific professional_info id.
@@ -12,7 +13,20 @@ import { createGeneralInfo, getGeneralInfo } from "@/services/professional_infor
     * actual html code
 */
 const GeneralInfo = () => {
-  const fixedProfessionalId = '2f194e12-92a2-4c91-a27c-d75ff08337b3';
+  const { data: session } = useSession();
+  const [professionalID, setProfessionalID] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProfessionalID = async () => {
+      if (session?.user?.email) {
+        const staticID = await getProfessionalByEmail(session.user.email);
+        setProfessionalID(staticID);
+      }
+    };
+    
+    fetchProfessionalID();
+  }, [session]);
+
 
   const [existingGeneralInfo, setExistingGeneralInfo] = useState({
     first_name: '',
@@ -26,7 +40,7 @@ const GeneralInfo = () => {
   useEffect(() => {
     const fetchExistingGeneralInfo = async () => {
       try {
-        const existingInfo = await getGeneralInfo(fixedProfessionalId);
+        const existingInfo = await getGeneralInfo(professionalID);
         if (existingInfo){
           setExistingGeneralInfo(existingInfo);
         }
@@ -41,10 +55,10 @@ const GeneralInfo = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createGeneralInfo(fixedProfessionalId, {
+      await createGeneralInfo(professionalID, {
         ...existingGeneralInfo
       });
-      const existingInfo = await getGeneralInfo(fixedProfessionalId);
+      const existingInfo = await getGeneralInfo(professionalID);
       setExistingGeneralInfo(existingInfo);
     } catch (error) {
       console.error('Error creating general info:', error);

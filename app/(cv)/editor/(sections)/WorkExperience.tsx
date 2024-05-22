@@ -3,6 +3,8 @@ import React from "react";
 import {getWorks, createWork, updateWork, deleteWork} from "@/services/professional_information/generalService";
 import { useEffect, useState} from "react";
 import { update } from "cypress/types/lodash";
+import { useSession } from "next-auth/react";
+import { getProfessionalByEmail } from "@/services/sessionService";
 
 interface Work {
   work_experience_id : string;
@@ -13,13 +15,25 @@ interface Work {
 }
 
 const WorkExperience: React.FC = () => {
-  const staticID = "2f194e12-92a2-4c91-a27c-d75ff08337b3";
+  const { data: session } = useSession();
+  const [professionalID, setProfessionalID] = useState<string | null>(null);
   const [works, setWorks] = useState<Work[]>([]);
+
+  useEffect(() => {
+    const fetchProfessionalID = async () => {
+      if (session?.user?.email) {
+        const staticID = await getProfessionalByEmail(session.user.email);
+        setProfessionalID(staticID);
+      }
+    };
+    
+    fetchProfessionalID();
+  }, [session]);
 
   useEffect(() => {
     const fetchWorks = async () => {
       try {
-        const worksGetted = await getWorks(staticID);
+        const worksGetted = await getWorks(professionalID);
         setWorks(worksGetted);
       }
       catch (error) {
@@ -120,7 +134,7 @@ const WorkExperience: React.FC = () => {
           <button onClick={() => handleDelete(work.work_experience_id, index)}>Delete</button>
         </div>
       ))}
-      <button onClick={() => handleCreation(staticID)}>Create New Work</button>
+      <button onClick={() => handleCreation(professionalID)}>Create New Work</button>
     </div>
   )
 }

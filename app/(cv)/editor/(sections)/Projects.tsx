@@ -2,6 +2,8 @@
 import React from "react";
 import {getProjects, createProject, updateProject, deleteProject} from "@/services/professional_information/generalService";
 import { useEffect, useState} from "react";
+import { useSession } from "next-auth/react";
+import { getProfessionalByEmail } from "@/services/sessionService";
 
 interface Project {
   project_id: string;
@@ -12,13 +14,24 @@ interface Project {
 }
 
 const Projects: React.FC = () => {
-  const staticID = "2f194e12-92a2-4c91-a27c-d75ff08337b3";
+  const { data: session } = useSession();
+  const [professionalID, setProfessionalID] = useState<string | null>(null);
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
+    const fetchProfessionalID = async () => {
+      if (session?.user?.email) {
+        const staticID = await getProfessionalByEmail(session.user.email);
+        setProfessionalID(staticID);
+      }
+    };
+    
+    fetchProfessionalID();
+  }, [session]);
+  useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const projectsGetted = await getProjects(staticID);
+        const projectsGetted = await getProjects(professionalID);
         setProjects(projectsGetted);
       }
       catch (error) {
@@ -119,7 +132,7 @@ const Projects: React.FC = () => {
           <button onClick={() => handleDelete(project.project_id, index)}>Delete</button>
         </div>
       ))}
-      <button onClick={() => handleCreation(staticID)}>Create New Project</button>
+      <button onClick={() => handleCreation(professionalID)}>Create New Project</button>
     </div>
   )
 }
