@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import MainLogo from '@/public/assets/MainLogo'; // Import the MainLogo component
+import prisma from "@/lib/prisma";
+import { createNewUser } from "@/services/userService";
 
 const Register: React.FC= () => {
     const [firstName, setFirstName] = useState('');
@@ -16,12 +18,7 @@ const Register: React.FC= () => {
             return;
         }
 
-        await prisma.users.create({
-            data: {
-                email: email,
-                password: password
-            }
-        })
+        await createNewUser(email, password);
 
         // Reset form after submission
         setFirstName('');

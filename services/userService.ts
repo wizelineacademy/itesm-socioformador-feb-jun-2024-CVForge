@@ -1,3 +1,4 @@
+"use server";
 import prisma from '@/lib/prisma';
 import { User } from '@/types/user'
 
@@ -37,7 +38,7 @@ const getAllUsers = async () => {
   return users;
 }
 
-export default {
+export {
   createUser,
   findUserById,
   getAllUsers,
