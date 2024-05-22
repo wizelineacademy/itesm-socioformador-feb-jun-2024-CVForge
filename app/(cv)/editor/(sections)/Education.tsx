@@ -3,7 +3,8 @@ import React from "react";
 import {useEffect, useState} from "react";
 import {createEducation, getEducation, updateEducation, deleteEducation} from "@/services/professional_information/generalService";
 import ProfessionalInfo from "../page";
-
+import { useSession } from "next-auth/react";
+import { getProfessionalByEmail } from "@/services/sessionService";
 interface Education {
   education_id: string;
   school: string;
@@ -15,12 +16,25 @@ interface Education {
 }
 
 const EducationComponent: React.FC = () => {
-  const staticID = "2f194e12-92a2-4c91-a27c-d75ff08337b3";
+  const { data: session } = useSession();
   const [educations, setEducations] = useState<Education[]>([]);
+  const [professionalID, setProfessionalID] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProfessionalID = async () => {
+      if (session?.user?.email) {
+        const staticID = await getProfessionalByEmail(session.user.email);
+        setProfessionalID(staticID);
+      }
+    };
+    
+    fetchProfessionalID();
+  }, [session]);
+
 
   useEffect(() => {
     const fetchEducations = async () => {
-      const fetchedEducations = await getEducation(staticID);
+      const fetchedEducations = await getEducation(professionalID);
       setEducations(fetchedEducations);
     }
     fetchEducations();
@@ -134,7 +148,7 @@ const EducationComponent: React.FC = () => {
           <button onClick={() => handleDelete(education.education_id, index)}>Delete</button>
         </div>
       ))}
-      <button onClick={() => handleCreation(staticID)}>Create New Education</button>
+      <button onClick={() => handleCreation(professionalID)}>Create New Education</button>
     </div>
   );
 };

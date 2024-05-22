@@ -109,12 +109,17 @@ const handler = NextAuth({
 
       // If the user does not exist, create a new entry
       if (!existingUser) {
-        await prisma.users.create({
+        const newUser = await prisma.users.create({
           data: {
             email: user.email ?? "",
             password: "123",
           },
         });
+        await prisma.professional_info.create({
+          data : {
+            user_id : newUser.users_id,
+          }
+        })
       }
 
       return true;

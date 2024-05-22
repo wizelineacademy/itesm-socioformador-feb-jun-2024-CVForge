@@ -10,4 +10,18 @@ const getUserIdByEmail = async (userEmail : string) => {
   return user.users_id;
 }
 
-export {getUserIdByEmail}
+const getProfessionalByEmail = async (userEmail : string) => {
+  const user = await prisma.users.findFirst(
+    {
+      where : { email : userEmail},
+    }
+  );
+  const professional_info = await prisma.professional_info.findFirst(
+    {
+      where : {user_id : user.users_id}
+    }
+  );
+  return professional_info.professional_info_id;
+}
+
+export {getUserIdByEmail, getProfessionalByEmail}

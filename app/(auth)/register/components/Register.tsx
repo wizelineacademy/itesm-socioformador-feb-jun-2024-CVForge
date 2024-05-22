@@ -1,7 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MainLogo from '@/public/assets/MainLogo'; // Import the MainLogo component
+import prisma from "@/lib/prisma";
+import { createNewUser } from "@/services/userService";
 
 const Register: React.FC= () => {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    const handleSubmit = async (event) => {
+        event.preventDefault(); // Prevent the page from refreshing
+
+        if (password!== confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
+
+        await createNewUser(email, password);
+
+        // Reset form after submission
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
+    };
+
     return (
         <div className='flex items-center justify-center h-screen mx-36'>
             <div className='bg-white shadow-md flex items-between justify-center rounded-lg p-10 w-auto h-auto m-10'>
@@ -18,6 +44,8 @@ const Register: React.FC= () => {
                                 type="text"
                                 className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none"
                                 placeholder="first name"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
                             />
                         </div>
                         {/* last name */}
@@ -27,6 +55,8 @@ const Register: React.FC= () => {
                                 type="text"
                                 className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none"
                                 placeholder="last name"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
                             />
                         </div>
                     </div>
@@ -38,6 +68,8 @@ const Register: React.FC= () => {
                             type="email"
                             className="border-2 border-gptgreen bg-white h-10 px-3 pr-60 rounded-lg text-md focus:outline-none"
                             placeholder="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
                     {/* password */}
@@ -47,6 +79,8 @@ const Register: React.FC= () => {
                             type="password"
                             className="border-2 border-gptgreen bg-white h-10 px-3 pr-60 rounded-lg text-md focus:outline-none"
                             placeholder="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
                     {/* confirm password */}
@@ -56,11 +90,13 @@ const Register: React.FC= () => {
                             type="password"
                             className="border-2 border-gptgreen bg-white h-10 px-3 pr-60 rounded-lg text-md focus:outline-none"
                             placeholder="confirm password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                     </div>
                     <div className='p-4'/> {/* spacer */}
                     {/* confirm password */}
-                    <button className='flex items-center justify-center bg-gradient-to-r from-aiblue to-gptgreen felx-row text-white text-md rounded-3xl p-2.5 w-full'>
+                    <button onClick={handleSubmit} className='flex items-center justify-center bg-gradient-to-r from-aiblue to-gptgreen felx-row text-white text-md rounded-3xl p-2.5 w-full'>
                         Create Account
                     </button>  
                 </div>

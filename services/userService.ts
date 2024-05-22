@@ -1,5 +1,18 @@
+"use server";
 import prisma from '@/lib/prisma';
 import { User } from '@/types/user'
+
+const createNewUser = async (userEmail : string, userPassword : string) => {
+  const userCreated = await prisma.users.create(
+    {
+      data : {
+        email : userEmail, 
+        password : userPassword,
+      }
+    }
+  )
+  return userCreated;
+};
 
 const createUser = async (userData: User) => {
   const user = await prisma.users.create({
@@ -25,8 +38,9 @@ const getAllUsers = async () => {
   return users;
 }
 
-export default {
+export {
   createUser,
   findUserById,
-  getAllUsers
+  getAllUsers,
+  createNewUser
 }
