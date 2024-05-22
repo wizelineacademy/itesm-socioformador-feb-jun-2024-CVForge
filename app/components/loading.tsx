@@ -1,4 +1,10 @@
 export default function GalleryLoading(){
-    return <div className="loader text-primarygray font-inter text-md font-bold">Loading...</div>
+    return (
+        <div className="loader text-primarygray font-inter text-md font-bold">
+            <h1 className='font-koh_santepheap text-md font-bold text-primarygray'>
+                CVForge<span className='text-gptgreen'>.ai</span>
+            </h1>
+        </div>
+    )
 }
 //credits: https://www.youtube.com/watch?v=U5iUc8U3coI

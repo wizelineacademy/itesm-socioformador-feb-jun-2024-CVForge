@@ -8,10 +8,11 @@ import { getAllPositions } from "@/services/positionServices";
 import { cv, desired_position } from "@prisma/client";
 import { RxCross2 } from "react-icons/rx";
 import { useSession } from "next-auth/react";
-
+import {getUserIdByEmail} from "@/services/sessionService";
 
 const Gallery: React.FC = () => {
   const { data: session } = useSession();
+  
   //useState for CV
   const [cvs, setCvs] = useState<cv[]>([]);
   const [title, setTitle] = useState<string>("");
@@ -28,14 +29,8 @@ const Gallery: React.FC = () => {
   useEffect(() => {
     const fetchCvs = async () => {
       try {
-        const userEmail = session?.user?.email;
-
-        const user = await prisma.users.findFirst({
-          where: { email: userEmail },
-        });
-
-        const cvArray = await getAllCVs(user.users_id);
-
+        const userId = await getUserIdByEmail(session.user.email);
+        const cvArray = await getAllCVs(userId);
         setCvs(cvArray);
       } catch (error) {
         console.error("Failed to fetch CVs:", error);
@@ -68,7 +63,9 @@ const Gallery: React.FC = () => {
     event.preventDefault();
     try {
       if (selectedPosition) {
+        const userId = await getUserIdByEmail(session.user.email);
         const newCv = await createCV({
+          user_id : userId,
           title: title,
           desired_position_id: selectedPosition,
         });
