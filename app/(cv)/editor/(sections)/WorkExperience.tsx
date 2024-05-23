@@ -6,6 +6,8 @@ import { update } from "cypress/types/lodash";
 import { useSession } from "next-auth/react";
 import { getProfessionalByEmail } from "@/services/sessionService";
 import { MdOutlineModeEdit } from "react-icons/md";
+import { MdOutlineDeleteOutline } from "react-icons/md";
+
 
 interface Work {
   work_experience_id : string;
@@ -126,7 +128,7 @@ const WorkExperience: React.FC = () => {
                     <input
                       type="text"
                       name="work_position"
-                      className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
+                      className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
                       defaultValue={work.work_position || ""}
                       placeholder="Title"
                     />
@@ -140,7 +142,7 @@ const WorkExperience: React.FC = () => {
                     <input
                       type="date"
                       name="start_date"
-                      className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
+                      className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
                       defaultValue={work.start_date ? work.start_date.toISOString().split("T")[0] : ""}
                       placeholder="Start Date: "
                     />
@@ -154,7 +156,7 @@ const WorkExperience: React.FC = () => {
                   <input
                     type="date"
                     name="end_date"
-                    className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
+                    className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
                     defaultValue={work.end_date ? work.end_date.toISOString().split("T")[0] : ""}
                     placeholder="End Date: "
                   />
@@ -169,7 +171,7 @@ const WorkExperience: React.FC = () => {
                     <input
                       type="text"
                       name="description"
-                      className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
+                      className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
                       defaultValue={work.description || ""}
                       placeholder="Description: "
                     />
@@ -178,12 +180,12 @@ const WorkExperience: React.FC = () => {
               </div>
               <div className="flex flex-row w-full mt-3">
                 <button 
-                  className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-auto" 
+                  className='flex items-center justify-center bg-gradient-to-r from-aiblue to-gptgreen felx-row text-white text-md rounded-3xl p-2 px-12 w-auto delay-50 hover:scale-105 duration-200 mr-auto'
                   type="submit"
                   onClick={() => toggleEditMode(work.work_experience_id)}
-                >save</button>
-                <button className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-auto" 
-                  onClick={() => handleDelete(work.work_experience_id, index)}>Delete</button>
+                >Save</button>
+                <button className="h-auto mr-4 rounded-lg text-xl text-secondarygray hover:text-primarygray"  
+                  onClick={() => handleDelete(work.work_experience_id, index)}><MdOutlineDeleteOutline /></button>
               </div>
             </form>
            ) : (
