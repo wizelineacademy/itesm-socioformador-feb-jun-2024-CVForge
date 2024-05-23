@@ -5,6 +5,7 @@ import { useEffect, useState} from "react";
 import { update } from "cypress/types/lodash";
 import { useSession } from "next-auth/react";
 import { getProfessionalByEmail } from "@/services/sessionService";
+import { MdOutlineModeEdit } from "react-icons/md";
 
 interface Work {
   work_experience_id : string;
@@ -19,19 +20,17 @@ const WorkExperience: React.FC = () => {
   const [professionalID, setProfessionalID] = useState<string | null>(null);
   const [works, setWorks] = useState<Work[]>([]);
   const [editingCardId, setEditingCardId] = useState<string | null>(null);
+  const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
 
   const toggleEditMode = (cardId: string) => {
-    // Delay the state change by 500 milliseconds (0.5 seconds)
-    setTimeout(() => {
-      if (editingCardId === cardId) {
-        // If already in edit mode, exit edit mode
-        setEditingCardId(null);
-      } else {
-        // Otherwise, enter edit mode for the specified card
-        setEditingCardId(cardId);
-      }
-    }, 200); // Delay in milliseconds
-  };
+  setTimeout(() => {
+    if (editingCardId === cardId) {
+      setEditingCardId(null);
+    } else {
+      setEditingCardId(cardId); 
+    }
+  }, 200);
+};
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, workID: string) => {
     event.preventDefault();
@@ -67,7 +66,6 @@ const WorkExperience: React.FC = () => {
     }catch (error) {
       console.error('Error deleting work:', error);
       if (error instanceof prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
-        // Optionally remove the record from the state if it does not exist in the database
         setWorks((prevWorks) =>
         prevWorks.filter((work) => work.work_experience_id !== workID)
         );
@@ -78,7 +76,6 @@ const WorkExperience: React.FC = () => {
   const handleCreation = async (ProfessionalID: string) => {
     const workCreated = await createWork(ProfessionalID);
     setWorks((prevWorks) => [...prevWorks, workCreated]);
-    // Set the newly created card into edit mode
     setEditingCardId(workCreated.work_experience_id);
   };
 
@@ -106,15 +103,21 @@ const WorkExperience: React.FC = () => {
     fetchWorks();
   }, [professionalID]);
 
-
   return (
     <div>
       <h1 className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-1">Work Experience</h1>
       <div className='w-full h-0.5 bg-outlinegray rounded-lg mt-3'></div>
       {works.map((work, index) => (
-        <div className='flex flex-col border border-outlinegray border-2 hover:border-editorgray hover:shadow-lg hover:bg-editorgray rounded-lg p-4 my-4 mt-6' key={work.work_experience_id}>
+        <div 
+          onMouseEnter={() => setHoveredCardId(work.work_experience_id)}
+          onMouseLeave={() => setHoveredCardId(null)}
+          key={work.work_experience_id}
+        >
           {editingCardId === work.work_experience_id? (
-            <form onSubmit={(event) => handleSubmit(event, work.work_experience_id)}>
+            <form           
+              className={`flex flex-col bg-outlinegray bg-opacity-20 border border-2 border-outlinegray shadow-lg rounded-lg p-4 my-4 mt-6`}
+              onSubmit={(event) => handleSubmit(event, work.work_experience_id)}
+            >
               <div className="flex flex-row w-full">
                 {/* Position */}
                 <div className="w-full">
@@ -184,14 +187,19 @@ const WorkExperience: React.FC = () => {
               </div>
             </form>
            ) : (
-            <>
-              <p>{work.work_position}</p>
-              <p>{work.start_date? work.start_date.toLocaleDateString() : 'xxx'}</p>
-              <p>{work.end_date? work.end_date.toLocaleDateString() : 'xxx'}</p>
+            <div className={`flex flex-col border border-2 border-outlinegray hover:border-gptgreen hover:shadow-lg rounded-lg p-4 my-4 mt-6 text-secondarygray`}>
+              <div className="flex flex-row">
+                <h1 className="text-primarygray mr-auto">{work.work_position}</h1>
+                {editingCardId === work.work_experience_id || hoveredCardId === work.work_experience_id? (
+                  <button className="h-auto mr-4 rounded-lg text-xl" 
+                    onClick={() => toggleEditMode(work.work_experience_id)}>
+                    <MdOutlineModeEdit />
+                  </button>
+                ) : null}
+              </div>
+              <p>{work.start_date? work.start_date.toLocaleDateString() : 'xxx'} {work.end_date? ` - ${work.end_date.toLocaleDateString()}` : ' '}</p>
               <p>{work.description}</p>
-              <button className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-auto" 
-                onClick={() => toggleEditMode(work.work_experience_id)}>Edit</button>
-            </>
+            </div>
           )}
         </div>
       ))}
@@ -206,3 +214,4 @@ const WorkExperience: React.FC = () => {
 }
 
 export default WorkExperience;
+
