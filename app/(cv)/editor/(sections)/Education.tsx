@@ -38,7 +38,7 @@ const EducationComponent: React.FC = () => {
       setEducations(fetchedEducations);
     }
     fetchEducations();
-  }, []);
+  }, [professionalID]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, educationID: string) => {
     event.preventDefault();

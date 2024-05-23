@@ -18,30 +18,20 @@ const WorkExperience: React.FC = () => {
   const { data: session } = useSession();
   const [professionalID, setProfessionalID] = useState<string | null>(null);
   const [works, setWorks] = useState<Work[]>([]);
+  const [editingCardId, setEditingCardId] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchProfessionalID = async () => {
-      if (session?.user?.email) {
-        const staticID = await getProfessionalByEmail(session.user.email);
-        setProfessionalID(staticID);
+  const toggleEditMode = (cardId: string) => {
+    // Delay the state change by 500 milliseconds (0.5 seconds)
+    setTimeout(() => {
+      if (editingCardId === cardId) {
+        // If already in edit mode, exit edit mode
+        setEditingCardId(null);
+      } else {
+        // Otherwise, enter edit mode for the specified card
+        setEditingCardId(cardId);
       }
-    };
-    
-    fetchProfessionalID();
-  }, [session]);
-
-  useEffect(() => {
-    const fetchWorks = async () => {
-      try {
-        const worksGetted = await getWorks(professionalID);
-        setWorks(worksGetted);
-      }
-      catch (error) {
-        console.log("There was an error trying to fetch the works", error)
-      }
-    }
-    fetchWorks();
-  }, [professionalID]);
+    }, 200); // Delay in milliseconds
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, workID: string) => {
     event.preventDefault();
@@ -85,83 +75,124 @@ const WorkExperience: React.FC = () => {
     }
   };
 
-  const handleCreation = async (ProfessionalID : string) => {
+  const handleCreation = async (ProfessionalID: string) => {
     const workCreated = await createWork(ProfessionalID);
     setWorks((prevWorks) => [...prevWorks, workCreated]);
-  }
+    // Set the newly created card into edit mode
+    setEditingCardId(workCreated.work_experience_id);
+  };
+
+  useEffect(() => {
+    const fetchProfessionalID = async () => {
+      if (session?.user?.email) {
+        const staticID = await getProfessionalByEmail(session.user.email);
+        setProfessionalID(staticID);
+      }
+    };
+    
+    fetchProfessionalID();
+  }, [session]);
+
+  useEffect(() => {
+    const fetchWorks = async () => {
+      try {
+        const worksGetted = await getWorks(professionalID);
+        setWorks(worksGetted);
+      }
+      catch (error) {
+        console.log("There was an error trying to fetch the works", error)
+      }
+    }
+    fetchWorks();
+  }, [professionalID]);
+
 
   return (
     <div>
-      <div className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-1">Work Experience</div>
+      <h1 className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-1">Work Experience</h1>
       <div className='w-full h-0.5 bg-outlinegray rounded-lg mt-3'></div>
       {works.map((work, index) => (
         <div className='flex flex-col border border-outlinegray border-2 hover:border-editorgray hover:shadow-lg hover:bg-editorgray rounded-lg p-4 my-4 mt-6' key={work.work_experience_id}>
-          <form onSubmit={(event) => handleSubmit(event, work.work_experience_id)}>
-            <div className="flex flex-row w-full">
-              {/* Position */}
-              <div className="w-full">
-                <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Title</p>
-                <label>
-                  <input
-                    type="text"
-                    name="work_position"
-                    className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
-                    defaultValue={work.work_position || ""}
-                    placeholder="Title"
-                  />
-                </label>
-              </div>
-              {/* Spacer */} <div className='w-40'/>
-              {/* Start Date */}
-              <div className="w-auto">
-                <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>From</p>
-                <label>
+          {editingCardId === work.work_experience_id? (
+            <form onSubmit={(event) => handleSubmit(event, work.work_experience_id)}>
+              <div className="flex flex-row w-full">
+                {/* Position */}
+                <div className="w-full">
+                  <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Title</p>
+                  <label>
+                    <input
+                      type="text"
+                      name="work_position"
+                      className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
+                      defaultValue={work.work_position || ""}
+                      placeholder="Title"
+                    />
+                  </label>
+                </div>
+                {/* Spacer */} <div className='w-40'/>
+                {/* Start Date */}
+                <div className="w-auto">
+                  <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>From</p>
+                  <label>
+                    <input
+                      type="date"
+                      name="start_date"
+                      className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
+                      defaultValue={work.start_date ? work.start_date.toISOString().split("T")[0] : ""}
+                      placeholder="Start Date: "
+                    />
+                  </label>
+                </div>
+                <p className='text-primarygray font-semibold font-inter text-s pt-[10px] m-4'>-</p>
+                {/* End Date */}
+                <div className="w-auto">
+                  <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>To</p>
+                  <label>
                   <input
                     type="date"
-                    name="start_date"
+                    name="end_date"
                     className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
-                    defaultValue={work.start_date ? work.start_date.toISOString().split("T")[0] : ""}
-                    placeholder="Start Date: "
+                    defaultValue={work.end_date ? work.end_date.toISOString().split("T")[0] : ""}
+                    placeholder="End Date: "
                   />
                 </label>
+                </div>
               </div>
-              <p className='text-primarygray font-semibold font-inter text-s pt-[10px] m-4'>-</p>
-              {/* End Date */}
-              <div className="w-auto">
-                <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>To</p>
-                <label>
-                <input
-                  type="date"
-                  name="end_date"
-                  className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
-                  defaultValue={work.end_date ? work.end_date.toISOString().split("T")[0] : ""}
-                  placeholder="End Date: "
-                />
-              </label>
+              <div className="flex flex-row w-full text-secondarygray">
+                {/* Description */}
+                <div className="w-full">
+                  <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Description</p>
+                  <label>
+                    <input
+                      type="text"
+                      name="description"
+                      className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
+                      defaultValue={work.description || ""}
+                      placeholder="Description: "
+                    />
+                  </label>
+                </div>
               </div>
-            </div>
-            <div className="flex flex-row w-full text-secondarygray">
-              {/* Description */}
-              <div className="w-full">
-                <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Description</p>
-                <label>
-                  <input
-                    type="text"
-                    name="description"
-                    className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
-                    defaultValue={work.description || ""}
-                    placeholder="Description: "
-                  />
-                </label>
+              <div className="flex flex-row w-full mt-3">
+                <button 
+                  className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-auto" 
+                  type="submit"
+                  onClick={() => toggleEditMode(work.work_experience_id)}
+                >save</button>
+                <button className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-auto" 
+                  onClick={() => handleDelete(work.work_experience_id, index)}>Delete</button>
               </div>
-            </div>
-            <div className="flex flex-row w-full mt-3">
+            </form>
+           ) : (
+            <>
+              <p>{work.work_position}</p>
+              <p>{work.start_date? work.start_date.toLocaleDateString() : 'xxx'}</p>
+              <p>{work.end_date? work.end_date.toLocaleDateString() : 'xxx'}</p>
+              <p>{work.description}</p>
               <button className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-auto" 
-                type="submit">Add</button>
-              <button className="border-2 border-outlinegray bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-auto" 
-                onClick={() => handleDelete(work.work_experience_id, index)}>Delete</button>
-            </div>
-          </form>
+                onClick={() => toggleEditMode(work.work_experience_id)}>Edit</button>
+            </>
+          )}
         </div>
       ))}
       <div className="w-full justify-center">
