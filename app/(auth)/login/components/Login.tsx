@@ -34,6 +34,7 @@ const Login: React.FC= () => {
         if (result?.error) {
             // Handle error (e.g., show a message to the user)
             console.error(result.error);
+            alert('Email or Password is not correct.');
         } else {
             // Redirect the user or do something else 
             console.log('Signed in successfully');
