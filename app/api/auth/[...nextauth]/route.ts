@@ -4,6 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 import LinkedInProvider from "next-auth/providers/linkedin"
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "@/lib/prisma";
+//import bcrypt from 'bcrypt';
 
 const handler = NextAuth({
   session: {
