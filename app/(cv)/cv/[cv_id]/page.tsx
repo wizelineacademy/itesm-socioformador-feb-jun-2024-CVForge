@@ -22,7 +22,6 @@ const CV = () => {
     generalInfo();
   }, []);
 
-
   useEffect(() => {
     const callApi = async () => {
       const selectedPosition = "Data Engineer";
@@ -113,13 +112,13 @@ const CV = () => {
                   respondWith.string(() =>
                     Promise.reject("See docs to implement AI Assistant")
                   ),
-                autosave_interval: 3000, // Autosave interval in milliseconds
+                autosave_interval: 10000, // Autosave interval in milliseconds
                 autosave_prefix: "cv-autosave", // Prefix for autosave key
               }}
               initialValue={cvBodyData}
               onInit={(evt, editor) => (editorRef.current = editor)}
-              onChange={handleEditorChange}
-            />
+/*               onChange={handleEditorChange}
+ */            />
             {autosaveStatus && <div>{autosaveStatus}</div>}
           </>
         ) : (
