@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-primarygray p-8 px-16 flex flex-col text-whitefo">
+    <footer className="bg-primarygray pt-8 px-16 flex flex-col text-whitefo">
       <div className="flex flex-row justify-between w-full px-28">
         {/* Logo and info */}
         <div className="flex flex-col w-40 mr-32 mb-auto">
@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
       </div>
       <div className="bg-secondarygray w-full h-0.5 rounded bg-opacity-30"/>
       <Link className="mx-auto" href="/">
-        <p className="text-md text-secondarygray pt-1 hover:underline">To Top</p>
+        <p className="text-md text-secondarygray pt-1 hover:underline mb-2">To Top</p>
       </Link>
     </footer>
   );
