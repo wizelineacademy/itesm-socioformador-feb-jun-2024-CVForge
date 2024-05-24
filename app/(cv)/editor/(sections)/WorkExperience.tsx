@@ -34,7 +34,7 @@ const WorkExperience: React.FC = () => {
   }, 200);
 };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, workID: string) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, workID: string, index: number) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
@@ -45,17 +45,23 @@ const WorkExperience: React.FC = () => {
       end_date: formData.get("end_date") ? new Date(formData.get("end_date") as string) : undefined,
     };
 
-    try {
-      const updatedWork = await updateWork(workID, workData);
-      console.log('Work updated successfully:', updatedWork);
-      setWorks((prevWorks) =>
-      prevWorks.map((work) =>
-      work.work_experience_id === workID ? updatedWork : work
-        )
-      );
-    } catch (error) {
-      console.error('Error updating work:', error);
+    if (workData.description.trim() == "") {
+      alert('chelo');
+      await handleDelete(workID, index);
+    } else {
+      try {
+        const updatedWork = await updateWork(workID, workData);
+        console.log('Work updated successfully:', updatedWork);
+        setWorks((prevWorks) =>
+        prevWorks.map((work) =>
+        work.work_experience_id === workID ? updatedWork : work
+          )
+        );
+      } catch (error) {
+        console.error('Error updating work:', error);
+      }
     }
+
   };
 
   const handleDelete = async (workID: string, index: number) => {
@@ -118,7 +124,7 @@ const WorkExperience: React.FC = () => {
           {editingCardId === work.work_experience_id? (
             <form           
               className={`flex flex-col bg-outlinegray bg-opacity-20 border border-2 border-outlinegray shadow-lg rounded-lg p-4 my-4 mt-6`}
-              onSubmit={(event) => handleSubmit(event, work.work_experience_id)}
+              onSubmit={(event) => handleSubmit(event, work.work_experience_id, index)}
             >
               <div className="flex flex-row w-full">
                 {/* Position */}
