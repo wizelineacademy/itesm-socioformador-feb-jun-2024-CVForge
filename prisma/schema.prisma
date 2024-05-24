@@ -73,7 +73,6 @@ model cv {
   users               users?            @relation(fields: [user_id], references: [users_id], onDelete: NoAction, onUpdate: NoAction)
   content             String?           @db.Text
   recommendation      recommendation[]
-  content             String?
 }
 
 model desired_position {
