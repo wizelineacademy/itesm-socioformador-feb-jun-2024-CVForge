@@ -91,7 +91,7 @@ const LeftSidebar = () => {
                             <div className="w-full h-10"><SecondaryLogo /></div>
                         </Link>
                         <div className="flex flex-row w-full ">
-                            <ul className="w-full">
+                            <ul className="w-full mx-2">
                                 <SidebarMenuElement
                                         title="Editor"
                                         icon={<PersonalInfo_icon />}
