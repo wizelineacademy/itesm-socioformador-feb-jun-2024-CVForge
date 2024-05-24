@@ -34,7 +34,7 @@ const WorkExperience: React.FC = () => {
   }, 200);
 };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, workID: string) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, workID: string, work: Work) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
@@ -45,17 +45,23 @@ const WorkExperience: React.FC = () => {
       end_date: formData.get("end_date") ? new Date(formData.get("end_date") as string) : undefined,
     };
 
-    try {
-      const updatedWork = await updateWork(workID, workData);
-      console.log('Work updated successfully:', updatedWork);
-      setWorks((prevWorks) =>
-      prevWorks.map((work) =>
-      work.work_experience_id === workID ? updatedWork : work
-        )
-      );
-    } catch (error) {
-      console.error('Error updating work:', error);
+    if (workData.description.trim() == "" || !workData.start_date || workData.work_position.trim() == "") {
+      alert('Title, Description, and Start Date must be filled in to save.');
+    } else {
+      try {
+        const updatedWork = await updateWork(workID, workData);
+        console.log('Work updated successfully:', updatedWork);
+        setWorks((prevWorks) =>
+        prevWorks.map((work) =>
+        work.work_experience_id === workID ? updatedWork : work
+          )
+        );
+        toggleEditMode(work.work_experience_id);
+      } catch (error) {
+        console.error('Error updating work:', error);
+      }
     }
+
   };
 
   const handleDelete = async (workID: string, index: number) => {
@@ -118,7 +124,7 @@ const WorkExperience: React.FC = () => {
           {editingCardId === work.work_experience_id? (
             <form           
               className={`flex flex-col bg-outlinegray bg-opacity-20 border border-2 border-outlinegray shadow-lg rounded-lg p-4 my-4 mt-6`}
-              onSubmit={(event) => handleSubmit(event, work.work_experience_id)}
+              onSubmit={(event) => handleSubmit(event, work.work_experience_id, work)}
             >
               <div className="flex flex-row w-full">
                 {/* Position */}
@@ -182,7 +188,6 @@ const WorkExperience: React.FC = () => {
                 <button 
                   className='flex items-center justify-center bg-gradient-to-r from-aiblue to-gptgreen felx-row text-white text-md rounded-3xl p-2 px-12 w-auto delay-50 hover:scale-105 duration-200 mr-auto'
                   type="submit"
-                  onClick={() => toggleEditMode(work.work_experience_id)}
                 >Save</button>
                 <button className="h-auto mr-4 rounded-lg text-xl text-secondarygray hover:text-primarygray"  
                   onClick={() => handleDelete(work.work_experience_id, index)}><MdOutlineDeleteOutline /></button>
