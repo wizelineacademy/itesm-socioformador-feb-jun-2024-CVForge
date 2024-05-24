@@ -20,8 +20,6 @@ const getProfessionalByEmail = async (userEmail : string) => {
     return null; // Handle no user found scenario
   }
 
-  console.log("user: ", user)
-
   const professional_info = await prisma.professional_info.findFirst({
     where: { user_id: user.users_id }
   });
