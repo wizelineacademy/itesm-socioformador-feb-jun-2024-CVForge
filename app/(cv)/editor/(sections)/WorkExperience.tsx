@@ -106,7 +106,7 @@ const WorkExperience: React.FC = () => {
   }, [professionalID]);
 
   return (
-    <div>
+    <div className="w-full h-full overflow-y-auto">
       <h1 className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-1">Work Experience</h1>
       <div className='w-full h-0.5 bg-outlinegray rounded-lg mt-3'></div>
       {works.map((work, index) => (

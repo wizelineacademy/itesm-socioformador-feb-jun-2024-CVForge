@@ -118,19 +118,19 @@ const LeftSidebar = () => {
                             <div className="pt-3">
                                 <ul>
                                     <SidebarMenuElement
-                                        title="CVs"
-                                        icon={<CV_icon />}
-                                        currentTab={currentTab}
-                                        href="/cv_gallery"
-                                        itemTab="cv_gallery"
-                                        open= {open}
-                                    />
-                                    <SidebarMenuElement
                                         title="Editor"
                                         icon={<PersonalInfo_icon />}
                                         currentTab={currentTab}
                                         href="/editor"
                                         itemTab="editor"
+                                        open= {open}
+                                    />
+                                    <SidebarMenuElement
+                                        title="CVs"
+                                        icon={<CV_icon />}
+                                        currentTab={currentTab}
+                                        href="/cv_gallery"
+                                        itemTab="cv_gallery"
                                         open= {open}
                                     />
                                 </ul>

@@ -16,7 +16,7 @@ const ProfessionalInfo: React.FC = () => {
 
   const [currentSection, setCurrentSection] = useState("general");
 
-  const sectionComponents = {
+  const sectionComponents = { 
     general: <GeneralInfo />,
     education: <Education />,
     projects: <Projects />,
@@ -29,10 +29,12 @@ const ProfessionalInfo: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-row mx-auto justify-center">
+    <div className="flex flex-row mx-auto justify-center h-screen">
       {/* Form */}
-      <div className="bg-white my-10 w-[846px] h-auto rounded-lg py-5 px-8 shadow-lg">
-        {sectionComponents[currentSection]}
+      <div className="h-full overflow-y-scroll hide-scrollbar">
+        <div className="bg-white my-10 w-[846px] rounded-lg py-5 px-8 shadow-lg">
+            {sectionComponents[currentSection]}
+        </div>
       </div>
       {/* Side Menu */}
       <div className="bg-white my-10 ml-10 py-5 px-6 w-auto h-auto rounded-lg mb-auto shadow-lg">

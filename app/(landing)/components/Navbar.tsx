@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
                             <Link href='/' className="text-lg hover:text-gptgreen underline px-4 py-2 text-secondarygray" >Home</Link>
                         </li>
                         <li>
-                            <Link href='/professional_info/1/general_info' className="text-lg hover:text-gptgreen hover:underline px-4 py-2 text-secondarygray" >Editor</Link>
+                            <Link href='/editor' className="text-lg hover:text-gptgreen hover:underline px-4 py-2 text-secondarygray" >Editor</Link>
                         </li>
                         <li>
                             <Link href='/cv_gallery' className="text-lg hover:text-gptgreen hover:underline px-4 py-2 text-secondarygray" >CV Gallery</Link>
