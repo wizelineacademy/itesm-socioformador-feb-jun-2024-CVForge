@@ -14,14 +14,14 @@ const Footer: React.FC = () => {
         {/* Contact Us */}
         <div className="flex flex-col w-40">
           <h1 className="font-bold text-xl text-secondarygray">Contact Us</h1>
-          <Link href="https://www.linkedin.com/company/cvforge/about/">
+          <Link className=" mr-auto" href="https://www.linkedin.com/company/cvforge/about/">
             <p className="text-md py-1 hover:underline">LinkedIn</p>
           </Link>
         </div>
         {/* Services */}
         <div className="flex flex-col w-40">
           <h1 className="font-bold text-xl text-secondarygray">Services</h1>
-          <Link href="/cv_gallery">
+          <Link className=" mr-auto" href="/cv_gallery">
             <p className="text-md py-1 hover:underline">CV Creation</p>
           </Link>
         </div>
@@ -33,6 +33,9 @@ const Footer: React.FC = () => {
         </div>
       </div>
       <div className="bg-secondarygray w-full h-0.5 rounded bg-opacity-30"/>
+      <Link className="mx-auto" href="/">
+        <p className="text-md text-secondarygray pt-1 hover:underline">To Top</p>
+      </Link>
     </footer>
   );
 };
