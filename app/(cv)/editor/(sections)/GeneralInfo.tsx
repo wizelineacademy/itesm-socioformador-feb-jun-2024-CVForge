@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { createGeneralInfo, getGeneralInfo } from "@/services/professional_information/generalService";
+import React, { useState, useEffect } from "react";
+import {
+  createGeneralInfo,
+  getGeneralInfo,
+} from "@/services/professional_information/generalService";
 import { useSession } from "next-auth/react";
 import { getProfessionalByEmail } from "@/services/sessionService";
 /*I want to make a a form that gets the current data that is on the general_info table for an specific professional_info id and that can update that information.
@@ -16,54 +19,57 @@ const GeneralInfo = () => {
   const { data: session } = useSession();
   const [professionalID, setProfessionalID] = useState<string | null>(null);
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     const fetchProfessionalID = async () => {
-      if (session?.user?.email) {
-        
-        const staticID = await getProfessionalByEmail(session.user.email);
-        console.log('Professional ID:', staticID);
-        // setProfessionalID(staticID);
-      }
+      const staticID = await getProfessionalByEmail(session.user.email);
+      console.log("Professional ID:", staticID);
+      if (staticID) setProfessionalID(staticID);
     };
-    
-    fetchProfessionalID();
-  }, [session]);
 
+    if (session?.user?.email) fetchProfessionalID();
+  }, [session?.user?.email]);
 
   const [existingGeneralInfo, setExistingGeneralInfo] = useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-    phone: '',
-    github_link: '',
-    linkedin_link: '',
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    github_link: "",
+    linkedin_link: "",
   });
 
   useEffect(() => {
     const fetchExistingGeneralInfo = async () => {
       try {
+        console.log("profesioanlif", professionalID)
+
         const existingInfo = await getGeneralInfo(professionalID);
-        if (existingInfo){
+        if (existingInfo) {
+          console.log("---")
           setExistingGeneralInfo(existingInfo);
         }
       } catch (error) {
-        console.error('Error fetching existing general info:', error);
+        console.error("Error fetching existing general info:", error);
       }
     };
-    fetchExistingGeneralInfo();
-  }, []);
-
+    if (professionalID) fetchExistingGeneralInfo();
+  }, [professionalID]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
     try {
-      await createGeneralInfo(professionalID, {
-        ...existingGeneralInfo
-      });
-      const existingInfo = await getGeneralInfo(professionalID);
-      setExistingGeneralInfo(existingInfo);
+      await createGeneralInfo(professionalID, { ...existingGeneralInfo });
+      // Refresh or update state as needed
     } catch (error) {
-      console.error('Error creating general info:', error);
+      console.error("Error creating general info:", error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -76,70 +82,90 @@ const GeneralInfo = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-1">General Info</div>
-      <div className='w-full h-0.5 bg-outlinegray rounded-lg my-3'></div>
-      {/* Identity */}<>
-        <div className="text-4xl font-koh_santepheap font-bold text-primarygray font-bold">Identity</div>
-        <p className="text-lg font-inter text-secondarygray text-md">Personal information that will be shown regardless of desired position</p>         
-        <div className='flex flex-row'>
+      <div className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-1">
+        General Info
+      </div>
+      <div className="w-full h-0.5 bg-outlinegray rounded-lg my-3"></div>
+      {/* Identity */}
+      <>
+        <div className="text-4xl font-koh_santepheap font-bold text-primarygray">
+          Identity
+        </div>
+        <p className="text-lg font-inter text-secondarygray text-md">
+          Personal information that will be shown regardless of desired position
+        </p>
+        <div className="flex flex-row">
           {/* First name */}
-          <div className='flex flex-col justify-left pb-4 pr-14 w-full'>
-            <p className='text-primarygray font-semibold font-inter text-s pb-0.5'>First Name</p>
+          <div className="flex flex-col justify-left pb-4 pr-14 w-full">
+            <p className="text-primarygray font-semibold font-inter text-s pb-0.5">
+              First Name
+            </p>
             <label>
               <input
                 type="text"
                 name="first_name"
                 className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
                 placeholder={existingGeneralInfo.first_name}
-                value={existingGeneralInfo.first_name} 
+                value={existingGeneralInfo.first_name}
                 onChange={handleChange}
               />
             </label>
           </div>
           {/* Last name */}
-          <div className='flex flex-col justify-left pb-4 w-full'>
-            <p className='text-primarygray font-semibold font-inter text-s pb-0.5'>Last Name</p>
+          <div className="flex flex-col justify-left pb-4 w-full">
+            <p className="text-primarygray font-semibold font-inter text-s pb-0.5">
+              Last Name
+            </p>
             <label>
               <input
                 type="text"
                 name="last_name"
                 className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
                 placeholder={existingGeneralInfo.last_name}
-                value={existingGeneralInfo.last_name} 
+                value={existingGeneralInfo.last_name}
                 onChange={handleChange}
               />
             </label>
           </div>
         </div>
       </>
-      {/* Contact Information */}<>
-      <div className="text-4xl font-koh_santepheap font-bold text-primarygray font-bold">Contact Information</div>
-        <p className="text-lg font-inter text-secondarygray text-md">Personal information that will be shown regardless of desired position</p>         
-        <div className='flex flex-row'>
+      {/* Contact Information */}
+      <>
+        <div className="text-4xl font-koh_santepheap font-bold text-primarygray">
+          Contact Information
+        </div>
+        <p className="text-lg font-inter text-secondarygray text-md">
+          Personal information that will be shown regardless of desired position
+        </p>
+        <div className="flex flex-row">
           {/* Email */}
-          <div className='flex flex-col justify-left pr-6 pb-4'>
-            <p className='text-primarygray font-semibold font-inter text-s pb-0.5'>Email</p>
+          <div className="flex flex-col justify-left pr-6 pb-4">
+            <p className="text-primarygray font-semibold font-inter text-s pb-0.5">
+              Email
+            </p>
             <label>
               <input
                 type="email"
                 name="email"
                 className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none"
                 placeholder={existingGeneralInfo.email}
-                value={existingGeneralInfo.email} 
+                value={existingGeneralInfo.email}
                 onChange={handleChange}
               />
             </label>
           </div>
           {/* Phone Number */}
-          <div className='flex flex-col justify-left pr-6 pb-4'>
-            <p className='text-primarygray font-semibold font-inter text-s pb-0.5'>Phone Number</p>
+          <div className="flex flex-col justify-left pr-6 pb-4">
+            <p className="text-primarygray font-semibold font-inter text-s pb-0.5">
+              Phone Number
+            </p>
             <label>
               <input
                 type="tel"
                 name="phone"
                 className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none"
                 placeholder={existingGeneralInfo.phone}
-                value={existingGeneralInfo.phone} 
+                value={existingGeneralInfo.phone}
                 onChange={handleChange}
               />
             </label>
@@ -147,9 +173,12 @@ const GeneralInfo = () => {
         </div>
       </>
       {/* submit */}
-      <button type="submit" className='flex items-center justify-center bg-gradient-to-r from-aiblue to-gptgreen felx-row text-white text-md rounded-3xl p-2.5 w-72 delay-50 hover:scale-105 duration-200'>
+      <button
+        type="submit"
+        className="flex items-center justify-center bg-gradient-to-r from-aiblue to-gptgreen felx-row text-white text-md rounded-3xl p-2.5 w-72 delay-50 hover:scale-105 duration-200"
+      >
         Save Info
-      </button>  
+      </button>
       {existingGeneralInfo && (
         <div>
           <h3>Existing General Info</h3>

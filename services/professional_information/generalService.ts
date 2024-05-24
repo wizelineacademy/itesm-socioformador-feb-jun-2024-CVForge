@@ -41,16 +41,16 @@ interface Project {
 }
 
 interface Work {
-  work_experience_id : string;
-  work_position : string;
-  description : string;
-  start_date : Date;
-  end_date : Date;
+  work_experience_id: string;
+  work_position: string;
+  description: string;
+  start_date: Date;
+  end_date: Date;
 }
 
 interface Skill {
-  title : string;
-  proficiency : string;
+  title: string;
+  proficiency: string;
 }
 
 //General Info Services
@@ -71,18 +71,26 @@ const getGeneralInfo = async (
   return generalInfo;
 };
 
-const createGeneralInfo = async (
-  professionalID: string,
-  generalData: Prisma.general_infoCreateInput
-) => {
+const createGeneralInfo = async (professionalID, generalData) => {
+  // Check if general info already exists for the professional
+  if (professionalID) {
+    const existingInfo = await prisma.general_info.findUnique({
+      where: { professional_info_id: professionalID },
+    });
+
+    if (existingInfo) {
+      console.error("General info already exists, consider updating instead");
+      return existingInfo; // Handle existing info case
+    }
+  }
+
   const newGeneralInfo = await prisma.general_info.create({
     data: {
       ...generalData,
-      professional_info: {
-        connect: { professional_info_id: professionalID },
-      },
+      professional_info_id: professionalID, // Ensure this ID is correctly associated
     },
   });
+
   return newGeneralInfo;
 };
 
@@ -169,23 +177,23 @@ const createProject = async (professionalID: string): Promise<Project> => {
   return createdProject;
 };
 
-const updateProject = async (projectID: string, projectData: Partial<Project>): Promise<Project> => {
-  const updatedProject = await prisma.project.update(
-    {
-      where : {project_id : projectID},
-      data : projectData,
-    }
-  )
+const updateProject = async (
+  projectID: string,
+  projectData: Partial<Project>
+): Promise<Project> => {
+  const updatedProject = await prisma.project.update({
+    where: { project_id: projectID },
+    data: projectData,
+  });
   return updatedProject;
 };
 
 const deleteProject = async (projectID: string): Promise<Project> => {
-  const deletedProject  = await prisma.project.delete({
-    where : {project_id : projectID}
-  })
+  const deletedProject = await prisma.project.delete({
+    where: { project_id: projectID },
+  });
   return deletedProject;
-}
-
+};
 
 //Work experience services
 const getWorks = async (professionalID: string): Promise<Work[]> => {
@@ -208,23 +216,23 @@ const createWork = async (professionalID: string): Promise<Work> => {
   return createdWork;
 };
 
-const updateWork = async (workID: string, workData: Partial<Work>): Promise<Work> => {
-  const updatedWork = await prisma.work_experience.update(
-    {
-      where : {work_experience_id : workID},
-      data : workData,
-    }
-  )
+const updateWork = async (
+  workID: string,
+  workData: Partial<Work>
+): Promise<Work> => {
+  const updatedWork = await prisma.work_experience.update({
+    where: { work_experience_id: workID },
+    data: workData,
+  });
   return updatedWork;
 };
 
 const deleteWork = async (workID: string): Promise<Work> => {
-  const deletedWork  = await prisma.work_experience.delete({
-    where : {work_experience_id : workID}
-  })
+  const deletedWork = await prisma.work_experience.delete({
+    where: { work_experience_id: workID },
+  });
   return deletedWork;
-}
-
+};
 
 //Work experience services
 const getSkills = async (professionalID: string): Promise<Skill[]> => {
