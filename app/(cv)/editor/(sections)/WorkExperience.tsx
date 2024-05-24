@@ -211,9 +211,9 @@ const WorkExperience: React.FC = () => {
         </div>
       ))}
       <div className="w-full justify-center">
-        <button onClick={() => handleCreation(professionalID)} className='flex flex-row items-center justify-center text-outlinegray hover:text-secondarygray text-md p-20'>
+        <button onClick={() => handleCreation(professionalID)} className='flex flex-row items-center justify-center text-outlinegray hover:text-secondarygray text-md p-2'>
            <p className='text-4xl'>+</p>
-           <p className="m-2 mt-[14px]">Add Work Experience</p>
+           <p className="m-2 ">Add Work Experience</p>
         </button>  
       </div>
     </div>
