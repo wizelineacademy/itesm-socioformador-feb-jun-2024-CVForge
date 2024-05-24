@@ -16,12 +16,14 @@ const getProfessionalByEmail = async (userEmail : string) => {
       where : { email : userEmail},
     }
   );
+  
   const professional_info = await prisma.professional_info.findFirst(
     {
       where : {user_id : user.users_id}
     }
   );
-  return professional_info.professional_info_id;
+  // return professional_info.professional_info_id;
+  return professional_info
 }
 
 export {getUserIdByEmail, getProfessionalByEmail}

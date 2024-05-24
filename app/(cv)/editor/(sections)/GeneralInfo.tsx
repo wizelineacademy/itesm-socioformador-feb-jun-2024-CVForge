@@ -19,8 +19,10 @@ const GeneralInfo = () => {
   useEffect(() => {
     const fetchProfessionalID = async () => {
       if (session?.user?.email) {
+        
         const staticID = await getProfessionalByEmail(session.user.email);
-        setProfessionalID(staticID);
+        console.log('Professional ID:', staticID);
+        // setProfessionalID(staticID);
       }
     };
     
