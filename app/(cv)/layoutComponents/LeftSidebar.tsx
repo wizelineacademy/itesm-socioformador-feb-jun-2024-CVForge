@@ -34,41 +34,19 @@ const SidebarMenuElement: React.FC<SidebarListElementProps> = ({ title, currentT
         <li className="my-6">
             <Link href={href} className= {`flex flex-row items-center ${!open && "hidden"} hover:bg-secondarygray hover:rounded hover:bg-opacity-30 p-1.5`} style={{ color: color }}>
                 <div className="flex cursor-pointer items-center">
+                    {/* Icon */}
                     <div className="mr-1 flex flex-row items-center w-8 ">
                         <div className="w-8 h-8 text-4xl ">
                             {IconComponent}
                         </div>
                     </div>
+                    {/* Text */}
                     <p className= "ml-2 origin-left font-medium font-inter text-xl font-bold" style={{ color: color }}>
                         {title}
-                     </p>
+                    </p>
                 </div>
             </Link>
         </li>
-    );
-};
-
-const SidebarSettingsElement: React.FC<SidebarListElementProps> = ({ title, icon, open}) => {
-    // The color to be assigned
-    const color = "#7E7E7E";
-    // The icon for the item
-    const IconComponent = React.cloneElement(icon, { strokeColor: color });
-
-    return (
-        <button className="my-4" onClick={() => signOut({callbackUrl: "/", redirect: true})}>
-            <div className= {`flex flex-row items-center ${!open && "hidden"} hover:bg-secondarygray hover:rounded hover:bg-opacity-30 p-1.5 pr-16`} style={{ color: color }}>
-                <div className="flex cursor-pointer items-center">
-                    <div className="mr-1 flex flex-row items-center w-8 ">
-                        <div className="w-8 h-8 text-4xl ">
-                            {IconComponent}
-                        </div>
-                    </div>
-                    <p className= "ml-2 origin-left font-medium font-inter text-lg text-secondarygray" >
-                        {title}
-                     </p>
-                </div>
-            </div>
-        </button>
     );
 };
 
@@ -104,41 +82,37 @@ const LeftSidebar = () => {
     return (
         <aside className="flex z-10">
             <div className={`bg-primarygray h-screen ${open ? "w-64" : "w-0"} duration-200 relative`}>
-                <div className="p-5 h-full">
+                <div className="p-5 h-screen">
                     <IoIosArrowForward className={`flex flex-col h-screen items-center justify-center text-primarygray text-3xl absolute -right-7 cursor-pointer hover:text-secondarygray ${open && "rotate-180"}`} 
                         onClick={() => setOpen(!open)}
                     />
-                    <div className={`${!open && "hidden"} py-8 `}>
-                        <div className="inline-flex">
-                            <Link href="/">
-                                <div className="w-full h-10"><SecondaryLogo /></div>
-                            </Link>
-                        </div>
-                        <div className="w-full px-2">
-                            <div className="pt-3">
-                                <ul>
-                                    <SidebarMenuElement
+                    <div className={`${!open && "hidden"} my-auto mt-8`}>
+                        <Link href="/">
+                            <div className="w-full h-10"><SecondaryLogo /></div>
+                        </Link>
+                        <div className="flex flex-row w-full ">
+                            <ul className="w-full">
+                                <SidebarMenuElement
                                         title="Editor"
                                         icon={<PersonalInfo_icon />}
                                         currentTab={currentTab}
                                         href="/editor"
                                         itemTab="editor"
                                         open= {open}
-                                    />
-                                    <SidebarMenuElement
+                                />
+                                <SidebarMenuElement
                                         title="CVs"
                                         icon={<CV_icon />}
                                         currentTab={currentTab}
                                         href="/cv_gallery"
                                         itemTab="cv_gallery"
                                         open= {open}
-                                    />
-                                </ul>
-                            </div>
-                            <div className="absolute bottom-0 w-48 pb-6">
-                                <button className="my-4" onClick={() => signOut({callbackUrl: "/", redirect: true})}>
-                                    <div className= {`flex flex-row items-center ${!open && "hidden"} hover:bg-secondarygray hover:rounded hover:bg-opacity-30 p-1.5 pr-16`}>
-                                        <div className="flex cursor-pointer items-center">
+                                />
+                                <button 
+                                    className= {`flex flex-row items-center ${!open && "hidden"} hover:bg-secondarygray hover:rounded hover:bg-opacity-30 p-1.5 pr-20 mt-full absolute bottom-0 mb-10`} 
+                                    onClick={() => signOut({callbackUrl: "/", redirect: true})}
+                                >
+                                    <div className="flex cursor-pointer items-center">
                                             <div className="mr-1 flex flex-row items-center w-8 ">
                                                 <div className="w-8 h-8 text-4xl ">
                                                     <SignOut />
@@ -148,9 +122,8 @@ const LeftSidebar = () => {
                                                 Sign Out
                                             </p>
                                         </div>
-                                    </div>
                                 </button>
-                            </div>
+                            </ul>
                         </div>
                     </div>
                 </div>

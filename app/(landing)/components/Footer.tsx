@@ -1,6 +1,7 @@
 import React from "react";
 import SecondaryLogo from "@/public/assets/SecondaryLogo"
 import Link from "next/link";
+import Image from "next/image";
 
 const Footer: React.FC = () => {
   return (
