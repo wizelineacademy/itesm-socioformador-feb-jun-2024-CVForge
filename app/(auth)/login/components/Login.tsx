@@ -46,7 +46,7 @@ const Login: React.FC= () => {
         <div className='flex items-center justify-center h-screen w-screen'>
             <div className='bg-white shadow-md flex items-between justify-center rounded-lg w-auto h-auto mx-auto'>
                 <div className='flex flex-col pb-8'>
-                    <Link href={"/"} className="sticky h-10 flex items-center text-outlinegray hover:text-secondarygray bg-transparent pl-8 pt-8">
+                    <Link href={"/"} className="sticky h-10 flex items-center text-outlinegray hover:text-secondarygray bg-transparent pl-8 pt-8 mr-auto">
                         <IoIosArrowForward className='rotate-180'/>
                         <p className="text-md font-bold font-inter ">Back to Menu</p>
                     </Link>

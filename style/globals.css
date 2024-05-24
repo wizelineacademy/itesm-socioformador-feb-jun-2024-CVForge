@@ -187,3 +187,78 @@ body {
   50% { height: 8px; width: 40px }
   100% { left: 235px; height: 30px; width: 15px}
 }
+
+.dotted-line-0,.dotted-line-1,.dotted-line-2,.dotted-line-3,.dotted-line-4,.dotted-line-5,.dotted-line-6,.dotted-line-7,.dotted-line-8,.dotted-line-9,.dotted-line-10,.dotted-line-11,.dotted-line-12,.dotted-line-13,.dotted-line-14 {
+  animation-duration: 7s;
+  animation-name: waveAnimation;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease;
+  transition: all;
+}
+
+.dotted-line-0 {
+  animation-delay: 0s;
+}
+.dotted-line-1 {
+  animation-delay: 0.5s;
+}
+.dotted-line-2 {
+  animation-delay: 1s;
+}
+.dotted-line-3 {
+  animation-delay: 1.5s;
+}
+.dotted-line-4 {
+  animation-delay: 2s;
+}
+.dotted-line-5 {
+  animation-delay: 2.5s;
+}
+.dotted-line-6 {
+  animation-delay: 3s;
+}
+.dotted-line-7 {
+  animation-delay: 3.5s;
+}
+.dotted-line-8 {
+  animation-delay: 4s;
+}
+.dotted-line-9 {
+  animation-delay: 4.5s;
+}
+.dotted-line-10 {
+  animation-delay: 5s;
+}
+.dotted-line-11 {
+  animation-delay: 5.5s;
+}
+.dotted-line-12 {
+  animation-delay: 6s;
+}
+.dotted-line-13 {
+  animation-delay: 6.5s;
+}
+.dotted-line-14 {
+  animation-delay: 7s;
+}
+
+
+@keyframes waveAnimation {
+  0%, 100% {
+    transform: scaleY(1); 
+  }
+  50% {
+    transform: scaleY(1.08); 
+  }
+
+}
+
+/* @keyframes waveAnimation {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+
+} */

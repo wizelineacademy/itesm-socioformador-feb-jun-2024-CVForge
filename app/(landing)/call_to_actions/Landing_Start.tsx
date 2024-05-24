@@ -1,6 +1,6 @@
-import DottedBg from '@/public/assets/svg/DottedBg';
 import React from 'react';
 import Link from 'next/link';
+import DottedBg from '@/app/components/WavedDots';
 
 const LandingStart: React.FC = () => {
   return (
@@ -33,7 +33,7 @@ const LandingStart: React.FC = () => {
             <div className='bg-gradient-to-r from-gptgreen to-aiblue opacity-50 rounded ' style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}></div>
         </div>
         {/* Dotted Pattern*/}
-        <div className='w-[550px] h-[500px] absolute top-[-58px] right-0 z-0 opacity-40'>
+        <div className='w-[550px] h-[500px] absolute top-[-8px] right-0 z-0 opacity-40 flex flex-row'>
             <DottedBg/>
         </div>
     </div>
