@@ -25,7 +25,6 @@ const GeneralInfo = () => {
   useEffect(() => {
     const fetchProfessionalID = async () => {
       const professioanlInfoId = await getProfessionalByEmail(session.user.email);
-      console.log("Professional ID:", professioanlInfoId);
       if (professioanlInfoId) setProfessionalID(professioanlInfoId);
     };
 
