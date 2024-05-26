@@ -200,7 +200,6 @@ const Gallery: React.FC = () => {
           title: title,
           desired_position_id: selectedPosition,
         });
-        console.log("new cv: ", newCv)
 
         setCvs((cvs) => [...cvs, newCv]);
         setIsFormVisible(false);
