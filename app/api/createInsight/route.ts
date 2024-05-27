@@ -9,6 +9,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     try {
         const { query } = parse(req.url || '', true);
         const cvId = query.cvId as string;
+        const jobPosition = query.jobPosition as string; // Extract job position from query parameters
         const defaultCvId = "28b8183b-239d-4a8d-8485-6a4edb5ff943";
 
         const generatedCv = await prisma.cv.findUnique({
@@ -16,7 +17,8 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         });
         const cvData = generatedCv.content;
 
-        const recommendations = await generate_recommendations(cvData);
+        const recommendations = await generate_recommendations(cvData, jobPosition);
+        console.log(jobPosition, recommendations)
 
         return NextResponse.json({ message: recommendations });
     } catch (error: any) {
