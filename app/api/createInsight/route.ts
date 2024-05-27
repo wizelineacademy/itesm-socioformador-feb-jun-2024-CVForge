@@ -15,9 +15,8 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
             where: { cv_id: cvId || defaultCvId },
         });
         const cvData = generatedCv.content;
-        const jobPosition = "Data Engineer"; 
 
-        const recommendations = await generate_recommendations(cvData, jobPosition);
+        const recommendations = await generate_recommendations(cvData);
 
         return NextResponse.json({ message: recommendations });
     } catch (error: any) {
