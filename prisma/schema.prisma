@@ -71,6 +71,7 @@ model cv {
   ai_response         ai_response?
   desired_position    desired_position? @relation(fields: [desired_position_id], references: [desired_position_id], onDelete: NoAction, onUpdate: NoAction)
   users               users?            @relation(fields: [user_id], references: [users_id], onDelete: NoAction, onUpdate: NoAction)
+  content             String?           @db.Text
   recommendation      recommendation[]
 }
 
@@ -190,7 +191,7 @@ model certificate {
 }
 
 model skill {
-  skill_id             String             @id @db.Uuid
+  skill_id             String             @id @default(uuid())
   professional_info_id String?            @db.Uuid
   title                String?            @db.VarChar(255)
   duration             String?            @db.VarChar(255)

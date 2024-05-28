@@ -10,7 +10,7 @@ def generate_recommendations(cv_data, job_position):
     try:
         # Craft prompt
         
-        prompt = f"Hello! I'm seeking advice on improving my CV for a {job_position} position. Below is the content of my CV:\n\n"
+        prompt = f"Hello! I'm seeking advice on improving my CV. Below is the content of my CV:\n\n"
         # for section in cv_data:
         #     for key, value in section.items():
         #         prompt += f"CV section: {key}\nContent: {value}\n\n"

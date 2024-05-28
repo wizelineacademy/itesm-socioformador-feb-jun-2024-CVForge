@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma';
-import userService from '@/services/userService'; // Assuming you export these functions from a service file
+import { createUser, findUserById, getAllUsers} from '@/services/userService'; // Assuming you export these functions from a service file
 import { User } from '@/types/user'; // Import the User type if needed, adjust path as required
 import { expect } from '@jest/globals';
 
@@ -31,7 +31,7 @@ describe('User Service', () => {
     const expectedUser = { users_id: mockUserId, name: 'John Doe', email: 'john@example.com' };
 
     // Perform the function call
-    const user = await userService.findUserById(mockUserId);
+    const user = await findUserById(mockUserId);
 
     // Check that the returned value matches the expected mock value
     expect(user).toEqual(expectedUser);
@@ -48,7 +48,7 @@ describe('User Service', () => {
     ];
 
     // Perform the function call
-    const users = await userService.getAllUsers();
+    const users = await getAllUsers();
 
     // Check that the returned value matches the expected mock value
     expect(users).toEqual(expectedUsers);
@@ -78,7 +78,7 @@ describe('User Service', () => {
     };
 
     // Call the function under test
-    const user = await userService.createUser(newUserData);
+    const user = await createUser(newUserData);
 
     // Assertions to check both the result and the call to the Prisma create method
     expect(user).toEqual(expectedUser);

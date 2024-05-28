@@ -3,10 +3,15 @@
 import prisma from '@/lib/prisma';
 
 export const findCVById = async (cvID: string) => {
-  const cv = await prisma.cv.findUnique({
-    where: { cv_id: cvID },
-  });
-  return cv;
+  try {
+    const cv = await prisma.cv.findUnique({
+      where: { cv_id: cvID },
+    });
+    return cv;
+  } catch (error) {
+    console.error('Failed to fetch CV:', error);
+    return null;
+  }
 };
 
 export const getAllCVs = async(userId: string) => {

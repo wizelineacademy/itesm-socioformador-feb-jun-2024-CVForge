@@ -1,57 +1,34 @@
 import { NextRequest, NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
+
 import { MOCK_PROFESSIONAL_INFO } from "../../(cv)/cv/[cv_id]/CONSTANTS";
 import generateCV from "@/scripts/cv_generation";
 
-// Handle POST requests
-// export async function POST(req: NextRequest): Promise<NextResponse> {
-//     try {
-//         // Extract data from the request
-//         const data = req.body;
-//         const cvData = JSON.stringify(MOCK_PROFESSIONAL_INFO);
-//         const jobPosition = "Data Engineer";
+const prisma = new PrismaClient();
+const STATIC_CV_ID = "828e9129-21e6-4523-8bb1-bd4e7e3c9cc4";
 
-//         // Execute a Python script with the given parameters
-//         const result: string = await new Promise((resolve, reject) => {
-//             exec(`python3 scripts/cv_generation.py ${cvData} "${jobPosition}"`, (error, stdout, stderr) => {
-//                 if (error) {
-//                     console.log("Execution error:", error);
-//                     reject(new Error('Error executing Python script: ' + error.message));
-//                     return;
-//                 }
-//                 if (stderr) {
-//                     console.log("Script error output:", stderr);
-//                     reject(new Error('Python script reported an error: ' + stderr));
-//                     return;
-//                 }
-//                 resolve(stdout);
-//             });
-//         });
-
-//         // Return the parsed results as a JSON response
-//         return NextResponse.json({ message: "CV processed successfully", results: result });
-//     } catch (error) {
-//         console.error("Error in Python script execution:", error);
-//         return NextResponse.json({ error: error.message });
-//     }
-// }
-
-export async function POST(req: NextRequest): Promise<NextResponse> {
+export async function POST(req: NextRequest) {
   try {
-    // Extract data from the request
-    const data = req.body;
-    const cvData = JSON.stringify(MOCK_PROFESSIONAL_INFO);
-    const jobPosition = "Data Engineer";
+    const data = await req.json();
+    const { cvId, professionalInfo, selectedPosition } = data;
 
-    // Call the generateCV function
-    const result = await generateCV(cvData, jobPosition);
+    // Call the generateCV function with the parsed CV content
+    const generatedCV = await generateCV(professionalInfo, selectedPosition);
 
-    // Return the parsed results as a JSON response
+    // Update the static CV entry in the database or handle the response
+    const updatedCv = await prisma.cv.update({
+      where: { cv_id: cvId },
+      data: {
+        content: generatedCV,
+      },
+    });
+
     return NextResponse.json({
       message: "CV processed successfully",
-      results: result,
+      results: updatedCv,
     });
   } catch (error) {
-    console.error("Error in JavaScript script execution:", error);
+    console.error("Error in POST method:", error);
     return NextResponse.json({ error: error.message });
   }
 }
