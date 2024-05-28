@@ -7,23 +7,22 @@ const SignInOutButton = () => {
 
   if (session && session.user) {
     return (
-      <div className="flex gap-4 items-center">
+      <div className="flex gap-4 items-center xl:text-lg lg:text-lg md:text-md sm:text-xs">
         <p className="text-secondarygray hover:underline">{session.user.email}</p>
-        
-        <button onClick={() => signOut()} className="hidden md:block bg-gradient-to-r from-gptgreen to-aiblue text-whitefo font-bold w-40 py-2 px-4 rounded-3xl delay-50 hover:scale-105 duration-200">
+        <button onClick={() => signOut()} className="hidden md:block bg-gradient-to-r from-gptgreen to-aiblue text-whitefo font-bold py-2 px-4 rounded-3xl delay-50 hover:scale-105 duration-200 w-40">
           Sign Out
         </button>
       </div>
     );
   }
   return (
-    <div className="flex gap-4 items-center">
-      <div className="w-[140px]"/>
+    <div className="flex gap-4 items-center xl:text-sm lg:text-sm md:text-md sm:text-xs">
       <button onClick={() => signIn()} className="hidden md:block bg-gradient-to-r from-gptgreen to-aiblue text-whitefo font-bold w-40 py-2 px-4 rounded-3xl delay-50 hover:scale-105 duration-200">
         Sign In
       </button>
     </div>
   );
 };
+//xl:text-xl lg:text-lg md:text-md sm:text-sm
 
 export default SignInOutButton;
