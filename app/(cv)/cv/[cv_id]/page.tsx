@@ -15,7 +15,7 @@ const CV = ({ params }: { params: { cv_id: string } }) => {
       if (params.cv_id) {
         const cvData = await findCVById(params.cv_id);
         if (cvData) {
-          setCvBodyData(cvData.content)
+          setCvBodyData(cvData.content);
           console.log("CV Data:", cvData);
         } else {
           console.log("No CV found with ID:", params.cv_id);
@@ -80,21 +80,9 @@ const CV = ({ params }: { params: { cv_id: string } }) => {
                 branding: false,
                 resize: false,
                 plugins:
-                  "anchor autolink charmap codesample emoticons link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown autosave",
+                  "anchor autolink charmap codesample emoticons link lists media searchreplace table visualblocks wordcount linkcheckerx",
                 toolbar:
-                  "undo redo | fontfamily fontsize | bold italic underline strikethrough | link image media table | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
-                tinycomments_mode: "embedded",
-                tinycomments_author: "Author name",
-                mergetags_list: [
-                  { value: "First.Name", title: "First Name" },
-                  { value: "Email", title: "Email" },
-                ],
-                ai_request: (request, respondWith) =>
-                  respondWith.string(() =>
-                    Promise.reject("See docs to implement AI Assistant")
-                  ),
-                autosave_interval: 10000, // Autosave interval in milliseconds
-                autosave_prefix: "cv-autosave", // Prefix for autosave key
+                  "undo redo | fontfamily fontsize | bold italic underline strikethrough | link image media table | spellcheckdialog | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat",
               }}
               initialValue={cvBodyData}
               onInit={(evt, editor) => (editorRef.current = editor)}
