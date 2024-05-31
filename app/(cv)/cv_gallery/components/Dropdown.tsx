@@ -38,7 +38,7 @@ const Dropdown: React.FC<DropdownProps> = ({cvProp, deleteFunction}) => {
               <RiRoadMapLine/>
               <p className='pl-2'>Roadmap</p>
             </Link>
-            <Link href="/" className="flex flex-row block px-4 py-2 text-sm text-secondarygray hover:bg-gray-100 hover:text-primarygray" role="menuitem">
+            <Link href="#" className="flex flex-row block px-4 py-2 text-sm text-secondarygray hover:bg-gray-100 hover:text-primarygray" role="menuitem">
               <MdOutlineSimCardDownload />
               <p className='pl-2'>Download</p>
             </Link>
