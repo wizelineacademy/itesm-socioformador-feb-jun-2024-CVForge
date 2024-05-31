@@ -120,5 +120,7 @@ const Projects: React.FC<ProjectProps> = ({projectsList, setProjects, profession
       ))}
       <button onClick={() => handleCreation(professionalID)}>Create New Project</button>
     </div>
-  )
-*/
+  ); 
+}
+
+export default Projects;
