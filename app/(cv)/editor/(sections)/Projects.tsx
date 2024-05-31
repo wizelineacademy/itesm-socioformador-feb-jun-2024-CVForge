@@ -13,34 +13,14 @@ interface Project {
   end_date: Date;
 }
 
-const Projects: React.FC = () => {
-  const { data: session } = useSession();
-  const [professionalID, setProfessionalID] = useState<string | null>(null);
-  const [projects, setProjects] = useState<Project[]>([]);
+interface ProjectProps {
+  projectsList : Project[];
+  setProjects : React.Dispatch<React.SetStateAction<Project[]>>;
+  professionalID: string | null;
+}
 
-  useEffect(() => {
-    const fetchProfessionalID = async () => {
-      if (session?.user?.email) {
-        const staticID = await getProfessionalByEmail(session.user.email);
-        setProfessionalID(staticID);
-      }
-    };
-    
-    fetchProfessionalID();
-  }, [session]);
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const projectsGetted = await getProjects(professionalID);
-        setProjects(projectsGetted);
-      }
-      catch (error) {
-        console.log("There was an error trying to fetch the projects", error)
-      }
-    }
-    fetchProjects();
-  }, []);
-
+const Projects: React.FC<ProjectProps> = ({projectsList, setProjects, professionalID}) => {
+  
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, projectID: string) => {
     event.preventDefault();
 
@@ -91,7 +71,7 @@ const Projects: React.FC = () => {
 
   return (
     <div>
-      {projects.map((project, index) => (
+      {projectsList.map((project, index) => (
         <div key={project.project_id}>
           <h1>Project #{index + 1}</h1>
           <form onSubmit={(event) => handleSubmit(event, project.project_id)}>

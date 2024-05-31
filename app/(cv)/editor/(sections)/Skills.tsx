@@ -15,10 +15,12 @@ interface Skill {
   proficiency : string;
 }
 
-const Skills: React.FC = () => {
-  const { data: session } = useSession();
-  const [professionalID, setProfessionalID] = useState<string | null>(null);
-  const [skills, setSkills] = useState<Skill[]>([]);
+interface SkillProps {
+  skillList : Skill[];
+  setSkills : React.Dispatch<React.SetStateAction<Skill[]>>;
+  professionalID: string | null;
+}
+const Skills: React.FC<SkillProps> = ({skillList, setSkills, professionalID}) => {
   const [editingCardId, setEditingCardId] = useState<string | null>(null);
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
 
@@ -83,35 +85,13 @@ const Skills: React.FC = () => {
     setEditingCardId(skillCreated.skill_id);
   };
 
-  useEffect(() => {
-    const fetchProfessionalID = async () => {
-      if (session?.user?.email) {
-        const staticID = await getProfessionalByEmail(session.user.email);
-        setProfessionalID(staticID);
-      }
-    };
-    
-    fetchProfessionalID();
-  }, [session]);
-
-  useEffect(() => {
-    const fetchSkills = async () => {
-      try {
-        const skillsGetted = await getSkills(professionalID);
-        setSkills(skillsGetted);
-      }
-      catch (error) {
-        console.log("There was an error trying to fetch the skills", error)
-      }
-    }
-    fetchSkills();
-  }, [professionalID]);
+  
 
   return (
     <div className="w-full h-full overflow-y-auto">
       <h1 className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-1">Skills</h1>
       <div className='w-full h-0.5 bg-outlinegray rounded-lg mt-3'></div>
-      {skills.map((skill, index) => (
+      {skillList.map((skill, index) => (
         <div 
           onMouseEnter={() => setHoveredCardId(skill.skill_id)}
           onMouseLeave={() => setHoveredCardId(null)}

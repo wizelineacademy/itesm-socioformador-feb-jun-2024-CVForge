@@ -15,51 +15,32 @@ import { getProfessionalByEmail } from "@/services/sessionService";
     * handleSubmit
     * actual html code
 */
-const GeneralInfo = () => {
-  const { data: session } = useSession();
-  const [professionalID, setProfessionalID] = useState<string | null>(null);
+interface GeneralInfo {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  github_link: string;
+  linkedin_link: string;
+}
+
+interface GeneralInfoProps {
+  generalInfo : GeneralInfo;
+  setGeneralInfo : React.Dispatch<React.SetStateAction<GeneralInfo>>;
+  professionalID: string | null;
+}
+
+const GeneralInfo: React.FC<GeneralInfoProps> = ({generalInfo, setGeneralInfo, professionalID}) => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchProfessionalID = async () => {
-      const professioanlInfoId = await getProfessionalByEmail(session.user.email);
-      if (professioanlInfoId) setProfessionalID(professioanlInfoId);
-    };
-
-    if (session?.user?.email) fetchProfessionalID();
-  }, [session?.user?.email]);
-
-  const [existingGeneralInfo, setExistingGeneralInfo] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    phone: "",
-    github_link: "",
-    linkedin_link: "",
-  });
-
-  useEffect(() => {
-    const fetchExistingGeneralInfo = async () => {
-      try {
-        const existingInfo = await getGeneralInfo(professionalID);
-        if (existingInfo) {
-          setExistingGeneralInfo(existingInfo);
-        }
-      } catch (error) {
-        console.error("Error fetching existing general info:", error);
-      }
-    };
-    if (professionalID) fetchExistingGeneralInfo();
-  }, [professionalID]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
     try {
-      await createGeneralInfo(professionalID, { ...existingGeneralInfo });
+      await createGeneralInfo(professionalID, { ...generalInfo });
       // Refresh or update state as needed
     } catch (error) {
       console.error("Error creating general info:", error);
@@ -70,8 +51,8 @@ const GeneralInfo = () => {
   };
 
   const handleChange = (e) => {
-    setExistingGeneralInfo({
-      ...existingGeneralInfo,
+    setGeneralInfo({
+      ...generalInfo,
       [e.target.name]: e.target.value,
     });
   };
@@ -92,8 +73,8 @@ const GeneralInfo = () => {
                 type="text"
                 name="first_name"
                 className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
-                placeholder={existingGeneralInfo.first_name}
-                value={existingGeneralInfo.first_name}
+                placeholder={generalInfo.first_name}
+                value={generalInfo.first_name}
                 onChange={handleChange}
               />
             </label>
@@ -109,8 +90,8 @@ const GeneralInfo = () => {
                 type="text"
                 name="last_name"
                 className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
-                placeholder={existingGeneralInfo.last_name}
-                value={existingGeneralInfo.last_name}
+                placeholder={generalInfo.last_name}
+                value={generalInfo.last_name}
                 onChange={handleChange}
               />
             </label>
@@ -129,8 +110,8 @@ const GeneralInfo = () => {
                 type="email"
                 name="email"
                 className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
-                placeholder={existingGeneralInfo.email}
-                value={existingGeneralInfo.email}
+                placeholder={generalInfo.email}
+                value={generalInfo.email}
                 onChange={handleChange}
               />
             </label>
@@ -144,8 +125,8 @@ const GeneralInfo = () => {
                 type="tel"
                 name="phone"
                 className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
-                placeholder={existingGeneralInfo.phone}
-                value={existingGeneralInfo.phone}
+                placeholder={generalInfo.phone}
+                value={generalInfo.phone}
                 onChange={handleChange}
               />
             </label>
@@ -164,8 +145,8 @@ const GeneralInfo = () => {
                 type="text"
                 name="github_link"
                 className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
-                placeholder={existingGeneralInfo.github_link}
-                value={existingGeneralInfo.github_link} 
+                placeholder={generalInfo.github_link}
+                value={generalInfo.github_link} 
                 onChange={handleChange}
               />
             </label>
@@ -179,8 +160,8 @@ const GeneralInfo = () => {
                 type="text"
                 name="linkedin_link"
                 className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
-                placeholder={existingGeneralInfo.linkedin_link}
-                value={existingGeneralInfo.linkedin_link} 
+                placeholder={generalInfo.linkedin_link}
+                value={generalInfo.linkedin_link} 
                 onChange={handleChange}
               />
             </label>

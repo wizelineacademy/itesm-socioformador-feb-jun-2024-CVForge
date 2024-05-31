@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import Education from "./(sections)/Education";
 import GeneralInfo from "./(sections)/GeneralInfo";
 import Projects from "./(sections)/Projects";
@@ -9,19 +9,196 @@ import WorkExperience from "./(sections)/WorkExperience";
 import { setCurrentTab } from "@/contexts/cv/sidebar/currentTab";
 import { useDispatch } from "react-redux";
 import { IoIosArrowForward } from "react-icons/io";
-
+import {getProfessionalByEmail} from "@/services/sessionService";
+import {getEducation, getGeneralInfo, getProjects, getSkills, getWorks} from "@/services/professional_information/generalService";
+import { useSession } from "next-auth/react";
 const ProfessionalInfo: React.FC = () => {
+  interface Education {
+    education_id: string;
+    school: string;
+    education_degree: string;
+    gpa: number;
+    start_date: Date;
+    end_date: Date;
+    relevant_coursework: string;
+  }
+
+  interface GeneralInfo {
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone: string;
+    github_link: string;
+    linkedin_link: string;
+  }
+  
+  interface Project {
+    project_id: string;
+    name: string;
+    description: string;
+    start_date: Date;
+    end_date: Date;
+  }
+  interface Skill {
+    skill_id : string;
+    title : string;
+    proficiency : string;
+  }
+  interface Work {
+    work_experience_id : string;
+    work_position : string;
+    description : string;
+    start_date : Date;
+    end_date : Date;
+  }
   const dispatch = useDispatch()
   dispatch(setCurrentTab("editor"))
-
+  const { data: session } = useSession();
   const [currentSection, setCurrentSection] = useState("general");
+  const [professionalID, setProfessionalID] = useState<string | null>(null);
+  const [educations, setEducations] = useState<Education[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [skills, setSkills] = useState<Skill[]>([]);
+  const [works, setWorks] = useState<Work[]>([]);
+  useEffect(() => {
+    const fetchProfessionalID = async () => {
+      if (session?.user?.email) {
+        const staticID = await getProfessionalByEmail(session.user.email);
+        setProfessionalID(staticID);
+      }
+    };
+    
+    fetchProfessionalID();
+  }, [session]);
 
-  const sectionComponents = { 
-    general: <GeneralInfo />,
-    education: <Education />,
-    projects: <Projects />,
-    work: <WorkExperience />,
-    skills: <Skills />,
+  useEffect(() => {
+    const fetchWorks = async () => {
+      try {
+        const worksGetted = await getWorks(professionalID);
+        setWorks(worksGetted);
+      }
+      catch (error) {
+        console.log("There was an error trying to fetch the works", error)
+      }
+    }
+    fetchWorks();
+  }, [professionalID]);
+  useEffect(() => {
+    const fetchProfessionalID = async () => {
+      if (session?.user?.email) {
+        const staticID = await getProfessionalByEmail(session.user.email);
+        setProfessionalID(staticID);
+      }
+    };
+    
+    fetchProfessionalID();
+  }, [session]);
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const projectsGetted = await getProjects(professionalID);
+        setProjects(projectsGetted);
+      }
+      catch (error) {
+        console.log("There was an error trying to fetch the projects", error)
+      }
+    }
+    fetchProjects();
+  }, []);
+  const [existingGeneralInfo, setExistingGeneralInfo] = useState<GeneralInfo>({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    github_link: "",
+    linkedin_link: "",
+  });
+  useEffect(() => {
+    const fetchProfessionalID = async () => {
+      if (session?.user?.email) {
+        const staticID = await getProfessionalByEmail(session.user.email);
+        setProfessionalID(staticID);
+      }
+    };
+
+    fetchProfessionalID();
+  }, [session]);
+
+  useEffect(() => {
+    const fetchEducations = async () => {
+      if (professionalID) {
+        const fetchedEducations = await getEducation(professionalID);
+        setEducations(fetchedEducations);
+      }
+    };
+
+    fetchEducations();
+  }, [professionalID]);
+
+  useEffect(() => {
+    const fetchExistingGeneralInfo = async () => {
+      try {
+        const existingInfo = await getGeneralInfo(professionalID);
+        if (existingInfo) {
+          setExistingGeneralInfo(existingInfo);
+        }
+      } catch (error) {
+        console.error("Error fetching existing general info:", error);
+      }
+    };
+    if (professionalID) fetchExistingGeneralInfo();
+  }, [professionalID]);
+
+  useEffect(() => {
+    const fetchProfessionalID = async () => {
+      if (session?.user?.email) {
+        const staticID = await getProfessionalByEmail(session.user.email);
+        setProfessionalID(staticID);
+      }
+    };
+    
+    fetchProfessionalID();
+  }, [session]);
+
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        const skillsGetted = await getSkills(professionalID);
+        setSkills(skillsGetted);
+      }
+      catch (error) {
+        console.log("There was an error trying to fetch the skills", error)
+      }
+    }
+    fetchSkills();
+  }, [professionalID]);
+  const sectionComponents = {
+    general: (<GeneralInfo 
+    generalInfo = {existingGeneralInfo}
+    setGeneralInfo = {setExistingGeneralInfo}
+    professionalID = {professionalID}
+    />
+    ),
+    education: 
+      (<Education
+        educations={educations}
+        setEducations={setEducations}
+        professionalID={professionalID}
+      />),
+    projects: (<Projects 
+      projectsList={projects}
+      setProjects={setProjects}
+      professionalID={professionalID}
+    />),
+    work: <WorkExperience 
+      works={works}
+      setWorks={setWorks}
+      professionalID={professionalID}/>,
+    skills: <Skills 
+      skillList={skills}
+      setSkills={setSkills}
+      professionalID={professionalID}
+    />,
   };
 
   const handleSectionChange = (section: string) => {

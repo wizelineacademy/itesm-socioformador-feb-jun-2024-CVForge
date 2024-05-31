@@ -17,10 +17,13 @@ interface Work {
   end_date : Date;
 }
 
-const WorkExperience: React.FC = () => {
-  const { data: session } = useSession();
-  const [professionalID, setProfessionalID] = useState<string | null>(null);
-  const [works, setWorks] = useState<Work[]>([]);
+interface WorkProps {
+  works : Work[];
+  setWorks : React.Dispatch<React.SetStateAction<Work[]>>;
+  professionalID : string | null ,
+}
+
+const WorkExperience: React.FC<WorkProps> = ({works, setWorks, professionalID}) => {
   const [editingCardId, setEditingCardId] = useState<string | null>(null);
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
 
@@ -87,29 +90,6 @@ const WorkExperience: React.FC = () => {
     setEditingCardId(workCreated.work_experience_id);
   };
 
-  useEffect(() => {
-    const fetchProfessionalID = async () => {
-      if (session?.user?.email) {
-        const staticID = await getProfessionalByEmail(session.user.email);
-        setProfessionalID(staticID);
-      }
-    };
-    
-    fetchProfessionalID();
-  }, [session]);
-
-  useEffect(() => {
-    const fetchWorks = async () => {
-      try {
-        const worksGetted = await getWorks(professionalID);
-        setWorks(worksGetted);
-      }
-      catch (error) {
-        console.log("There was an error trying to fetch the works", error)
-      }
-    }
-    fetchWorks();
-  }, [professionalID]);
 
   return (
     <div className="w-full h-full overflow-y-auto">

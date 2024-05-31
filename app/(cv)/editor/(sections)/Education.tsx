@@ -5,6 +5,7 @@ import {createEducation, getEducation, updateEducation, deleteEducation} from "@
 import ProfessionalInfo from "../page";
 import { useSession } from "next-auth/react";
 import { getProfessionalByEmail } from "@/services/sessionService";
+
 interface Education {
   education_id: string;
   school: string;
@@ -15,30 +16,14 @@ interface Education {
   relevant_coursework: string;
 }
 
-const EducationComponent: React.FC = () => {
-  const { data: session } = useSession();
-  const [educations, setEducations] = useState<Education[]>([]);
-  const [professionalID, setProfessionalID] = useState<string | null>(null);
+interface EducationProps {
+  educations: Education[];
+  setEducations: React.Dispatch<React.SetStateAction<Education[]>>;
+  professionalID: string | null;
+}
 
-  useEffect(() => {
-    const fetchProfessionalID = async () => {
-      if (session?.user?.email) {
-        const staticID = await getProfessionalByEmail(session.user.email);
-        setProfessionalID(staticID);
-      }
-    };
-    
-    fetchProfessionalID();
-  }, [session]);
+const EducationComponent: React.FC<EducationProps> = ({ educations, setEducations, professionalID }) => {
 
-
-  useEffect(() => {
-    const fetchEducations = async () => {
-      const fetchedEducations = await getEducation(professionalID);
-      setEducations(fetchedEducations);
-    }
-    fetchEducations();
-  }, [professionalID]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, educationID: string) => {
     event.preventDefault();
