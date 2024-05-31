@@ -22,8 +22,19 @@ interface ProjectProps {
 }
 
 const Projects: React.FC<ProjectProps> = ({projectsList, setProjects, professionalID}) => {
-  
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, projectID: string) => {
+  const [editingCardId, setEditingCardId] = useState<string | null>(null);
+  const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+
+  const toggleEditMode = (cardId: string) => {
+    setTimeout(() => {
+      if (editingCardId === cardId) {
+        setEditingCardId(null);
+      } else {
+        setEditingCardId(cardId); 
+      }
+    }, 200);
+  };
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, projectID: string, project: Project) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
@@ -80,7 +91,7 @@ const Projects: React.FC<ProjectProps> = ({projectsList, setProjects, profession
       {projectsList.map((project, index) => (
         <div key={project.project_id}>
           <h1>Project #{index + 1}</h1>
-          <form onSubmit={(event) => handleSubmit(event, project.project_id)}>
+          <form onSubmit={(event) => handleSubmit(event, project.project_id, project)}>
             <label>
               <input
                 type="text"

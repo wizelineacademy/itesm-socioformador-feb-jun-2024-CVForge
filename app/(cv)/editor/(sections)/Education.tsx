@@ -5,7 +5,8 @@ import {createEducation, getEducation, updateEducation, deleteEducation} from "@
 import ProfessionalInfo from "../page";
 import { useSession } from "next-auth/react";
 import { getProfessionalByEmail } from "@/services/sessionService";
-
+import { MdOutlineModeEdit } from "react-icons/md";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 interface Education {
   education_id: string;
   school: string;
@@ -23,7 +24,17 @@ interface EducationProps {
 }
 
 const EducationComponent: React.FC<EducationProps> = ({ educations, setEducations, professionalID }) => {
-
+  const [editingCardId, setEditingCardId] = useState<string | null>(null);
+  const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+  const toggleEditMode = (cardId: string) => {
+    setTimeout(() => {
+      if (editingCardId === cardId) {
+        setEditingCardId(null);
+      } else {
+        setEditingCardId(cardId); 
+      }
+    }, 200);
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, educationID: string, education: Education) => {
     event.preventDefault();
@@ -79,29 +90,6 @@ const EducationComponent: React.FC<EducationProps> = ({ educations, setEducation
     setEditingCardId(educationCreated.education_id);
   };
 
-  useEffect(() => {
-    const fetchProfessionalID = async () => {
-      if (session?.user?.email) {
-        const staticID = await getProfessionalByEmail(session.user.email);
-        setProfessionalID(staticID);
-      }
-    };
-    
-    fetchProfessionalID();
-  }, [session]);
-
-  useEffect(() => {
-    const fetchEducations = async () => {
-      try {
-        const fetchedEducations = await getEducation(professionalID);
-        setEducations(fetchedEducations);
-      }
-      catch (error) {
-        console.log("There was an error trying to fetch the works", error)
-      }
-    }
-    fetchEducations();
-  }, [professionalID]);
 
   return (
     <div className="w-full h-full overflow-y-auto">
