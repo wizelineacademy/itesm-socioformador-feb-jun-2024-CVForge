@@ -60,6 +60,7 @@ const ProfessionalInfo: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [skills, setSkills] = useState<Skill[]>([]);
   const [works, setWorks] = useState<Work[]>([]);
+
   useEffect(() => {
     const fetchProfessionalID = async () => {
       if (session?.user?.email) {
@@ -83,11 +84,13 @@ const ProfessionalInfo: React.FC = () => {
     }
     fetchWorks();
   }, [professionalID]); 
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const projectsGetted = await getProjects(professionalID);
         setProjects(projectsGetted);
+        console.log(projectsGetted)
       }
       catch (error) {
         console.log("There was an error trying to fetch the projects", error)
@@ -95,6 +98,7 @@ const ProfessionalInfo: React.FC = () => {
     }
     fetchProjects();
   }, [professionalID]);
+
   const [existingGeneralInfo, setExistingGeneralInfo] = useState<GeneralInfo>({
     first_name: "",
     last_name: "",

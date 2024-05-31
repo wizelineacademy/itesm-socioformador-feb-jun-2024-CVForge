@@ -2,8 +2,8 @@
 import { setCurrentTab } from "@/contexts/cv/sidebar/currentTab";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
-// !DELETE, placeholder for the recommendations, must actually fetch the recommendations
-import { FETCHED_RECOMMENDATIONS } from "../../cv/[cv_id]/CONSTANTS";
+import GalleryLoading from "@/app/components/loading";
+
 
 // Package imports
 import { useEffect, useState } from "react";
@@ -36,13 +36,12 @@ const RecommendationItem: React.FC<RecommendationItem> = ({ recommendationItemDa
 
     return (
         <li className="flex flex-row font-inter">
-            
             {/* buttons */}
             <div className="flex flex-col items-center">
                 <button onClick={handleCompletedStatusChange}
                     aria-label={`Mark ${recommendationItemData.title} as ${completed ? 'incomplete' : 'complete'}`}
-                    className="w-[31px] h-[35px] border border-[3px] border-secondarygray rounded-full flex justify-center items-center">
-                    <span className={`w-[21px] h-[21px] rounded-full ${completed ? "bg-gptgreen" : "bg-transparent"}`}></span>
+                    className="w-[31px] h-[35px] border border-[3px] border-secondarygray rounded-xl flex justify-center items-center">
+                    <span className={`w-[21px] h-[21px] rounded-xl ${completed ? "bg-gptgreen" : "bg-transparent"}`}></span>
                 </button>
                 {!isLast && <div className="w-[3px] h-full bg-secondarygray"></div>}
                 {isLast && <div className="w-[3px] h-full bg-transparent"></div>}
@@ -123,9 +122,7 @@ const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
         setFetchedRecommendations(newRecommendations);
     };
 
-    // Here must fetch the recommendation data for the CV
-    // call everytime the authentication token has been modified
-    // set the fetched recommendation state
+    // Here must fetch the recommendation data for the CV call everytime the authentication token has been modified set the fetched recommendation state
     useEffect(() => {
         // setFetchedRecommendations()
         const fetchRecommendations = async () => {
@@ -164,7 +161,10 @@ const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
                         isLast={index === fetchedRecommendations.length - 1}
                         completedStatusChange={handleCompletedRecommendationItem}
                     />
-                )): <p>No recommendations available</p>
+                )): 
+                <div className="w-full h-screen top-0 left-0 bg-editorgray flex justify-center items-center mx-auto">
+                    <GalleryLoading/>
+                </div>
             }</ul>
         </div>
     )
