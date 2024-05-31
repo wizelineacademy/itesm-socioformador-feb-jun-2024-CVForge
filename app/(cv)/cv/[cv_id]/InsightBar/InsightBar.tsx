@@ -17,8 +17,8 @@ import RecommendedChanges from "./RecommendedChanges";
 
 const InsightBar = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [aiResponse, setAiResponse] = useState<string>("");
-    const [isLoadingFetch, setIsLoadingFetch] = useState<boolean | null>(null);
+    const [recommendations, setRecommendations] = useState<string[]>([]);
+    const [isLoadingFetch, setIsLoadingFetch] = useState<boolean>(false);
     const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
     const handleOpenInsightBar = () => {
@@ -30,21 +30,22 @@ const InsightBar = () => {
     };
 
     useEffect(() => {
-        const handleCheckService = async () => {
+        const fetchRecommendations = async () => {
             setIsLoadingFetch(true);
             try {
                 const response = await fetch('/api/createInsight', { method: 'GET' });
                 const jsonData = await response.json();
-                const message = jsonData.message;
-                setAiResponse(message);
+                if (jsonData && jsonData.message) {
+                    setRecommendations(jsonData.message);
+                }
             } catch (error) {
-                console.error('Failed to fetch data:', error);
+                console.error('Failed to fetch recommendations:', error);
             } finally {
                 setIsLoadingFetch(false);
             }
         };
 
-        handleCheckService();
+        fetchRecommendations();
     }, []);
 
     return (
@@ -60,6 +61,7 @@ const InsightBar = () => {
                 <div className={`${isOpen ? "flex-row" : "flex-col"} flex`}>
                     <div>
                         <div className="flex justify-center my-4">
+                            {/* Display Gauge component */}
                             <Gauge
                                 width={150}
                                 height={150}
@@ -83,7 +85,8 @@ const InsightBar = () => {
                         </div>
                         <hr className="w-full h-[1px] my-2" />
                     </div>
-                    <RecommendedChanges recommendedChangesList={aiResponse} />
+                    {/* Pass recommendations to RecommendedChanges component */}
+                    <RecommendedChanges recommendations={recommendations} />
                 </div>
                 <div className="w-full bottom-0 right-0 flex justify-end items-center">
                     <Link href={"/"} className="h-full text-end pr-4">Roadmap</Link>

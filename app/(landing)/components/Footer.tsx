@@ -1,11 +1,13 @@
 import React from "react";
 import SecondaryLogo from "@/public/assets/SecondaryLogo"
 import Link from "next/link";
-import Image from "next/image";
+import { FaLinkedin } from "react-icons/fa";
+import { CiLinkedin } from "react-icons/ci";
+
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-primarygray pt-8 px-16 flex flex-col text-whitefo">
+    <footer className="bg-primarygray pt-8 px-1/12 flex flex-col text-whitefo">
       <div className="flex flex-row justify-between w-full px-28">
         {/* Logo and info */}
         <div className="flex flex-col w-40 mr-32 mb-auto">
@@ -15,7 +17,8 @@ const Footer: React.FC = () => {
         {/* Contact Us */}
         <div className="flex flex-col w-40">
           <h1 className="font-bold text-xl text-secondarygray">Contact Us</h1>
-          <Link className=" mr-auto" href="https://www.linkedin.com/company/cvforge/about/">
+          <Link className="flex flex-row mr-auto" href="https://www.linkedin.com/company/cvforge/about/">
+            <CiLinkedin className="text-3xl py-1"/>
             <p className="text-md py-1 hover:underline">LinkedIn</p>
           </Link>
         </div>

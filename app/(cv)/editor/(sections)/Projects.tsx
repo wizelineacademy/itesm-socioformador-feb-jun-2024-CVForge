@@ -4,6 +4,8 @@ import {getProjects, createProject, updateProject, deleteProject} from "@/servic
 import { useEffect, useState} from "react";
 import { useSession } from "next-auth/react";
 import { getProfessionalByEmail } from "@/services/sessionService";
+import { MdOutlineModeEdit } from "react-icons/md";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 
 interface Project {
   project_id: string;
@@ -32,16 +34,21 @@ const Projects: React.FC<ProjectProps> = ({projectsList, setProjects, profession
       end_date: formData.get("end_date") ? new Date(formData.get("end_date") as string) : undefined,
     };
 
-    try {
-      const updatedProject = await updateProject(projectID, projectData);
-      console.log('Project updated successfully:', updatedProject);
-      setProjects((prevProjects) =>
-        prevProjects.map((project) =>
-          project.project_id === projectID ? updatedProject : project
-        )
-      );
-    } catch (error) {
-      console.error('Error updating project:', error);
+    if (projectData.description.trim() == "" || !projectData.start_date || projectData.name.trim() == "") {
+      alert('Title, Description, and Start Date must be filled in to save.');
+    } else {
+      try {
+        const updatedProject = await updateProject(projectID, projectData);
+        console.log('Project updated successfully:', updatedProject);
+        setProjects((prevProjects) =>
+          prevProjects.map((project) =>
+            project.project_id === projectID ? updatedProject : project
+          )
+        );
+        toggleEditMode(project.project_id);
+      } catch (error) {
+        console.error('Error updating project:', error);
+      }
     }
   };
 
@@ -55,7 +62,6 @@ const Projects: React.FC<ProjectProps> = ({projectsList, setProjects, profession
     }catch (error) {
       console.error('Error deleting project:', error);
       if (error instanceof prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
-        // Optionally remove the record from the state if it does not exist in the database
         setProjects((prevProjects) =>
         prevProjects.filter((project) => project.project_id !== projectID)
         );
@@ -115,6 +121,4 @@ const Projects: React.FC<ProjectProps> = ({projectsList, setProjects, profession
       <button onClick={() => handleCreation(professionalID)}>Create New Project</button>
     </div>
   )
-}
-
-export default Projects;
+*/

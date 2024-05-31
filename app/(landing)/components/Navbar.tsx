@@ -8,21 +8,21 @@ const Navbar: React.FC = () => {
     const ulRef = useRef(null);
     const isNearTop = useScrollPosition(ulRef);
     return (
-        <div className={`text-normaltext py-7 px-2 bg-white w-full shadow shadow-sm`}>
-            <div className='mx-5 flex justify-between items-center'>
-                <h1 className='font-koh_santepheap text-4xl font-bold text-primarygray'>
+        <div className={`text-inter py-5 px-2 bg-white w-full shadow shadow-sm`}>
+            <div className='mx-5 flex items-center'>
+                <h1 className='font-koh_santepheap font-bold text-primarygray xl:text-4xl lg:text-3xl md:text-2xl sm:text-2xl'>
                     CVForge<span className='text-gptgreen'>.ai</span>
                 </h1>
-                <nav className='hidden md:block'>
-                    <ul className='flex gap-6'>
+                <nav className='hidden md:block mx-auto xl:text-lg lg:text-lg md:text-md sm:text-sm'>
+                    <ul className='flex xl:gap-6'>
                         <li>
-                            <Link href='/' className="text-lg hover:text-gptgreen underline px-4 py-2 text-secondarygray" >Home</Link>
+                            <Link href='/' className="hover:text-gptgreen underline px-4 py-2 text-secondarygray" >Home</Link>
                         </li>
                         <li>
-                            <Link href='/editor' className="text-lg hover:text-gptgreen hover:underline px-4 py-2 text-secondarygray" >Editor</Link>
+                            <Link href='/editor' className="hover:text-gptgreen hover:underline px-4 py-2 text-secondarygray" >Editor</Link>
                         </li>
                         <li>
-                            <Link href='/cv_gallery' className="text-lg hover:text-gptgreen hover:underline px-4 py-2 text-secondarygray" >CV Gallery</Link>
+                            <Link href='/cv_gallery' className="hover:text-gptgreen hover:underline px-4 py-2 text-secondarygray" >CV Gallery</Link>
                         </li>
                     </ul>
                 </nav>

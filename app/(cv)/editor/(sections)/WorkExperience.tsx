@@ -8,7 +8,6 @@ import { getProfessionalByEmail } from "@/services/sessionService";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 
-
 interface Work {
   work_experience_id : string;
   work_position : string;
@@ -28,14 +27,14 @@ const WorkExperience: React.FC<WorkProps> = ({works, setWorks, professionalID}) 
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
 
   const toggleEditMode = (cardId: string) => {
-  setTimeout(() => {
-    if (editingCardId === cardId) {
-      setEditingCardId(null);
-    } else {
-      setEditingCardId(cardId); 
-    }
-  }, 200);
-};
+    setTimeout(() => {
+      if (editingCardId === cardId) {
+        setEditingCardId(null);
+      } else {
+        setEditingCardId(cardId); 
+      }
+    }, 200);
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, workID: string, work: Work) => {
     event.preventDefault();
@@ -47,7 +46,7 @@ const WorkExperience: React.FC<WorkProps> = ({works, setWorks, professionalID}) 
       start_date: formData.get("start_date") ? new Date(formData.get("start_date") as string) : undefined,
       end_date: formData.get("end_date") ? new Date(formData.get("end_date") as string) : undefined,
     };
-
+    console.log
     if (workData.description.trim() == "" || !workData.start_date || workData.work_position.trim() == "") {
       alert('Title, Description, and Start Date must be filled in to save.');
     } else {
@@ -55,8 +54,8 @@ const WorkExperience: React.FC<WorkProps> = ({works, setWorks, professionalID}) 
         const updatedWork = await updateWork(workID, workData);
         console.log('Work updated successfully:', updatedWork);
         setWorks((prevWorks) =>
-        prevWorks.map((work) =>
-        work.work_experience_id === workID ? updatedWork : work
+          prevWorks.map((work) =>
+            work.work_experience_id === workID ? updatedWork : work
           )
         );
         toggleEditMode(work.work_experience_id);
@@ -139,17 +138,17 @@ const WorkExperience: React.FC<WorkProps> = ({works, setWorks, professionalID}) 
                 <div className="w-auto">
                   <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>To</p>
                   <label>
-                  <input
-                    type="date"
-                    name="end_date"
-                    className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
-                    defaultValue={work.end_date ? work.end_date.toISOString().split("T")[0] : ""}
-                    placeholder="End Date: "
-                  />
-                </label>
+                    <input
+                      type="date"
+                      name="end_date"
+                      className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
+                      defaultValue={work.end_date ? work.end_date.toISOString().split("T")[0] : ""}
+                      placeholder="End Date: "
+                    />
+                  </label>
                 </div>
               </div>
-              <div className="flex flex-row w-full text-secondarygray">
+              <div className="flex flex-row w-full text-secondarygray ">
                 {/* Description */}
                 <div className="w-full">
                   <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Description</p>
@@ -193,7 +192,7 @@ const WorkExperience: React.FC<WorkProps> = ({works, setWorks, professionalID}) 
       <div className="w-full justify-center">
         <button onClick={() => handleCreation(professionalID)} className='flex flex-row items-center justify-center text-outlinegray hover:text-secondarygray text-md p-2'>
            <p className='text-4xl'>+</p>
-           <p className="m-2 ">Add Work Experience</p>
+           <p className="m-2 ">Add New Work Experience</p>
         </button>  
       </div>
     </div>
