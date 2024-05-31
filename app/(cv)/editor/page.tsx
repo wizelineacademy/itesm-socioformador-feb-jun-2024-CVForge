@@ -82,17 +82,7 @@ const ProfessionalInfo: React.FC = () => {
       }
     }
     fetchWorks();
-  }, [professionalID]);
-  useEffect(() => {
-    const fetchProfessionalID = async () => {
-      if (session?.user?.email) {
-        const staticID = await getProfessionalByEmail(session.user.email);
-        setProfessionalID(staticID);
-      }
-    };
-    
-    fetchProfessionalID();
-  }, [session]);
+  }, [professionalID]); 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -104,7 +94,7 @@ const ProfessionalInfo: React.FC = () => {
       }
     }
     fetchProjects();
-  }, []);
+  }, [professionalID]);
   const [existingGeneralInfo, setExistingGeneralInfo] = useState<GeneralInfo>({
     first_name: "",
     last_name: "",
@@ -113,16 +103,6 @@ const ProfessionalInfo: React.FC = () => {
     github_link: "",
     linkedin_link: "",
   });
-  useEffect(() => {
-    const fetchProfessionalID = async () => {
-      if (session?.user?.email) {
-        const staticID = await getProfessionalByEmail(session.user.email);
-        setProfessionalID(staticID);
-      }
-    };
-
-    fetchProfessionalID();
-  }, [session]);
 
   useEffect(() => {
     const fetchEducations = async () => {
