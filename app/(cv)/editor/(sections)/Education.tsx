@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { getProfessionalByEmail } from "@/services/sessionService";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+
 interface Education {
   education_id: string;
   school: string;
@@ -34,26 +35,7 @@ const EducationComponent: React.FC = () => {
     }, 200);
   };
 
-  useEffect(() => {
-    const fetchProfessionalID = async () => {
-      if (session?.user?.email) {
-        const staticID = await getProfessionalByEmail(session.user.email);
-        setProfessionalID(staticID);
-      }
-    };
-    
-    fetchProfessionalID();
-  }, [session]);
-
-  useEffect(() => {
-    const fetchEducations = async () => {
-      const fetchedEducations = await getEducation(professionalID);
-      setEducations(fetchedEducations);
-    }
-    fetchEducations();
-  }, [professionalID]);
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, educationID: string) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, educationID: string, education: Education) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
@@ -65,17 +47,21 @@ const EducationComponent: React.FC = () => {
       end_date: formData.get("end_date") ? new Date(formData.get("end_date") as string) : undefined,
       relevant_coursework: formData.get("relevant_coursework") as string
     };
-
-    try {
-      const updatedEducation = await updateEducation(educationID, educationData);
-      console.log('Education updated successfully:', updatedEducation);
-      setEducations((prevEducations) =>
-        prevEducations.map((education) =>
-          education.education_id === educationID ? updatedEducation : education
-        )
-      );
-    } catch (error) {
-      console.error('Error updating education:', error);
+    if (educationData.school.trim() == "" || !educationData.start_date || educationData.education_degree.trim() == "") {
+      alert('Title, Description, and Start Date must be filled in to save.');
+    } else {
+      try {
+        const updatedEducation = await updateEducation(educationID, educationData);
+        console.log('Education updated successfully:', updatedEducation);
+        setEducations((prevEducations) =>
+          prevEducations.map((education) =>
+            education.education_id === educationID ? updatedEducation : education
+          )
+        );
+        toggleEditMode(education.education_id);
+      } catch (error) {
+        console.error('Error updating education:', error);
+      }
     }
   };
 
@@ -101,7 +87,31 @@ const EducationComponent: React.FC = () => {
     const educationCreated = await createEducation(ProfessionalID);
     setEducations((prevEducations) => [...prevEducations, educationCreated]);
     setEditingCardId(educationCreated.education_id);
-  }
+  };
+
+  useEffect(() => {
+    const fetchProfessionalID = async () => {
+      if (session?.user?.email) {
+        const staticID = await getProfessionalByEmail(session.user.email);
+        setProfessionalID(staticID);
+      }
+    };
+    
+    fetchProfessionalID();
+  }, [session]);
+
+  useEffect(() => {
+    const fetchEducations = async () => {
+      try {
+        const fetchedEducations = await getEducation(professionalID);
+        setEducations(fetchedEducations);
+      }
+      catch (error) {
+        console.log("There was an error trying to fetch the works", error)
+      }
+    }
+    fetchEducations();
+  }, [professionalID]);
 
   return (
     <div className="w-full h-full overflow-y-auto">
@@ -116,7 +126,7 @@ const EducationComponent: React.FC = () => {
           {editingCardId === education.education_id? (
             <form           
               className={`flex flex-col bg-outlinegray bg-opacity-20 border border-2 border-outlinegray shadow-lg rounded-lg p-4 my-4 mt-6`}
-              onSubmit={(event) => handleSubmit(event, education.education_id)}
+              onSubmit={(event) => handleSubmit(event, education.education_id, education)}
             >
               <div className="flex flex-row w-full">
                 {/* School */}
@@ -201,8 +211,9 @@ const EducationComponent: React.FC = () => {
            ) : (
             <div className={`flex flex-col border border-2 border-outlinegray hover:border-gptgreen hover:shadow-lg rounded-lg p-4 my-4 mt-6 text-secondarygray`}>
               <div className="flex flex-row">
-                <h1 className="text-primarygray mr-auto">{education.school}</h1>
-                <h1 className="text-primarygray mr-auto">{education.school}</h1>
+                <h1 className="text-primarygray">{education.school}</h1>
+                <h1 className="text-primarygray mx-2">-</h1>
+                <h1 className="text-primarygray mr-auto">{education.education_degree}</h1>
                 {editingCardId === education.education_id || hoveredCardId === education.education_id? (
                   <button className="h-auto mr-4 rounded-lg text-xl" 
                     onClick={() => toggleEditMode(education.education_id)}>
@@ -211,7 +222,7 @@ const EducationComponent: React.FC = () => {
                 ) : null}
               </div>
               <p>{education.start_date? education.start_date.toLocaleDateString() : 'xxx'} {education.end_date? ` - ${education.end_date.toLocaleDateString()}` : ' '}</p>
-              <p>{education.relevant_coursework}</p>
+              <h1 className="text-primarygray">GPA: {education.gpa}</h1>
             </div>
           )}
         </div>
@@ -227,67 +238,3 @@ const EducationComponent: React.FC = () => {
 };
 
 export default EducationComponent;
-/*
-return (
-    <div>
-      {educations.map((education, index) => (
-        <div key={education.education_id}>
-          <h1>Education #{index + 1}</h1>
-          <form onSubmit={(event) => handleSubmit(event, education.education_id)}>
-            <label>
-              <input
-                type="text"
-                name="school"
-                defaultValue={education.school || ""}
-                placeholder="School: "
-              />
-            </label>
-            <label>
-              <input
-                type="text"
-                name="education_degree"
-                defaultValue={education.education_degree || ""}
-                placeholder="Education Degree: "
-              />
-            </label>
-            <label>
-              <input
-                type="text"
-                name="gpa"
-                defaultValue={education.gpa?.toString() || ""}
-                placeholder="GPA: "
-              />
-            </label>
-            <label>
-              <input
-                type="date"
-                name="start_date"
-                defaultValue={education.start_date ? education.start_date.toISOString().split("T")[0] : ""}
-                placeholder="Start Date: "
-              />
-            </label>
-            <label>
-              <input
-                type="date"
-                name="end_date"
-                defaultValue={education.end_date ? education.end_date.toISOString().split("T")[0] : ""}
-                placeholder="End Date: "
-              />
-            </label>
-            <label>
-              <input
-                type="text"
-                name="relevant_coursework"
-                defaultValue={education.relevant_coursework || ""}
-                placeholder="Relevant Coursework: "
-              />
-            </label>
-            <button type="submit">Save</button>
-          </form>
-          <button onClick={() => handleDelete(education.education_id, index)}>Delete</button>
-        </div>
-      ))}
-      <button onClick={() => handleCreation(professionalID)}>Create New Education</button>
-    </div>
-  );
-*/

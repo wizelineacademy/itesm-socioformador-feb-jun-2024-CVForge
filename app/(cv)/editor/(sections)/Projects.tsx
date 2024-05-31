@@ -78,6 +78,7 @@ const Projects: React.FC = () => {
             project.project_id === projectID ? updatedProject : project
           )
         );
+        toggleEditMode(project.project_id);
       } catch (error) {
         console.error('Error updating project:', error);
       }

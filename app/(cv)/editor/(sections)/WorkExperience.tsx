@@ -8,7 +8,6 @@ import { getProfessionalByEmail } from "@/services/sessionService";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 
-
 interface Work {
   work_experience_id : string;
   work_position : string;
@@ -19,8 +18,8 @@ interface Work {
 
 const WorkExperience: React.FC = () => {
   const { data: session } = useSession();
-  const [professionalID, setProfessionalID] = useState<string | null>(null);
   const [works, setWorks] = useState<Work[]>([]);
+  const [professionalID, setProfessionalID] = useState<string | null>(null);
   const [editingCardId, setEditingCardId] = useState<string | null>(null);
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
 
@@ -44,7 +43,7 @@ const WorkExperience: React.FC = () => {
       start_date: formData.get("start_date") ? new Date(formData.get("start_date") as string) : undefined,
       end_date: formData.get("end_date") ? new Date(formData.get("end_date") as string) : undefined,
     };
-
+    console.log
     if (workData.description.trim() == "" || !workData.start_date || workData.work_position.trim() == "") {
       alert('Title, Description, and Start Date must be filled in to save.');
     } else {
@@ -52,8 +51,8 @@ const WorkExperience: React.FC = () => {
         const updatedWork = await updateWork(workID, workData);
         console.log('Work updated successfully:', updatedWork);
         setWorks((prevWorks) =>
-        prevWorks.map((work) =>
-        work.work_experience_id === workID ? updatedWork : work
+          prevWorks.map((work) =>
+            work.work_experience_id === workID ? updatedWork : work
           )
         );
         toggleEditMode(work.work_experience_id);
