@@ -1,9 +1,189 @@
 "use client"
 import React from "react";
+import {getSkills, createSkill, updateSkill, deleteSkill} from "@/services/professional_information/generalService";
+import { useEffect, useState} from "react";
+import { update } from "cypress/types/lodash";
+import { useSession } from "next-auth/react";
+import { getProfessionalByEmail } from "@/services/sessionService";
+import { MdOutlineModeEdit } from "react-icons/md";
+import { MdOutlineDeleteOutline } from "react-icons/md";
+
+
+interface Skill {
+  skill_id : string;
+  title : string;
+  proficiency : string;
+}
 
 const Skills: React.FC = () => {
+  const { data: session } = useSession();
+  const [professionalID, setProfessionalID] = useState<string | null>(null);
+  const [skills, setSkills] = useState<Skill[]>([]);
+  const [editingCardId, setEditingCardId] = useState<string | null>(null);
+  const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+
+  const toggleEditMode = (cardId: string) => {
+  setTimeout(() => {
+    if (editingCardId === cardId) {
+      setEditingCardId(null);
+    } else {
+      setEditingCardId(cardId); 
+    }
+  }, 200);
+};
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, skillID: string, skill: Skill) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const skillData: Partial<Skill> = {
+      title: formData.get("title") as string,
+      proficiency: formData.get("proficiency") as string,
+    };
+
+    if (skillData.title.trim() == ""  || skillData.proficiency.trim() == "") {
+      alert('Title and proficiency must be filled in to save.');
+    } else {
+      try {
+        const updatedSkill = await updateSkill(skillID, skillData);
+        console.log('Skill updated successfully:', updatedSkill);
+        setSkills((prevSkills) =>
+        prevSkills.map((skill) =>
+        skill.skill_id === skillID ? updatedSkill : skill
+          )
+        );
+        toggleEditMode(skill.skill_id);
+      } catch (error) {
+        console.error('Error updating skill:', error);
+      }
+    }
+
+  };
+
+  const handleDelete = async (skillID: string, index: number) => {
+    try {
+      await deleteSkill(skillID);
+      console.log('Skill deleted successfully');
+      setSkills((prevSkills) =>
+      prevSkills.filter((_, idx) => idx !== index)
+      );
+    }catch (error) {
+      console.error('Error deleting skill:', error);
+      if (error instanceof prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+        setSkills((prevSkills) =>
+        prevSkills.filter((skill) => skill.skill_id !== skillID)
+        );
+      }
+    }
+  };
+
+  const handleCreation = async (ProfessionalID: string) => {
+    const skillCreated = await createSkill(ProfessionalID);
+    setSkills((prevSkills) => [...prevSkills, skillCreated]);
+    setEditingCardId(skillCreated.skill_id);
+  };
+
+  useEffect(() => {
+    const fetchProfessionalID = async () => {
+      if (session?.user?.email) {
+        const staticID = await getProfessionalByEmail(session.user.email);
+        setProfessionalID(staticID);
+      }
+    };
+    
+    fetchProfessionalID();
+  }, [session]);
+
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        const skillsGetted = await getSkills(professionalID);
+        setSkills(skillsGetted);
+      }
+      catch (error) {
+        console.log("There was an error trying to fetch the skills", error)
+      }
+    }
+    fetchSkills();
+  }, [professionalID]);
+
   return (
-    <div>Skills</div>
+    <div className="w-full h-full overflow-y-auto">
+      <h1 className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-1">Skills</h1>
+      <div className='w-full h-0.5 bg-outlinegray rounded-lg mt-3'></div>
+      {skills.map((skill, index) => (
+        <div 
+          onMouseEnter={() => setHoveredCardId(skill.skill_id)}
+          onMouseLeave={() => setHoveredCardId(null)}
+          key={skill.skill_id}
+        >
+          {editingCardId === skill.skill_id? (
+            <form           
+              className={`flex flex-col bg-outlinegray bg-opacity-20 border border-2 border-outlinegray shadow-lg rounded-lg p-4 my-4 mt-6`}
+              onSubmit={(event) => handleSubmit(event, skill.skill_id, skill)}
+            >
+              <div className="flex flex-row w-full">
+                <div className="w-full">
+                  <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Skill</p>
+                  <label>
+                    <input
+                      type="text"
+                      name="title"
+                      className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
+                      defaultValue={skill.title || ""}
+                      placeholder="Skill"
+                    />
+                  </label>
+                </div>
+                {/* Spacer */} <div className='w-40'/>
+                
+              </div>
+              <div className="flex flex-row w-full text-secondarygray">
+                <div className="w-full">
+                  <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Proficiency</p>
+                  <label>
+                    <input
+                      type="text"
+                      name="proficiency"
+                      className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
+                      defaultValue={skill.proficiency || ""}
+                      placeholder="Proficiency: "
+                    />
+                  </label>
+                </div>
+              </div>
+              <div className="flex flex-row w-full mt-3">
+                <button 
+                  className='flex items-center justify-center bg-gradient-to-r from-aiblue to-gptgreen felx-row text-white text-md rounded-3xl p-2 px-12 w-auto delay-50 hover:scale-105 duration-200 mr-auto'
+                  type="submit"
+                >Save</button>
+                <button className="h-auto mr-4 rounded-lg text-xl text-secondarygray hover:text-primarygray"  
+                  onClick={() => handleDelete(skill.skill_id, index)}><MdOutlineDeleteOutline /></button>
+              </div>
+            </form>
+           ) : (
+            <div className={`flex flex-col border border-2 border-outlinegray hover:border-gptgreen hover:shadow-lg rounded-lg p-4 my-4 mt-6 text-secondarygray`}>
+              <div className="flex flex-row">
+                <h1 className="text-primarygray mr-auto">{skill.title}</h1>
+                {editingCardId === skill.skill_id || hoveredCardId === skill.skill_id? (
+                  <button className="h-auto mr-4 rounded-lg text-xl" 
+                    onClick={() => toggleEditMode(skill.skill_id)}>
+                    <MdOutlineModeEdit />
+                  </button>
+                ) : null}
+              </div>
+              <p>{skill.proficiency}</p>
+            </div>
+          )}
+        </div>
+      ))}
+      <div className="w-full justify-center">
+        <button onClick={() => handleCreation(professionalID)} className='flex flex-row items-center justify-center text-outlinegray hover:text-secondarygray text-md p-2'>
+           <p className='text-4xl'>+</p>
+           <p className="m-2 ">Add Skill</p>
+        </button>  
+      </div>
+    </div>
   )
 }
 
