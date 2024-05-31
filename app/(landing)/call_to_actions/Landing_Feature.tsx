@@ -14,17 +14,17 @@ const LandingFeature: React.FC = () => {
             svgImage={Search_Icon}
           />
           <FeatureCard
-            title="Ai Assistance"
+            title="Roadmap Generation"
             content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's "
             svgImage={Search_Icon}
           />
           <FeatureCard
-            title="Ai Assistance"
+            title="Personalised Feadback"
             content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's "
             svgImage={Search_Icon}
           />
           <FeatureCard
-            title="Ai Assistance"
+            title="Customized Editor"
             content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's "
             svgImage={Search_Icon}
           />

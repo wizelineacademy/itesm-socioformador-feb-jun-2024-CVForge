@@ -123,6 +123,7 @@ const Skills: React.FC = () => {
               onSubmit={(event) => handleSubmit(event, skill.skill_id, skill)}
             >
               <div className="flex flex-row w-full">
+                {/* skill */}
                 <div className="w-full">
                   <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Skill</p>
                   <label>
@@ -135,11 +136,9 @@ const Skills: React.FC = () => {
                     />
                   </label>
                 </div>
-                {/* Spacer */} <div className='w-40'/>
-                
-              </div>
-              <div className="flex flex-row w-full text-secondarygray">
-                <div className="w-full">
+                {/* Spacer */} <div className='w-20'/>
+                {/* Proficiency */}
+                <div className="w-44 mr-6">
                   <p className='text-primarygray font-semibold font-inter text-xs pb-0.5'>Proficiency</p>
                   <label>
                     <input
@@ -162,9 +161,10 @@ const Skills: React.FC = () => {
               </div>
             </form>
            ) : (
-            <div className={`flex flex-col border border-2 border-outlinegray hover:border-gptgreen hover:shadow-lg rounded-lg p-4 my-4 mt-6 text-secondarygray`}>
+            <div className={`flex flex-col border border-2 border-outlinegray hover:border-gptgreen hover:shadow-lg rounded-lg p-4 my-4 mt-6`}>
               <div className="flex flex-row">
-                <h1 className="text-primarygray mr-auto">{skill.title}</h1>
+                <h1 className="text-primarygray w-36">Skill: <span className="text-secondarygray">{skill.title}</span> </h1>
+                <p className="text-primarygray mr-auto">Proficiency: <span className="text-secondarygray">{skill.proficiency}</span></p>
                 {editingCardId === skill.skill_id || hoveredCardId === skill.skill_id? (
                   <button className="h-auto mr-4 rounded-lg text-xl" 
                     onClick={() => toggleEditMode(skill.skill_id)}>
@@ -172,7 +172,6 @@ const Skills: React.FC = () => {
                   </button>
                 ) : null}
               </div>
-              <p>{skill.proficiency}</p>
             </div>
           )}
         </div>

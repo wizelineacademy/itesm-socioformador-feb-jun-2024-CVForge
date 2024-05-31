@@ -6,9 +6,9 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 255, 0;
-  --background-start-rgb: 0, 255, 0;
-  --background-end-rgb: 0, 255, 0;
+  --foreground-rgb: 34, 34, 36;
+  --background-start-rgb: 34, 34, 36;
+  --background-end-rgb: 34, 34, 36;
 }
 
 @media (prefers-color-scheme: dark) {

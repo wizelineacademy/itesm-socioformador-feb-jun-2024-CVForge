@@ -21,7 +21,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         }
 
         // If recommendations do not exist, generate new ones
-        const defaultCvId = "28b8183b-239d-4a8d-8485-6a4edb5ff943";
+        const defaultCvId = "11cf082c-c7bd-44e6-a428-8d823342e07f";
 
         const generatedCv = await prisma.cv.findUnique({
             where: { cv_id: cvId || defaultCvId },
