@@ -26,6 +26,7 @@ interface EducationProps {
 const EducationComponent: React.FC<EducationProps> = ({ educations, setEducations, professionalID }) => {
   const [editingCardId, setEditingCardId] = useState<string | null>(null);
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+
   const toggleEditMode = (cardId: string) => {
     setTimeout(() => {
       if (editingCardId === cardId) {
@@ -89,7 +90,6 @@ const EducationComponent: React.FC<EducationProps> = ({ educations, setEducation
     setEducations((prevEducations) => [...prevEducations, educationCreated]);
     setEditingCardId(educationCreated.education_id);
   };
-
 
   return (
     <div className="w-full h-full overflow-y-auto">

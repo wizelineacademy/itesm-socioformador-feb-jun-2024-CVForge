@@ -34,6 +34,7 @@ const Projects: React.FC<ProjectProps> = ({projectsList, setProjects, profession
       }
     }, 200);
   };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, projectID: string, project: Project) => {
     event.preventDefault();
 
@@ -83,8 +84,8 @@ const Projects: React.FC<ProjectProps> = ({projectsList, setProjects, profession
   const handleCreation = async (ProfessionalID : string) => {
     const projectCreated = await createProject(ProfessionalID);
     setProjects((prevProjects) => [...prevProjects, projectCreated]);
+    setEditingCardId(projectCreated.project_id);
   }
-
 
   return (
     <div>
