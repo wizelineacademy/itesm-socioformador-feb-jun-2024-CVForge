@@ -49,6 +49,7 @@ interface Work {
 }
 
 interface Skill {
+  skill_id : string;
   title : string;
   proficiency : string;
 }
@@ -233,9 +234,9 @@ const getSkills = async (professionalID: string): Promise<Skill[]> => {
   });
   return arraySkills;
 };
-/*
-const createSkill = async (professionalID: string): Promise<Work> => {
-  const createdWork = await prisma.skill.create({
+
+const createSkill = async (professionalID: string): Promise<Skill> => {
+  const createdSkill = await prisma.skill.create({
     data: {
       professional_info: {
         connect: {
@@ -244,26 +245,26 @@ const createSkill = async (professionalID: string): Promise<Work> => {
       },
     },
   });
-  return createdWork;
+  return createdSkill;
 };
 
-const updateWork = async (workID: string, workData: Partial<Work>): Promise<Work> => {
-  const updatedWork = await prisma.work_experience.update(
+const updateSkill = async (skillID: string, skillData: Partial<Skill>): Promise<Skill> => {
+  const updatedSkill = await prisma.skill.update(
     {
-      where : {work_experience_id : workID},
-      data : workData,
+      where : {skill_id : skillID},
+      data : skillData,
     }
   )
-  return updatedWork;
+  return updatedSkill;
 };
 
-const deleteWork = async (workID: string): Promise<Work> => {
-  const deletedWork  = await prisma.work_experience.delete({
-    where : {work_experience_id : workID}
+const deleteSkill = async (skillID: string): Promise<Skill> => {
+  const deletedSkill  = await prisma.skill.delete({
+    where : {skill_id : skillID}
   })
-  return deletedWork;
+  return deletedSkill;
 }
-*/
+
 export {
   getGeneralInfo,
   createGeneralInfo,
@@ -279,4 +280,8 @@ export {
   createWork,
   updateWork,
   deleteWork,
+  getSkills,
+  createSkill,
+  updateSkill,
+  deleteSkill,
 };
