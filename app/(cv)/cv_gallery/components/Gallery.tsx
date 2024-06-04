@@ -28,6 +28,7 @@ import {
 import { cv, desired_position } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { ProfessionalInfo } from "@/types/professionalInfo";
+import GalleryLoading from "@/app/components/loading";
 
 interface GalleryProps {
   searchQuery: string;
@@ -35,12 +36,10 @@ interface GalleryProps {
 
 const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
   const { data: session } = useSession();
-
   const [professionalId, setProfessionalId] = useState<string>("");
-
   const [professionalInfo, setProfessionalInfo] = useState<ProfessionalInfo>();
-
   const [canCreateCv, setCanCreateCv] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   //useState for CV
   const [cvs, setCvs] = useState<cv[]>([]);
@@ -137,7 +136,6 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
     }
   }
 
-
   // Use effect to get the data neded to create a new cv
   useEffect(() => {
     // Check if there is information
@@ -194,6 +192,9 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
   };
 
   const handleCreateCv = async (event: React.FormEvent) => {
+    setTimeout(() => {
+      setIsLoading(true); 
+    }, 500);
     event.preventDefault();
     try {
       if (selectedPosition) {
@@ -216,6 +217,10 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
       }
     } catch (error) {
       console.error("Failed to create new CV:", error);
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false); 
+      }, 4000);
     }
   };
 
@@ -243,6 +248,11 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
       {cvs.filter(cv => cv.title.toLowerCase().includes(searchQuery)).map((cv, index) => (
         <ExistingCV key={index} cvProp={cv} deleteFunction={handleCVDelete} />
       ))}
+      {isLoading && (
+      <div className="absolute w-screen h-screen top-0 left-0 bg-primarygray bg-opacity-50 flex justify-center items-center z-10">
+        <GalleryLoading />
+      </div>
+    )}
     </div>
 
       {/*pop up to create new*/}
@@ -333,11 +343,4 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
 };
 
 export default Gallery;
-/*
-<div className="absolute w-screen h-screen top-0 left-0 bg-white flex justify-center items-center">
-                <GalleryLoading/>
-            </div>
 
-                    <div className="fixed absolute top-0 left-0 w-screen h-screen bg-opacity-50 bg-black flex justify-center items-center">
-
-*/

@@ -12,6 +12,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import {getProfessionalByEmail} from "@/services/sessionService";
 import {getEducation, getGeneralInfo, getProjects, getSkills, getWorks} from "@/services/professional_information/generalService";
 import { useSession } from "next-auth/react";
+import GalleryLoading from "@/app/components/loading";
 const ProfessionalInfo: React.FC = () => {
   interface Education {
     education_id: string;
@@ -22,7 +23,6 @@ const ProfessionalInfo: React.FC = () => {
     end_date: Date;
     relevant_coursework: string;
   }
-
   interface GeneralInfo {
     first_name: string;
     last_name: string;
@@ -31,7 +31,6 @@ const ProfessionalInfo: React.FC = () => {
     github_link: string;
     linkedin_link: string;
   }
-  
   interface Project {
     project_id: string;
     name: string;
@@ -60,6 +59,46 @@ const ProfessionalInfo: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [skills, setSkills] = useState<Skill[]>([]);
   const [works, setWorks] = useState<Work[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [existingGeneralInfo, setExistingGeneralInfo] = useState<GeneralInfo>({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    github_link: "",
+    linkedin_link: "",
+  });
+  const sectionComponents = {
+    general: (<GeneralInfo 
+    generalInfo = {existingGeneralInfo}
+    setGeneralInfo = {setExistingGeneralInfo}
+    professionalID = {professionalID}
+    />
+    ),
+    education: 
+      (<Education
+        educations={educations}
+        setEducations={setEducations}
+        professionalID={professionalID}
+      />),
+    projects: (<Projects 
+      projectsList={projects}
+      setProjects={setProjects}
+      professionalID={professionalID}
+    />),
+    work: <WorkExperience 
+      works={works}
+      setWorks={setWorks}
+      professionalID={professionalID}/>,
+    skills: <Skills 
+      skillList={skills}
+      setSkills={setSkills}
+      professionalID={professionalID}
+    />,
+  };
+  const handleSectionChange = (section: string) => {
+    setCurrentSection(section);
+  };
 
   useEffect(() => {
     const fetchProfessionalID = async () => {
@@ -68,7 +107,6 @@ const ProfessionalInfo: React.FC = () => {
         setProfessionalID(staticID);
       }
     };
-    
     fetchProfessionalID();
   }, [session]);
 
@@ -99,32 +137,27 @@ const ProfessionalInfo: React.FC = () => {
     fetchProjects();
   }, [professionalID]);
 
-  const [existingGeneralInfo, setExistingGeneralInfo] = useState<GeneralInfo>({
-    first_name: "",
-    last_name: "",
-    email: "",
-    phone: "",
-    github_link: "",
-    linkedin_link: "",
-  });
-
   useEffect(() => {
     const fetchEducations = async () => {
+      setIsLoading(true);
       if (professionalID) {
         const fetchedEducations = await getEducation(professionalID);
         setEducations(fetchedEducations);
       }
+      setIsLoading(false);
     };
 
     fetchEducations();
   }, [professionalID]);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchExistingGeneralInfo = async () => {
       try {
         const existingInfo = await getGeneralInfo(professionalID);
         if (existingInfo) {
           setExistingGeneralInfo(existingInfo);
+          setIsLoading(false);
         }
       } catch (error) {
         console.error("Error fetching existing general info:", error);
@@ -156,41 +189,15 @@ const ProfessionalInfo: React.FC = () => {
     }
     fetchSkills();
   }, [professionalID]);
-  const sectionComponents = {
-    general: (<GeneralInfo 
-    generalInfo = {existingGeneralInfo}
-    setGeneralInfo = {setExistingGeneralInfo}
-    professionalID = {professionalID}
-    />
-    ),
-    education: 
-      (<Education
-        educations={educations}
-        setEducations={setEducations}
-        professionalID={professionalID}
-      />),
-    projects: (<Projects 
-      projectsList={projects}
-      setProjects={setProjects}
-      professionalID={professionalID}
-    />),
-    work: <WorkExperience 
-      works={works}
-      setWorks={setWorks}
-      professionalID={professionalID}/>,
-    skills: <Skills 
-      skillList={skills}
-      setSkills={setSkills}
-      professionalID={professionalID}
-    />,
-  };
-
-  const handleSectionChange = (section: string) => {
-    setCurrentSection(section);
-  };
 
   return (
-    <div className="flex flex-row mx-auto justify-center h-screen">
+    <>
+    {isLoading? (
+      <div className="absolute w-screen h-screen top-0 left-0 bg-primarygray bg-opacity-50 flex justify-center items-center z-10">
+        <GalleryLoading />
+      </div>
+    ) : (
+      <div className="flex flex-row mx-auto justify-center h-screen">
       {/* Form */}
       <div className="h-full overflow-y-scroll hide-scrollbar">
         <div className="bg-white my-10 w-[846px] rounded-lg py-5 px-8 shadow-lg">
@@ -208,6 +215,10 @@ const ProfessionalInfo: React.FC = () => {
         </ul>
       </div>
     </div>
+
+    )}
+    </>
+
   );
 };
 

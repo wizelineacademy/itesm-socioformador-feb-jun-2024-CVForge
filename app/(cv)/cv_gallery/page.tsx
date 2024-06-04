@@ -20,14 +20,14 @@ const Menu: React.FC = ({ }) => {
   
   
   if (session && session.user) {
-  return (
-    <div className="flex h-screen overflow-y-scroll justify-center">
-      <div className="flex flex-col">
-        <SearchBar onSearchChange={handleSearchInputChange} /> 
-        <Gallery searchQuery={searchQuery} />
+    return (
+      <div className="flex h-screen overflow-y-scroll justify-center">
+        <div className="flex flex-col">
+          <SearchBar onSearchChange={handleSearchInputChange} /> 
+          <Gallery searchQuery={searchQuery} />
+        </div>
       </div>
-    </div>
-  )
+    )
   } else {
     return (
       <GalleryLoading />
