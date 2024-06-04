@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { RxCross2 } from "react-icons/rx";
-
-// Component imports
 import NewCv from "./NewCv";
 import ExistingCV from "./ExistingCV";
 
@@ -31,7 +29,11 @@ import { cv, desired_position } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { ProfessionalInfo } from "@/types/professionalInfo";
 
-const Gallery: React.FC = () => {
+interface GalleryProps {
+  searchQuery: string;
+}
+
+const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
   const { data: session } = useSession();
 
   const [professionalId, setProfessionalId] = useState<string>("");
@@ -135,6 +137,7 @@ const Gallery: React.FC = () => {
     }
   }
 
+
   // Use effect to get the data neded to create a new cv
   useEffect(() => {
     // Check if there is information
@@ -236,11 +239,11 @@ const Gallery: React.FC = () => {
   return (
     <div className="min-h-screen bg-transparent">
       <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-2 overflow-y-auto top-0">
-        <NewCv handleFormToggle={handleFormToggle} />
-        {cvs.map((cv, index) => (
-          <ExistingCV key={index} cvProp={cv} deleteFunction={handleCVDelete} />
-        ))}
-      </div>
+      <NewCv handleFormToggle={handleFormToggle} />
+      {cvs.filter(cv => cv.title.toLowerCase().includes(searchQuery)).map((cv, index) => (
+        <ExistingCV key={index} cvProp={cv} deleteFunction={handleCVDelete} />
+      ))}
+    </div>
 
       {/*pop up to create new*/}
       {isFormVisible && (
