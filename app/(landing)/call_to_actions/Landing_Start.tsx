@@ -1,8 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 import DottedBg from '@/app/components/WavedDots';
+import { useSession } from "next-auth/react";
+
 
 const LandingStart: React.FC = () => {
+const { data: session } = useSession();
   return (
     <div className="bg-transparent relative">
         {/* Front */}
@@ -22,11 +25,19 @@ const LandingStart: React.FC = () => {
                 </p>
             </div>
             {/* Button */}
-            <Link href='/login'>
-                <button className="md:block bg-gradient-to-r from-gptgreen to-aiblue text-whitefo text-md w-64 py-2 px-4 rounded-3xl mt-6 delay-50 hover:scale-105 duration-200">
+            {session && session.user? (
+                <Link href='/cv_gallery'>
+                    <button className="md:block bg-gradient-to-r from-gptgreen to-aiblue text-whitefo text-md w-64 py-2 px-4 rounded-3xl mt-6 delay-50 hover:scale-105 duration-200">
+                    Go to Gallery
+                    </button>
+                </Link>
+            ) : (
+                <Link href='/login'>
+                    <button className="md:block bg-gradient-to-r from-gptgreen to-aiblue text-whitefo text-md w-64 py-2 px-4 rounded-3xl mt-6 delay-50 hover:scale-105 duration-200">
                     Try Our Service
-                </button>
-            </Link>
+                    </button>
+                </Link>
+            )}
         </div>
         {/* Gradient Block */}
         <div className='w-[550px] h-7 absolute top-[38px] left-[20px] z-5'>

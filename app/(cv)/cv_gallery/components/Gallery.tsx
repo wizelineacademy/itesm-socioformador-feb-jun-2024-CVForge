@@ -252,7 +252,7 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
       <div className="absolute w-screen h-screen top-0 left-0 bg-primarygray bg-opacity-50 flex justify-center items-center z-10">
         <GalleryLoading />
       </div>
-    )}
+      )}
     </div>
 
       {/*pop up to create new*/}
