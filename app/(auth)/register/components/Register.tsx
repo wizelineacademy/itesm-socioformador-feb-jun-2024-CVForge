@@ -5,7 +5,8 @@ import { IoIosArrowForward } from "react-icons/io";
 import Link from 'next/link';
 //import bcrypt from 'bcrypt'
 import { useRouter } from 'next/navigation';
-import { getUserIdByEmail } from '@/services/sessionService';
+import { checkIfEmailInUse, getUserIdByEmail } from '@/services/sessionService';
+import { signIn } from 'next-auth/react';
 
 const Register: React.FC= () => {
     const [firstName, setFirstName] = useState('');
@@ -25,16 +26,20 @@ const Register: React.FC= () => {
 
         //const hashedPassword = await bcrypt.hash(password, 10)
 
-        if (getUserIdByEmail(email)) {
+        if ((await checkIfEmailInUse(email)).valueOf()) {
             alert('This email is already in use. Check if you have already logged in with Google or LinkedIn.');
         } else {
             await createNewUser(email, password);
             // Reset form after submission
-            setFirstName('');
-            setLastName('');
             setEmail('');
             setPassword('');
             setConfirmPassword('');
+
+            await signIn('credentials', {
+                redirect: false,
+                email,
+                password,
+            })
             
             router.push("/cv_gallery");
         }

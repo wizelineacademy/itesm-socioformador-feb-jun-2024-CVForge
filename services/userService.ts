@@ -11,6 +11,11 @@ const createNewUser = async (userEmail : string, userPassword : string) => {
       }
     }
   )
+  await prisma.professional_info.create({
+    data : {
+      user_id : userCreated.users_id,
+    }
+  });
   return userCreated;
 };
 
