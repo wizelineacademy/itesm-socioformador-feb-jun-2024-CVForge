@@ -15,22 +15,26 @@ async function generate_recommendations(cvContent, jobPosition) {
         });
 
         const recommendationsString = response.choices[0].message.content.trim();
-        // If recommendations are too short or empty, provide a default message
         if (recommendationsString.length < 10) {
             return [{
-                title: "Sorry",
+                title: "No Recommendations",
                 main_content: "No specific recommendations could be generated based on the provided CV content."
             }];
         }
 
         // Split the recommendations into an array based on some delimiter
-        const recommendationsArray = recommendationsString.split('\n');
+        const recommendationsArray = recommendationsString.split('\n').filter(Boolean);
 
         // Map the array to recommendation objects
-        const recommendations = recommendationsArray.map((recommendation, index) => ({
-            title: `Recommendation ${index + 1}`,
-            main_content: recommendation.trim()
-        }));
+        const recommendations = recommendationsArray.map((recommendation) => {
+            const parts = recommendation.split(':');
+            const title = parts[0].trim();
+            const main_content = parts.slice(1).join(':').trim();
+            return {
+                title: title || "General Recommendation",
+                main_content: main_content
+            };
+        });
 
         return recommendations;
     } catch (e) {
