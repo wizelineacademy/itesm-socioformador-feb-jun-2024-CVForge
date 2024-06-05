@@ -59,7 +59,7 @@ async function generateCV(cvData, jobPosition) {
       });
     }
 
-    prompt += `Based on the information provided, select only the sections and their content that are most relevant for the job position: '${jobPosition}'. You must return it in markdown format and include all possible content that fits the job position, like the following: <h2>Section</h2>, <h3>Content</h3>, <h3>Content</h3>. Do not modify any of the content. If necessary, use many Content fields. Do not return the content in curly braces. Return only the selected sections and their corresponding content. DO NOT ADD INFORMATION THAT WAS NOT PROVIDED TO YOU`;
+    prompt += `Based on the information provided, select sections and their content and the job position: '${jobPosition}'. You must return it in markdown format and include all possible content that fits the job position, like the following: <h2>Section</h2>, <h3>Content</h3>, <h3>Content</h3>. Do not modify any of the content. If necessary, use many Content fields. Do not return the content in curly braces. Return only the selected sections and their corresponding content. DO NOT ADD INFORMATION THAT WAS NOT PROVIDED TO YOU`;
 
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo-0125",
