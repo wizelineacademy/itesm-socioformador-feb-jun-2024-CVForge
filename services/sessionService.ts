@@ -10,6 +10,15 @@ const getUserIdByEmail = async (userEmail : string) => {
   return user.users_id;
 }
 
+const checkIfEmailInUse = async (userEmail : string) => {
+  const user = await prisma.users.count(
+    {
+      where : { email : userEmail },
+    }
+  );
+  return user;
+}
+
 const getProfessionalByEmail = async (userEmail : string) => {
   const user = await prisma.users.findFirst(
     {
@@ -25,4 +34,4 @@ const getProfessionalByEmail = async (userEmail : string) => {
   return professional_info.professional_info_id;
 }
 
-export {getUserIdByEmail, getProfessionalByEmail}
+export {getUserIdByEmail, getProfessionalByEmail, checkIfEmailInUse}
