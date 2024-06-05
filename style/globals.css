@@ -38,6 +38,7 @@ body {
   display: flex;
   flex-wrap: wrap;
 }
+
 .carousel{
   overflow: hidden;
   -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
@@ -48,6 +49,7 @@ body {
   flex-wrap: nowrap;
   animation: scroll 35s linear infinite;
 }
+
 
 @keyframes scroll{
   to{

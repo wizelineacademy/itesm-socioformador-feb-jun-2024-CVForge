@@ -18,6 +18,18 @@ const LandingPosition: React.FC = () => {
           <PositionBox title="Full Stack Developer"/>
           <PositionBox title="Back-End Developer"/>
         </div>
+        <div className='carousel__inner'>
+          <PositionBox title="Back-End Developer"/>
+          <PositionBox title="Data Analyst"/>
+          <PositionBox title="Prompt Engineer"/>
+          <PositionBox title="Full Stack Developer"/>
+          <PositionBox title="Front-End Developer"/>
+          <PositionBox title="Back-End Developer"/>
+          <PositionBox title="Data Analyst"/>
+          <PositionBox title="Prompt Engineer"/>
+          <PositionBox title="Full Stack Developer"/>
+          <PositionBox title="Front-End Developer"/>
+        </div>
       </div>
     </div>
   );
