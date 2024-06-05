@@ -26,7 +26,7 @@ const Recommendation: React.FC<RecommendationProps> = ({ title, mainContent }) =
                     {title}
                 </h3>
                 <button onClick={handleOpenButtonClick} >
-                    <OpenArrow flipDegree={isOpen ? 180 : 0} />
+                    <OpenArrow flipDegree={isOpen ? 90 : 180} />
                 </button>
             </div>
             {isOpen ?

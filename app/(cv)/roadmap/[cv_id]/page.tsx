@@ -162,8 +162,8 @@ const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
                         completedStatusChange={handleCompletedRecommendationItem}
                     />
                 )): 
-                <div className="w-full h-screen top-0 left-0 bg-editorgray flex justify-center items-center mx-auto">
-                    <GalleryLoading/>
+                <div className="absolute w-screen h-screen top-0 left-0 bg-primarygray bg-opacity-50 flex justify-center items-center z-20">
+                    <GalleryLoading />
                 </div>
             }</ul>
         </div>

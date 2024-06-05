@@ -157,7 +157,7 @@ const ProfessionalInfo: React.FC = () => {
         const existingInfo = await getGeneralInfo(professionalID);
         if (existingInfo) {
           setExistingGeneralInfo(existingInfo);
-          setIsLoading(false);
+          setIsLoading(false); 
         }
       } catch (error) {
         console.error("Error fetching existing general info:", error);
