@@ -25,7 +25,7 @@ const RecommendedChanges: React.FC<RecommendedChangesProps> = ({ recommendations
             <h2 className="font-bold text-lg text-primarygray mb-4">Recommendations</h2>
             <div>
                 {recommendations.map((recommendation, index) => (
-                    <div key={recommendation.recommendation_id} className=" border-2 border-secondarygray bg-white rounded-lg p-4 mb-4">
+                    <div key={recommendation.recommendation_id} className="border-2 border-secondarygray bg-white rounded-lg p-4 mb-4">
                         <div className="flex justify-between items-center cursor-pointer" onClick={() => toggleContent(index)}>
                             <h3 className="mb-2 font-bold">{recommendation.title}</h3>
                             <OpenArrow flipDegree={expandedIndex === index ? 180 : 0} />
@@ -41,3 +41,7 @@ const RecommendedChanges: React.FC<RecommendedChangesProps> = ({ recommendations
 };
 
 export default RecommendedChanges;
+
+
+
+

@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { RxCross2 } from "react-icons/rx";
+
+// Component imports
 import NewCv from "./NewCv";
 import ExistingCV from "./ExistingCV";
 
@@ -28,18 +30,15 @@ import {
 import { cv, desired_position } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { ProfessionalInfo } from "@/types/professionalInfo";
-import GalleryLoading from "@/app/components/loading";
 
-interface GalleryProps {
-  searchQuery: string;
-}
-
-const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
+const Gallery: React.FC = () => {
   const { data: session } = useSession();
+
   const [professionalId, setProfessionalId] = useState<string>("");
+
   const [professionalInfo, setProfessionalInfo] = useState<ProfessionalInfo>();
+
   const [canCreateCv, setCanCreateCv] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   //useState for CV
   const [cvs, setCvs] = useState<cv[]>([]);
@@ -165,64 +164,57 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
 
   const callApi = async (cvId: string) => {
     const selectedPositionTitle = positions.find(
-      (position) => position.desired_position_id == selectedPosition
+        (position) => position.desired_position_id == selectedPosition
     ).title;
     try {
-      const response = await fetch("/api/createCv", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          cvId: cvId,
-          professionalInfo: JSON.stringify(professionalInfo),
-          selectedPosition: selectedPositionTitle,
-        }),
-      });
-
-      if (response.ok) {
-        const jsonData = await response.json();
-        console.log("Message: ", jsonData.message);
-      } else {
-        console.error("Failed to fetch CV data:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error fetching CV data:", error);
-    }
-  };
-
-  const handleCreateCv = async (event: React.FormEvent) => {
-    setTimeout(() => {
-      setIsLoading(true); 
-    }, 500);
-    event.preventDefault();
-    try {
-      if (selectedPosition) {
-        const userId = await getUserIdByEmail(session.user.email);
-        const newCv = await createCV({
-          user_id: userId,
-          title: title,
-          desired_position_id: selectedPosition,
+        const response = await fetch("/api/createCv", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                cvId: cvId,
+                professionalInfo: JSON.stringify(professionalInfo),
+                selectedPosition: selectedPositionTitle,
+            }),
         });
 
-        setCvs((cvs) => [...cvs, newCv]);
-        setIsFormVisible(false);
-        setTitle("");
-        setSelectedPosition("");
-        // Get the cv content from the ai api
-        callApi(newCv.cv_id);
-        // Handle successful form submission (e.g., close form, reset form)
-      } else {
-        console.error("No position selected. Please choose a position.");
-      }
+        if (response.ok) {
+            const jsonData = await response.json();
+            console.log("Message: ", jsonData.message);
+        } else {
+            console.error("Failed to fetch CV data:", response.statusText);
+        }
     } catch (error) {
-      console.error("Failed to create new CV:", error);
-    } finally {
-      setTimeout(() => {
-        setIsLoading(false); 
-      }, 4000);
+        console.error("Error fetching CV data:", error);
     }
-  };
+};
+
+const handleCreateCv = async (event: React.FormEvent) => {
+  event.preventDefault();
+  try {
+      if (selectedPosition) {
+          const userId = await getUserIdByEmail(session.user.email);
+          const newCv = await createCV({
+              user_id: userId,
+              title: title,
+              desired_position_id: selectedPosition,
+          });
+
+          setCvs((cvs) => [...cvs, newCv]);
+          setIsFormVisible(false);
+          setTitle("");
+          setSelectedPosition("");
+          // Get the cv content from the AI API and store recommendations
+          await callApi(newCv.cv_id);
+          // Handle successful form submission (e.g., close form, reset form)
+      } else {
+          console.error("No position selected. Please choose a position.");
+      }
+  } catch (error) {
+      console.error("Failed to create new CV:", error);
+  }
+};
 
   const handleCVDelete = async (cvId: string) => {
     const deletedCV = await deleteCV(cvId);
@@ -244,16 +236,11 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
   return (
     <div className="min-h-screen bg-transparent">
       <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-2 overflow-y-auto top-0">
-      <NewCv handleFormToggle={handleFormToggle} />
-      {cvs.filter(cv => cv.title.toLowerCase().includes(searchQuery)).map((cv, index) => (
-        <ExistingCV key={index} cvProp={cv} deleteFunction={handleCVDelete} />
-      ))}
-      {isLoading && (
-      <div className="absolute w-screen h-screen top-0 left-0 bg-primarygray bg-opacity-50 flex justify-center items-center z-10">
-        <GalleryLoading />
+        <NewCv handleFormToggle={handleFormToggle} />
+        {cvs.map((cv, index) => (
+          <ExistingCV key={index} cvProp={cv} deleteFunction={handleCVDelete} />
+        ))}
       </div>
-      )}
-    </div>
 
       {/*pop up to create new*/}
       {isFormVisible && (
@@ -343,4 +330,12 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
 };
 
 export default Gallery;
+/*
+<div className="absolute w-screen h-screen top-0 left-0 bg-white flex justify-center items-center">
+                <GalleryLoading/>
+            </div>
+
+                    <div className="fixed absolute top-0 left-0 w-screen h-screen bg-opacity-50 bg-black flex justify-center items-center">
+
+*/
 
