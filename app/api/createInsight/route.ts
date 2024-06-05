@@ -11,6 +11,11 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         const cvId = query.cvId as string;
         const jobPosition = query.jobPosition as string;
 
+        // Validate input
+        if (!cvId || !jobPosition) {
+            return NextResponse.json({ error: 'Missing cvId or jobPosition' });
+        }
+
         // Check if recommendations already exist for the given CV
         const existingRecommendations = await prisma.recommendation.findMany({
             where: { cv_id: cvId },
@@ -20,23 +25,28 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
             return NextResponse.json({ message: existingRecommendations });
         }
 
-        // If recommendations do not exist, generate new ones
-        const defaultCvId = "11cf082c-c7bd-44e6-a428-8d823342e07f";
-
+        // Fetch the CV data
         const generatedCv = await prisma.cv.findUnique({
-            where: { cv_id: cvId || defaultCvId },
+            where: { cv_id: cvId },
         });
+
+        if (!generatedCv) {
+            return NextResponse.json({ error: 'CV not found' });
+        }
+
         const cvData = generatedCv.content;
 
+        // Generate new recommendations
         const recommendations = await generate_recommendations(cvData, jobPosition);
         console.log(jobPosition, recommendations);
 
         const validRecommendations = recommendations.filter(recommendation => recommendation.title && recommendation.main_content);
 
+        // Save the generated recommendations to the database
         const savedRecommendations = await Promise.all(validRecommendations.map(async (recommendation) => {
             return prisma.recommendation.create({
                 data: {
-                    cv_id: cvId || defaultCvId,
+                    cv_id: cvId,
                     title: recommendation.title,
                     main_content: recommendation.main_content,
                     completed: false 
