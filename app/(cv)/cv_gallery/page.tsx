@@ -18,7 +18,6 @@ const Menu: React.FC = ({ }) => {
     setSearchQuery(query);
   };  
   
-  
   if (session && session.user) {
     return (
       <div className="flex h-screen overflow-y-scroll justify-center">

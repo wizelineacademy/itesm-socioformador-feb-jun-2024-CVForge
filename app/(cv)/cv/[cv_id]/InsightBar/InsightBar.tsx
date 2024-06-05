@@ -15,6 +15,7 @@ import ReccomendationSection from "./RecommendationSection";
 import OpenArrow from "@/public/assets/cv/insight/OpenArrow_icon";
 import RecommendedChanges from "./RecommendedChanges";
 
+
 const InsightBar = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [recommendations, setRecommendations] = useState<string[]>([]);
@@ -32,15 +33,18 @@ const InsightBar = () => {
     useEffect(() => {
         const fetchRecommendations = async () => {
             setIsLoadingFetch(true);
+            console.log("fetching")
             try {
                 const response = await fetch('/api/createInsight', { method: 'GET' });
                 const jsonData = await response.json();
                 if (jsonData && jsonData.message) {
                     setRecommendations(jsonData.message);
+                    console.log("Recomendations:",recommendations)
                 }
             } catch (error) {
                 console.error('Failed to fetch recommendations:', error);
             } finally {
+                console.log(recommendations)
                 setIsLoadingFetch(false);
             }
         };
