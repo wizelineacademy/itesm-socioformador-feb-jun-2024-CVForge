@@ -52,36 +52,11 @@ const InsightBar = () => {
         <div className={` ${isOpen ? "w-[900px]" : "w-[400px] 2xl:w-[600px]"} h-full transition-all duration-500 right-0 shadow-lg font-inter bg-white text-primarygray`}>
             <div className="w-full h-screen px-4 overflow-y-auto">
                 <div className="w-full flex flex-row items-center mt-8 mb-2">
-                    <h1 className="text-3xl font-black">Score</h1>
+                    <h1 className="text-3xl font-black">Feedback</h1>
                 </div>
-                <hr className="w-full h-[1px]"></hr>
+                <hr className="w-full h-[1px] mb-2"></hr>
                 <div className={`${isOpen ? "flex-row" : "flex-col"} flex`}>
-                    <div>
-                        <div className="flex justify-center my-4">
-                            {/* Display Gauge component */}
-                            <Gauge
-                                width={150}
-                                height={150}
-                                value={SCORE}
-                                sx={(theme) => ({
-                                    [`& .${gaugeClasses.valueText}`]: {
-                                        fontSize: 60,
-                                    },
-                                    [`& .${gaugeClasses.valueArc}`]: {
-                                        fill: '#98C887',
-                                        strokeWidth: '4px',
-                                        stroke: '#98C887'
-                                    },
-                                    [`& .${gaugeClasses.referenceArc}`]: {
-                                        fill: '#D9D9D9',
-                                        strokeWidth: '4px',
-                                        stroke: '#D9D9D9'
-                                    },
-                                })}
-                            />
-                        </div>
-                        <hr className="w-full h-[1px] my-2" />
-                    </div>
+ 
                     <RecommendedChanges recommendations={recommendations} />
                 </div>
                 <div className="w-full bottom-0 right-0 flex justify-end items-center">
