@@ -38,23 +38,12 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
         // Generate new recommendations
         const recommendations = await generate_recommendations(cvData, jobPosition);
-        console.log(jobPosition, recommendations);
 
+        // Ensure the recommendations are valid and contain the necessary fields
         const validRecommendations = recommendations.filter(recommendation => recommendation.title && recommendation.main_content);
 
-        // Save the generated recommendations to the database
-        const savedRecommendations = await Promise.all(validRecommendations.map(async (recommendation) => {
-            return prisma.recommendation.create({
-                data: {
-                    cv_id: cvId,
-                    title: recommendation.title,
-                    main_content: recommendation.main_content,
-                    completed: false 
-                }
-            });
-        }));
 
-        return NextResponse.json({ message: savedRecommendations });
+        return NextResponse.json({ message: recommendations });
     } catch (error: any) {
         console.error("Error in generating recommendations:", error);
         return NextResponse.json({ error: error.message });
