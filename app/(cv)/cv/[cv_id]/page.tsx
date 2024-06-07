@@ -80,7 +80,7 @@ const CV = ({ params }: { params: { cv_id: string } }) => {
                     toolbar:
                       "undo redo | fontfamily fontsize | bold italic underline strikethrough | link image media table | spellcheckdialog | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat",
                   }}
-                  initialValue={cvBodyData}
+                  initialValue={cvBodyData.replace(/h3/g, 'p')}
                   onInit={(evt, editor) => (editorRef.current = editor)}
                 />
                 {autosaveStatus && <div>{autosaveStatus}</div>}
