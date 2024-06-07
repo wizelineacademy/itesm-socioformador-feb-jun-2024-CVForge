@@ -86,7 +86,7 @@ const CV = ({ params }: { params: { cv_id: string } }) => {
                 {autosaveStatus && <div>{autosaveStatus}</div>}
               </div>
               <div className="absolute right-0">
-                <InsightBar />
+                <InsightBar cv_id={params.cv_id}/>
               </div>
             </div>
           ) : (

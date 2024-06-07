@@ -14,13 +14,27 @@ import ReccomendationSection from "./RecommendationSection";
 // Icon imports
 import OpenArrow from "@/public/assets/cv/insight/OpenArrow_icon";
 import RecommendedChanges from "./RecommendedChanges";
+import { recommendation } from "@prisma/client";
+import { findRecommendationById, findRecommendationsByCvId, getAllRecommendation } from "@/services/recommendationService";
 
-const InsightBar = () => {
+type InsightBarProps = {cv_id: string}
+const InsightBar:React.FC<InsightBarProps> = ({cv_id}) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [recommendations, setRecommendations] = useState<string[]>([]);
+    const [recommendations, setRecommendations] = useState<recommendation[]>([]);
     const [isLoadingFetch, setIsLoadingFetch] = useState<boolean>(false);
     const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
+    useEffect(() => {
+        // setFetchedRecommendations()
+        const fetchRecommendations = async () => {
+            try {
+                const recommendationsArray = await findRecommendationsByCvId(cv_id);
+                setRecommendations(recommendationsArray);
+            } catch (error) {
+                console.error("Failed to fetch recommendations", error);
+            }
+        };
+        if (cv_id) fetchRecommendations();
+    }, [cv_id])
     const handleOpenInsightBar = () => {
         setIsOpen(!isOpen);
     }
@@ -28,25 +42,6 @@ const InsightBar = () => {
     const toggleContent = (index: number) => {
         setExpandedIndex(expandedIndex === index ? null : index);
     };
-
-    useEffect(() => {
-        const fetchRecommendations = async () => {
-            setIsLoadingFetch(true);
-            try {
-                const response = await fetch('/api/createInsight', { method: 'GET' });
-                const jsonData = await response.json();
-                if (jsonData && jsonData.message) {
-                    setRecommendations(jsonData.message);
-                }
-            } catch (error) {
-                console.error('Failed to fetch recommendations:', error);
-            } finally {
-                setIsLoadingFetch(false);
-            }
-        };
-
-        fetchRecommendations();
-    }, []);
 
     return (
         <div className={` ${isOpen ? "w-[900px]" : "w-[400px] 2xl:w-[600px]"} h-full transition-all duration-500 right-0 shadow-lg font-inter bg-white text-primarygray`}>
