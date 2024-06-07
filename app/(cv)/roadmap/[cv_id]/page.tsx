@@ -9,7 +9,7 @@ import GalleryLoading from "@/app/components/loading";
 import { useEffect, useState } from "react";
 import React, { useRef } from 'react';
 
-
+ 
 // Icon imports
 import OpenArrow_icon from "@/public/assets/cv/insight/OpenArrow_icon";
 import { recommendation } from "@prisma/client";
@@ -25,7 +25,6 @@ type RecommendationItem = {
 }
 
 function removeRecommendationAndStar(inputString: string): string {
-    // Replace 'Recommendation' and '*' with an empty string
     const filteredString = inputString.replace(/Recommendation/g, '').replace(/\*/g, '').replace(/:/g, '');
     return filteredString;
 }
@@ -33,7 +32,6 @@ function removeRecommendationAndStar(inputString: string): string {
 const RecommendationItem: React.FC<RecommendationItem> = ({ recommendationItemData, isLast, completedStatusChange }) => {
     const [completed, setCompleted] = useState<boolean>(recommendationItemData.completed);
 
-    // Change the completed status, sends to the parent and also updates internally to reflect visually
     const handleCompletedStatusChange = () => {
         const newCompletedStatus = !completed;
         setCompleted(newCompletedStatus);
@@ -147,31 +145,33 @@ const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
     const isNearTop = useScrollPosition(ulRef);
 
     return (
-        <div className="flex flex-col bg-editorgray h-screen">
-            {/* Top part */}
-            <div className={`flex flex-col w-full ${isNearTop? '' : 'shadow-lg'}`}>
-                <Link href={"/cv_gallery"} className="sticky h-10 flex items-center text-secondarygray bg-transparent pl-8 pt-8">
-                    <OpenArrow_icon flipDegree={270} /><p className="text-md font-bold font-inter ">Back to Menu</p>
-                </Link>
-                <div className="flex flex-col justify-center items-center mx-[300px] pr-10 pb-5 top-0">
-                    <p className="text-4xl text-primarygray font-bold font-koh_santepheap">Roadmap</p>
-                    <p className="text-secondarygray text-center w-fill text-lg m-2 mt-5">This roadmap delineates recommended challenges suggested by our AI to enhance your qualifications and increase your likelihood of securing your desired position.</p>
+        <div className="flex h-screen overflow-y-scroll justify-center">
+            <div className="flex flex-col ">
+                {/* Top part */}
+                <div className={`flex flex-col w-full ${isNearTop? '' : 'shadow-lg'}`}>
+                    <Link href={"/cv_gallery"} className="sticky h-10 flex items-center text-secondarygray bg-transparent pl-8 pt-8">
+                        <OpenArrow_icon flipDegree={270} /><p className="text-md font-bold font-inter ">Back to Menu</p>
+                    </Link>
+                    <div className="flex flex-col justify-center items-center mx-auto w-[560px] pr-10 pb-5 top-0">
+                        <p className="text-4xl text-primarygray font-bold font-koh_santepheap">Roadmap</p>
+                        <p className="text-secondarygray text-center w-fill text-lg m-2 mt-5">This roadmap delineates recommended challenges suggested by our AI to enhance your qualifications and increase your likelihood of securing your desired position.</p>
+                    </div>
                 </div>
+                {/* Scroll area */}
+                <ul ref={ulRef} className="overflow-y-scroll mx-12">{
+                    fetchedRecommendations.length > 0 ? fetchedRecommendations.map((recommendation, index) => (
+                        <RecommendationItem
+                            key={recommendation.recommendation_id}
+                            recommendationItemData={recommendation}
+                            isLast={index === fetchedRecommendations.length - 1}
+                            completedStatusChange={handleCompletedRecommendationItem}
+                        />
+                    )): 
+                    <div className="absolute w-screen h-screen top-0 left-0 bg-primarygray bg-opacity-50 flex justify-center items-center z-20">
+                        <GalleryLoading />
+                    </div>
+                }</ul>
             </div>
-            {/* Scroll area */}
-            <ul ref={ulRef} className="overflow-y-scroll mx-12">{
-                fetchedRecommendations.length > 0 ? fetchedRecommendations.map((recommendation, index) => (
-                    <RecommendationItem
-                        key={recommendation.recommendation_id}
-                        recommendationItemData={recommendation}
-                        isLast={index === fetchedRecommendations.length - 1}
-                        completedStatusChange={handleCompletedRecommendationItem}
-                    />
-                )): 
-                <div className="absolute w-screen h-screen top-0 left-0 bg-primarygray bg-opacity-50 flex justify-center items-center z-20">
-                    <GalleryLoading />
-                </div>
-            }</ul>
         </div>
     )
 }

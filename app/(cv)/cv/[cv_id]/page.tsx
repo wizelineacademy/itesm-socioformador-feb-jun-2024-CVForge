@@ -5,11 +5,15 @@ import { Editor } from "@tinymce/tinymce-react";
 import { getGeneralInfo } from "@/services/professional_information/generalService";
 import { findCVById } from "@/services/cvService";
 import GalleryLoading from "@/app/components/loading";
+import { setCurrentTab } from "@/contexts/cv/sidebar/currentTab";
+import { useDispatch } from "react-redux";
 
 const CV = ({ params }: { params: { cv_id: string } }) => {
   const [cvBodyData, setCvBodyData] = useState<string>("");
   const editorRef = useRef<any>(null);
   const [autosaveStatus, setAutosaveStatus] = useState<string>("");
+  const dispatch = useDispatch()
+  dispatch(setCurrentTab("cv_gallery"))
 
   useEffect(() => {
     const fetchCV = async () => {
