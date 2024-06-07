@@ -25,10 +25,12 @@ async function generate_recommendations(cvContent, jobPosition) {
         // Split the recommendations into an array based on some delimiter
         const recommendationsArray = recommendationsString.split('\n').filter(Boolean);
 
-        // Map the array to recommendation objects
+        // Map the array to recommendation objects containing the title without numbering and main content
         const recommendations = recommendationsArray.map((recommendation) => {
             const parts = recommendation.split(':');
-            const title = parts[0].trim();
+            let title = parts[0].trim();
+            // Remove any numbering or "Recommendation" indication from the title
+            title = title.replace(/^\d+\.\s*|\s*Recommendation\s*/i, '');
             const main_content = parts.slice(1).join(':').trim();
             return {
                 title: title || "General Recommendation",
