@@ -17,6 +17,7 @@ import RecommendedChanges from "./RecommendedChanges";
 import { recommendation } from "@prisma/client";
 import { findRecommendationById, findRecommendationsByCvId, getAllRecommendation } from "@/services/recommendationService";
 
+
 type InsightBarProps = {cv_id: string}
 const InsightBar:React.FC<InsightBarProps> = ({cv_id}) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -51,12 +52,15 @@ const InsightBar:React.FC<InsightBarProps> = ({cv_id}) => {
                 </div>
                 <hr className="w-full h-[1px] mb-2"></hr>
                 <div className={`${isOpen ? "flex-row" : "flex-col"} flex`}>
- 
                     <RecommendedChanges recommendations={recommendations} />
                 </div>
-                <div className="w-full bottom-0 right-0 flex justify-end items-center">
-                    <Link href={"/"} className="h-full text-end pr-4">Roadmap</Link>
-                </div>
+                <div className="w-full flex justify-center items-center">
+                    <button className="md:block bg-gradient-to-r from-gptgreen to-aiblue text-whitefo text-md w-64 py-2 px-4 rounded-3xl mt-6 delay-50 hover:scale-105 duration-200">
+                        <Link href={`/roadmap/${cv_id}`} className="h-full text-end pr-4">Roadmap</Link>
+                    </button>
+                </div> 
+
+
             </div>
         </div>
     )
