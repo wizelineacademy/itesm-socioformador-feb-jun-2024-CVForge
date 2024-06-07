@@ -6,6 +6,7 @@ import Link from 'next/link';
 //import bcrypt from 'bcrypt'
 import { useRouter } from 'next/navigation';
 import { checkIfEmailInUse, getUserIdByEmail } from '@/services/sessionService';
+import { signIn } from 'next-auth/react';
 
 const Register: React.FC= () => {
     const [firstName, setFirstName] = useState('');
@@ -30,13 +31,17 @@ const Register: React.FC= () => {
         } else {
             await createNewUser(email, password);
             // Reset form after submission
-            setFirstName('');
-            setLastName('');
             setEmail('');
             setPassword('');
             setConfirmPassword('');
+
+            await signIn('credentials', {
+                redirect: false,
+                email,
+                password,
+            })
             
-            router.push("/");
+            router.push("/cv_gallery");
         }
 
 
