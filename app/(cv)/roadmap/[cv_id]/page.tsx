@@ -24,6 +24,12 @@ type RecommendationItem = {
     completedStatusChange: (recommendation: recommendation) => void;
 }
 
+function removeRecommendationAndStar(inputString: string): string {
+    // Replace 'Recommendation' and '*' with an empty string
+    const filteredString = inputString.replace(/Recommendation/g, '').replace(/\*/g, '').replace(/:/g, '');
+    return filteredString;
+}
+
 const RecommendationItem: React.FC<RecommendationItem> = ({ recommendationItemData, isLast, completedStatusChange }) => {
     const [completed, setCompleted] = useState<boolean>(recommendationItemData.completed);
 
@@ -49,7 +55,7 @@ const RecommendationItem: React.FC<RecommendationItem> = ({ recommendationItemDa
             {/* text */}
             <div className="flex flex-col mb-7 ml-4 mt-[-3px] bg-white rounded rounded-xl shadow-lg">
                 <div className="p-3">
-                    <h3 className="font-semibold text-2xl">{recommendationItemData.title}</h3>
+                    <h3 className="font-semibold text-2xl">{removeRecommendationAndStar(recommendationItemData.title)}</h3>
                     <p className="text-secondarygray text-lg">{recommendationItemData.main_content}</p>
                 </div>
             </div>
