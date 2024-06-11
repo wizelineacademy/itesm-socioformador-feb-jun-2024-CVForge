@@ -32,8 +32,12 @@ const Footer: React.FC = () => {
         {/* Thanks */}
         <div className="flex flex-col w-40">
           <h1 className="font-bold text-xl text-secondarygray pb-3">Thanks To</h1>
-          <img src="/assets/tec-logo.png" alt="Tecnológico de Monterrey"/>
-          <img src="/assets/wizeline-logo.png" alt="Wizeline"/>
+          <a href="https://tec.mx/es">
+            <img src="/assets/tec-logo.png" alt="Tecnológico de Monterrey"/>
+          </a>
+          <a href="https://www.wizeline.com/es/">
+            <img src="/assets/wizeline-logo.png" alt="Wizeline"/>
+          </a>
         </div>
       </div>
       <div className="bg-secondarygray w-full h-0.5 rounded bg-opacity-30"/>
