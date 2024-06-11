@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { getProfessionalByEmail } from "@/services/sessionService";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+import { Prisma } from "@prisma/client";
 
 interface Work {
   work_experience_id : string;
@@ -75,7 +76,7 @@ const WorkExperience: React.FC<WorkProps> = ({works, setWorks, professionalID}) 
       );
     }catch (error) {
       console.error('Error deleting work:', error);
-      if (error instanceof prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+      if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
         setWorks((prevWorks) =>
         prevWorks.filter((work) => work.work_experience_id !== workID)
         );

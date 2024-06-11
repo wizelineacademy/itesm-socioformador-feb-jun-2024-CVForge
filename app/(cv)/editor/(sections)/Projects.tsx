@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { getProfessionalByEmail } from "@/services/sessionService";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+import { Prisma } from "@prisma/client";
 
 interface Project {
   project_id: string;
@@ -73,7 +74,7 @@ const Projects: React.FC<ProjectProps> = ({projectsList, setProjects, profession
       );
     }catch (error) {
       console.error('Error deleting project:', error);
-      if (error instanceof prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+      if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
         setProjects((prevProjects) =>
         prevProjects.filter((project) => project.project_id !== projectID)
         );

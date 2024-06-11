@@ -7,6 +7,9 @@ import { useSession } from "next-auth/react";
 import { getProfessionalByEmail } from "@/services/sessionService";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+import prisma from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
+
 interface Education {
   education_id: string;
   school: string;
@@ -74,9 +77,9 @@ const EducationComponent: React.FC<EducationProps> = ({ educations, setEducation
       setEducations((prevEducations) =>
         prevEducations.filter((_, idx) => idx !== index)
       );
-    }catch (error) {
+    }catch (error:any) {
       console.error('Error deleting education:', error);
-      if (error instanceof prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+      if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
         // Optionally remove the record from the state if it does not exist in the database
         setEducations((prevEducations) =>
           prevEducations.filter((education) => education.education_id !== educationID)

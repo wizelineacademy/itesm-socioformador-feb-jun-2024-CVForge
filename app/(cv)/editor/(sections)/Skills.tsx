@@ -5,6 +5,7 @@ import { update } from "cypress/types/lodash";
 import { useSession } from "next-auth/react";
 import { getProfessionalByEmail } from "@/services/sessionService";
 import { MdOutlineModeEdit, MdOutlineDeleteOutline } from "react-icons/md";
+import { Prisma } from "@prisma/client";
 
 interface Skill {
   skill_id: string;
@@ -68,7 +69,7 @@ const Skills: React.FC<SkillProps> = ({ skillList, setSkills, professionalID }) 
       );
     } catch (error) {
       console.error('Error deleting skill:', error);
-      if (error instanceof prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+      if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
         setSkills((prevSkills) =>
           prevSkills.filter((skill) => skill.skill_id !== skillID)
         );
