@@ -3,6 +3,8 @@ import SecondaryLogo from "@/public/assets/SecondaryLogo"
 import Link from "next/link";
 import { FaLinkedin } from "react-icons/fa";
 import { CiLinkedin } from "react-icons/ci";
+import Image from 'next/image';
+
 
 
 const Footer: React.FC = () => {
@@ -33,10 +35,10 @@ const Footer: React.FC = () => {
         <div className="flex flex-col w-40">
           <h1 className="font-bold text-xl text-secondarygray pb-3">Thanks To</h1>
           <a href="https://tec.mx/es">
-            <img src="/assets/tec-logo.png" alt="Tecnológico de Monterrey"/>
+            <Image src="/assets/tec-logo.png" alt="Tecnológico de Monterrey" width={100} height={100}/>
           </a>
           <a href="https://www.wizeline.com/es/">
-            <img src="/assets/wizeline-logo.png" alt="Wizeline"/>
+            <Image src="/assets/wizeline-logo.png" alt="Wizeline" width={100} height={100}/>
           </a>
         </div>
       </div>
