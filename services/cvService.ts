@@ -34,7 +34,6 @@ export const createCV = async(data : {user_id? : string; title?: string;
 };
 
 export const deleteCV = async(cvId: string) => {
-  console.log("Cv id that i am deleting: ", cvId);
   const deletedCV = await prisma.cv.delete({
     where: {
       cv_id: cvId,
