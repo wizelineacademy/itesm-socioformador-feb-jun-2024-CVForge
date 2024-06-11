@@ -7,7 +7,6 @@ export const findCVById = async (cvID: string) => {
     const cv = await prisma.cv.findUnique({
       where: { cv_id: cvID },
     });
-    console.log(cv);
     return cv;
   } catch (error) {
     console.error('Failed to fetch CV:', error);

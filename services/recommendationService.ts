@@ -23,7 +23,6 @@ export const findRecommendationById = async (recommendationId: string) => {
 
 export const findRecommendationsByCvId = async (cvId: string): Promise<recommendation[]> => {
     try {
-        console.log("Fetching recommendations for CV ID:", cvId)
         const recommendations = await prisma.recommendation.findMany({
             where: { cv_id: cvId }
         });
