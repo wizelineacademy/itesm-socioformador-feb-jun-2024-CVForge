@@ -1,5 +1,10 @@
 {
+  "files": ["app/**/*.js"],
+  "ignores": ["app/**/*config.js"],  
   "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
   "plugins": ["prettier/recommended"],
-  "rules": { "prettier/prettier": "error" }
+  "rules": {
+    "semi": "error",
+    "prefer-const": "error"
+  }
 }
