@@ -1,24 +1,24 @@
-'use client'
-import React from 'react'
-import { useState, useEffect } from 'react'
-import Education from './(sections)/Education'
-import GeneralInfo from './(sections)/GeneralInfo'
-import Projects from './(sections)/Projects'
-import Skills from './(sections)/Skills'
-import WorkExperience from './(sections)/WorkExperience'
-import { setCurrentTab } from '@/contexts/cv/sidebar/currentTab'
-import { useDispatch } from 'react-redux'
-import { IoIosArrowForward } from 'react-icons/io'
-import { getProfessionalByEmail } from '@/services/sessionService'
+"use client"
+import React from "react"
+import { useState, useEffect } from "react"
+import Education from "./(sections)/Education"
+import GeneralInfo from "./(sections)/GeneralInfo"
+import Projects from "./(sections)/Projects"
+import Skills from "./(sections)/Skills"
+import WorkExperience from "./(sections)/WorkExperience"
+import { setCurrentTab } from "@/contexts/cv/sidebar/currentTab"
+import { useDispatch } from "react-redux"
+import { IoIosArrowForward } from "react-icons/io"
+import { getProfessionalByEmail } from "@/services/sessionService"
 import {
   getEducation,
   getGeneralInfo,
   getProjects,
   getSkills,
   getWorks,
-} from '@/services/professional_information/generalService'
-import { useSession } from 'next-auth/react'
-import GalleryLoading from '@/app/components/loading'
+} from "@/services/professional_information/generalService"
+import { useSession } from "next-auth/react"
+import GalleryLoading from "@/app/components/loading"
 const ProfessionalInfo: React.FC = () => {
   interface Education {
     education_id: string
@@ -57,9 +57,9 @@ const ProfessionalInfo: React.FC = () => {
     end_date: Date
   }
   const dispatch = useDispatch()
-  dispatch(setCurrentTab('editor'))
+  dispatch(setCurrentTab("editor"))
   const { data: session } = useSession()
-  const [currentSection, setCurrentSection] = useState('general')
+  const [currentSection, setCurrentSection] = useState("general")
   const [professionalID, setProfessionalID] = useState<string | null>(null)
   const [educations, setEducations] = useState<Education[]>([])
   const [projects, setProjects] = useState<Project[]>([])
@@ -67,12 +67,12 @@ const ProfessionalInfo: React.FC = () => {
   const [works, setWorks] = useState<Work[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [existingGeneralInfo, setExistingGeneralInfo] = useState<GeneralInfo>({
-    first_name: '',
-    last_name: '',
-    email: '',
-    phone: '',
-    github_link: '',
-    linkedin_link: '',
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    github_link: "",
+    linkedin_link: "",
   })
   const sectionComponents = {
     general: (
@@ -131,7 +131,7 @@ const ProfessionalInfo: React.FC = () => {
         const worksGetted = await getWorks(professionalID)
         setWorks(worksGetted)
       } catch (error) {
-        console.log('There was an error trying to fetch the works', error)
+        console.log("There was an error trying to fetch the works", error)
       }
     }
     fetchWorks()
@@ -144,7 +144,7 @@ const ProfessionalInfo: React.FC = () => {
         setProjects(projectsGetted)
         console.log(projectsGetted)
       } catch (error) {
-        console.log('There was an error trying to fetch the projects', error)
+        console.log("There was an error trying to fetch the projects", error)
       }
     }
     fetchProjects()
@@ -173,7 +173,7 @@ const ProfessionalInfo: React.FC = () => {
           setIsLoading(false)
         }
       } catch (error) {
-        console.error('Error fetching existing general info:', error)
+        console.error("Error fetching existing general info:", error)
       }
     }
     if (professionalID) fetchExistingGeneralInfo()
@@ -196,7 +196,7 @@ const ProfessionalInfo: React.FC = () => {
         const skillsGetted = await getSkills(professionalID)
         setSkills(skillsGetted)
       } catch (error) {
-        console.log('There was an error trying to fetch the skills', error)
+        console.log("There was an error trying to fetch the skills", error)
       }
     }
     fetchSkills()
@@ -222,45 +222,45 @@ const ProfessionalInfo: React.FC = () => {
               <li className="step hover:text-gptgreen hover:underline">
                 <button
                   className="flex felx-row flex-nowrap items-center"
-                  onClick={() => handleSectionChange('general')}
+                  onClick={() => handleSectionChange("general")}
                 >
-                  {' '}
+                  {" "}
                   <IoIosArrowForward /> General Info
                 </button>
               </li>
               <li className="step hover:text-gptgreen hover:underline">
                 <button
                   className="flex felx-row flex-nowrap items-center"
-                  onClick={() => handleSectionChange('work')}
+                  onClick={() => handleSectionChange("work")}
                 >
-                  {' '}
+                  {" "}
                   <IoIosArrowForward /> Work Experience
                 </button>
               </li>
               <li className="step hover:text-gptgreen hover:underline">
                 <button
                   className="flex felx-row flex-nowrap items-center"
-                  onClick={() => handleSectionChange('education')}
+                  onClick={() => handleSectionChange("education")}
                 >
-                  {' '}
+                  {" "}
                   <IoIosArrowForward /> Education
                 </button>
               </li>
               <li className="step hover:text-gptgreen hover:underline">
                 <button
                   className="flex felx-row flex-nowrap items-center"
-                  onClick={() => handleSectionChange('projects')}
+                  onClick={() => handleSectionChange("projects")}
                 >
-                  {' '}
+                  {" "}
                   <IoIosArrowForward /> Projects
                 </button>
               </li>
               <li className="step hover:text-gptgreen hover:underline">
                 <button
                   className="flex felx-row flex-nowrap items-center"
-                  onClick={() => handleSectionChange('skills')}
+                  onClick={() => handleSectionChange("skills")}
                 >
-                  {' '}
+                  {" "}
                   <IoIosArrowForward /> Skills
                 </button>
               </li>

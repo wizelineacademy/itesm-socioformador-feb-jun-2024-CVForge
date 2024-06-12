@@ -1,5 +1,5 @@
-import React from 'react'
-import PositionBox from '../components/PositionBox'
+import React from "react"
+import PositionBox from "../components/PositionBox"
 
 const LandingPosition: React.FC = () => {
   return (

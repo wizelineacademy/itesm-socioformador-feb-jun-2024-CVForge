@@ -1,16 +1,16 @@
-'use client'
-import React, { useEffect, useState } from 'react'
+"use client"
+import React, { useEffect, useState } from "react"
 import {
   getSkills,
   createSkill,
   updateSkill,
   deleteSkill,
-} from '@/services/professional_information/generalService'
-import { update } from 'cypress/types/lodash'
-import { useSession } from 'next-auth/react'
-import { getProfessionalByEmail } from '@/services/sessionService'
-import { MdOutlineModeEdit, MdOutlineDeleteOutline } from 'react-icons/md'
-import { Prisma } from '@prisma/client'
+} from "@/services/professional_information/generalService"
+import { update } from "cypress/types/lodash"
+import { useSession } from "next-auth/react"
+import { getProfessionalByEmail } from "@/services/sessionService"
+import { MdOutlineModeEdit, MdOutlineDeleteOutline } from "react-icons/md"
+import { Prisma } from "@prisma/client"
 
 interface Skill {
   skill_id: string
@@ -51,16 +51,16 @@ const Skills: React.FC<SkillProps> = ({
 
     const formData = new FormData(event.currentTarget)
     const skillData: Partial<Skill> = {
-      title: formData.get('title') as string,
-      proficiency: formData.get('proficiency') as string,
+      title: formData.get("title") as string,
+      proficiency: formData.get("proficiency") as string,
     }
 
-    if (skillData.title.trim() === '' || skillData.proficiency.trim() === '') {
-      alert('Title and proficiency must be filled in to save.')
+    if (skillData.title.trim() === "" || skillData.proficiency.trim() === "") {
+      alert("Title and proficiency must be filled in to save.")
     } else {
       try {
         const updatedSkill = await updateSkill(skillID, skillData)
-        console.log('Skill updated successfully:', updatedSkill)
+        console.log("Skill updated successfully:", updatedSkill)
         setSkills((prevSkills) =>
           prevSkills.map((skill) =>
             skill.skill_id === skillID ? updatedSkill : skill,
@@ -68,7 +68,7 @@ const Skills: React.FC<SkillProps> = ({
         )
         toggleEditMode(skill.skill_id)
       } catch (error) {
-        console.error('Error updating skill:', error)
+        console.error("Error updating skill:", error)
       }
     }
   }
@@ -76,13 +76,13 @@ const Skills: React.FC<SkillProps> = ({
   const handleDelete = async (skillID: string, index: number) => {
     try {
       await deleteSkill(skillID)
-      console.log('Skill deleted successfully')
+      console.log("Skill deleted successfully")
       setSkills((prevSkills) => prevSkills.filter((_, idx) => idx !== index))
     } catch (error) {
-      console.error('Error deleting skill:', error)
+      console.error("Error deleting skill:", error)
       if (
         error instanceof Prisma.PrismaClientKnownRequestError &&
-        error.code === 'P2025'
+        error.code === "P2025"
       ) {
         setSkills((prevSkills) =>
           prevSkills.filter((skill) => skill.skill_id !== skillID),
@@ -125,7 +125,7 @@ const Skills: React.FC<SkillProps> = ({
                       type="text"
                       name="title"
                       className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
-                      defaultValue={skill.title || ''}
+                      defaultValue={skill.title || ""}
                       placeholder="Skill"
                     />
                   </label>
@@ -140,7 +140,7 @@ const Skills: React.FC<SkillProps> = ({
                     <select
                       name="proficiency"
                       className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
-                      defaultValue={skill.proficiency || ''}
+                      defaultValue={skill.proficiency || ""}
                     >
                       <option value="" disabled>
                         Proficiency:
@@ -173,11 +173,11 @@ const Skills: React.FC<SkillProps> = ({
             >
               <div className="flex flex-row">
                 <h1 className="text-primarygray w-36">
-                  Skill:{' '}
-                  <span className="text-secondarygray">{skill.title}</span>{' '}
+                  Skill:{" "}
+                  <span className="text-secondarygray">{skill.title}</span>{" "}
                 </h1>
                 <p className="text-primarygray mr-auto">
-                  Proficiency:{' '}
+                  Proficiency:{" "}
                   <span className="text-secondarygray">
                     {skill.proficiency}
                   </span>

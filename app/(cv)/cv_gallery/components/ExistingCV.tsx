@@ -1,8 +1,8 @@
-'use-client'
-import React, { useState, useEffect } from 'react'
-import { cv } from '@prisma/client'
-import Dropdown from './Dropdown'
-import Image from 'next/image' // Import the Image component from next/image
+"use-client"
+import React, { useState, useEffect } from "react"
+import { cv } from "@prisma/client"
+import Dropdown from "./Dropdown"
+import Image from "next/image" // Import the Image component from next/image
 
 interface ExistingCVProps {
   cvProp: cv
@@ -10,11 +10,11 @@ interface ExistingCVProps {
 }
 
 const cvData = [
-  { id: 'CV_Juan', imageUrl: '/assets/moccvs/CV-Juan.jpg' },
-  { id: 'CV_Franco', imageUrl: '/assets/moccvs/CV-Franco.jpg' },
-  { id: 'CV_Yuvan', imageUrl: '/assets/moccvs/CV-Yuvan.jpg' },
-  { id: 'CV_Gael', imageUrl: '/assets/moccvs/CV-Gael.jpg' },
-  { id: 'CV_Jerry', imageUrl: '/assets/moccvs/CV-Jerry.jpg' },
+  { id: "CV_Juan", imageUrl: "/assets/moccvs/CV-Juan.jpg" },
+  { id: "CV_Franco", imageUrl: "/assets/moccvs/CV-Franco.jpg" },
+  { id: "CV_Yuvan", imageUrl: "/assets/moccvs/CV-Yuvan.jpg" },
+  { id: "CV_Gael", imageUrl: "/assets/moccvs/CV-Gael.jpg" },
+  { id: "CV_Jerry", imageUrl: "/assets/moccvs/CV-Jerry.jpg" },
 ]
 
 const ExistingCV: React.FC<ExistingCVProps> = ({ cvProp, deleteFunction }) => {

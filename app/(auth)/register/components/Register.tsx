@@ -1,26 +1,26 @@
-import React, { useState } from 'react'
-import prisma from '@/lib/prisma'
-import { createNewUser } from '@/services/userService'
-import { IoIosArrowForward } from 'react-icons/io'
-import Link from 'next/link'
+import React, { useState } from "react"
+import prisma from "@/lib/prisma"
+import { createNewUser } from "@/services/userService"
+import { IoIosArrowForward } from "react-icons/io"
+import Link from "next/link"
 //import bcrypt from 'bcrypt'
-import { useRouter } from 'next/navigation'
-import { checkIfEmailInUse, getUserIdByEmail } from '@/services/sessionService'
-import { signIn } from 'next-auth/react'
+import { useRouter } from "next/navigation"
+import { checkIfEmailInUse, getUserIdByEmail } from "@/services/sessionService"
+import { signIn } from "next-auth/react"
 
 const Register: React.FC = () => {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
   const router = useRouter()
 
   const handleSubmit = async (event) => {
     event.preventDefault() // Prevent the page from refreshing
 
     if (password !== confirmPassword) {
-      alert('Passwords do not match!')
+      alert("Passwords do not match!")
       return
     }
 
@@ -28,22 +28,22 @@ const Register: React.FC = () => {
 
     if ((await checkIfEmailInUse(email)).valueOf()) {
       alert(
-        'This email is already in use. Check if you have already logged in with Google or LinkedIn.',
+        "This email is already in use. Check if you have already logged in with Google or LinkedIn.",
       )
     } else {
       await createNewUser(email, password)
       // Reset form after submission
-      setEmail('')
-      setPassword('')
-      setConfirmPassword('')
+      setEmail("")
+      setPassword("")
+      setConfirmPassword("")
 
-      await signIn('credentials', {
+      await signIn("credentials", {
         redirect: false,
         email,
         password,
       })
 
-      router.push('/cv_gallery')
+      router.push("/cv_gallery")
     }
   }
 
@@ -52,7 +52,7 @@ const Register: React.FC = () => {
       <div className="bg-white shadow-md flex items-between justify-center rounded-lg w-auto h-auto mx-auto">
         <div className="flex flex-col">
           <Link
-            href={'/login'}
+            href={"/login"}
             className="sticky h-10 flex items-center text-outlinegray hover:text-secondarygray bg-transparent pl-8 pt-8"
           >
             <IoIosArrowForward className="rotate-180" />
@@ -94,7 +94,7 @@ const Register: React.FC = () => {
               {/* confirm password */}
               <div className="flex flex-col justify-left">
                 <p className="text-primarygray font-semibold font-inter text-xs pb-0.5">
-                  {' '}
+                  {" "}
                   Confirm Password
                 </p>
                 <input

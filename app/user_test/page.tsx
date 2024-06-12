@@ -1,22 +1,22 @@
-'use client'
+"use client"
 
-import { useState } from 'react'
+import { useState } from "react"
 
 export default function Home() {
   const [users, setUsers] = useState<any>([])
 
   const createUser = async () => {
     const userData = {
-      first_name: 'Test',
-      last_name: 'lol',
-      email: 'example@mail.com',
-      password: '123',
+      first_name: "Test",
+      last_name: "lol",
+      email: "example@mail.com",
+      password: "123",
     }
 
-    const response = await fetch('/api/db/user', {
-      method: 'POST',
+    const response = await fetch("/api/db/user", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(userData),
     })
@@ -26,7 +26,7 @@ export default function Home() {
   }
 
   const fetchUsers = async () => {
-    const response = await fetch('/api/db/user')
+    const response = await fetch("/api/db/user")
     const data = await response.json()
     setUsers(data)
     console.log(data)

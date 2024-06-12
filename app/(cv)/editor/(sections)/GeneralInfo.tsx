@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react"
 import {
   createGeneralInfo,
   getGeneralInfo,
-} from '@/services/professional_information/generalService'
-import { useSession } from 'next-auth/react'
-import { getProfessionalByEmail } from '@/services/sessionService'
+} from "@/services/professional_information/generalService"
+import { useSession } from "next-auth/react"
+import { getProfessionalByEmail } from "@/services/sessionService"
 /*I want to make a a form that gets the current data that is on the general_info table for an specific professional_info id and that can update that information.
   - Make services based on getting the current data of general_info table based on a professional_info record.
   - Make services based on posting new data to general_info table with an specific professional_info id.
@@ -46,7 +46,7 @@ const GeneralInfo: React.FC<GeneralInfoProps> = ({
       await createGeneralInfo(professionalID, { ...generalInfo })
       // Refresh or update state as needed
     } catch (error) {
-      console.error('Error creating general info:', error)
+      console.error("Error creating general info:", error)
       setError(error.message)
     } finally {
       setLoading(false)

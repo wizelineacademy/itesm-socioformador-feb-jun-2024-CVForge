@@ -1,11 +1,11 @@
-'use client'
+"use client"
 
 // Package imports
-import { useState } from 'react'
+import { useState } from "react"
 
 // Icon imports
-import OpenArrow from '@/public/assets/cv/insight/OpenArrow_icon'
-import { recommendation } from '@prisma/client'
+import OpenArrow from "@/public/assets/cv/insight/OpenArrow_icon"
+import { recommendation } from "@prisma/client"
 
 type RecommendationProps = {
   title: string

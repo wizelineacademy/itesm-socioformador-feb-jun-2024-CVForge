@@ -1,7 +1,7 @@
-import React from 'react'
-import Link from 'next/link'
-import DottedBg from '@/app/components/WavedDots'
-import { useSession } from 'next-auth/react'
+import React from "react"
+import Link from "next/link"
+import DottedBg from "@/app/components/WavedDots"
+import { useSession } from "next-auth/react"
 
 const LandingStart: React.FC = () => {
   const { data: session } = useSession()
@@ -12,13 +12,13 @@ const LandingStart: React.FC = () => {
         {/* Big Text */}
         <div className="text-primarygray text-6xl font-inter font-bold">
           <p>
-            Start <span className="text-gptgreen">Forging</span> your{' '}
+            Start <span className="text-gptgreen">Forging</span> your{" "}
           </p>
           <p className="my-1">
-            <span className="text-gptgreen">CV</span> with our{' '}
+            <span className="text-gptgreen">CV</span> with our{" "}
           </p>
           <p>
-            <span className="text-gptgreen">AI</span> Assisted Service{' '}
+            <span className="text-gptgreen">AI</span> Assisted Service{" "}
           </p>
         </div>
         <div className="xl:pr-72 lg:pr-24 md:pr-10 sm:pr-10">
@@ -53,11 +53,11 @@ const LandingStart: React.FC = () => {
         <div
           className="bg-gradient-to-r from-gptgreen to-aiblue opacity-50 rounded "
           style={{
-            position: 'absolute',
+            position: "absolute",
             top: 0,
             left: 0,
-            width: '100%',
-            height: '100%',
+            width: "100%",
+            height: "100%",
           }}
         ></div>
       </div>

@@ -1,13 +1,13 @@
-import '@/style/globals.css'
-import 'intersection-observer'
-import Providers from '../components/Providers'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
+import "@/style/globals.css"
+import "intersection-observer"
+import Providers from "../components/Providers"
+import Navbar from "./components/Navbar"
+import Footer from "./components/Footer"
 
 export const metadata = {
-  title: 'CVForge',
-  description: 'CVForge',
-  keywords: ['CV, Resume, AI, ai, Linkedin, Google'],
+  title: "CVForge",
+  description: "CVForge",
+  keywords: ["CV, Resume, AI, ai, Linkedin, Google"],
 }
 
 export default function RootLayout({

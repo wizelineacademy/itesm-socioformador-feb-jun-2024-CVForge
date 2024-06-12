@@ -1,9 +1,9 @@
-'use client'
-import '@/style/globals.css'
-import React from 'react'
+"use client"
+import "@/style/globals.css"
+import React from "react"
 
 // Component imports
-import Register from './components/Register'
+import Register from "./components/Register"
 
 const Auth: React.FC = ({}) => {
   return (

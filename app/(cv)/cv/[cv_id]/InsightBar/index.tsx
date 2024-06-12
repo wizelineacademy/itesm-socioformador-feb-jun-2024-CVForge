@@ -1,1 +1,1 @@
-export { default } from './InsightBar'
+export { default } from "./InsightBar"

@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
+import { NextRequest, NextResponse } from "next/server"
+import { PrismaClient } from "@prisma/client"
 
-import { MOCK_PROFESSIONAL_INFO } from '../../(cv)/cv/[cv_id]/CONSTANTS'
-import generateCV from '@/scripts/cv_generation'
+import { MOCK_PROFESSIONAL_INFO } from "../../(cv)/cv/[cv_id]/CONSTANTS"
+import generateCV from "@/scripts/cv_generation"
 
 const prisma = new PrismaClient()
-const STATIC_CV_ID = '828e9129-21e6-4523-8bb1-bd4e7e3c9cc4'
+const STATIC_CV_ID = "828e9129-21e6-4523-8bb1-bd4e7e3c9cc4"
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
@@ -27,11 +27,11 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     // Return the parsed results as a JSON response
     return NextResponse.json({
-      message: 'CV processed successfully',
+      message: "CV processed successfully",
       results: updatedCv,
     })
   } catch (error) {
-    console.error('Error in JavaScript script execution:', error)
+    console.error("Error in JavaScript script execution:", error)
     return NextResponse.json({ error: error.message })
   }
 }

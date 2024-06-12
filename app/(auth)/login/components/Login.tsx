@@ -1,14 +1,14 @@
-import React, { FormEvent, useState } from 'react'
-import Google_Icon from '@/public/assets/svg/Google_Icon'
-import Linkedin_Icon from '@/public/assets/svg/Linkedin_Icon'
-import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { IoIosArrowForward } from 'react-icons/io'
-import Link from 'next/link'
+import React, { FormEvent, useState } from "react"
+import Google_Icon from "@/public/assets/svg/Google_Icon"
+import Linkedin_Icon from "@/public/assets/svg/Linkedin_Icon"
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
+import { IoIosArrowForward } from "react-icons/io"
+import Link from "next/link"
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState('') // State for email
-  const [password, setPassword] = useState('') // State for password
+  const [email, setEmail] = useState("") // State for email
+  const [password, setPassword] = useState("") // State for password
   const router = useRouter()
 
   // Function to handle email input change
@@ -24,7 +24,7 @@ const Login: React.FC = () => {
   // Function to handle form submission
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    const result = await signIn('credentials', {
+    const result = await signIn("credentials", {
       redirect: false,
       email,
       password,
@@ -33,11 +33,11 @@ const Login: React.FC = () => {
     if (result?.error) {
       // Handle error (e.g., show a message to the user)
       console.error(result.error)
-      alert('Email or Password is not correct.')
+      alert("Email or Password is not correct.")
     } else {
       // Redirect the user or do something else
-      console.log('Signed in successfully')
-      router.push('/cv_gallery')
+      console.log("Signed in successfully")
+      router.push("/cv_gallery")
     }
   }
 
@@ -46,7 +46,7 @@ const Login: React.FC = () => {
       <div className="bg-white shadow-md flex items-between justify-center rounded-lg w-auto h-auto mx-auto">
         <div className="flex flex-col pb-8">
           <Link
-            href={'/'}
+            href={"/"}
             className="sticky h-10 flex items-center text-outlinegray hover:text-secondarygray bg-transparent pl-8 pt-8 mr-auto"
           >
             <IoIosArrowForward className="rotate-180" />
@@ -64,7 +64,7 @@ const Login: React.FC = () => {
               </p>
               {/* Google */}
               <button
-                onClick={() => signIn('google', { callbackUrl: '/cv_gallery' })}
+                onClick={() => signIn("google", { callbackUrl: "/cv_gallery" })}
                 className="flex felx-row text-gptgreen text-xl border border-gptgreen rounded-3xl p-1.5 border-2 w-72 delay-50 hover:scale-105 duration-200"
               >
                 <div className="px-3 pl-5">
@@ -77,8 +77,8 @@ const Login: React.FC = () => {
               <div className="p-3" />
               <button
                 onClick={() =>
-                  signIn('linkedin', {
-                    callbackUrl: 'http://localhost:3000/cv_gallery',
+                  signIn("linkedin", {
+                    callbackUrl: "http://localhost:3000/cv_gallery",
                   })
                 }
                 className="flex felx-row text-gptgreen text-xl border border-gptgreen rounded-3xl p-1.5 border-2 w-72 delay-50 hover:scale-105 duration-200"
@@ -95,7 +95,7 @@ const Login: React.FC = () => {
                 <p className="text-outlinegray">or</p>
                 <div className="w-full h-0.5 bg-outlinegray mx-2 rounded-lg"></div>
               </div>
-              <Link href={'/register'}>
+              <Link href={"/register"}>
                 <button className="flex items-center justify-center bg-gradient-to-r from-aiblue to-gptgreen felx-row text-white text-md rounded-3xl p-2.5 w-72 delay-50 hover:scale-105 duration-200">
                   Create Account
                 </button>

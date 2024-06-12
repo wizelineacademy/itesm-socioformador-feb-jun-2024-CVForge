@@ -1,6 +1,6 @@
-'use client'
-import { getAllUsers } from '@/services/userService'
-import { useEffect, useState } from 'react'
+"use client"
+import { getAllUsers } from "@/services/userService"
+import { useEffect, useState } from "react"
 
 interface User {
   users_id: string
