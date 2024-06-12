@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import LinkedInProvider from 'next-auth/providers/linkedin'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import prisma from '@/lib/prisma'
+=======
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import LinkedInProvider from "next-auth/providers/linkedin";
+import CredentialsProvider from "next-auth/providers/credentials";
+import prisma from "@/lib/prisma";
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 //import bcrypt from 'bcrypt';
 
 const handler = NextAuth({
@@ -23,20 +32,20 @@ const handler = NextAuth({
       clientId: process.env.LINKEDIN_CLIENT_ID! as string,
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET! as string,
       authorization: {
-        url: 'https://www.linkedin.com/oauth/v2/authorization',
-        params: { scope: 'openid profile email' }, // Specify the scope here
+        url: "https://www.linkedin.com/oauth/v2/authorization",
+        params: { scope: "openid profile email" }, // Specify the scope here
       },
       token: {
-        url: 'https://www.linkedin.com/oauth/v2/accessToken',
+        url: "https://www.linkedin.com/oauth/v2/accessToken",
       },
       userinfo: {
-        url: 'https://api.linkedin.com/v2/userinfo',
+        url: "https://api.linkedin.com/v2/userinfo",
         params: {
-          projection: '', // Adjust according to your needs
+          projection: "", // Adjust according to your needs
         },
       },
-      issuer: 'https://www.linkedin.com/oauth',
-      jwks_endpoint: 'https://www.linkedin.com/oauth/openid/jwks',
+      issuer: "https://www.linkedin.com/oauth",
+      jwks_endpoint: "https://www.linkedin.com/oauth/openid/jwks",
       profile(profile) {
         return {
           id: profile.sub,
@@ -66,7 +75,11 @@ const handler = NextAuth({
 
         const user = await prisma.users.findFirst({
           where: { email: credentials.email.toLowerCase() },
+<<<<<<< HEAD
         })
+=======
+        });
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
         if (user) {
           // If the user is found, compare the provided password with the hashed password in the database
@@ -101,7 +114,7 @@ const handler = NextAuth({
     */
   ],
   pages: {
-    signIn: '/login',
+    signIn: "/login",
   },
   callbacks: {
     async signIn({ user, account, profile }) {
@@ -122,7 +135,11 @@ const handler = NextAuth({
           data: {
             user_id: newUser.users_id,
           },
+<<<<<<< HEAD
         })
+=======
+        });
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
       }
 
       return true
@@ -139,6 +156,12 @@ const handler = NextAuth({
       return session
     },
   },
+<<<<<<< HEAD
 })
 
 export { handler as GET, handler as POST }
+=======
+});
+
+export { handler as GET, handler as POST };
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)

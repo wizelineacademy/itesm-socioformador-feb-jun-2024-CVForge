@@ -4,8 +4,13 @@ import { PrismaClient } from '@prisma/client'
 import { MOCK_PROFESSIONAL_INFO } from '../../(cv)/cv/[cv_id]/CONSTANTS'
 import generateCV from '@/scripts/cv_generation'
 
+<<<<<<< HEAD
 const prisma = new PrismaClient()
 const STATIC_CV_ID = '828e9129-21e6-4523-8bb1-bd4e7e3c9cc4'
+=======
+const prisma = new PrismaClient();
+const STATIC_CV_ID = "828e9129-21e6-4523-8bb1-bd4e7e3c9cc4";
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
@@ -16,7 +21,11 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const jobPosition = selectedPosition
 
     // Call the generateCV function
+<<<<<<< HEAD
     const generatedCV = cvContent || (await generateCV(cvData, jobPosition))
+=======
+    const generatedCV = cvContent || (await generateCV(cvData, jobPosition));
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
     // Update the static CV entry in the database
     const updatedCv = await prisma.cv.update({
       where: { cv_id: STATIC_CV_ID },

@@ -1,10 +1,16 @@
+<<<<<<< HEAD
 'use client'
 import React from 'react'
+=======
+"use client";
+import React from "react";
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 import {
   getWorks,
   createWork,
   updateWork,
   deleteWork,
+<<<<<<< HEAD
 } from '@/services/professional_information/generalService'
 import { useEffect, useState } from 'react'
 import { update } from 'cypress/types/lodash'
@@ -26,6 +32,29 @@ interface WorkProps {
   works: Work[]
   setWorks: React.Dispatch<React.SetStateAction<Work[]>>
   professionalID: string | null
+=======
+} from "@/services/professional_information/generalService";
+import { useEffect, useState } from "react";
+import { update } from "cypress/types/lodash";
+import { useSession } from "next-auth/react";
+import { getProfessionalByEmail } from "@/services/sessionService";
+import { MdOutlineModeEdit } from "react-icons/md";
+import { MdOutlineDeleteOutline } from "react-icons/md";
+import { Prisma } from "@prisma/client";
+
+interface Work {
+  work_experience_id: string;
+  work_position: string;
+  description: string;
+  start_date: Date;
+  end_date: Date;
+}
+
+interface WorkProps {
+  works: Work[];
+  setWorks: React.Dispatch<React.SetStateAction<Work[]>>;
+  professionalID: string | null;
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 }
 
 const WorkExperience: React.FC<WorkProps> = ({
@@ -33,15 +62,24 @@ const WorkExperience: React.FC<WorkProps> = ({
   setWorks,
   professionalID,
 }) => {
+<<<<<<< HEAD
   const [editingCardId, setEditingCardId] = useState<string | null>(null)
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null)
+=======
+  const [editingCardId, setEditingCardId] = useState<string | null>(null);
+  const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
   const toggleEditMode = (cardId: string) => {
     setTimeout(() => {
       if (editingCardId === cardId) {
         setEditingCardId(null)
       } else {
+<<<<<<< HEAD
         setEditingCardId(cardId)
+=======
+        setEditingCardId(cardId);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
       }
     }, 200)
   }
@@ -51,10 +89,15 @@ const WorkExperience: React.FC<WorkProps> = ({
     workID: string,
     work: Work,
   ) => {
+<<<<<<< HEAD
     event.preventDefault()
+=======
+    event.preventDefault();
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
     const formData = new FormData(event.currentTarget)
     const workData: Partial<Work> = {
+<<<<<<< HEAD
       work_position: formData.get('work_position') as string,
       description: formData.get('description') as string,
       start_date: formData.get('start_date')
@@ -75,10 +118,33 @@ const WorkExperience: React.FC<WorkProps> = ({
       try {
         const updatedWork = await updateWork(workID, workData)
         console.log('Work updated successfully:', updatedWork)
+=======
+      work_position: formData.get("work_position") as string,
+      description: formData.get("description") as string,
+      start_date: formData.get("start_date")
+        ? new Date(formData.get("start_date") as string)
+        : undefined,
+      end_date: formData.get("end_date")
+        ? new Date(formData.get("end_date") as string)
+        : undefined,
+    };
+    console.log;
+    if (
+      workData.description.trim() == "" ||
+      !workData.start_date ||
+      workData.work_position.trim() == ""
+    ) {
+      alert("Title, Description, and Start Date must be filled in to save.");
+    } else {
+      try {
+        const updatedWork = await updateWork(workID, workData);
+        console.log("Work updated successfully:", updatedWork);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
         setWorks((prevWorks) =>
           prevWorks.map((work) =>
             work.work_experience_id === workID ? updatedWork : work,
           ),
+<<<<<<< HEAD
         )
         toggleEditMode(work.work_experience_id)
       } catch (error) {
@@ -101,15 +167,46 @@ const WorkExperience: React.FC<WorkProps> = ({
         setWorks((prevWorks) =>
           prevWorks.filter((work) => work.work_experience_id !== workID),
         )
+=======
+        );
+        toggleEditMode(work.work_experience_id);
+      } catch (error) {
+        console.error("Error updating work:", error);
+      }
+    }
+  };
+
+  const handleDelete = async (workID: string, index: number) => {
+    try {
+      await deleteWork(workID);
+      console.log("Work deleted successfully");
+      setWorks((prevWorks) => prevWorks.filter((_, idx) => idx !== index));
+    } catch (error) {
+      console.error("Error deleting work:", error);
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === "P2025"
+      ) {
+        setWorks((prevWorks) =>
+          prevWorks.filter((work) => work.work_experience_id !== workID),
+        );
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
       }
     }
   }
 
   const handleCreation = async (ProfessionalID: string) => {
+<<<<<<< HEAD
     const workCreated = await createWork(ProfessionalID)
     setWorks((prevWorks) => [...prevWorks, workCreated])
     setEditingCardId(workCreated.work_experience_id)
   }
+=======
+    const workCreated = await createWork(ProfessionalID);
+    setWorks((prevWorks) => [...prevWorks, workCreated]);
+    setEditingCardId(workCreated.work_experience_id);
+  };
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
   return (
     <div className="w-full h-full overflow-y-auto">
@@ -159,8 +256,13 @@ const WorkExperience: React.FC<WorkProps> = ({
                       className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
                       defaultValue={
                         work.start_date
+<<<<<<< HEAD
                           ? work.start_date.toISOString().split('T')[0]
                           : ''
+=======
+                          ? work.start_date.toISOString().split("T")[0]
+                          : ""
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
                       }
                       placeholder="Start Date: "
                     />
@@ -181,8 +283,13 @@ const WorkExperience: React.FC<WorkProps> = ({
                       className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
                       defaultValue={
                         work.end_date
+<<<<<<< HEAD
                           ? work.end_date.toISOString().split('T')[0]
                           : ''
+=======
+                          ? work.end_date.toISOString().split("T")[0]
+                          : ""
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
                       }
                       placeholder="End Date: "
                     />
@@ -240,10 +347,17 @@ const WorkExperience: React.FC<WorkProps> = ({
                 ) : null}
               </div>
               <p>
+<<<<<<< HEAD
                 {work.start_date ? work.start_date.toLocaleDateString() : 'xxx'}{' '}
                 {work.end_date
                   ? ` - ${work.end_date.toLocaleDateString()}`
                   : ' '}
+=======
+                {work.start_date ? work.start_date.toLocaleDateString() : "xxx"}{" "}
+                {work.end_date
+                  ? ` - ${work.end_date.toLocaleDateString()}`
+                  : " "}
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
               </p>
               <p>{work.description}</p>
             </div>
@@ -260,7 +374,11 @@ const WorkExperience: React.FC<WorkProps> = ({
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
+<<<<<<< HEAD
 export default WorkExperience
+=======
+export default WorkExperience;
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)

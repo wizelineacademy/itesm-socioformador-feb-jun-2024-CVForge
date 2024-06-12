@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react'
 import FeatureCard from '../components/FeatureBox'
 import Search_Icon from '@/public/assets/svg/Search_Icon'
@@ -7,6 +8,17 @@ import { VscEditorLayout } from 'react-icons/vsc'
 import { FaPersonChalkboard } from 'react-icons/fa6'
 import { GiArtificialHive } from 'react-icons/gi'
 import { RiRoadMapLine } from 'react-icons/ri'
+=======
+import React from "react";
+import FeatureCard from "../components/FeatureBox";
+import Search_Icon from "@/public/assets/svg/Search_Icon";
+import { FaRunning } from "react-icons/fa";
+import { GrMultiple } from "react-icons/gr";
+import { VscEditorLayout } from "react-icons/vsc";
+import { FaPersonChalkboard } from "react-icons/fa6";
+import { GiArtificialHive } from "react-icons/gi";
+import { RiRoadMapLine } from "react-icons/ri";
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
 const LandingFeature: React.FC = () => {
   return (

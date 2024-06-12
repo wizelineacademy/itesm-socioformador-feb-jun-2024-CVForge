@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 # Ignore everything
 /*
 
 # Allow only the app folder
 !/app
+=======
+dist
+build 
+coverage
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)

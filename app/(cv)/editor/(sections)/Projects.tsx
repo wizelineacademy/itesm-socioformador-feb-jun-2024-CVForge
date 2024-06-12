@@ -1,10 +1,16 @@
+<<<<<<< HEAD
 'use client'
 import React from 'react'
+=======
+"use client";
+import React from "react";
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 import {
   getProjects,
   createProject,
   updateProject,
   deleteProject,
+<<<<<<< HEAD
 } from '@/services/professional_information/generalService'
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
@@ -12,6 +18,15 @@ import { getProfessionalByEmail } from '@/services/sessionService'
 import { MdOutlineModeEdit } from 'react-icons/md'
 import { MdOutlineDeleteOutline } from 'react-icons/md'
 import { Prisma } from '@prisma/client'
+=======
+} from "@/services/professional_information/generalService";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { getProfessionalByEmail } from "@/services/sessionService";
+import { MdOutlineModeEdit } from "react-icons/md";
+import { MdOutlineDeleteOutline } from "react-icons/md";
+import { Prisma } from "@prisma/client";
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
 interface Project {
   project_id: string
@@ -22,9 +37,15 @@ interface Project {
 }
 
 interface ProjectProps {
+<<<<<<< HEAD
   projectsList: Project[]
   setProjects: React.Dispatch<React.SetStateAction<Project[]>>
   professionalID: string | null
+=======
+  projectsList: Project[];
+  setProjects: React.Dispatch<React.SetStateAction<Project[]>>;
+  professionalID: string | null;
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 }
 
 const Projects: React.FC<ProjectProps> = ({
@@ -32,15 +53,24 @@ const Projects: React.FC<ProjectProps> = ({
   setProjects,
   professionalID,
 }) => {
+<<<<<<< HEAD
   const [editingCardId, setEditingCardId] = useState<string | null>(null)
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null)
+=======
+  const [editingCardId, setEditingCardId] = useState<string | null>(null);
+  const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
   const toggleEditMode = (cardId: string) => {
     setTimeout(() => {
       if (editingCardId === cardId) {
         setEditingCardId(null)
       } else {
+<<<<<<< HEAD
         setEditingCardId(cardId)
+=======
+        setEditingCardId(cardId);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
       }
     }, 200)
   }
@@ -50,10 +80,15 @@ const Projects: React.FC<ProjectProps> = ({
     projectID: string,
     project: Project,
   ) => {
+<<<<<<< HEAD
     event.preventDefault()
+=======
+    event.preventDefault();
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
     const formData = new FormData(event.currentTarget)
     const projectData: Partial<Project> = {
+<<<<<<< HEAD
       name: formData.get('name') as string,
       description: formData.get('description') as string,
       start_date: formData.get('start_date')
@@ -74,20 +109,50 @@ const Projects: React.FC<ProjectProps> = ({
       try {
         const updatedProject = await updateProject(projectID, projectData)
         console.log('Project updated successfully:', updatedProject)
+=======
+      name: formData.get("name") as string,
+      description: formData.get("description") as string,
+      start_date: formData.get("start_date")
+        ? new Date(formData.get("start_date") as string)
+        : undefined,
+      end_date: formData.get("end_date")
+        ? new Date(formData.get("end_date") as string)
+        : undefined,
+    };
+
+    if (
+      projectData.description.trim() == "" ||
+      !projectData.start_date ||
+      projectData.name.trim() == ""
+    ) {
+      alert("Title, Description, and Start Date must be filled in to save.");
+    } else {
+      try {
+        const updatedProject = await updateProject(projectID, projectData);
+        console.log("Project updated successfully:", updatedProject);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
         setProjects((prevProjects) =>
           prevProjects.map((project) =>
             project.project_id === projectID ? updatedProject : project,
           ),
+<<<<<<< HEAD
         )
         toggleEditMode(project.project_id)
       } catch (error) {
         console.error('Error updating project:', error)
+=======
+        );
+        toggleEditMode(project.project_id);
+      } catch (error) {
+        console.error("Error updating project:", error);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
       }
     }
   }
 
   const handleDelete = async (projectID: string, index: number) => {
     try {
+<<<<<<< HEAD
       await deleteProject(projectID)
       console.log('Project deleted successfully')
       setProjects((prevProjects) =>
@@ -102,15 +167,38 @@ const Projects: React.FC<ProjectProps> = ({
         setProjects((prevProjects) =>
           prevProjects.filter((project) => project.project_id !== projectID),
         )
+=======
+      await deleteProject(projectID);
+      console.log("Project deleted successfully");
+      setProjects((prevProjects) =>
+        prevProjects.filter((_, idx) => idx !== index),
+      );
+    } catch (error) {
+      console.error("Error deleting project:", error);
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === "P2025"
+      ) {
+        setProjects((prevProjects) =>
+          prevProjects.filter((project) => project.project_id !== projectID),
+        );
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
       }
     }
   }
 
   const handleCreation = async (ProfessionalID: string) => {
+<<<<<<< HEAD
     const projectCreated = await createProject(ProfessionalID)
     setProjects((prevProjects) => [...prevProjects, projectCreated])
     setEditingCardId(projectCreated.project_id)
   }
+=======
+    const projectCreated = await createProject(ProfessionalID);
+    setProjects((prevProjects) => [...prevProjects, projectCreated]);
+    setEditingCardId(projectCreated.project_id);
+  };
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
   return (
     <div className="w-full h-full overflow-y-auto">
       <h1 className="text-5xl text-gptgreen font-koh_santepheap font-bold mb-1">
@@ -158,8 +246,13 @@ const Projects: React.FC<ProjectProps> = ({
                       name="start_date"
                       defaultValue={
                         project.start_date
+<<<<<<< HEAD
                           ? project.start_date.toISOString().split('T')[0]
                           : ''
+=======
+                          ? project.start_date.toISOString().split("T")[0]
+                          : ""
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
                       }
                       placeholder="Start Date: "
                       className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
@@ -180,8 +273,13 @@ const Projects: React.FC<ProjectProps> = ({
                       name="end_date"
                       defaultValue={
                         project.end_date
+<<<<<<< HEAD
                           ? project.end_date.toISOString().split('T')[0]
                           : ''
+=======
+                          ? project.end_date.toISOString().split("T")[0]
+                          : ""
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
                       }
                       placeholder="End Date"
                       className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
@@ -240,10 +338,17 @@ const Projects: React.FC<ProjectProps> = ({
               <p>
                 {project.start_date
                   ? project.start_date.toLocaleDateString()
+<<<<<<< HEAD
                   : 'xxx'}{' '}
                 {project.end_date
                   ? ` - ${project.end_date.toLocaleDateString()}`
                   : ' '}
+=======
+                  : "xxx"}{" "}
+                {project.end_date
+                  ? ` - ${project.end_date.toLocaleDateString()}`
+                  : " "}
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
               </p>
               <p>{project.description}</p>
             </div>
@@ -260,8 +365,8 @@ const Projects: React.FC<ProjectProps> = ({
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Projects
 /*

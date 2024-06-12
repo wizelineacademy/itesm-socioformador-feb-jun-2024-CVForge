@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use client'
 import { getAllUsers } from '@/services/userService'
 import { useEffect, useState } from 'react'
@@ -11,6 +12,21 @@ interface User {
   last_login: Date | null
   created_at: Date | null
   updated_at: Date | null
+=======
+"use client";
+import { getAllUsers } from "@/services/userService";
+import { useEffect, useState } from "react";
+
+interface User {
+  users_id: string;
+  email: string;
+  password: string;
+  verification: boolean | null;
+  is_active: boolean | null;
+  last_login: Date | null;
+  created_at: Date | null;
+  updated_at: Date | null;
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 }
 
 const TestServicesPage = () => {
@@ -34,7 +50,14 @@ const TestServicesPage = () => {
         ))}
       </ul>
     </div>
+<<<<<<< HEAD
   )
 }
 
 export default TestServicesPage
+=======
+  );
+};
+
+export default TestServicesPage;
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)

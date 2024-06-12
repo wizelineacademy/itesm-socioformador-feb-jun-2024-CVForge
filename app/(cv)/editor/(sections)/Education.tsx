@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 'use client'
 import React from 'react'
 import { useEffect, useState } from 'react'
+=======
+"use client";
+import React from "react";
+import { useEffect, useState } from "react";
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 import {
   createEducation,
   getEducation,
   updateEducation,
   deleteEducation,
+<<<<<<< HEAD
 } from '@/services/professional_information/generalService'
 import ProfessionalInfo from '../page'
 import { useSession } from 'next-auth/react'
@@ -13,6 +20,17 @@ import { getProfessionalByEmail } from '@/services/sessionService'
 import { MdOutlineModeEdit } from 'react-icons/md'
 import { MdOutlineDeleteOutline } from 'react-icons/md'
 import { Prisma } from '@prisma/client'
+=======
+} from "@/services/professional_information/generalService";
+import ProfessionalInfo from "../page";
+import { useSession } from "next-auth/react";
+import { getProfessionalByEmail } from "@/services/sessionService";
+import { MdOutlineModeEdit } from "react-icons/md";
+import { MdOutlineDeleteOutline } from "react-icons/md";
+import prisma from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
+
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 interface Education {
   education_id: string
   school: string
@@ -34,15 +52,24 @@ const EducationComponent: React.FC<EducationProps> = ({
   setEducations,
   professionalID,
 }) => {
+<<<<<<< HEAD
   const [editingCardId, setEditingCardId] = useState<string | null>(null)
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null)
+=======
+  const [editingCardId, setEditingCardId] = useState<string | null>(null);
+  const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
   const toggleEditMode = (cardId: string) => {
     setTimeout(() => {
       if (editingCardId === cardId) {
         setEditingCardId(null)
       } else {
+<<<<<<< HEAD
         setEditingCardId(cardId)
+=======
+        setEditingCardId(cardId);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
       }
     }, 200)
   }
@@ -52,10 +79,15 @@ const EducationComponent: React.FC<EducationProps> = ({
     educationID: string,
     education: Education,
   ) => {
+<<<<<<< HEAD
     event.preventDefault()
+=======
+    event.preventDefault();
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
     const formData = new FormData(event.currentTarget)
     const educationData: Partial<Education> = {
+<<<<<<< HEAD
       school: formData.get('school') as string,
       education_degree: formData.get('education_degree') as string,
       gpa: formData.get('gpa')
@@ -75,29 +107,63 @@ const EducationComponent: React.FC<EducationProps> = ({
       educationData.education_degree.trim() == ''
     ) {
       alert('Title, Description, and Start Date must be filled in to save.')
+=======
+      school: formData.get("school") as string,
+      education_degree: formData.get("education_degree") as string,
+      gpa: formData.get("gpa")
+        ? parseFloat(formData.get("gpa") as string)
+        : undefined,
+      start_date: formData.get("start_date")
+        ? new Date(formData.get("start_date") as string)
+        : undefined,
+      end_date: formData.get("end_date")
+        ? new Date(formData.get("end_date") as string)
+        : undefined,
+      relevant_coursework: formData.get("relevant_coursework") as string,
+    };
+    if (
+      educationData.school.trim() == "" ||
+      !educationData.start_date ||
+      educationData.education_degree.trim() == ""
+    ) {
+      alert("Title, Description, and Start Date must be filled in to save.");
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
     } else {
       try {
         const updatedEducation = await updateEducation(
           educationID,
           educationData,
+<<<<<<< HEAD
         )
         console.log('Education updated successfully:', updatedEducation)
+=======
+        );
+        console.log("Education updated successfully:", updatedEducation);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
         setEducations((prevEducations) =>
           prevEducations.map((education) =>
             education.education_id === educationID
               ? updatedEducation
               : education,
           ),
+<<<<<<< HEAD
         )
         toggleEditMode(education.education_id)
       } catch (error) {
         console.error('Error updating education:', error)
+=======
+        );
+        toggleEditMode(education.education_id);
+      } catch (error) {
+        console.error("Error updating education:", error);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
       }
     }
   }
 
   const handleDelete = async (educationID: string, index: number) => {
     try {
+<<<<<<< HEAD
       await deleteEducation(educationID)
       console.log('Education deleted successfully')
       setEducations((prevEducations) =>
@@ -108,22 +174,45 @@ const EducationComponent: React.FC<EducationProps> = ({
       if (
         error instanceof Prisma.PrismaClientKnownRequestError &&
         error.code === 'P2025'
+=======
+      await deleteEducation(educationID);
+      console.log("Education deleted successfully");
+      setEducations((prevEducations) =>
+        prevEducations.filter((_, idx) => idx !== index),
+      );
+    } catch (error: any) {
+      console.error("Error deleting education:", error);
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === "P2025"
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
       ) {
         // Optionally remove the record from the state if it does not exist in the database
         setEducations((prevEducations) =>
           prevEducations.filter(
             (education) => education.education_id !== educationID,
           ),
+<<<<<<< HEAD
         )
+=======
+        );
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
       }
     }
   }
 
   const handleCreation = async (ProfessionalID: string) => {
+<<<<<<< HEAD
     const educationCreated = await createEducation(ProfessionalID)
     setEducations((prevEducations) => [...prevEducations, educationCreated])
     setEditingCardId(educationCreated.education_id)
   }
+=======
+    const educationCreated = await createEducation(ProfessionalID);
+    setEducations((prevEducations) => [...prevEducations, educationCreated]);
+    setEditingCardId(educationCreated.education_id);
+  };
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
   return (
     <div className="w-full h-full overflow-y-auto">
@@ -205,8 +294,13 @@ const EducationComponent: React.FC<EducationProps> = ({
                       name="start_date"
                       defaultValue={
                         education.start_date
+<<<<<<< HEAD
                           ? education.start_date.toISOString().split('T')[0]
                           : ''
+=======
+                          ? education.start_date.toISOString().split("T")[0]
+                          : ""
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
                       }
                       className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
                     />
@@ -226,8 +320,13 @@ const EducationComponent: React.FC<EducationProps> = ({
                       name="end_date"
                       defaultValue={
                         education.end_date
+<<<<<<< HEAD
                           ? education.end_date.toISOString().split('T')[0]
                           : ''
+=======
+                          ? education.end_date.toISOString().split("T")[0]
+                          : ""
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
                       }
                       placeholder="End Date: "
                       className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
@@ -273,10 +372,17 @@ const EducationComponent: React.FC<EducationProps> = ({
               <p>
                 {education.start_date
                   ? education.start_date.toLocaleDateString()
+<<<<<<< HEAD
                   : 'xxx'}{' '}
                 {education.end_date
                   ? ` - ${education.end_date.toLocaleDateString()}`
                   : ' '}
+=======
+                  : "xxx"}{" "}
+                {education.end_date
+                  ? ` - ${education.end_date.toLocaleDateString()}`
+                  : " "}
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
               </p>
               <h1 className="text-primarygray">GPA: {education.gpa}</h1>
             </div>
@@ -293,7 +399,12 @@ const EducationComponent: React.FC<EducationProps> = ({
         </button>
       </div>
     </div>
+<<<<<<< HEAD
   )
 }
+=======
+  );
+};
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
 export default EducationComponent

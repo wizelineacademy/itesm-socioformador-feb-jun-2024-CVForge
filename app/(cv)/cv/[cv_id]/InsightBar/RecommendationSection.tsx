@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 'use client'
+=======
+"use client";
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
 // Package imports
 import { useState } from 'react'
@@ -8,19 +12,33 @@ import OpenArrow from '@/public/assets/cv/insight/OpenArrow_icon'
 import { recommendation } from '@prisma/client'
 
 type RecommendationProps = {
+<<<<<<< HEAD
   title: string
   mainContent: string
 }
+=======
+  title: string;
+  mainContent: string;
+};
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 const Recommendation: React.FC<RecommendationProps> = ({
   title,
   mainContent,
 }) => {
   // Collapsed and only displaying title or displaying the full information
+<<<<<<< HEAD
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const handleOpenButtonClick = () => {
     setIsOpen(!isOpen)
   }
+=======
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleOpenButtonClick = () => {
+    setIsOpen(!isOpen);
+  };
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
   return (
     <div className="border-2 border-secondarygray rounded-lg p-2 my-2">
@@ -37,12 +55,21 @@ const Recommendation: React.FC<RecommendationProps> = ({
         </>
       ) : null}
     </div>
+<<<<<<< HEAD
   )
 }
 
 type RecommendationSectionProps = {
   recommendations: recommendation[]
 }
+=======
+  );
+};
+
+type RecommendationSectionProps = {
+  recommendations: recommendation[];
+};
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 const ReccomendationSection: React.FC<RecommendationSectionProps> = ({
   recommendations,
 }) => {
@@ -57,7 +84,14 @@ const ReccomendationSection: React.FC<RecommendationSectionProps> = ({
         />
       ))}
     </div>
+<<<<<<< HEAD
   )
 }
 
 export default ReccomendationSection
+=======
+  );
+};
+
+export default ReccomendationSection;
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)

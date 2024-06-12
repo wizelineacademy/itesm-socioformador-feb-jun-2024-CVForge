@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import OpenArrow from '@/public/assets/cv/insight/OpenArrow_icon'
 
 type Recommendation = {
+<<<<<<< HEAD
   recommendation_id: string
   cv_id: string
   title: string
@@ -30,6 +31,36 @@ const RecommendedChanges: React.FC<RecommendedChangesProps> = ({
     setExpandedIndex((prevIndex) => (prevIndex === index ? null : index))
   }
 
+=======
+  recommendation_id: string;
+  cv_id: string;
+  title: string;
+  main_content: string;
+  completed: boolean;
+};
+
+type RecommendedChangesProps = {
+  recommendations: Recommendation[];
+};
+
+function removeRecommendationAndStar(inputString: string): string {
+  const filteredString = inputString
+    .replace(/Recommendation/g, "")
+    .replace(/\*/g, "")
+    .replace(/:/g, "");
+  return filteredString;
+}
+
+const RecommendedChanges: React.FC<RecommendedChangesProps> = ({
+  recommendations,
+}) => {
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
+  const toggleContent = (index: number) => {
+    setExpandedIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
+
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
   return (
     <div className="bg-transparent p-4 rounded-lg">
       <h2 className="font-bold text-lg text-primarygray mb-4">
@@ -57,7 +88,14 @@ const RecommendedChanges: React.FC<RecommendedChangesProps> = ({
         ))}
       </div>
     </div>
+<<<<<<< HEAD
   )
 }
 
 export default RecommendedChanges
+=======
+  );
+};
+
+export default RecommendedChanges;
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)

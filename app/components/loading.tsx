@@ -5,6 +5,10 @@ export default function GalleryLoading() {
         CVForge<span className="text-gptgreen">.ai</span>
       </h1>
     </div>
+<<<<<<< HEAD
   )
+=======
+  );
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 }
 //credits: https://www.youtube.com/watch?v=U5iUc8U3coI

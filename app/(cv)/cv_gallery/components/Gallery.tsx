@@ -66,9 +66,17 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
   // Get the user professional information
   useEffect(() => {
     const fetchProfessionalID = async () => {
+<<<<<<< HEAD
       const professinalInfoId = await getProfessionalByEmail(session.user.email)
       if (professinalInfoId) setProfessionalId(professinalInfoId)
     }
+=======
+      const professinalInfoId = await getProfessionalByEmail(
+        session.user.email,
+      );
+      if (professinalInfoId) setProfessionalId(professinalInfoId);
+    };
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
     if (session?.user?.email) fetchProfessionalID()
   }, [session?.user?.email])
@@ -159,7 +167,11 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
   const callApi = async (cvId: string) => {
     const selectedPositionTitle = positions.find(
       (position) => position.desired_position_id == selectedPosition,
+<<<<<<< HEAD
     ).title
+=======
+    ).title;
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
     try {
       const response = await fetch('/api/createCv', {
         method: 'POST',
@@ -186,9 +198,15 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
 
   const handleCreateCv = async (event: React.FormEvent) => {
     setTimeout(() => {
+<<<<<<< HEAD
       setIsLoading(true)
     }, 500)
     event.preventDefault()
+=======
+      setIsLoading(true);
+    }, 500);
+    event.preventDefault();
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
     try {
       if (selectedPosition) {
         const userId = await getUserIdByEmail(session.user.email)
@@ -212,8 +230,13 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
       console.error('Failed to create new CV:', error)
     } finally {
       setTimeout(() => {
+<<<<<<< HEAD
         setIsLoading(false)
       }, 4000)
+=======
+        setIsLoading(false);
+      }, 4000);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
     }
   }
 
@@ -341,4 +364,8 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
   )
 }
 
+<<<<<<< HEAD
 export default Gallery
+=======
+export default Gallery;
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import React from 'react'
 import PositionBox from '../components/PositionBox'
+=======
+import React from "react";
+import PositionBox from "../components/PositionBox";
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
 const LandingPosition: React.FC = () => {
   return (

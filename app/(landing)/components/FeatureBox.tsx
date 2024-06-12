@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 import React from 'react'
 
 interface CardProps {
   title: string
   content: string
   svgImage: React.ElementType
+=======
+import React from "react";
+
+interface CardProps {
+  title: string;
+  content: string;
+  svgImage: React.ElementType;
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 }
 
 const FeatureCard: React.FC<CardProps> = ({

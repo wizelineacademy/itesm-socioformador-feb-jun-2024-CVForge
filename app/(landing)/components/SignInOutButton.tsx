@@ -18,7 +18,11 @@ const SignInOutButton = () => {
           Sign Out
         </button>
       </div>
+<<<<<<< HEAD
     )
+=======
+    );
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
   } else {
     return (
       <div className="flex gap-4 items-center xl:text-sm lg:text-sm md:text-md sm:text-xs">
@@ -34,4 +38,8 @@ const SignInOutButton = () => {
 }
 //xl:text-xl lg:text-lg md:text-md sm:text-sm
 
+<<<<<<< HEAD
 export default SignInOutButton
+=======
+export default SignInOutButton;
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use-client'
 import React, { useState, useEffect } from 'react'
 import { cv } from '@prisma/client'
@@ -16,6 +17,26 @@ const cvData = [
   { id: 'CV_Gael', imageUrl: '/assets/moccvs/CV-Gael.jpg' },
   { id: 'CV_Jerry', imageUrl: '/assets/moccvs/CV-Jerry.jpg' },
 ]
+=======
+"use-client";
+import React, { useState, useEffect } from "react";
+import { cv } from "@prisma/client";
+import Dropdown from "./Dropdown";
+import Image from "next/image"; // Import the Image component from next/image
+
+interface ExistingCVProps {
+  cvProp: cv;
+  deleteFunction: (cvId: string) => void;
+}
+
+const cvData = [
+  { id: "CV_Juan", imageUrl: "/assets/moccvs/CV-Juan.jpg" },
+  { id: "CV_Franco", imageUrl: "/assets/moccvs/CV-Franco.jpg" },
+  { id: "CV_Yuvan", imageUrl: "/assets/moccvs/CV-Yuvan.jpg" },
+  { id: "CV_Gael", imageUrl: "/assets/moccvs/CV-Gael.jpg" },
+  { id: "CV_Jerry", imageUrl: "/assets/moccvs/CV-Jerry.jpg" },
+];
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
 const ExistingCV: React.FC<ExistingCVProps> = ({ cvProp, deleteFunction }) => {
   const [isHovered, setIsHovered] = useState(false)
@@ -66,7 +87,12 @@ const ExistingCV: React.FC<ExistingCVProps> = ({ cvProp, deleteFunction }) => {
         </p>
       </div>
     </div>
+<<<<<<< HEAD
   )
 }
+=======
+  );
+};
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
 export default ExistingCV

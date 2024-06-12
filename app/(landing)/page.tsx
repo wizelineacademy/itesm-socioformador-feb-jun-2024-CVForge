@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use client'
 import React from 'react'
 import Navbar from './components/Navbar'
@@ -5,6 +6,15 @@ import Footer from './components/Footer'
 import LandingFeature from './call_to_actions/Landing_Feature'
 import LandingPosition from './call_to_actions/Landing_Position'
 import LandingStart from './call_to_actions/Landing_Start'
+=======
+"use client";
+import React from "react";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import LandingFeature from "./call_to_actions/Landing_Feature";
+import LandingPosition from "./call_to_actions/Landing_Position";
+import LandingStart from "./call_to_actions/Landing_Start";
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
 const Home: React.FC = () => {
   return (

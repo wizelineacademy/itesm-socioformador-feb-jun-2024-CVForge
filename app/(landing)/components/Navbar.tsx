@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use client'
 import Link from 'next/link'
 import SignInOutButton from './SignInOutButton'
@@ -6,6 +7,16 @@ import useScrollPosition from '@/hooks/useScrollPosition'
 
 const Navbar: React.FC = () => {
   const ulRef = useRef(null)
+=======
+"use client";
+import Link from "next/link";
+import SignInOutButton from "./SignInOutButton";
+import React, { useRef } from "react";
+import useScrollPosition from "@/hooks/useScrollPosition";
+
+const Navbar: React.FC = () => {
+  const ulRef = useRef(null);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
   return (
     <div className={`text-inter py-5 px-2 bg-white w-full shadow shadow-sm`}>
       <div className="mx-5 flex items-center">
@@ -17,8 +28,13 @@ const Navbar: React.FC = () => {
         </div>
       </div>
     </div>
+<<<<<<< HEAD
   )
 }
+=======
+  );
+};
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
 export default Navbar
 /*
