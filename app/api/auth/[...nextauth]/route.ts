@@ -1,14 +1,14 @@
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google";
-import LinkedInProvider from "next-auth/providers/linkedin"
-import CredentialsProvider from "next-auth/providers/credentials";
-import prisma from "@/lib/prisma";
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import NextAuth from 'next-auth'
+import GoogleProvider from 'next-auth/providers/google'
+import LinkedInProvider from 'next-auth/providers/linkedin'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import prisma from '@/lib/prisma'
 //import bcrypt from 'bcrypt';
 
 const handler = NextAuth({
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
   jwt: {
     secret: process.env.NEXTAUTH_SECRET,
@@ -42,7 +42,7 @@ const handler = NextAuth({
           id: profile.sub,
           name: profile.name,
           email: profile.email,
-        };
+        }
       },
       allowDangerousEmailAccountLinking: true,
       /*
@@ -54,33 +54,35 @@ const handler = NextAuth({
       */
     }),
     CredentialsProvider({
-      name: "Credentials",
+      name: 'Credentials',
       credentials: {
         email: {},
         password: {},
       },
       async authorize(credentials) {
         if (!credentials) {
-          return null;
+          return null
         }
 
-        const user = await prisma.users.findFirst({ where: { email: credentials.email.toLowerCase() } });
+        const user = await prisma.users.findFirst({
+          where: { email: credentials.email.toLowerCase() },
+        })
 
         if (user) {
           // If the user is found, compare the provided password with the hashed password in the database
           //const passwordMatch = await bcrypt.compare(credentials.password, user.password);
-          const passwordMatch = credentials.password == user.password;
+          const passwordMatch = credentials.password == user.password
 
           if (passwordMatch) {
             // If the passwords match, return the user object
             return {
               id: user.users_id.toString(),
               email: user.email,
-            };
+            }
           }
         }
 
-        return null;
+        return null
       },
     }),
     /*
@@ -102,41 +104,41 @@ const handler = NextAuth({
     signIn: '/login',
   },
   callbacks: {
-    async signIn({user, account, profile}) {
+    async signIn({ user, account, profile }) {
       // Check if the user exists in the "users" table
       const existingUser = await prisma.users.findFirst({
-        where: { email: user.email ?? "" },
-      });
+        where: { email: user.email ?? '' },
+      })
 
       // If the user does not exist, create a new entry
       if (!existingUser) {
         const newUser = await prisma.users.create({
           data: {
-            email: user.email ?? "",
-            password: "123",
+            email: user.email ?? '',
+            password: '123',
           },
-        });
+        })
         await prisma.professional_info.create({
-          data : {
-            user_id : newUser.users_id,
-          }
+          data: {
+            user_id: newUser.users_id,
+          },
         })
       }
 
-      return true;
+      return true
     },
     async jwt({ token, user, account, profile, isNewUser }) {
       if (user) {
-        token.id = user.id;
+        token.id = user.id
       }
       // Add any other custom claims here
-      return token;
+      return token
     },
     async session({ session, token, user }) {
       // You can also customize the session object here
-      return session;
+      return session
     },
- },
+  },
 })
 
 export { handler as GET, handler as POST }

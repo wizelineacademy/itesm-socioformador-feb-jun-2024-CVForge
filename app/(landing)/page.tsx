@@ -1,24 +1,23 @@
-"use client"
-import React from "react";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import LandingFeature from "./call_to_actions/Landing_Feature";
-import LandingPosition from "./call_to_actions/Landing_Position";
-import LandingStart from "./call_to_actions/Landing_Start";
-
+'use client'
+import React from 'react'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import LandingFeature from './call_to_actions/Landing_Feature'
+import LandingPosition from './call_to_actions/Landing_Position'
+import LandingStart from './call_to_actions/Landing_Start'
 
 const Home: React.FC = () => {
   return (
     <div className="xl:px-48 lg:px-32 md:px-20 sm:px-10 py-16 space-y-32 > * content">
       <div className="pt-20">
-        <LandingStart/>
+        <LandingStart />
       </div>
       <div className="animation">
-        <LandingFeature/>
+        <LandingFeature />
       </div>
-      <LandingPosition/>
+      <LandingPosition />
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
