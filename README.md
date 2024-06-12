@@ -1,43 +1,220 @@
-# CV Forge
+<a name="readme-top"></a>
 
-## Members
-Yuvan Thirukumaran - A00834121<br> 
-Franco Lugo - A00833951<br>
-Juan Lebrija - A01721659<br>
-Angel García - A00833115<br>
-Marco Podesta - A00833604<br>
-Gerardo Sandoval - A01721732<br>
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="public/assets/CVForgeLogoReadMe.png" alt="Logo" height="60">
+  </a>
 
-CVForge.ai es un SaaS que ayuda al usuario a crear un CV apto para la posición que quiera aplicar con la ayuda de IA. Esta aplicación utiliza nuestra base de datos para buscar CVs que fueron aceptados en la posición deseada por el usuario y utilizando la información del usuario brindada por el mismo usuario vía subiendo su CV, permitiendo al usuario vincular su cuenta de LinkedIn o ingresar su información manualmente. CVForge.ai utiliza inteligencia artificial para generar un CV adaptado a la posición específica que el usuario desea solicitar. Además, proporciona retroalimentación sobre el CV generado, ayudando al usuario a mejorar su presentación. Apis de GPT y de Linkedin son utilizadas. nice
+  <h3 align="center">CVForge.ai</h3>
 
-## Table of Contents
-- [Stack](#stack)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Features](#features)
-- [Contributing](#contributing)
-- [License](#license)
+  <p align="center">
+    Start Forging your CV with our AI Assisted Service 
+  </p>
+  <br />
+  <br />
+  <a href="https://main.d1q8p2sw9urkoh.amplifyapp.com/">View Demo</a>
+</div>
 
-## Stack
-Front-end: Next.js, <br> 
-Back-end: Node.js, Express.js <br>
-DB: PostgresSql <br>
-Model: OpenAi API
+<!-- TABLE OF CONTENTS-->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+  </ol>
+</details>
 
-## Installation
-```bash
-git clone https://github.com/wizelineacademy/itesm-socioformador-feb-jun-2024-CVForge.git
-cd itesm-socioformador-feb-jun-2024-CVForge
-npm i
-```
+<!-- ABOUT THE PROJECT -->
+
+## About The Project
+
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
+
+CVForge.ai es un SaaS que ayuda al usuario a crear un CV apto para la posición que quiera aplicar con la ayuda de IA. Esta aplicación utiliza nuestra base de datos para buscar CVs que fueron aceptados en la posición deseada por el usuario y utilizando la información del usuario brindada por el mismo usuario vía subiendo su CV, permitiendo al usuario vincular su cuenta de LinkedIn o ingresar su información manualmente. CVForge.ai utiliza inteligencia artificial para generar un CV adaptado a la posición específica que el usuario desea solicitar. Además, proporciona retroalimentación sobre el CV generado, ayudando al usuario a mejorar su presentación. Apis de GPT y de Linkedin son utilizadas.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Built With
+
+This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+
+- [![Next][Next.js]][Next-url]
+- [![Node][Node.js]][Node-url]
+- [![React][React.js]][React-url]
+- [![Postgrel][Postgre.sql]][Postgre-url]
+- [![Tailwind][Tailwind.ts]][Tailwind-url]
+- [![Prisma][Prisma.io]][Prisma-url]
+- [![Openai][Openai.ai]][Openai-url]
+- [![Aws][Aws.ts]][Aws-url]
+- [![Github][Github.ts]][Github-url]
+- [![Cypress][Cypress.io]][Cypress-url]
+- [![Jest][Jest.io]][Jest-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+
+## Getting Started
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+
+- npm
+  ```sh
+  npm install npm@latest -g
+  ```
+
+### Installation
+
+_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+
+1. Get a free API Key at [https://example.com](https://example.com)
+2. Clone the repo
+   ```sh
+   git clone https://github.com/your_username_/Project-Name.git
+   ```
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
+4. Enter your API in `config.js`
+   ```js
+   const API_KEY = "ENTER YOUR API";
+   ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- USAGE EXAMPLES -->
 
 ## Usage
-```bash
-npm run dev
-```
 
-## Plugins
-[Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma)
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+
+_For more examples, please refer to the [Documentation](https://example.com)_
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ROADMAP -->
+
+## Roadmap
+
+- [x] Add Changelog
+- [x] Add back to top links
+- [ ] Add Additional Templates w/ Examples
+- [ ] Add "components" document to easily copy & paste sections of the readme
+- [ ] Multi-language Support
+  - [ ] Chinese
+  - [ ] Spanish
+
+See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LICENSE -->
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTACT -->
+
+## Contact
+
+Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+
+Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGMENTS -->
+
+## Acknowledgments
+
+Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+
+- [Choose an Open Source License](https://choosealicense.com)
+- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+- [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
+- [Malven's Grid Cheatsheet](https://grid.malven.co/)
+- [Img Shields](https://shields.io)
+- [GitHub Pages](https://pages.github.com)
+- [Font Awesome](https://fontawesome.com)
+- [React Icons](https://react-icons.github.io/react-icons/search)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
+[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/othneildrew
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+
+[Node.js]: https://img.shields.io/badge/ &style=for-the-badge
+[Node-url]: https://nodejs.org/en
+
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Postgre.sql]: https://img.shields.io/badge/-Postgre%20SQL-lightblue?logo=postgresql&logoColor=white
+[Postgre-url]: https://www.postgresql.org
+
+[Tailwind.ts]: https://img.shields.io/badge/ &style=for-the-badge
+[Tailwind-url]: https://tailwindcss.com
+
+[Prisma.io]: https://img.shields.io/badge/ &style=for-the-badge
+[Prisma-url]: https://www.prisma.io
+
+[Openai.ai]: https://img.shields.io/badge/ &style=for-the-badge
+[Openai-url]: https://openai.com
+
+[Aws.ts]: https://img.shields.io/badge/ &style=for-the-badge
+[Aws-url]: https://aws.amazon.com
+
+[Github.ts]: https://img.shields.io/badge/ &style=for-the-badge
+[Github-url]: https://github.com
+
+[Cypress.io]: https://img.shields.io/badge/ &style=for-the-badge
+[Cypress-url]: https://www.cypress.io
+
+[Jest.io]: https://img.shields.io/badge/ &style=for-the-badge
+[Jest-url]: https://jestjs.io

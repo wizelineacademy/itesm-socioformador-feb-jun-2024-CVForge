@@ -24,7 +24,7 @@ const Dropdown: React.FC<DropdownProps> = ({ cvProp, deleteFunction }) => {
   return (
     <div className="relative inline-block text-left">
       <div>
-        <button type="button" onClick={toggleDropdown}>
+        <button id="cv-dropdown-button" type="button" onClick={toggleDropdown}>
           <BsThreeDotsVertical className="h-5 w-5 text-secondarygray" />
         </button>
       </div>
