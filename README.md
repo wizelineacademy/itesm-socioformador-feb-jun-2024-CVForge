@@ -48,7 +48,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 - [![Node][Node.js]][Node-url]
 - [![React][React.js]][React-url]
 - [![Express][Express.js]][Express-url]
-- [![PostgresSql][PostgresSql]][PostgresSql-url]
+- [![Postgrel][Postgre.sql]][Postgre-url]
 - [![Svelte][Svelte.dev]][Svelte-url]
 - Front-end: [![Next][Next.js]][Next-url] Next.js <br>
 - Back-end: [![Node][Node.js]][Node-url] Node.js, Express.js <br>
@@ -190,5 +190,5 @@ Use this space to list resources you find helpful and would like to give credit 
 [Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
-[Postgre]: https://img.shields.io/badge/-PostgreSQL-lightblue?logo=postgresql&logoColor=white
+[Postgre.sql]: https://img.shields.io/badge/-PostgreSQL-lightblue?logo=postgresql&logoColor=white
 [Postgre-url]: https://www.postgresql.org
