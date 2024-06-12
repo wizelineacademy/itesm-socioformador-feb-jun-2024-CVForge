@@ -87,7 +87,7 @@ const LeftSidebar = () => {
                         onClick={() => setOpen(!open)}
                     />
                     <div className={`${!open && "hidden"} my-auto mt-8`}>
-                        <Link href="/">
+                        <Link href="/" id="to-home">
                             <div className="w-full h-10"><SecondaryLogo /></div>
                         </Link>
                         <div className="flex flex-row w-full ">

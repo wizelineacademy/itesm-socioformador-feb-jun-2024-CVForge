@@ -245,7 +245,7 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
     <div className="min-h-screen bg-transparent">
       <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-2 overflow-y-auto top-0">
       <NewCv handleFormToggle={handleFormToggle} />
-      {cvs.filter(cv => cv.title.toLowerCase().includes(searchQuery)).map((cv, index) => (
+      {cvs && cvs.filter(cv => cv.title.toLowerCase().includes(searchQuery)).map((cv, index) => (
         <ExistingCV key={index} cvProp={cv} deleteFunction={handleCVDelete} />
       ))}
       {isLoading && (
