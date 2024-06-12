@@ -47,13 +47,14 @@ This section should list any major frameworks/libraries used to bootstrap your p
 - [![Next][Next.js]][Next-url]
 - [![Node][Node.js]][Node-url]
 - [![React][React.js]][React-url]
-- [![Express][Express.js]][Express-url]
 - [![Postgrel][Postgre.sql]][Postgre-url]
-- [![Svelte][Svelte.dev]][Svelte-url]
-- Front-end: [![Next][Next.js]][Next-url] Next.js <br>
-- Back-end: [![Node][Node.js]][Node-url] Node.js, Express.js <br>
-- DB: PostgresSQL <br>
-- Model: OpenAI API <br>
+- [![Tailwind][Tailwind.ts]][Tailwind-url]
+- [![Prisma][Prisma.io]][Prisma-url]
+- [![Openai][Openai.ai]][Openai-url]
+- [![Aws][Aws.ts]][Aws-url]
+- [![Github][Github.ts]][Github-url]
+- [![Cypress][Cypress.io]][Cypress-url]
+- [![Jest][Jest.io]][Jest-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -188,7 +189,32 @@ Use this space to list resources you find helpful and would like to give credit 
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
+
+[Node.js]: https://img.shields.io/badge/ &style=for-the-badge
+[Node-url]: https://nodejs.org/en
+
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
-[Postgre.sql]: https://img.shields.io/badge/-PostgreSQL-lightblue?logo=postgresql&logoColor=white
+[Postgre.sql]: https://img.shields.io/badge/-Postgre%20SQL-lightblue?logo=postgresql&logoColor=white
 [Postgre-url]: https://www.postgresql.org
+
+[Tailwind.ts]: https://img.shields.io/badge/ &style=for-the-badge
+[Tailwind-url]: https://tailwindcss.com
+
+[Prisma.io]: https://img.shields.io/badge/ &style=for-the-badge
+[Prisma-url]: https://www.prisma.io
+
+[Openai.ai]: https://img.shields.io/badge/ &style=for-the-badge
+[Openai-url]: https://openai.com
+
+[Aws.ts]: https://img.shields.io/badge/ &style=for-the-badge
+[Aws-url]: https://aws.amazon.com
+
+[Github.ts]: https://img.shields.io/badge/ &style=for-the-badge
+[Github-url]: https://github.com
+
+[Cypress.io]: https://img.shields.io/badge/ &style=for-the-badge
+[Cypress-url]: https://www.cypress.io
+
+[Jest.io]: https://img.shields.io/badge/ &style=for-the-badge
+[Jest-url]: https://jestjs.io
