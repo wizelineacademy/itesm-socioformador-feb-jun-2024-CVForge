@@ -1,10 +1,10 @@
-import { combineReducers } from "@reduxjs/toolkit";
-import currentTabReducer from "./sidebar/currentTab";
+import { combineReducers } from '@reduxjs/toolkit'
+import currentTabReducer from './sidebar/currentTab'
 
 const rootReducer = combineReducers({
-    currentTab: currentTabReducer
-});
+  currentTab: currentTabReducer,
+})
 
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof rootReducer>
 
-export default rootReducer;
+export default rootReducer

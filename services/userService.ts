@@ -1,23 +1,21 @@
-"use server";
-import prisma from '@/lib/prisma';
+'use server'
+import prisma from '@/lib/prisma'
 import { User } from '@/types/user'
 
-const createNewUser = async (userEmail : string, userPassword : string) => {
-  const userCreated = await prisma.users.create(
-    {
-      data : {
-        email : userEmail, 
-        password : userPassword,
-      }
-    }
-  )
+const createNewUser = async (userEmail: string, userPassword: string) => {
+  const userCreated = await prisma.users.create({
+    data: {
+      email: userEmail,
+      password: userPassword,
+    },
+  })
   await prisma.professional_info.create({
-    data : {
-      user_id : userCreated.users_id,
-    }
-  });
-  return userCreated;
-};
+    data: {
+      user_id: userCreated.users_id,
+    },
+  })
+  return userCreated
+}
 
 const createUser = async (userData: User) => {
   const user = await prisma.users.create({
@@ -27,25 +25,20 @@ const createUser = async (userData: User) => {
       created_at: new Date(),
       updated_at: new Date(),
     },
-  });
-  return user;
-};
+  })
+  return user
+}
 
 const findUserById = async (userId: string) => {
   const user = await prisma.users.findUnique({
     where: { users_id: userId },
-  });
-  return user;
-};
+  })
+  return user
+}
 
 const getAllUsers = async () => {
-  const users = await prisma.users.findMany();
-  return users;
+  const users = await prisma.users.findMany()
+  return users
 }
 
-export {
-  createUser,
-  findUserById,
-  getAllUsers,
-  createNewUser
-}
+export { createUser, findUserById, getAllUsers, createNewUser }

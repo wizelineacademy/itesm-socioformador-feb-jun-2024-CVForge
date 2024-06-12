@@ -1,5 +1,5 @@
-import prisma from '@/lib/prisma';
-import { recommendation } from '@prisma/client';
+import prisma from '@/lib/prisma'
+import { recommendation } from '@prisma/client'
 
 // const findCVInsightById = async (cvInsightId: string) => {
 //     const cvInsight = await prisma.cv_insight.findUnique({

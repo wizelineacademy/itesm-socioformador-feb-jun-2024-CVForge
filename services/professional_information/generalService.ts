@@ -1,62 +1,62 @@
-"use server";
-import prisma from "@/lib/prisma";
-import { general_info, professional_info } from "@prisma/client";
-import { Prisma } from "@prisma/client";
-import { Decimal } from "@prisma/client/runtime/library";
+'use server'
+import prisma from '@/lib/prisma'
+import { general_info, professional_info } from '@prisma/client'
+import { Prisma } from '@prisma/client'
+import { Decimal } from '@prisma/client/runtime/library'
 
 interface GeneralInfo {
-  first_name: string;
-  last_name: string;
-  email: string;
-  phone: string;
-  github_link: string;
-  linkedin_link: string;
+  first_name: string
+  last_name: string
+  email: string
+  phone: string
+  github_link: string
+  linkedin_link: string
 }
 
 interface Education {
-  education_id: string;
-  school: string;
-  education_degree: string;
-  gpa: number;
-  start_date: Date;
-  end_date: Date;
-  relevant_coursework: string;
+  education_id: string
+  school: string
+  education_degree: string
+  gpa: number
+  start_date: Date
+  end_date: Date
+  relevant_coursework: string
 }
 
 interface EducationInput {
-  school: string;
-  educationDegree: string;
-  gpa?: number;
-  startDate?: Date;
-  endDate?: Date;
-  relevantCoursework?: string[];
+  school: string
+  educationDegree: string
+  gpa?: number
+  startDate?: Date
+  endDate?: Date
+  relevantCoursework?: string[]
 }
 
 interface Project {
-  project_id: string;
-  name: string;
-  description: string;
-  start_date: Date;
-  end_date: Date;
+  project_id: string
+  name: string
+  description: string
+  start_date: Date
+  end_date: Date
 }
 
 interface Work {
-  work_experience_id : string;
-  work_position : string;
-  description : string;
-  start_date : Date;
-  end_date : Date;
+  work_experience_id: string
+  work_position: string
+  description: string
+  start_date: Date
+  end_date: Date
 }
 
 interface Skill {
-  skill_id : string;
-  title : string;
-  proficiency : string;
+  skill_id: string
+  title: string
+  proficiency: string
 }
 
 //General Info Services
 const getGeneralInfo = async (
-  professionalID: string
+  professionalID: string,
 ): Promise<GeneralInfo | null> => {
   const generalInfo = await prisma.general_info.findUnique({
     where: { professional_info_id: professionalID },
@@ -68,13 +68,13 @@ const getGeneralInfo = async (
       github_link: true,
       linkedin_link: true,
     },
-  });
-  return generalInfo;
-};
+  })
+  return generalInfo
+}
 
 const createGeneralInfo = async (
   professionalID: string,
-  generalData: Prisma.general_infoCreateInput
+  generalData: Prisma.general_infoCreateInput,
 ) => {
   const newGeneralInfo = await prisma.general_info.create({
     data: {
@@ -83,9 +83,9 @@ const createGeneralInfo = async (
         connect: { professional_info_id: professionalID },
       },
     },
-  });
-  return newGeneralInfo;
-};
+  })
+  return newGeneralInfo
+}
 
 //Education services
 const getEducation = async (professionalID: string): Promise<Education[]> => {
@@ -100,9 +100,9 @@ const getEducation = async (professionalID: string): Promise<Education[]> => {
       end_date: true,
       relevant_coursework: true,
     },
-  });
-  return educations;
-};
+  })
+  return educations
+}
 
 const createEducation = async (professionalID: string) => {
   const createdEducation = await prisma.education.create({
@@ -113,49 +113,49 @@ const createEducation = async (professionalID: string) => {
         },
       },
     },
-  });
-  return createdEducation;
-};
+  })
+  return createdEducation
+}
 
 const updateEducation = async (
   educationID: string,
-  educationData: Partial<Education>
+  educationData: Partial<Education>,
 ) => {
   const updatedEducation = await prisma.education.update({
     where: { education_id: educationID },
     data: educationData,
-  });
-  return updatedEducation;
-};
+  })
+  return updatedEducation
+}
 
 const deleteEducation = async (educationID: string) => {
   try {
     const deletedEducation = await prisma.education.delete({
       where: { education_id: educationID },
-    });
-    return deletedEducation;
+    })
+    return deletedEducation
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === "P2025") {
-        console.error("Error: Record to delete does not exist");
+      if (error.code === 'P2025') {
+        console.error('Error: Record to delete does not exist')
       } else {
-        console.error("Prisma error code:", error.code);
+        console.error('Prisma error code:', error.code)
       }
     } else {
-      console.error("Unknown error:", error);
+      console.error('Unknown error:', error)
     }
-    throw error;
+    throw error
   }
-};
+}
 
 //Projects services
 
 const getProjects = async (professionalID: string): Promise<Project[]> => {
   const arrayProjects = await prisma.project.findMany({
     where: { professional_info_id: professionalID },
-  });
-  return arrayProjects;
-};
+  })
+  return arrayProjects
+}
 
 const createProject = async (professionalID: string): Promise<Project> => {
   const createdProject = await prisma.project.create({
@@ -166,35 +166,35 @@ const createProject = async (professionalID: string): Promise<Project> => {
         },
       },
     },
-  });
-  return createdProject;
-};
-
-const updateProject = async (projectID: string, projectData: Partial<Project>): Promise<Project> => {
-  const updatedProject = await prisma.project.update(
-    {
-      where : {project_id : projectID},
-      data : projectData,
-    }
-  )
-  return updatedProject;
-};
-
-const deleteProject = async (projectID: string): Promise<Project> => {
-  const deletedProject  = await prisma.project.delete({
-    where : {project_id : projectID}
   })
-  return deletedProject;
+  return createdProject
 }
 
+const updateProject = async (
+  projectID: string,
+  projectData: Partial<Project>,
+): Promise<Project> => {
+  const updatedProject = await prisma.project.update({
+    where: { project_id: projectID },
+    data: projectData,
+  })
+  return updatedProject
+}
+
+const deleteProject = async (projectID: string): Promise<Project> => {
+  const deletedProject = await prisma.project.delete({
+    where: { project_id: projectID },
+  })
+  return deletedProject
+}
 
 //Work experience services
 const getWorks = async (professionalID: string): Promise<Work[]> => {
   const arrayWorks = await prisma.work_experience.findMany({
     where: { professional_info_id: professionalID },
-  });
-  return arrayWorks;
-};
+  })
+  return arrayWorks
+}
 
 const createWork = async (professionalID: string): Promise<Work> => {
   const createdWork = await prisma.work_experience.create({
@@ -205,35 +205,35 @@ const createWork = async (professionalID: string): Promise<Work> => {
         },
       },
     },
-  });
-  return createdWork;
-};
-
-const updateWork = async (workID: string, workData: Partial<Work>): Promise<Work> => {
-  const updatedWork = await prisma.work_experience.update(
-    {
-      where : {work_experience_id : workID},
-      data : workData,
-    }
-  )
-  return updatedWork;
-};
-
-const deleteWork = async (workID: string): Promise<Work> => {
-  const deletedWork  = await prisma.work_experience.delete({
-    where : {work_experience_id : workID}
   })
-  return deletedWork;
+  return createdWork
 }
 
+const updateWork = async (
+  workID: string,
+  workData: Partial<Work>,
+): Promise<Work> => {
+  const updatedWork = await prisma.work_experience.update({
+    where: { work_experience_id: workID },
+    data: workData,
+  })
+  return updatedWork
+}
+
+const deleteWork = async (workID: string): Promise<Work> => {
+  const deletedWork = await prisma.work_experience.delete({
+    where: { work_experience_id: workID },
+  })
+  return deletedWork
+}
 
 //Work experience services
 const getSkills = async (professionalID: string): Promise<Skill[]> => {
   const arraySkills = await prisma.skill.findMany({
     where: { professional_info_id: professionalID },
-  });
-  return arraySkills;
-};
+  })
+  return arraySkills
+}
 
 const createSkill = async (professionalID: string): Promise<Skill> => {
   const createdSkill = await prisma.skill.create({
@@ -244,25 +244,26 @@ const createSkill = async (professionalID: string): Promise<Skill> => {
         },
       },
     },
-  });
-  return createdSkill;
-};
+  })
+  return createdSkill
+}
 
-const updateSkill = async (skillID: string, skillData: Partial<Skill>): Promise<Skill> => {
-  const updatedSkill = await prisma.skill.update(
-    {
-      where : {skill_id : skillID},
-      data : skillData,
-    }
-  )
-  return updatedSkill;
-};
+const updateSkill = async (
+  skillID: string,
+  skillData: Partial<Skill>,
+): Promise<Skill> => {
+  const updatedSkill = await prisma.skill.update({
+    where: { skill_id: skillID },
+    data: skillData,
+  })
+  return updatedSkill
+}
 
 const deleteSkill = async (skillID: string): Promise<Skill> => {
-  const deletedSkill  = await prisma.skill.delete({
-    where : {skill_id : skillID}
+  const deletedSkill = await prisma.skill.delete({
+    where: { skill_id: skillID },
   })
-  return deletedSkill;
+  return deletedSkill
 }
 
 export {
@@ -284,4 +285,4 @@ export {
   createSkill,
   updateSkill,
   deleteSkill,
-};
+}
