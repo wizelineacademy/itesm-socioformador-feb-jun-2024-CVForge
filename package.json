@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test": "jest",
     "prepare": "husky",
-    "lint:fix": "next lint --fix ."
+    "lint:fix": "next lint --fix"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",

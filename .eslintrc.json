@@ -1,6 +1,6 @@
 {
-  "files": ["app/**/*.js"],
-  "ignores": ["app/**/*config.js"],  
+  // "files": ["app/**/*.ts"],
+  // "ignores": ["app/**/*config.ts"],  
   "extends": ["next/core-web-vitals", "plugin:prettier/recommended", "next"],
   "plugins": ["prettier/recommended"],
   "rules": {
