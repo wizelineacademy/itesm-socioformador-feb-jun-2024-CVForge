@@ -25,9 +25,15 @@ interface GeneralInfo {
 }
 
 interface GeneralInfoProps {
+<<<<<<< HEAD
   generalInfo: GeneralInfo
   setGeneralInfo: React.Dispatch<React.SetStateAction<GeneralInfo>>
   professionalID: string | null
+=======
+  generalInfo: GeneralInfo;
+  setGeneralInfo: React.Dispatch<React.SetStateAction<GeneralInfo>>;
+  professionalID: string | null;
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 }
 
 const GeneralInfo: React.FC<GeneralInfoProps> = ({
@@ -35,8 +41,13 @@ const GeneralInfo: React.FC<GeneralInfoProps> = ({
   setGeneralInfo,
   professionalID,
 }) => {
+<<<<<<< HEAD
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+=======
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
   const handleSubmit = async (e) => {
     e.preventDefault()

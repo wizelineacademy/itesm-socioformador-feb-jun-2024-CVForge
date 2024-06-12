@@ -7,16 +7,24 @@ export default function Home() {
 
   const createUser = async () => {
     const userData = {
+<<<<<<< HEAD
       first_name: 'Test',
       last_name: 'lol',
       email: 'example@mail.com',
       password: '123',
     }
+=======
+      first_name: "Test",
+      last_name: "lol",
+      email: "example@mail.com",
+      password: "123",
+    };
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
-    const response = await fetch('/api/db/user', {
-      method: 'POST',
+    const response = await fetch("/api/db/user", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(userData),
     })
@@ -26,11 +34,19 @@ export default function Home() {
   }
 
   const fetchUsers = async () => {
+<<<<<<< HEAD
     const response = await fetch('/api/db/user')
     const data = await response.json()
     setUsers(data)
     console.log(data)
   }
+=======
+    const response = await fetch("/api/db/user");
+    const data = await response.json();
+    setUsers(data);
+    console.log(data);
+  };
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
   return (
     <main className="w-full h-full">
@@ -44,5 +60,9 @@ export default function Home() {
         ))}
       </div>
     </main>
+<<<<<<< HEAD
   )
+=======
+  );
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 }

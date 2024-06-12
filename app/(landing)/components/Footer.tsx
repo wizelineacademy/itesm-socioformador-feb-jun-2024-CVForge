@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 import React from 'react'
 import SecondaryLogo from '@/public/assets/SecondaryLogo'
 import Link from 'next/link'
 import { FaLinkedin } from 'react-icons/fa'
 import { CiLinkedin } from 'react-icons/ci'
 import Image from 'next/image'
+=======
+import React from "react";
+import SecondaryLogo from "@/public/assets/SecondaryLogo";
+import Link from "next/link";
+import { FaLinkedin } from "react-icons/fa";
+import { CiLinkedin } from "react-icons/ci";
+import Image from "next/image";
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
 const Footer: React.FC = () => {
   return (

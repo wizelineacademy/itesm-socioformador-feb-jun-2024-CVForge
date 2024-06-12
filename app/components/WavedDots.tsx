@@ -1,6 +1,11 @@
 const DottedSquare = () => {
+<<<<<<< HEAD
   return <div className="w-2 h-2 bg-secondarygray rounded-lg"></div>
 }
+=======
+  return <div className="w-2 h-2 bg-secondarygray rounded-lg"></div>;
+};
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
 export default function DottedBg() {
   return (
@@ -186,7 +191,11 @@ export default function DottedBg() {
         <DottedSquare />
       </div>
     </div>
+<<<<<<< HEAD
   )
+=======
+  );
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 }
 //10 Rows
 //14 cols

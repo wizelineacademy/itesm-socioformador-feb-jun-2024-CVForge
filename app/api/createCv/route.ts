@@ -25,12 +25,20 @@ export async function POST(req: NextRequest) {
     const recommendations = await generate_recommendations(
       generatedCV,
       selectedPosition,
+<<<<<<< HEAD
     )
+=======
+    );
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
     // Filter valid recommendations
     const validRecommendations = recommendations.filter(
       (recommendation) => recommendation.title && recommendation.main_content,
+<<<<<<< HEAD
     )
+=======
+    );
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
     // Save recommendations in the database
     const savedRecommendations = await Promise.all(
@@ -43,9 +51,15 @@ export async function POST(req: NextRequest) {
             main_content: recommendation.main_content,
             completed: false,
           },
+<<<<<<< HEAD
         })
       }),
     )
+=======
+        });
+      }),
+    );
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
     return NextResponse.json({
       message: 'CV and recommendations processed successfully',

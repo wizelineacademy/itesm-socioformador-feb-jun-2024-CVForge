@@ -7,24 +7,40 @@ import {
   RECOMMENDED_CHANGES,
   FETCHED_RECOMMENDATIONS,
   MOCK_CV,
+<<<<<<< HEAD
 } from '../CONSTANTS'
 
 // Package imports
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge'
+=======
+} from "../CONSTANTS";
+
+// Package imports
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Gauge, gaugeClasses } from "@mui/x-charts/Gauge";
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
 // Component imports
 import ReccomendationSection from './RecommendationSection'
 
 // Icon imports
+<<<<<<< HEAD
 import OpenArrow from '@/public/assets/cv/insight/OpenArrow_icon'
 import RecommendedChanges from './RecommendedChanges'
 import { recommendation } from '@prisma/client'
+=======
+import OpenArrow from "@/public/assets/cv/insight/OpenArrow_icon";
+import RecommendedChanges from "./RecommendedChanges";
+import { recommendation } from "@prisma/client";
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 import {
   findRecommendationById,
   findRecommendationsByCvId,
   getAllRecommendation,
+<<<<<<< HEAD
 } from '@/services/recommendationService'
 
 type InsightBarProps = { cv_id: string }
@@ -33,10 +49,21 @@ const InsightBar: React.FC<InsightBarProps> = ({ cv_id }) => {
   const [recommendations, setRecommendations] = useState<recommendation[]>([])
   const [isLoadingFetch, setIsLoadingFetch] = useState<boolean>(false)
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
+=======
+} from "@/services/recommendationService";
+
+type InsightBarProps = { cv_id: string };
+const InsightBar: React.FC<InsightBarProps> = ({ cv_id }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [recommendations, setRecommendations] = useState<recommendation[]>([]);
+  const [isLoadingFetch, setIsLoadingFetch] = useState<boolean>(false);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
   useEffect(() => {
     // setFetchedRecommendations()
     const fetchRecommendations = async () => {
       try {
+<<<<<<< HEAD
         const recommendationsArray = await findRecommendationsByCvId(cv_id)
         setRecommendations(recommendationsArray)
       } catch (error) {
@@ -56,13 +83,38 @@ const InsightBar: React.FC<InsightBarProps> = ({ cv_id }) => {
   return (
     <div
       className={` ${isOpen ? 'w-[900px]' : 'w-[400px] 2xl:w-[600px]'} h-full transition-all duration-500 right-0 shadow-lg font-inter bg-white text-primarygray`}
+=======
+        const recommendationsArray = await findRecommendationsByCvId(cv_id);
+        setRecommendations(recommendationsArray);
+      } catch (error) {
+        console.error("Failed to fetch recommendations", error);
+      }
+    };
+    if (cv_id) fetchRecommendations();
+  }, [cv_id]);
+  const handleOpenInsightBar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const toggleContent = (index: number) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
+
+  return (
+    <div
+      className={` ${isOpen ? "w-[900px]" : "w-[400px] 2xl:w-[600px]"} h-full transition-all duration-500 right-0 shadow-lg font-inter bg-white text-primarygray`}
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
     >
       <div className="w-full h-screen px-4 overflow-y-auto">
         <div className="w-full flex flex-row items-center mt-8 mb-2">
           <h1 className="text-3xl font-black">Feedback</h1>
         </div>
         <hr className="w-full h-[1px] mb-2"></hr>
+<<<<<<< HEAD
         <div className={`${isOpen ? 'flex-row' : 'flex-col'} flex`}>
+=======
+        <div className={`${isOpen ? "flex-row" : "flex-col"} flex`}>
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
           <RecommendedChanges recommendations={recommendations} />
         </div>
         <div className="w-full flex justify-center items-center">
@@ -74,8 +126,13 @@ const InsightBar: React.FC<InsightBarProps> = ({ cv_id }) => {
         </div>
       </div>
     </div>
+<<<<<<< HEAD
   )
 }
+=======
+  );
+};
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
 export default InsightBar
 /*

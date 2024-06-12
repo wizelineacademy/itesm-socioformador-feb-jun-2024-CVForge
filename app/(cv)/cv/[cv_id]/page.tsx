@@ -9,11 +9,19 @@ import { setCurrentTab } from '@/contexts/cv/sidebar/currentTab'
 import { useDispatch } from 'react-redux'
 
 const CV = ({ params }: { params: { cv_id: string } }) => {
+<<<<<<< HEAD
   const [cvBodyData, setCvBodyData] = useState<string>('')
   const editorRef = useRef<any>(null)
   const [autosaveStatus, setAutosaveStatus] = useState<string>('')
   const dispatch = useDispatch()
   dispatch(setCurrentTab('cv_gallery'))
+=======
+  const [cvBodyData, setCvBodyData] = useState<string>("");
+  const editorRef = useRef<any>(null);
+  const [autosaveStatus, setAutosaveStatus] = useState<string>("");
+  const dispatch = useDispatch();
+  dispatch(setCurrentTab("cv_gallery"));
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
   useEffect(() => {
     const fetchCV = async () => {
@@ -76,11 +84,19 @@ const CV = ({ params }: { params: { cv_id: string } }) => {
                   min_height: 200,
                   width: 700,
                   plugins:
+<<<<<<< HEAD
                     'anchor autolink charmap codesample emoticons link lists media searchreplace table visualblocks wordcount linkcheckerx',
                   toolbar:
                     'undo redo | fontfamily fontsize | bold italic underline strikethrough | link image media table | spellcheckdialog | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
                 }}
                 initialValue={cvBodyData.replace(/## Section\n/g, '')}
+=======
+                    "anchor autolink charmap codesample emoticons link lists media searchreplace table visualblocks wordcount linkcheckerx",
+                  toolbar:
+                    "undo redo | fontfamily fontsize | bold italic underline strikethrough | link image media table | spellcheckdialog | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat",
+                }}
+                initialValue={cvBodyData.replace(/## Section\n/g, "")}
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
                 onInit={(evt, editor) => (editorRef.current = editor)}
               />
               {autosaveStatus && <div>{autosaveStatus}</div>}
@@ -96,8 +112,13 @@ const CV = ({ params }: { params: { cv_id: string } }) => {
         )}
       </div>
     </div>
+<<<<<<< HEAD
   )
 }
+=======
+  );
+};
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
 export default CV
 /**

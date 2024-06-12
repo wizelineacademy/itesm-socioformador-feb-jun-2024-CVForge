@@ -1,16 +1,30 @@
+<<<<<<< HEAD
 'use client'
 import React, { useEffect, useState } from 'react'
+=======
+"use client";
+import React, { useEffect, useState } from "react";
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 import {
   getSkills,
   createSkill,
   updateSkill,
   deleteSkill,
+<<<<<<< HEAD
 } from '@/services/professional_information/generalService'
 import { update } from 'cypress/types/lodash'
 import { useSession } from 'next-auth/react'
 import { getProfessionalByEmail } from '@/services/sessionService'
 import { MdOutlineModeEdit, MdOutlineDeleteOutline } from 'react-icons/md'
 import { Prisma } from '@prisma/client'
+=======
+} from "@/services/professional_information/generalService";
+import { update } from "cypress/types/lodash";
+import { useSession } from "next-auth/react";
+import { getProfessionalByEmail } from "@/services/sessionService";
+import { MdOutlineModeEdit, MdOutlineDeleteOutline } from "react-icons/md";
+import { Prisma } from "@prisma/client";
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
 interface Skill {
   skill_id: string
@@ -29,8 +43,13 @@ const Skills: React.FC<SkillProps> = ({
   setSkills,
   professionalID,
 }) => {
+<<<<<<< HEAD
   const [editingCardId, setEditingCardId] = useState<string | null>(null)
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null)
+=======
+  const [editingCardId, setEditingCardId] = useState<string | null>(null);
+  const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
   const toggleEditMode = (cardId: string) => {
     setTimeout(() => {
@@ -47,7 +66,11 @@ const Skills: React.FC<SkillProps> = ({
     skillID: string,
     skill: Skill,
   ) => {
+<<<<<<< HEAD
     event.preventDefault()
+=======
+    event.preventDefault();
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
     const formData = new FormData(event.currentTarget)
     const skillData: Partial<Skill> = {
@@ -55,26 +78,43 @@ const Skills: React.FC<SkillProps> = ({
       proficiency: formData.get('proficiency') as string,
     }
 
+<<<<<<< HEAD
     if (skillData.title.trim() === '' || skillData.proficiency.trim() === '') {
       alert('Title and proficiency must be filled in to save.')
     } else {
       try {
         const updatedSkill = await updateSkill(skillID, skillData)
         console.log('Skill updated successfully:', updatedSkill)
+=======
+    if (skillData.title.trim() === "" || skillData.proficiency.trim() === "") {
+      alert("Title and proficiency must be filled in to save.");
+    } else {
+      try {
+        const updatedSkill = await updateSkill(skillID, skillData);
+        console.log("Skill updated successfully:", updatedSkill);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
         setSkills((prevSkills) =>
           prevSkills.map((skill) =>
             skill.skill_id === skillID ? updatedSkill : skill,
           ),
+<<<<<<< HEAD
         )
         toggleEditMode(skill.skill_id)
       } catch (error) {
         console.error('Error updating skill:', error)
+=======
+        );
+        toggleEditMode(skill.skill_id);
+      } catch (error) {
+        console.error("Error updating skill:", error);
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
       }
     }
   }
 
   const handleDelete = async (skillID: string, index: number) => {
     try {
+<<<<<<< HEAD
       await deleteSkill(skillID)
       console.log('Skill deleted successfully')
       setSkills((prevSkills) => prevSkills.filter((_, idx) => idx !== index))
@@ -87,6 +127,20 @@ const Skills: React.FC<SkillProps> = ({
         setSkills((prevSkills) =>
           prevSkills.filter((skill) => skill.skill_id !== skillID),
         )
+=======
+      await deleteSkill(skillID);
+      console.log("Skill deleted successfully");
+      setSkills((prevSkills) => prevSkills.filter((_, idx) => idx !== index));
+    } catch (error) {
+      console.error("Error deleting skill:", error);
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === "P2025"
+      ) {
+        setSkills((prevSkills) =>
+          prevSkills.filter((skill) => skill.skill_id !== skillID),
+        );
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
       }
     }
   }
@@ -173,11 +227,19 @@ const Skills: React.FC<SkillProps> = ({
             >
               <div className="flex flex-row">
                 <h1 className="text-primarygray w-36">
+<<<<<<< HEAD
                   Skill:{' '}
                   <span className="text-secondarygray">{skill.title}</span>{' '}
                 </h1>
                 <p className="text-primarygray mr-auto">
                   Proficiency:{' '}
+=======
+                  Skill:{" "}
+                  <span className="text-secondarygray">{skill.title}</span>{" "}
+                </h1>
+                <p className="text-primarygray mr-auto">
+                  Proficiency:{" "}
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
                   <span className="text-secondarygray">
                     {skill.proficiency}
                   </span>
@@ -206,7 +268,7 @@ const Skills: React.FC<SkillProps> = ({
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Skills

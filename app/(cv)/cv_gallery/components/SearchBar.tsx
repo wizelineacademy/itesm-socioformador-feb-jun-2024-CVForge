@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import React from 'react'
 import Search_Icon from '@/public/assets/svg/Search_Icon'
 import Filter_Icon from '@/public/assets/svg/Filter_Icon'
+=======
+import React from "react";
+import Search_Icon from "@/public/assets/svg/Search_Icon";
+import Filter_Icon from "@/public/assets/svg/Filter_Icon";
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
 interface SearchBarProps {
   onSearchChange?: (query: string) => void
@@ -28,6 +34,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
         </div>
       </div>
     </div>
+<<<<<<< HEAD
   )
 }
 export default SearchBar
+=======
+  );
+};
+export default SearchBar;
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)

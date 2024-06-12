@@ -8,14 +8,25 @@ import GalleryLoading from '@/app/components/loading'
 import { useSession } from 'next-auth/react'
 
 const Menu: React.FC = ({}) => {
+<<<<<<< HEAD
   const { data: session } = useSession()
   const dispatch = useDispatch()
   dispatch(setCurrentTab('cv_gallery'))
+=======
+  const { data: session } = useSession();
+  const dispatch = useDispatch();
+  dispatch(setCurrentTab("cv_gallery"));
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
   const [searchQuery, setSearchQuery] = useState('')
   const handleSearchInputChange = (query: string) => {
+<<<<<<< HEAD
     setSearchQuery(query)
   }
+=======
+    setSearchQuery(query);
+  };
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
 
   if (session && session.user) {
     return (
@@ -25,10 +36,18 @@ const Menu: React.FC = ({}) => {
           <Gallery searchQuery={searchQuery} />
         </div>
       </div>
-    )
+    );
   } else {
+<<<<<<< HEAD
     return <GalleryLoading />
+=======
+    return <GalleryLoading />;
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
   }
-}
+};
 
+<<<<<<< HEAD
 export default Menu
+=======
+export default Menu;
+>>>>>>> affab28 (Installed and Integrated Packages: Husky, Prettier and ESLint)
