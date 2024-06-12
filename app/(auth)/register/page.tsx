@@ -1,16 +1,16 @@
-"use client";
+'use client'
 import '@/style/globals.css'
-import React from "react";
+import React from 'react'
 
 // Component imports
-import Register from "./components/Register";
+import Register from './components/Register'
 
-const Auth: React.FC = ({ }) => {
-    return (
-        <main className="w-full h-full">
-            <Register />
-        </main>
-    )
+const Auth: React.FC = ({}) => {
+  return (
+    <main className="w-full h-full">
+      <Register />
+    </main>
+  )
 }
 
-export default Auth;
+export default Auth

@@ -1,15 +1,14 @@
-import "@/style/globals.css";
-import 'intersection-observer';
-import Providers from "../components/Providers";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import '@/style/globals.css'
+import 'intersection-observer'
+import Providers from '../components/Providers'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 export const metadata = {
   title: 'CVForge',
   description: 'CVForge',
-  keywords: ['CV, Resume, AI, ai, Linkedin, Google']
+  keywords: ['CV, Resume, AI, ai, Linkedin, Google'],
 }
-
 
 export default function RootLayout({
   children,
@@ -20,15 +19,13 @@ export default function RootLayout({
     <html className="scroll-smooth" lang="en">
       <body className="flex flex-col bg-gradient-to-b from-white to-gray-300 h-screen">
         <Providers>
-        <Navbar/>
+          <Navbar />
           <div className="overflow-y-scroll">
-            <main>
-              {children}
-            </main>
-            <Footer/>
+            <main>{children}</main>
+            <Footer />
           </div>
         </Providers>
-      </body> 
+      </body>
     </html>
   )
 }

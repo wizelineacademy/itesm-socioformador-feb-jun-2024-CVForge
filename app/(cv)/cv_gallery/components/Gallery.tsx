@@ -1,95 +1,88 @@
-"use-client";
-import React, { useEffect, useState } from "react";
-import { format } from "date-fns";
-import { RxCross2 } from "react-icons/rx";
-import NewCv from "./NewCv";
-import ExistingCV from "./ExistingCV";
+'use-client'
+import React, { useEffect, useState } from 'react'
+import { format } from 'date-fns'
+import { RxCross2 } from 'react-icons/rx'
+import NewCv from './NewCv'
+import ExistingCV from './ExistingCV'
 
 // Services
-import {
-  getAllCVs,
-  createCV,
-  findCVById,
-  deleteCV,
-} from "@/services/cvService";
-import { getAllPositions } from "@/services/positionServices";
+import { getAllCVs, createCV, findCVById, deleteCV } from '@/services/cvService'
+import { getAllPositions } from '@/services/positionServices'
 import {
   getProfessionalByEmail,
   getUserIdByEmail,
-} from "@/services/sessionService";
+} from '@/services/sessionService'
 import {
   getEducation,
   getGeneralInfo,
   getProjects,
   getWorks,
-} from "@/services/professional_information/generalService";
+} from '@/services/professional_information/generalService'
 
 // Types
-import { cv, desired_position } from "@prisma/client";
-import { useSession } from "next-auth/react";
-import { ProfessionalInfo } from "@/types/professionalInfo";
-import GalleryLoading from "@/app/components/loading";
+import { cv, desired_position } from '@prisma/client'
+import { useSession } from 'next-auth/react'
+import { ProfessionalInfo } from '@/types/professionalInfo'
+import GalleryLoading from '@/app/components/loading'
 
 interface GalleryProps {
-  searchQuery: string;
+  searchQuery: string
 }
 
 const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
-  const { data: session } = useSession();
-  const [professionalId, setProfessionalId] = useState<string>("");
-  const [professionalInfo, setProfessionalInfo] = useState<ProfessionalInfo>();
-  const [canCreateCv, setCanCreateCv] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const { data: session } = useSession()
+  const [professionalId, setProfessionalId] = useState<string>('')
+  const [professionalInfo, setProfessionalInfo] = useState<ProfessionalInfo>()
+  const [canCreateCv, setCanCreateCv] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   //useState for CV
-  const [cvs, setCvs] = useState<cv[]>([]);
-  const [title, setTitle] = useState<string>("");
+  const [cvs, setCvs] = useState<cv[]>([])
+  const [title, setTitle] = useState<string>('')
   //useState for positions
-  const [positions, setPositions] = useState<desired_position[]>([]);
-  const [selectedPosition, setSelectedPosition] = useState<string>("");
+  const [positions, setPositions] = useState<desired_position[]>([])
+  const [selectedPosition, setSelectedPosition] = useState<string>('')
   //useState for CV creation pop-up
-  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [isFormVisible, setIsFormVisible] = useState(false)
   //useState for CV previsualization pop-up
-  const [isDetailVisible, setIsDetailVisible] = useState(false);
-  const [selectedCv, setSelectedCV] = useState<cv | null>(null);
+  const [isDetailVisible, setIsDetailVisible] = useState(false)
+  const [selectedCv, setSelectedCV] = useState<cv | null>(null)
 
   //Fetching all CV information
   useEffect(() => {
     const fetchCvs = async () => {
       try {
-        const userId = await getUserIdByEmail(session.user.email);
-        const cvArray = await getAllCVs(userId);
-        setCvs(cvArray);
+        const userId = await getUserIdByEmail(session.user.email)
+        const cvArray = await getAllCVs(userId)
+        setCvs(cvArray)
       } catch (error) {
-        console.error("Failed to fetch CVs:", error);
+        console.error('Failed to fetch CVs:', error)
       }
-    };
+    }
 
-    fetchCvs();
-  }, [session]);
+    fetchCvs()
+  }, [session])
 
   // Get the user professional information
   useEffect(() => {
     const fetchProfessionalID = async () => {
-      const professinalInfoId = await getProfessionalByEmail(
-        session.user.email
-      );
-      if (professinalInfoId) setProfessionalId(professinalInfoId);
-    };
+      const professinalInfoId = await getProfessionalByEmail(session.user.email)
+      if (professinalInfoId) setProfessionalId(professinalInfoId)
+    }
 
-    if (session?.user?.email) fetchProfessionalID();
-  }, [session?.user?.email]);
+    if (session?.user?.email) fetchProfessionalID()
+  }, [session?.user?.email])
 
   //Fetching all Positions Information
   const fetchPositions = async () => {
     try {
-      const positionsArray = await getAllPositions();
+      const positionsArray = await getAllPositions()
 
-      setPositions(positionsArray);
+      setPositions(positionsArray)
     } catch (error) {
-      console.error("Failed to fetch Positions:", error);
+      console.error('Failed to fetch Positions:', error)
     }
-  };
+  }
 
   // Get the users professional info details
   async function fetchProfessionalDetails(professionalId: string) {
@@ -99,40 +92,40 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
         getEducation(professionalId),
         getProjects(professionalId),
         getWorks(professionalId),
-      ]);
+      ])
 
-      const [generalInfo, education, projects, works] = responses;
+      const [generalInfo, education, projects, works] = responses
 
       // Convert date objects to strings
       const formattedEducation = education.map((edu) => ({
         ...edu,
-        start_date: edu.start_date ? format(edu.start_date, "dd/MM/yyyy") : "",
-        end_date: edu.end_date ? format(edu.end_date, "dd/MM/yyyy") : "",
-      }));
+        start_date: edu.start_date ? format(edu.start_date, 'dd/MM/yyyy') : '',
+        end_date: edu.end_date ? format(edu.end_date, 'dd/MM/yyyy') : '',
+      }))
 
       const formattedProjects = projects.map((proj) => ({
         ...proj,
         start_date: proj.start_date
-          ? format(proj.start_date, "dd/MM/yyyy")
-          : "",
-        end_date: proj.end_date ? format(proj.end_date, "dd/MM/yyyy") : "",
-      }));
+          ? format(proj.start_date, 'dd/MM/yyyy')
+          : '',
+        end_date: proj.end_date ? format(proj.end_date, 'dd/MM/yyyy') : '',
+      }))
 
       const formattedWorks = works.map((work) => ({
         ...work,
         start_date: work.start_date
-          ? format(work.start_date, "dd/MM/yyyy")
-          : "",
-        end_date: work.end_date ? format(work.end_date, "dd/MM/yyyy") : "",
-      }));
+          ? format(work.start_date, 'dd/MM/yyyy')
+          : '',
+        end_date: work.end_date ? format(work.end_date, 'dd/MM/yyyy') : '',
+      }))
       setProfessionalInfo({
         generalInfo: generalInfo || undefined,
         education: formattedEducation,
         project: formattedProjects,
         work: formattedWorks,
-      });
+      })
     } catch (error) {
-      console.error("Error fetching professional info:", error);
+      console.error('Error fetching professional info:', error)
     }
   }
 
@@ -141,10 +134,10 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
     // Check if there is information
 
     if (professionalId) {
-      fetchPositions();
-      fetchProfessionalDetails(professionalId);
+      fetchPositions()
+      fetchProfessionalDetails(professionalId)
     }
-  }, [professionalId]);
+  }, [professionalId])
 
   useEffect(() => {
     if (professionalInfo) {
@@ -154,106 +147,112 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
         professionalInfo.project &&
         professionalInfo.project.length > 0 &&
         professionalInfo.work &&
-        professionalInfo.work.length > 0;
-      setCanCreateCv(isValid);
+        professionalInfo.work.length > 0
+      setCanCreateCv(isValid)
     }
-  }, [professionalInfo]);
+  }, [professionalInfo])
 
   const handleFormToggle = () => {
-    setIsFormVisible(!isFormVisible);
-  };
+    setIsFormVisible(!isFormVisible)
+  }
 
   const callApi = async (cvId: string) => {
     const selectedPositionTitle = positions.find(
-      (position) => position.desired_position_id == selectedPosition
-    ).title;
+      (position) => position.desired_position_id == selectedPosition,
+    ).title
     try {
-      const response = await fetch("/api/createCv", {
-        method: "POST",
+      const response = await fetch('/api/createCv', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           cvId: cvId,
           professionalInfo: JSON.stringify(professionalInfo),
           selectedPosition: selectedPositionTitle,
         }),
-      });
+      })
 
       if (response.ok) {
-        const jsonData = await response.json();
-        console.log("Message: ", jsonData.message);
+        const jsonData = await response.json()
+        console.log('Message: ', jsonData.message)
       } else {
-        console.error("Failed to fetch CV data:", response.statusText);
+        console.error('Failed to fetch CV data:', response.statusText)
       }
     } catch (error) {
-      console.error("Error fetching CV data:", error);
+      console.error('Error fetching CV data:', error)
     }
-  };
+  }
 
   const handleCreateCv = async (event: React.FormEvent) => {
     setTimeout(() => {
-      setIsLoading(true); 
-    }, 500);
-    event.preventDefault();
+      setIsLoading(true)
+    }, 500)
+    event.preventDefault()
     try {
       if (selectedPosition) {
-        const userId = await getUserIdByEmail(session.user.email);
+        const userId = await getUserIdByEmail(session.user.email)
         const newCv = await createCV({
           user_id: userId,
           title: title,
           desired_position_id: selectedPosition,
-        });
+        })
 
-        setCvs((cvs) => [...cvs, newCv]);
-        setIsFormVisible(false);
-        setTitle("");
-        setSelectedPosition("");
+        setCvs((cvs) => [...cvs, newCv])
+        setIsFormVisible(false)
+        setTitle('')
+        setSelectedPosition('')
         // Get the cv content from the ai api
-        callApi(newCv.cv_id);
+        callApi(newCv.cv_id)
         // Handle successful form submission (e.g., close form, reset form)
       } else {
-        console.error("No position selected. Please choose a position.");
+        console.error('No position selected. Please choose a position.')
       }
     } catch (error) {
-      console.error("Failed to create new CV:", error);
+      console.error('Failed to create new CV:', error)
     } finally {
       setTimeout(() => {
-        setIsLoading(false); 
-      }, 4000);
+        setIsLoading(false)
+      }, 4000)
     }
-  };
+  }
 
   const handleCVDelete = async (cvId: string) => {
-    const deletedCV = await deleteCV(cvId);
-    setIsDetailVisible(false);
-    setCvs((prevCvs) => prevCvs.filter((cv) => cv.cv_id !== cvId));
-    console.log("cv deleted");
-  };
+    const deletedCV = await deleteCV(cvId)
+    setIsDetailVisible(false)
+    setCvs((prevCvs) => prevCvs.filter((cv) => cv.cv_id !== cvId))
+    console.log('cv deleted')
+  }
 
   const handlePositionChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
-    setSelectedPosition(event.target.value);
-  };
+    setSelectedPosition(event.target.value)
+  }
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-  };
+    setTitle(event.target.value)
+  }
 
   return (
     <div className="min-h-screen bg-transparent">
       <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-2 overflow-y-auto top-0">
-      <NewCv handleFormToggle={handleFormToggle} />
-      {cvs && cvs.filter(cv => cv.title.toLowerCase().includes(searchQuery)).map((cv, index) => (
-        <ExistingCV key={index} cvProp={cv} deleteFunction={handleCVDelete} />
-      ))}
-      {isLoading && (
-      <div className="absolute w-screen h-screen top-0 left-0 bg-primarygray bg-opacity-50 flex justify-center items-center z-10">
-        <GalleryLoading />
+        <NewCv handleFormToggle={handleFormToggle} />
+        {cvs
+          .filter((cv) => cv.title.toLowerCase().includes(searchQuery))
+          .map((cv, index) => (
+            <ExistingCV
+              key={index}
+              cvProp={cv}
+              deleteFunction={handleCVDelete}
+            />
+          ))}
+        {isLoading && (
+          <div className="absolute w-screen h-screen top-0 left-0 bg-primarygray bg-opacity-50 flex justify-center items-center z-10">
+            <GalleryLoading />
+          </div>
+        )}
       </div>
-      )}
-    </div>
 
       {/*pop up to create new*/}
       {isFormVisible && (
@@ -339,7 +338,7 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Gallery;
+export default Gallery

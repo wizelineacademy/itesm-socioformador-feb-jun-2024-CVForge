@@ -1,17 +1,17 @@
-"use client";
+'use client'
 
-import { useState } from "react";
+import { useState } from 'react'
 
 export default function Home() {
-  const [users, setUsers] = useState<any>([]);
+  const [users, setUsers] = useState<any>([])
 
   const createUser = async () => {
     const userData = {
-      first_name: "Test",
-      last_name: "lol",
-      email: "example@mail.com",
-      password: "123"
-    };
+      first_name: 'Test',
+      last_name: 'lol',
+      email: 'example@mail.com',
+      password: '123',
+    }
 
     const response = await fetch('/api/db/user', {
       method: 'POST',
@@ -19,18 +19,18 @@ export default function Home() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(userData),
-    });
+    })
 
-    const data = await response.json();
-    console.log(data);
-  };
+    const data = await response.json()
+    console.log(data)
+  }
 
   const fetchUsers = async () => {
-    const response = await fetch('/api/db/user');
-    const data = await response.json();
-    setUsers(data);
-    console.log(data);
-  };
+    const response = await fetch('/api/db/user')
+    const data = await response.json()
+    setUsers(data)
+    console.log(data)
+  }
 
   return (
     <main className="w-full h-full">
@@ -44,5 +44,5 @@ export default function Home() {
         ))}
       </div>
     </main>
-  );
+  )
 }

@@ -1,0 +1,5 @@
+# # Ignore everything
+# /*
+
+# # Allow only the app folder
+# !/app
