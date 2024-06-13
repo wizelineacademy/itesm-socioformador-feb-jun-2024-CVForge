@@ -19,13 +19,14 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li><a href="#about-the-project">About The Project</a></li>
     <li><a href="#stack">Stack</a></li>
-    <li><a href="#prerequisites">Prerequisites</a></li>
-    <li><a href="#installation">Installation</a></li>
+    <li><a href="#setup">Setup</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#features">Features</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
+    <li><a href="#contact-us">Contact Us</a></li>
   </ol>
 </details>
 
@@ -33,19 +34,19 @@
 
 ## About The Project
 
-CVForge.ai es un SaaS que ayuda al usuario a crear un CV apto para la posición que quiera aplicar con la ayuda de IA. Esta aplicación utiliza nuestra base de datos para buscar CVs que fueron aceptados en la posición deseada por el usuario y utilizando la información del usuario brindada por el mismo usuario vía subiendo su CV, permitiendo al usuario vincular su cuenta de LinkedIn o ingresar su información manualmente. CVForge.ai utiliza inteligencia artificial para generar un CV adaptado a la posición específica que el usuario desea solicitar. Además, proporciona retroalimentación sobre el CV generado, ayudando al usuario a mejorar su presentación. Apis de GPT y de Linkedin son utilizadas.
+CVForge.ai is a SaaS that helps users create a CV suitable for the position they want to apply for with the help of AI. This application uses our database to search for CVs that were accepted for the desired position by the user and utilizes the information provided by the user via uploading their CV, linking their LinkedIn account, or entering their information manually. CVForge.ai uses artificial intelligence to generate a CV tailored to the specific position the user wishes to apply for. Additionally, it provides feedback on the generated CV, helping the user improve their presentation. GPT and LinkedIn APIs are used.
 
-### Stack
+## Stack
 
 - [![Next][Next.js]][Next-url]
 - [![Node][Node.js]][Node-url]
 - [![React][React.js]][React-url]
-- [![Postgrel][Postgre.sql]][Postgre-url]
+- [![PostgreSQL][Postgre.sql]][Postgre-url]
 - [![Tailwind][Tailwind.ts]][Tailwind-url]
 - [![Prisma][Prisma.io]][Prisma-url]
-- [![Openai][Openai.ai]][Openai-url]
-- [![Aws][Aws.ts]][Aws-url]
-- [![Github][Github.ts]][Github-url]
+- [![OpenAI][Openai.ai]][Openai-url]
+- [![AWS][Aws.ts]][Aws-url]
+- [![GitHub][Github.ts]][Github-url]
 - [![Cypress][Cypress.io]][Cypress-url]
 - [![Jest][Jest.io]][Jest-url]
 
@@ -53,76 +54,114 @@ CVForge.ai es un SaaS que ayuda al usuario a crear un CV apto para la posición 
 
 <!-- GETTING STARTED -->
 
+## Setup
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
+Have Node installed on your hardware.
+To verify Node is installed, run the following command in your terminal:
+```bash
+npm -v
+```
 
 ### Installation
 
+To install the project, follow these steps:
+
+Clone the repository
 ```bash
 git clone https://github.com/wizelineacademy/itesm-socioformador-feb-jun-2024-CVForge.git
 cd itesm-socioformador-feb-jun-2024-CVForge
+```
+
+Install all dependencies
+```bash
 npm i
 ```
 
+### Create .Env
+
+Create a .env file in the root of the project and add the following environment variables.
+<ul>
+  <li>DATABASE_URL=your_database_url
+  <li>GOOGLE_CLIENT_ID=your_google_client_id
+  <li>GOOGLE_CLIENT_SECRET=your_google_client_secret
+  <li>NEXTAUTH_URL=your_nextauth_url
+  <li>NEXTAUTH_SECRET=your_nextauth_secret
+  <li>JWT_SECRET=your_jwt_secret
+  <li>OPENAI_API_KEY=your_openai_api_key
+  <li>NODE_TLS_REJECT_UNAUTHORIZED=value (e.g., 0)
+  <li>NEXT_PUBLIC_TINYMCE_API_KEY=your_tinymce_api_key
+  <li>LINKEDIN_CLIENT_ID=your_linkedin_client_id
+  <li>LINKEDIN_CLIENT_SECRET=your_linkedin_client_secret
+</ul>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- USAGE EXAMPLES -->
+<!-- USAGE -->
 
 ## Usage
 
+To start the development server, run:
 ```bash
 npm run dev
 ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<!-- FEATURES -->
 
-<!-- Plugins -->
+## Features
+<ul>
+  <li>AI-assisted CV generation
+  <li>Integration with LinkedIn
+  <li>Feedback on CV quality
+  <li>Database of successful CVs for reference
+  <li>Secure user data management
+</ul>
+<!-- CONTRIBUTING -->
 
-## Plugins
+## Contributing
 
-[Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma)
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
-<!-- License -->
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
 
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+<ol>
+  <li>Fork the Project
+  <li>Create your Feature Branch (git checkout -b feature/AmazingFeature)
+  <li>Commit your Changes (git commit -m 'Add some AmazingFeature')
+  <li>Push to the Branch (git push origin feature/AmazingFeature)
+  <li>Open a Pull Request
+</ol>
 
 <!-- CONTACT -->
 
-## Contact
+## Contact Us
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+LinkedIn: [CVForge](https://www.linkedin.com/company/cvforge/about/) 
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-- [Choose an Open Source License](https://choosealicense.com)
-- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-- [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-- [Malven's Grid Cheatsheet](https://grid.malven.co/)
-- [Img Shields](https://shields.io)
-- [GitHub Pages](https://pages.github.com)
-- [Font Awesome](https://fontawesome.com)
-- [React Icons](https://react-icons.github.io/react-icons/search)
+Project Link: [https://github.com/wizelineacademy/itesm-socioformador-feb-jun-2024-CVForge](https://github.com/wizelineacademy/itesm-socioformador-feb-jun-2024-CVForge)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+<!-- Contributors -->
+
+## Contributors
+
+We want to extend a big thank you to all of our contributors. Your support and contributions make this project possible!
+
+<table style="border-collapse: collapse; width: 100%;">
+  <tr style="border: none;">
+    <td><a href="https://github.com/Lebrijay02">@Lebrijay02</a></td>
+    <td><a href="https://github.com/marcopod">@marcopod</a></td>
+    <td><a href="https://github.com/Peco1503">@Peco1503</a></td>
+  </tr>
+  <tr style="border: none;">
+    <td><a href="https://github.com/AngelGaelGarciaRangel">@AngelGaelGarciaRangel</a></td>
+    <td><a href="https://github.com/YuvanTec">@YuvanTec</a></td>
+    <td><a href="https://github.com/a01721732">@a01721732</a></td>
+  </tr>
+</table>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
