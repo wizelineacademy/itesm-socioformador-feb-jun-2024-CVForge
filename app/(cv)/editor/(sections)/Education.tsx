@@ -1,18 +1,18 @@
-'use client'
-import React from 'react'
-import { useEffect, useState } from 'react'
+"use client"
+import React from "react"
+import { useEffect, useState } from "react"
 import {
   createEducation,
   getEducation,
   updateEducation,
   deleteEducation,
-} from '@/services/professional_information/generalService'
-import ProfessionalInfo from '../page'
-import { useSession } from 'next-auth/react'
-import { getProfessionalByEmail } from '@/services/sessionService'
-import { MdOutlineModeEdit } from 'react-icons/md'
-import { MdOutlineDeleteOutline } from 'react-icons/md'
-import { Prisma } from '@prisma/client'
+} from "@/services/professional_information/generalService"
+import ProfessionalInfo from "../page"
+import { useSession } from "next-auth/react"
+import { getProfessionalByEmail } from "@/services/sessionService"
+import { MdOutlineModeEdit } from "react-icons/md"
+import { MdOutlineDeleteOutline } from "react-icons/md"
+import { Prisma } from "@prisma/client"
 interface Education {
   education_id: string
   school: string
@@ -56,32 +56,32 @@ const EducationComponent: React.FC<EducationProps> = ({
 
     const formData = new FormData(event.currentTarget)
     const educationData: Partial<Education> = {
-      school: formData.get('school') as string,
-      education_degree: formData.get('education_degree') as string,
-      gpa: formData.get('gpa')
-        ? parseFloat(formData.get('gpa') as string)
+      school: formData.get("school") as string,
+      education_degree: formData.get("education_degree") as string,
+      gpa: formData.get("gpa")
+        ? parseFloat(formData.get("gpa") as string)
         : undefined,
-      start_date: formData.get('start_date')
-        ? new Date(formData.get('start_date') as string)
+      start_date: formData.get("start_date")
+        ? new Date(formData.get("start_date") as string)
         : undefined,
-      end_date: formData.get('end_date')
-        ? new Date(formData.get('end_date') as string)
+      end_date: formData.get("end_date")
+        ? new Date(formData.get("end_date") as string)
         : undefined,
-      relevant_coursework: formData.get('relevant_coursework') as string,
+      relevant_coursework: formData.get("relevant_coursework") as string,
     }
     if (
-      educationData.school.trim() == '' ||
+      educationData.school.trim() == "" ||
       !educationData.start_date ||
-      educationData.education_degree.trim() == ''
+      educationData.education_degree.trim() == ""
     ) {
-      alert('Title, Description, and Start Date must be filled in to save.')
+      alert("Title, Description, and Start Date must be filled in to save.")
     } else {
       try {
         const updatedEducation = await updateEducation(
           educationID,
           educationData,
         )
-        console.log('Education updated successfully:', updatedEducation)
+        console.log("Education updated successfully:", updatedEducation)
         setEducations((prevEducations) =>
           prevEducations.map((education) =>
             education.education_id === educationID
@@ -91,7 +91,7 @@ const EducationComponent: React.FC<EducationProps> = ({
         )
         toggleEditMode(education.education_id)
       } catch (error) {
-        console.error('Error updating education:', error)
+        console.error("Error updating education:", error)
       }
     }
   }
@@ -99,15 +99,15 @@ const EducationComponent: React.FC<EducationProps> = ({
   const handleDelete = async (educationID: string, index: number) => {
     try {
       await deleteEducation(educationID)
-      console.log('Education deleted successfully')
+      console.log("Education deleted successfully")
       setEducations((prevEducations) =>
         prevEducations.filter((_, idx) => idx !== index),
       )
     } catch (error) {
-      console.error('Error deleting education:', error)
+      console.error("Error deleting education:", error)
       if (
         error instanceof Prisma.PrismaClientKnownRequestError &&
-        error.code === 'P2025'
+        error.code === "P2025"
       ) {
         // Optionally remove the record from the state if it does not exist in the database
         setEducations((prevEducations) =>
@@ -154,7 +154,7 @@ const EducationComponent: React.FC<EducationProps> = ({
                     <input
                       type="text"
                       name="school"
-                      defaultValue={education.school || ''}
+                      defaultValue={education.school || ""}
                       placeholder="School"
                       className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
                     />
@@ -170,7 +170,7 @@ const EducationComponent: React.FC<EducationProps> = ({
                     <input
                       type="text"
                       name="education_degree"
-                      defaultValue={education.education_degree || ''}
+                      defaultValue={education.education_degree || ""}
                       placeholder="Degree"
                       className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
                     />
@@ -186,7 +186,7 @@ const EducationComponent: React.FC<EducationProps> = ({
                     <input
                       type="text"
                       name="gpa"
-                      defaultValue={education.gpa?.toString() || ''}
+                      defaultValue={education.gpa?.toString() || ""}
                       placeholder="GPA"
                       className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
                     />
@@ -205,8 +205,8 @@ const EducationComponent: React.FC<EducationProps> = ({
                       name="start_date"
                       defaultValue={
                         education.start_date
-                          ? education.start_date.toISOString().split('T')[0]
-                          : ''
+                          ? education.start_date.toISOString().split("T")[0]
+                          : ""
                       }
                       className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
                     />
@@ -226,8 +226,8 @@ const EducationComponent: React.FC<EducationProps> = ({
                       name="end_date"
                       defaultValue={
                         education.end_date
-                          ? education.end_date.toISOString().split('T')[0]
-                          : ''
+                          ? education.end_date.toISOString().split("T")[0]
+                          : ""
                       }
                       placeholder="End Date: "
                       className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
@@ -273,10 +273,10 @@ const EducationComponent: React.FC<EducationProps> = ({
               <p>
                 {education.start_date
                   ? education.start_date.toLocaleDateString()
-                  : 'xxx'}{' '}
+                  : "xxx"}{" "}
                 {education.end_date
                   ? ` - ${education.end_date.toLocaleDateString()}`
-                  : ' '}
+                  : " "}
               </p>
               <h1 className="text-primarygray">GPA: {education.gpa}</h1>
             </div>

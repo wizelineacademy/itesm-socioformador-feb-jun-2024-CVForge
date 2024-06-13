@@ -1,8 +1,8 @@
-'use client'
-import Link from 'next/link'
-import SignInOutButton from './SignInOutButton'
-import React, { useRef } from 'react'
-import useScrollPosition from '@/hooks/useScrollPosition'
+"use client"
+import Link from "next/link"
+import SignInOutButton from "./SignInOutButton"
+import React, { useRef } from "react"
+import useScrollPosition from "@/hooks/useScrollPosition"
 
 const Navbar: React.FC = () => {
   const ulRef = useRef(null)

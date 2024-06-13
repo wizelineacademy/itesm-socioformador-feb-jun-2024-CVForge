@@ -1,17 +1,17 @@
-'use client'
-import React from 'react'
+"use client"
+import React from "react"
 import {
   getProjects,
   createProject,
   updateProject,
   deleteProject,
-} from '@/services/professional_information/generalService'
-import { useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react'
-import { getProfessionalByEmail } from '@/services/sessionService'
-import { MdOutlineModeEdit } from 'react-icons/md'
-import { MdOutlineDeleteOutline } from 'react-icons/md'
-import { Prisma } from '@prisma/client'
+} from "@/services/professional_information/generalService"
+import { useEffect, useState } from "react"
+import { useSession } from "next-auth/react"
+import { getProfessionalByEmail } from "@/services/sessionService"
+import { MdOutlineModeEdit } from "react-icons/md"
+import { MdOutlineDeleteOutline } from "react-icons/md"
+import { Prisma } from "@prisma/client"
 
 interface Project {
   project_id: string
@@ -54,26 +54,26 @@ const Projects: React.FC<ProjectProps> = ({
 
     const formData = new FormData(event.currentTarget)
     const projectData: Partial<Project> = {
-      name: formData.get('name') as string,
-      description: formData.get('description') as string,
-      start_date: formData.get('start_date')
-        ? new Date(formData.get('start_date') as string)
+      name: formData.get("name") as string,
+      description: formData.get("description") as string,
+      start_date: formData.get("start_date")
+        ? new Date(formData.get("start_date") as string)
         : undefined,
-      end_date: formData.get('end_date')
-        ? new Date(formData.get('end_date') as string)
+      end_date: formData.get("end_date")
+        ? new Date(formData.get("end_date") as string)
         : undefined,
     }
 
     if (
-      projectData.description.trim() == '' ||
+      projectData.description.trim() == "" ||
       !projectData.start_date ||
-      projectData.name.trim() == ''
+      projectData.name.trim() == ""
     ) {
-      alert('Title, Description, and Start Date must be filled in to save.')
+      alert("Title, Description, and Start Date must be filled in to save.")
     } else {
       try {
         const updatedProject = await updateProject(projectID, projectData)
-        console.log('Project updated successfully:', updatedProject)
+        console.log("Project updated successfully:", updatedProject)
         setProjects((prevProjects) =>
           prevProjects.map((project) =>
             project.project_id === projectID ? updatedProject : project,
@@ -81,7 +81,7 @@ const Projects: React.FC<ProjectProps> = ({
         )
         toggleEditMode(project.project_id)
       } catch (error) {
-        console.error('Error updating project:', error)
+        console.error("Error updating project:", error)
       }
     }
   }
@@ -89,15 +89,15 @@ const Projects: React.FC<ProjectProps> = ({
   const handleDelete = async (projectID: string, index: number) => {
     try {
       await deleteProject(projectID)
-      console.log('Project deleted successfully')
+      console.log("Project deleted successfully")
       setProjects((prevProjects) =>
         prevProjects.filter((_, idx) => idx !== index),
       )
     } catch (error) {
-      console.error('Error deleting project:', error)
+      console.error("Error deleting project:", error)
       if (
         error instanceof Prisma.PrismaClientKnownRequestError &&
-        error.code === 'P2025'
+        error.code === "P2025"
       ) {
         setProjects((prevProjects) =>
           prevProjects.filter((project) => project.project_id !== projectID),
@@ -140,7 +140,7 @@ const Projects: React.FC<ProjectProps> = ({
                     <input
                       type="text"
                       name="name"
-                      defaultValue={project.name || ''}
+                      defaultValue={project.name || ""}
                       placeholder="Name"
                       className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
                     />
@@ -158,8 +158,8 @@ const Projects: React.FC<ProjectProps> = ({
                       name="start_date"
                       defaultValue={
                         project.start_date
-                          ? project.start_date.toISOString().split('T')[0]
-                          : ''
+                          ? project.start_date.toISOString().split("T")[0]
+                          : ""
                       }
                       placeholder="Start Date: "
                       className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
@@ -180,8 +180,8 @@ const Projects: React.FC<ProjectProps> = ({
                       name="end_date"
                       defaultValue={
                         project.end_date
-                          ? project.end_date.toISOString().split('T')[0]
-                          : ''
+                          ? project.end_date.toISOString().split("T")[0]
+                          : ""
                       }
                       placeholder="End Date"
                       className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
@@ -199,7 +199,7 @@ const Projects: React.FC<ProjectProps> = ({
                     <input
                       type="text"
                       name="description"
-                      defaultValue={project.description || ''}
+                      defaultValue={project.description || ""}
                       placeholder="Description"
                       className="border-2 border-gptgreen bg-white h-10 px-3 rounded-lg text-md focus:outline-none w-full"
                     />
@@ -240,10 +240,10 @@ const Projects: React.FC<ProjectProps> = ({
               <p>
                 {project.start_date
                   ? project.start_date.toLocaleDateString()
-                  : 'xxx'}{' '}
+                  : "xxx"}{" "}
                 {project.end_date
                   ? ` - ${project.end_date.toLocaleDateString()}`
-                  : ' '}
+                  : " "}
               </p>
               <p>{project.description}</p>
             </div>

@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
-import generateCV from '@/scripts/cv_generation'
-import generate_recommendations from '@/scripts/insight_generation'
+import { NextRequest, NextResponse } from "next/server"
+import { PrismaClient } from "@prisma/client"
+import generateCV from "@/scripts/cv_generation"
+import generate_recommendations from "@/scripts/insight_generation"
 
 const prisma = new PrismaClient()
 
@@ -48,11 +48,11 @@ export async function POST(req: NextRequest) {
     )
 
     return NextResponse.json({
-      message: 'CV and recommendations processed successfully',
+      message: "CV and recommendations processed successfully",
       results: { updatedCv, savedRecommendations },
     })
   } catch (error) {
-    console.error('Error in POST method:', error)
+    console.error("Error in POST method:", error)
     return NextResponse.json({ error: error.message })
   }
 }

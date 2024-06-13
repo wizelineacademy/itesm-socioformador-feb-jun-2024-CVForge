@@ -1,19 +1,19 @@
-'use client'
+"use client"
 
-import { useSelector } from 'react-redux'
-import { signOut, useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import SecondaryLogo from '@/public/assets/SecondaryLogo'
-import CV_icon from '@/public/assets/svg/CV_icon'
-import PersonalInfo_icon from '@/public/assets/svg/PersonalInfo_icon'
-import SignOut from '@/public/assets/svg/SignOut_Icon'
-import Account from '@/public/assets/svg/Account_Icon'
-import { RootState } from '@/contexts/cv/RootState'
-import Link from 'next/link'
-import React, { ReactElement, useEffect, useState } from 'react'
-import { IoIosArrowForward } from 'react-icons/io'
-import { useWindowSize } from '@/hooks/useWindowSize'
-import GalleryLoading from '@/app/components/loading'
+import { useSelector } from "react-redux"
+import { signOut, useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
+import SecondaryLogo from "@/public/assets/SecondaryLogo"
+import CV_icon from "@/public/assets/svg/CV_icon"
+import PersonalInfo_icon from "@/public/assets/svg/PersonalInfo_icon"
+import SignOut from "@/public/assets/svg/SignOut_Icon"
+import Account from "@/public/assets/svg/Account_Icon"
+import { RootState } from "@/contexts/cv/RootState"
+import Link from "next/link"
+import React, { ReactElement, useEffect, useState } from "react"
+import { IoIosArrowForward } from "react-icons/io"
+import { useWindowSize } from "@/hooks/useWindowSize"
+import GalleryLoading from "@/app/components/loading"
 
 type SidebarListElementProps = {
   title: string
@@ -33,7 +33,7 @@ const SidebarMenuElement: React.FC<SidebarListElementProps> = ({
   open,
 }) => {
   // The color to be assigned
-  const color = currentTab === itemTab ? '#D9D9D9' : '#7E7E7E'
+  const color = currentTab === itemTab ? "#D9D9D9" : "#7E7E7E"
   // The icon for the item
   const IconComponent = React.cloneElement(icon, { strokeColor: color })
 
@@ -41,7 +41,7 @@ const SidebarMenuElement: React.FC<SidebarListElementProps> = ({
     <li className="my-6">
       <Link
         href={href}
-        className={`flex flex-row items-center ${!open && 'hidden'} hover:bg-secondarygray hover:rounded hover:bg-opacity-30 p-1.5`}
+        className={`flex flex-row items-center ${!open && "hidden"} hover:bg-secondarygray hover:rounded hover:bg-opacity-30 p-1.5`}
         style={{ color: color }}
       >
         <div className="flex cursor-pointer items-center">
@@ -71,8 +71,8 @@ const LeftSidebar = () => {
   const { data: session, status } = useSession()
 
   useEffect(() => {
-    if (status === 'unauthenticated' && !session) {
-      router.push('/login')
+    if (status === "unauthenticated" && !session) {
+      router.push("/login")
     }
   }, [status, session, router])
 
@@ -84,7 +84,7 @@ const LeftSidebar = () => {
       setOpen(true)
     }
   }, [windowSize])
-  if (status === 'loading') {
+  if (status === "loading") {
     return (
       <div className="absolute w-screen h-screen top-0 left-0 bg-primarygray bg-opacity-50 flex justify-center items-center z-10">
         <GalleryLoading />
@@ -94,14 +94,14 @@ const LeftSidebar = () => {
   return (
     <aside className="flex z-10">
       <div
-        className={`bg-primarygray h-screen ${open ? 'w-64' : 'w-0'} duration-200 relative`}
+        className={`bg-primarygray h-screen ${open ? "w-64" : "w-0"} duration-200 relative`}
       >
         <div className="p-5 h-screen">
           <IoIosArrowForward
-            className={`flex flex-col h-screen items-center justify-center text-primarygray text-3xl absolute -right-7 cursor-pointer hover:text-secondarygray ${open && 'rotate-180'}`}
+            className={`flex flex-col h-screen items-center justify-center text-primarygray text-3xl absolute -right-7 cursor-pointer hover:text-secondarygray ${open && "rotate-180"}`}
             onClick={() => setOpen(!open)}
           />
-          <div className={`${!open && 'hidden'} my-auto mt-8`}>
+          <div className={`${!open && "hidden"} my-auto mt-8`}>
             <Link href="/">
               <div className="w-full h-10">
                 <SecondaryLogo />
@@ -126,8 +126,8 @@ const LeftSidebar = () => {
                   open={open}
                 />
                 <button
-                  className={`flex flex-row items-center ${!open && 'hidden'} hover:bg-secondarygray hover:rounded hover:bg-opacity-30 p-1.5 pr-20 mt-full absolute bottom-0 mb-10`}
-                  onClick={() => signOut({ callbackUrl: '/', redirect: true })}
+                  className={`flex flex-row items-center ${!open && "hidden"} hover:bg-secondarygray hover:rounded hover:bg-opacity-30 p-1.5 pr-20 mt-full absolute bottom-0 mb-10`}
+                  onClick={() => signOut({ callbackUrl: "/", redirect: true })}
                 >
                   <div className="flex cursor-pointer items-center">
                     <div className="mr-1 flex flex-row items-center w-8 ">

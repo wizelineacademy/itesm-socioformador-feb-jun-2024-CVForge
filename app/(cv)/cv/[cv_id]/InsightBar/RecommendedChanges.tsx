@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import OpenArrow from '@/public/assets/cv/insight/OpenArrow_icon'
+import React, { useState } from "react"
+import OpenArrow from "@/public/assets/cv/insight/OpenArrow_icon"
 
 type Recommendation = {
   recommendation_id: string
@@ -15,9 +15,9 @@ type RecommendedChangesProps = {
 
 function removeRecommendationAndStar(inputString: string): string {
   const filteredString = inputString
-    .replace(/Recommendation/g, '')
-    .replace(/\*/g, '')
-    .replace(/:/g, '')
+    .replace(/Recommendation/g, "")
+    .replace(/\*/g, "")
+    .replace(/:/g, "")
   return filteredString
 }
 

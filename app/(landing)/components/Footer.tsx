@@ -1,9 +1,9 @@
-import React from 'react'
-import SecondaryLogo from '@/public/assets/SecondaryLogo'
-import Link from 'next/link'
-import { FaLinkedin } from 'react-icons/fa'
-import { CiLinkedin } from 'react-icons/ci'
-import Image from 'next/image'
+import React from "react"
+import SecondaryLogo from "@/public/assets/SecondaryLogo"
+import Link from "next/link"
+import { FaLinkedin } from "react-icons/fa"
+import { CiLinkedin } from "react-icons/ci"
+import Image from "next/image"
 
 const Footer: React.FC = () => {
   return (

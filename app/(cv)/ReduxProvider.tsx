@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import { Provider } from 'react-redux'
-import { store } from '@/contexts/cv/store'
+import { Provider } from "react-redux"
+import { store } from "@/contexts/cv/store"
 
 type ReduxProviderProps = {
   children: React.ReactNode

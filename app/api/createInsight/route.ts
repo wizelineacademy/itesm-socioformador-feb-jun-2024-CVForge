@@ -1,19 +1,19 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
-import generate_recommendations from '@/scripts/insight_generation'
-import { parse } from 'url'
+import { NextRequest, NextResponse } from "next/server"
+import { PrismaClient } from "@prisma/client"
+import generate_recommendations from "@/scripts/insight_generation"
+import { parse } from "url"
 
 const prisma = new PrismaClient()
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
-    const { query } = parse(req.url || '', true)
+    const { query } = parse(req.url || "", true)
     const cvId = query.cvId as string
     const jobPosition = query.jobPosition as string
 
     // Validate input
     if (!cvId || !jobPosition) {
-      return NextResponse.json({ error: 'Missing cvId or jobPosition' })
+      return NextResponse.json({ error: "Missing cvId or jobPosition" })
     }
 
     // Check if recommendations already exist for the given CV
@@ -31,7 +31,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     })
 
     if (!generatedCv) {
-      return NextResponse.json({ error: 'CV not found' })
+      return NextResponse.json({ error: "CV not found" })
     }
 
     const cvData = generatedCv.content
@@ -46,7 +46,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
     return NextResponse.json({ message: recommendations })
   } catch (error: any) {
-    console.error('Error in generating recommendations:', error)
+    console.error("Error in generating recommendations:", error)
     return NextResponse.json({ error: error.message })
   }
 }

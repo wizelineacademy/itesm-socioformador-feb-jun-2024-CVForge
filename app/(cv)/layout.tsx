@@ -1,10 +1,10 @@
-'use client'
-import '@/style/globals.css'
-import ReduxProvider from './ReduxProvider'
-import LeftSidebar from './layoutComponents/LeftSidebar'
-import Providers from '../components/Providers'
+"use client"
+import "@/style/globals.css"
+import ReduxProvider from "./ReduxProvider"
+import LeftSidebar from "./layoutComponents/LeftSidebar"
+import Providers from "../components/Providers"
 //import { SessionProvider, useSession } from "next-auth/react";
-import { useRouter } from 'next/navigation' // Updated import statement
+import { useRouter } from "next/navigation" // Updated import statement
 
 export default function RootLayout({
   children,

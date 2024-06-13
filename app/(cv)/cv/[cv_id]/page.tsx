@@ -1,19 +1,19 @@
-'use client'
-import { useEffect, useState, useRef } from 'react'
-import InsightBar from './InsightBar'
-import { Editor } from '@tinymce/tinymce-react'
-import { getGeneralInfo } from '@/services/professional_information/generalService'
-import { findCVById } from '@/services/cvService'
-import GalleryLoading from '@/app/components/loading'
-import { setCurrentTab } from '@/contexts/cv/sidebar/currentTab'
-import { useDispatch } from 'react-redux'
+"use client"
+import { useEffect, useState, useRef } from "react"
+import InsightBar from "./InsightBar"
+import { Editor } from "@tinymce/tinymce-react"
+import { getGeneralInfo } from "@/services/professional_information/generalService"
+import { findCVById } from "@/services/cvService"
+import GalleryLoading from "@/app/components/loading"
+import { setCurrentTab } from "@/contexts/cv/sidebar/currentTab"
+import { useDispatch } from "react-redux"
 
 const CV = ({ params }: { params: { cv_id: string } }) => {
-  const [cvBodyData, setCvBodyData] = useState<string>('')
+  const [cvBodyData, setCvBodyData] = useState<string>("")
   const editorRef = useRef<any>(null)
-  const [autosaveStatus, setAutosaveStatus] = useState<string>('')
+  const [autosaveStatus, setAutosaveStatus] = useState<string>("")
   const dispatch = useDispatch()
-  dispatch(setCurrentTab('cv_gallery'))
+  dispatch(setCurrentTab("cv_gallery"))
 
   useEffect(() => {
     const fetchCV = async () => {
@@ -21,9 +21,9 @@ const CV = ({ params }: { params: { cv_id: string } }) => {
         const cvData = await findCVById(params.cv_id)
         if (cvData) {
           setCvBodyData(cvData.content)
-          console.log('CV Data:', cvData)
+          console.log("CV Data:", cvData)
         } else {
-          console.log('No CV found with ID:', params.cv_id)
+          console.log("No CV found with ID:", params.cv_id)
         }
       }
     }
@@ -32,33 +32,33 @@ const CV = ({ params }: { params: { cv_id: string } }) => {
   }, [params.cv_id])
 
   const saveContent = async (content: string) => {
-    console.log('Autosaving content:', content)
+    console.log("Autosaving content:", content)
 
     try {
-      const response = await fetch('/api/saveCv', {
-        method: 'POST',
+      const response = await fetch("/api/saveCv", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           cvContent: content,
-          selectedPosition: 'Data Engineer',
+          selectedPosition: "Data Engineer",
         }),
       })
 
       if (response.ok) {
-        console.log('CV saved successfully!')
-        setAutosaveStatus('Autosaved')
+        console.log("CV saved successfully!")
+        setAutosaveStatus("Autosaved")
       } else {
-        console.error('Failed to save CV:', response.statusText)
+        console.error("Failed to save CV:", response.statusText)
       }
     } catch (error) {
-      console.error('Error saving CV:', error)
+      console.error("Error saving CV:", error)
     }
   }
 
   const handleEditorChange = (content: string) => {
-    setAutosaveStatus('')
+    setAutosaveStatus("")
   }
 
   return (
@@ -76,11 +76,11 @@ const CV = ({ params }: { params: { cv_id: string } }) => {
                   min_height: 200,
                   width: 700,
                   plugins:
-                    'anchor autolink charmap codesample emoticons link lists media searchreplace table visualblocks wordcount linkcheckerx',
+                    "anchor autolink charmap codesample emoticons link lists media searchreplace table visualblocks wordcount linkcheckerx",
                   toolbar:
-                    'undo redo | fontfamily fontsize | bold italic underline strikethrough | link image media table | spellcheckdialog | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+                    "undo redo | fontfamily fontsize | bold italic underline strikethrough | link image media table | spellcheckdialog | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat",
                 }}
-                initialValue={cvBodyData.replace(/## Section\n/g, '')}
+                initialValue={cvBodyData.replace(/## Section\n/g, "")}
                 onInit={(evt, editor) => (editorRef.current = editor)}
               />
               {autosaveStatus && <div>{autosaveStatus}</div>}

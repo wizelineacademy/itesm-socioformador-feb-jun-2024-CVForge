@@ -1,25 +1,25 @@
-import React from 'react'
+import React from "react"
 
 // Icon imports
-import MainLogo from '@/public/assets/MainLogo'
+import MainLogo from "@/public/assets/MainLogo"
 
 const UserOptions = () => {
   // Extracted width and height from the Google button's styles
   const buttonStyle = {
-    width: '350px',
-    height: '48px',
-    display: 'flex',
-    alignItems: 'center', // Align items vertically in the button
-    justifyContent: 'center', // Align items horizontally in the button
+    width: "350px",
+    height: "48px",
+    display: "flex",
+    alignItems: "center", // Align items vertically in the button
+    justifyContent: "center", // Align items horizontally in the button
   }
 
   return (
     <div
       className="flex h-screen justify-center items-center"
       style={{
-        backgroundImage: 'url(/assets/bgimg.png)',
-        backgroundSize: '100% 100%',
-        backgroundRepeat: 'no-repeat',
+        backgroundImage: "url(/assets/bgimg.png)",
+        backgroundSize: "100% 100%",
+        backgroundRepeat: "no-repeat",
       }}
     >
       {/* Centered Content */}
@@ -27,7 +27,7 @@ const UserOptions = () => {
         {/* Text and button to upload */}
         <div>
           <h1 className="text-4xl font-koh_santepheap mb-8">
-            {' '}
+            {" "}
             Start creating your Professional
             <br /> CV with the help of our AI now!
           </h1>

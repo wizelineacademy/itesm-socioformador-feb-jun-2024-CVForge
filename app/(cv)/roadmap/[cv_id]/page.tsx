@@ -1,24 +1,24 @@
-'use client'
-import { setCurrentTab } from '@/contexts/cv/sidebar/currentTab'
-import { useDispatch } from 'react-redux'
-import Link from 'next/link'
-import GalleryLoading from '@/app/components/loading'
+"use client"
+import { setCurrentTab } from "@/contexts/cv/sidebar/currentTab"
+import { useDispatch } from "react-redux"
+import Link from "next/link"
+import GalleryLoading from "@/app/components/loading"
 
 // Package imports
-import { useEffect, useState } from 'react'
-import React, { useRef } from 'react'
+import { useEffect, useState } from "react"
+import React, { useRef } from "react"
 
 // Icon imports
-import OpenArrow_icon from '@/public/assets/cv/insight/OpenArrow_icon'
-import { recommendation } from '@prisma/client'
-import { use } from 'chai'
+import OpenArrow_icon from "@/public/assets/cv/insight/OpenArrow_icon"
+import { recommendation } from "@prisma/client"
+import { use } from "chai"
 import {
   findRecommendationById,
   findRecommendationsByCvId,
   getAllRecommendation,
-} from '@/services/recommendationService'
-import SearchBar from '../../cv_gallery/components/SearchBar'
-import useScrollPosition from '@/hooks/useScrollPosition'
+} from "@/services/recommendationService"
+import SearchBar from "../../cv_gallery/components/SearchBar"
+import useScrollPosition from "@/hooks/useScrollPosition"
 
 type RecommendationItem = {
   recommendationItemData: recommendation
@@ -28,9 +28,9 @@ type RecommendationItem = {
 
 function removeRecommendationAndStar(inputString: string): string {
   const filteredString = inputString
-    .replace(/Recommendation/g, '')
-    .replace(/\*/g, '')
-    .replace(/:/g, '')
+    .replace(/Recommendation/g, "")
+    .replace(/\*/g, "")
+    .replace(/:/g, "")
   return filteredString
 }
 
@@ -58,11 +58,11 @@ const RecommendationItem: React.FC<RecommendationItem> = ({
       <div className="flex flex-col items-center">
         <button
           onClick={handleCompletedStatusChange}
-          aria-label={`Mark ${recommendationItemData.title} as ${completed ? 'incomplete' : 'complete'}`}
+          aria-label={`Mark ${recommendationItemData.title} as ${completed ? "incomplete" : "complete"}`}
           className="w-[31px] h-[35px] border border-[3px] border-secondarygray rounded-xl flex justify-center items-center"
         >
           <span
-            className={`w-[21px] h-[21px] rounded-xl ${completed ? 'bg-gptgreen' : 'bg-transparent'}`}
+            className={`w-[21px] h-[21px] rounded-xl ${completed ? "bg-gptgreen" : "bg-transparent"}`}
           ></span>
         </button>
         {!isLast && <div className="w-[3px] h-full bg-secondarygray"></div>}
@@ -86,7 +86,7 @@ const RecommendationItem: React.FC<RecommendationItem> = ({
 const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
   // Set the current tab context
   const dispatch = useDispatch()
-  dispatch(setCurrentTab('cv_gallery'))
+  dispatch(setCurrentTab("cv_gallery"))
 
   // Hold fetched recommendations
   //const [fetchedRecommendations, setFetchedRecommendations] = useState<recommendation[]>(FETCHED_RECOMMENDATIONS)
@@ -144,7 +144,7 @@ const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
         clearTimeout(debounceTimers[recommendation_id])
       }
     } else {
-      console.error('No recommendation matches the id provided')
+      console.error("No recommendation matches the id provided")
     }
   }
 
@@ -178,7 +178,7 @@ const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
         )
         setFetchedRecommendations(recommendationsArray)
       } catch (error) {
-        console.error('Failed to fetch recommendations', error)
+        console.error("Failed to fetch recommendations", error)
       }
     }
 
@@ -192,9 +192,9 @@ const Roadmap: React.FC = ({ params }: { params: { cv_id: string } }) => {
     <div className="flex h-screen overflow-y-scroll justify-center">
       <div className="flex flex-col ">
         {/* Top part */}
-        <div className={`flex flex-col w-full ${isNearTop ? '' : 'shadow-lg'}`}>
+        <div className={`flex flex-col w-full ${isNearTop ? "" : "shadow-lg"}`}>
           <Link
-            href={'/cv_gallery'}
+            href={"/cv_gallery"}
             className="sticky h-10 flex items-center text-secondarygray bg-transparent pl-8 pt-8"
           >
             <OpenArrow_icon flipDegree={270} />

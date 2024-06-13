@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { BsThreeDotsVertical } from 'react-icons/bs'
-import { cv } from '@prisma/client'
-import { RiRoadMapLine } from 'react-icons/ri'
-import { MdOutlineSimCardDownload } from 'react-icons/md'
-import { IoTrashOutline } from 'react-icons/io5'
-import Link from 'next/link'
+import React, { useState } from "react"
+import { BsThreeDotsVertical } from "react-icons/bs"
+import { cv } from "@prisma/client"
+import { RiRoadMapLine } from "react-icons/ri"
+import { MdOutlineSimCardDownload } from "react-icons/md"
+import { IoTrashOutline } from "react-icons/io5"
+import Link from "next/link"
 
 interface DropdownProps {
   cvProp: cv
