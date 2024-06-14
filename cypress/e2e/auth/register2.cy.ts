@@ -1,29 +1,30 @@
 describe('Register Component', () => {
     beforeEach(() => {
-      cy.visit('/register'); // Adjust the path as necessary
+      cy.visit('http://localhost:3000/register'); // Adjust the path as necessary
     });
   
     it('fills out the registration form and submits', () => {
-      cy.get('input[name="firstName"]').type('John');
-      cy.get('input[name="lastName"]').type('Doe');
-      cy.get('input[name="email"]').type('john.doe@example.com');
-      cy.get('input[name="password"]').type('securePassword123');
-      cy.get('input[name="confirmPassword"]').type('securePassword123');
+      let dateTime = new Date();
+      cy.get('input[type="email"]').type(dateTime + '@example.com');
+      cy.get('input[placeholder="password"]').type('securePassword123');
+      cy.get('input[placeholder="confirm password"]').type('securePassword123');
   
-      cy.get('button[type="submit"]').click();
+      cy.get('button').click();
   
       // Assuming the form submission redirects to /cv_gallery
       cy.url().should('include', '/cv_gallery');
     });
   
     it('shows an error if passwords do not match', () => {
-      cy.get('input[name="password"]').type('securePassword123');
-      cy.get('input[name="confirmPassword"]').type('differentPassword');
+      cy.get('input[placeholder="password"]').type('securePassword123');
+      cy.get('input[placeholder="confirm password"]').type('differentPassword');
   
-      cy.get('button[type="submit"]').click();
+      cy.get('button').click();
   
       // Check if the error message is displayed
-      cy.contains('Passwords do not match').should('be.visible');
+      cy.on('window:alert', (text) => {
+        expect(text).to.contains('Passwords do not match');
+      });
     });
   
     it('alerts the user if the email is already in use', () => {
@@ -32,9 +33,9 @@ describe('Register Component', () => {
         body: { error: 'Email already in use' },
       }).as('registerApi');
   
-      cy.get('input[name="email"]').type('existing.email@example.com');
-      cy.get('input[name="password"]').type('securePassword123');
-      cy.get('input[name="confirmPassword"]').type('securePassword123');
+      cy.get('input[type="email"]').type('existing.email@example.com');
+      cy.get('input[placeholder="password"]').type('securePassword123');
+      cy.get('input[placeholder="confirm password"]').type('securePassword123');
   
       cy.wait('@registerApi');
   

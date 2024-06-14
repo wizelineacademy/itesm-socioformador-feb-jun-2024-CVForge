@@ -3,8 +3,15 @@ describe('Login using linkedin', () => {
       cy.visit('http://localhost:3000');
       cy.contains('Sign In').click();
     });
-  
-    it('displays CVs and shows the dropdown for a selected CV', () => {
+
+    it('takes the user to the LinkedIn signin page', () => {
+      cy.contains('Sign up with Linkedin').click();
+      cy.origin('https://www.linkedin.com', () => {
+        cy.contains('Email').should('exist');
+      });
+    });
+    
+    it('allows the user to enter their LinkedIn credentials', () => {
       cy.contains('Sign up with Linkedin').click();
       cy.origin('https://www.linkedin.com', () => {
         cy.get('input[id="username"]').type('#VALID USERNAME');

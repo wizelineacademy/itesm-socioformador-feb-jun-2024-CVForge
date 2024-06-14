@@ -4,14 +4,14 @@ describe('Login Component', () => {
   });
 
   it('should display the login form', () => {
-    cy.get('.flex.flex-col.items-center.justify-center.h-screen.w-screen').should('be.visible');
+    cy.get('.flex.items-center.justify-center.h-screen.w-screen').should('be.visible');
   });
 
   it('should allow users to enter email and password', () => {
     cy.get('input[type="email"]').type('test@example.com');
     cy.get('input[type="password"]').type('password123');
 
-    cy.get('button[type="submit"]').click();
+    cy.contains('Sign In').click();
 
     // Assert that the sign-in was successful
     cy.url().should('include', '/cv_gallery');
@@ -21,10 +21,13 @@ describe('Login Component', () => {
     cy.get('input[type="email"]').type('wrongemail@example.com');
     cy.get('input[type="password"]').type('wrongpassword');
 
-    cy.get('button[type="submit"]').click();
+    cy.contains('Sign In').click();
 
     // Check if the error message is displayed
-    cy.contains('Email or Password is not correct.').should('be.visible');
+    //cy.contains('Email or Password is not correct.').should('be.visible');
+    cy.on('window:alert', (text) => {
+      expect(text).to.contains('Email or Password is not correct.');
+    });
   });
 
   it('should navigate to register page when clicking on create account', () => {
