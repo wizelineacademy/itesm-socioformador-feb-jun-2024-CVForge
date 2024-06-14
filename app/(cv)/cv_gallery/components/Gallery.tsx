@@ -187,7 +187,7 @@ const Gallery: React.FC<GalleryProps> = ({ searchQuery }) => {
   const handleCreateCv = async (event: React.FormEvent) => {
     setTimeout(() => {
       setIsLoading(true)
-    }, 500)
+    }, 800)
     event.preventDefault()
     try {
       if (selectedPosition) {
