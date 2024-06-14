@@ -34,6 +34,10 @@
 
 ## About The Project
 
+<div align="center">
+  <img src="public/assets/landingCVF.png" alt="Landing Page" style="max-width:100%;">
+</div>
+
 CVForge.ai is a SaaS that helps users create a CV suitable for the position they want to apply for with the help of AI. This application uses our database to search for CVs that were accepted for the desired position by the user and utilizes the information provided by the user via uploading their CV, linking their LinkedIn account, or entering their information manually. CVForge.ai uses artificial intelligence to generate a CV tailored to the specific position the user wishes to apply for. Additionally, it provides feedback on the generated CV, helping the user improve their presentation. GPT and LinkedIn APIs are used.
 
 ## Stack
@@ -78,22 +82,24 @@ Install all dependencies
 npm i
 ```
 
-### Create .Env
+### Create .env
 
 Create a .env file in the root of the project and add the following environment variables.
-<ul>
-  <li>DATABASE_URL=your_database_url
-  <li>GOOGLE_CLIENT_ID=your_google_client_id
-  <li>GOOGLE_CLIENT_SECRET=your_google_client_secret
-  <li>NEXTAUTH_URL=your_nextauth_url
-  <li>NEXTAUTH_SECRET=your_nextauth_secret
-  <li>JWT_SECRET=your_jwt_secret
-  <li>OPENAI_API_KEY=your_openai_api_key
-  <li>NODE_TLS_REJECT_UNAUTHORIZED=value (e.g., 0)
-  <li>NEXT_PUBLIC_TINYMCE_API_KEY=your_tinymce_api_key
-  <li>LINKEDIN_CLIENT_ID=your_linkedin_client_id
-  <li>LINKEDIN_CLIENT_SECRET=your_linkedin_client_secret
-</ul>
+```bash
+AUTH_SECRET=<YOUR_KEY>
+POSTGRES_URL=<YOUR_KEY>
+DATABASE_URL=<your_database_url>
+GOOGLE_CLIENT_ID=<your_google_client_id>
+GOOGLE_CLIENT_SECRET=<your_google_client_secret>
+NEXTAUTH_URL=<your_nextauth_url>
+NEXTAUTH_SECRET=<your_nextauth_secret>
+JWT_SECRET=<your_jwt_secret>
+OPENAI_API_KEY=<your_openai_api_key>
+NODE_TLS_REJECT_UNAUTHORIZED=<value> # e.g., 0
+NEXT_PUBLIC_TINYMCE_API_KEY=<your_tinymce_api_key>
+LINKEDIN_CLIENT_ID=<your_linkedin_client_id>
+LINKEDIN_CLIENT_SECRET=<your_linkedin_client_secret>
+```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE -->
