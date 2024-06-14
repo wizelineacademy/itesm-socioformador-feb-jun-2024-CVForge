@@ -10,7 +10,7 @@ import { setCurrentTab } from "@/contexts/cv/sidebar/currentTab";
 import { useDispatch } from "react-redux";
 import { IoIosArrowForward } from "react-icons/io";
 import {getProfessionalByEmail} from "@/services/sessionService";
-import {getEducation, getGeneralInfo, getProjects, getSkills, getWorks} from "@/services/professional_information/generalService";
+import {getEducation, getGeneralInfo, getProjects, getSkills, getWorks} from "@/services/generalService";
 import { useSession } from "next-auth/react";
 import GalleryLoading from "@/app/components/loading";
 const ProfessionalInfo: React.FC = () => {

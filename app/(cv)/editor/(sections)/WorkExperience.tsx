@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import {getWorks, createWork, updateWork, deleteWork} from "@/services/professional_information/generalService";
+import {getWorks, createWork, updateWork, deleteWork} from "@/services/generalService";
 import { useEffect, useState} from "react";
 import { update } from "cypress/types/lodash";
 import { useSession } from "next-auth/react";

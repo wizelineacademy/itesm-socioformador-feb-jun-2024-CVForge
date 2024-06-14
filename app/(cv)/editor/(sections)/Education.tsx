@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import {useEffect, useState} from "react";
-import {createEducation, getEducation, updateEducation, deleteEducation} from "@/services/professional_information/generalService";
+import {createEducation, getEducation, updateEducation, deleteEducation} from "@/services/generalService";
 import ProfessionalInfo from "../page";
 import { useSession } from "next-auth/react";
 import { getProfessionalByEmail } from "@/services/sessionService";

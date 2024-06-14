@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import {getProjects, createProject, updateProject, deleteProject} from "@/services/professional_information/generalService";
+import {getProjects, createProject, updateProject, deleteProject} from "@/services/generalService";
 import { useEffect, useState} from "react";
 import { useSession } from "next-auth/react";
 import { getProfessionalByEmail } from "@/services/sessionService";

@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import { getSkills, createSkill, updateSkill, deleteSkill } from "@/services/professional_information/generalService";
+import { getSkills, createSkill, updateSkill, deleteSkill } from "@/services/generalService";
 import { update } from "cypress/types/lodash";
 import { useSession } from "next-auth/react";
 import { getProfessionalByEmail } from "@/services/sessionService";

@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 import InsightBar from "./InsightBar";
 import { Editor } from "@tinymce/tinymce-react";
-import { getGeneralInfo } from "@/services/professional_information/generalService";
+import { getGeneralInfo } from "@/services/generalService";
 import { findCVById } from "@/services/cvService";
 import GalleryLoading from "@/app/components/loading";
 import { setCurrentTab } from "@/contexts/cv/sidebar/currentTab";

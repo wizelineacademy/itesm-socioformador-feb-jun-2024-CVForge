@@ -1,20 +1,18 @@
 "use server";
-import prisma from '@/lib/prisma';
-import { User } from '@/types/user'
+import prisma from "@/lib/prisma";
+import { User } from "@/types/UserType";
 
-const createNewUser = async (userEmail : string, userPassword : string) => {
-  const userCreated = await prisma.users.create(
-    {
-      data : {
-        email : userEmail, 
-        password : userPassword,
-      }
-    }
-  )
+const createNewUser = async (userEmail: string, userPassword: string) => {
+  const userCreated = await prisma.users.create({
+    data: {
+      email: userEmail,
+      password: userPassword,
+    },
+  });
   await prisma.professional_info.create({
-    data : {
-      user_id : userCreated.users_id,
-    }
+    data: {
+      user_id: userCreated.users_id,
+    },
   });
   return userCreated;
 };
@@ -41,11 +39,6 @@ const findUserById = async (userId: string) => {
 const getAllUsers = async () => {
   const users = await prisma.users.findMany();
   return users;
-}
+};
 
-export {
-  createUser,
-  findUserById,
-  getAllUsers,
-  createNewUser
-}
+export { createUser, findUserById, getAllUsers, createNewUser };
