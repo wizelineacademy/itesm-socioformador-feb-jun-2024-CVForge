@@ -1,4 +1,4 @@
-import { ProfessionalInfo } from './professional';
+import { ProfessionalInfo } from './ProfessionalInfoType';
 
 export type Certificate = {
     certificate_id : string;

@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma';
-import { Certificate } from '@/types/certificate';
+import { Certificate } from '@/types/CertificateType';
 import { Prisma } from '@prisma/client';
 
 const createCertificate = async (certificateData: Prisma.certificateCreateInput) => {

@@ -1,11 +1,4 @@
-interface GeneralInfo {
-  first_name: string;
-  last_name: string;
-  email: string;
-  phone: string;
-  github_link: string;
-  linkedin_link: string;
-}
+import { GeneralInfo } from "./GeneralInfoType";
 
 interface Education {
   school: string;
@@ -13,7 +6,6 @@ interface Education {
   gpa: number;
   start_date: string;
   end_date: string;
-//   relevant_coursework: string;
 }
 
 interface Project {

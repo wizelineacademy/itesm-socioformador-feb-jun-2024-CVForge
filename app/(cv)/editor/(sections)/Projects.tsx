@@ -5,7 +5,7 @@ import {
   createProject,
   updateProject,
   deleteProject,
-} from "@/services/professional_information/generalService"
+} from "@/services/generalService"
 import { useEffect, useState } from "react"
 import { useSession } from "next-auth/react"
 import { getProfessionalByEmail } from "@/services/sessionService"

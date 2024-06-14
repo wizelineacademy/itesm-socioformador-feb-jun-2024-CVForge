@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma';
 import achievementService from '@/services/achievementService';
-import { Achievement } from '@/types/achievement';
+import { Achievement } from '@/types/AchievementType';
 import { expect } from '@jest/globals';
 
 jest.mock('@/lib/prisma', () => ({

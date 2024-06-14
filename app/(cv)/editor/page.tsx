@@ -16,7 +16,7 @@ import {
   getProjects,
   getSkills,
   getWorks,
-} from "@/services/professional_information/generalService"
+} from "@/services/generalService"
 import { useSession } from "next-auth/react"
 import GalleryLoading from "@/app/components/loading"
 const ProfessionalInfo: React.FC = () => {

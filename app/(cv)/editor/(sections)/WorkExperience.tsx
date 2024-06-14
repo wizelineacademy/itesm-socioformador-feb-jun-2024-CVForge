@@ -5,7 +5,7 @@ import {
   createWork,
   updateWork,
   deleteWork,
-} from "@/services/professional_information/generalService"
+} from "@/services/generalService"
 import { useEffect, useState } from "react"
 import { update } from "cypress/types/lodash"
 import { useSession } from "next-auth/react"

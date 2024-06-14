@@ -6,7 +6,7 @@ import {
   getEducation,
   updateEducation,
   deleteEducation,
-} from "@/services/professional_information/generalService"
+} from "@/services/generalService"
 import ProfessionalInfo from "../page"
 import { useSession } from "next-auth/react"
 import { getProfessionalByEmail } from "@/services/sessionService"

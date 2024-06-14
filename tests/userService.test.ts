@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma';
 import { createUser, findUserById, getAllUsers} from '@/services/userService'; // Assuming you export these functions from a service file
-import { User } from '@/types/user'; // Import the User type if needed, adjust path as required
+import { User } from '@/types/UserType'; // Import the User type if needed, adjust path as required
 import { expect } from '@jest/globals';
 
 // Type-safe mock setup

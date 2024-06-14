@@ -1,60 +1,12 @@
 "use server";
 import prisma from "@/lib/prisma";
-import { general_info, professional_info } from "@prisma/client";
 import { Prisma } from "@prisma/client";
-import { Decimal } from "@prisma/client/runtime/library";
+import { GeneralInfo } from "@/types/GeneralInfoType";
+import { Education } from "@/types/EducationType";
+import { Project } from "@/types/ProjectType";
+import { Work } from "@/types/WorkType";
+import { Skill } from "@/types/SkillType";
 
-interface GeneralInfo {
-  first_name: string;
-  last_name: string;
-  email: string;
-  phone: string;
-  github_link: string;
-  linkedin_link: string;
-}
-
-interface Education {
-  education_id: string;
-  school: string;
-  education_degree: string;
-  gpa: number;
-  start_date: Date;
-  end_date: Date;
-  relevant_coursework: string;
-}
-
-interface EducationInput {
-  school: string;
-  educationDegree: string;
-  gpa?: number;
-  startDate?: Date;
-  endDate?: Date;
-  relevantCoursework?: string[];
-}
-
-interface Project {
-  project_id: string;
-  name: string;
-  description: string;
-  start_date: Date;
-  end_date: Date;
-}
-
-interface Work {
-  work_experience_id : string;
-  work_position : string;
-  description : string;
-  start_date : Date;
-  end_date : Date;
-}
-
-interface Skill {
-  skill_id : string;
-  title : string;
-  proficiency : string;
-}
-
-//General Info Services
 const getGeneralInfo = async (
   professionalID: string
 ): Promise<GeneralInfo | null> => {
@@ -87,7 +39,6 @@ const createGeneralInfo = async (
   return newGeneralInfo;
 };
 
-//Education services
 const getEducation = async (professionalID: string): Promise<Education[]> => {
   const educations = await prisma.education.findMany({
     where: { professional_info_id: professionalID },
@@ -148,8 +99,6 @@ const deleteEducation = async (educationID: string) => {
   }
 };
 
-//Projects services
-
 const getProjects = async (professionalID: string): Promise<Project[]> => {
   const arrayProjects = await prisma.project.findMany({
     where: { professional_info_id: professionalID },
@@ -170,25 +119,24 @@ const createProject = async (professionalID: string): Promise<Project> => {
   return createdProject;
 };
 
-const updateProject = async (projectID: string, projectData: Partial<Project>): Promise<Project> => {
-  const updatedProject = await prisma.project.update(
-    {
-      where : {project_id : projectID},
-      data : projectData,
-    }
-  )
+const updateProject = async (
+  projectID: string,
+  projectData: Partial<Project>
+): Promise<Project> => {
+  const updatedProject = await prisma.project.update({
+    where: { project_id: projectID },
+    data: projectData,
+  });
   return updatedProject;
 };
 
 const deleteProject = async (projectID: string): Promise<Project> => {
-  const deletedProject  = await prisma.project.delete({
-    where : {project_id : projectID}
-  })
+  const deletedProject = await prisma.project.delete({
+    where: { project_id: projectID },
+  });
   return deletedProject;
-}
+};
 
-
-//Work experience services
 const getWorks = async (professionalID: string): Promise<Work[]> => {
   const arrayWorks = await prisma.work_experience.findMany({
     where: { professional_info_id: professionalID },
@@ -209,25 +157,24 @@ const createWork = async (professionalID: string): Promise<Work> => {
   return createdWork;
 };
 
-const updateWork = async (workID: string, workData: Partial<Work>): Promise<Work> => {
-  const updatedWork = await prisma.work_experience.update(
-    {
-      where : {work_experience_id : workID},
-      data : workData,
-    }
-  )
+const updateWork = async (
+  workID: string,
+  workData: Partial<Work>
+): Promise<Work> => {
+  const updatedWork = await prisma.work_experience.update({
+    where: { work_experience_id: workID },
+    data: workData,
+  });
   return updatedWork;
 };
 
 const deleteWork = async (workID: string): Promise<Work> => {
-  const deletedWork  = await prisma.work_experience.delete({
-    where : {work_experience_id : workID}
-  })
+  const deletedWork = await prisma.work_experience.delete({
+    where: { work_experience_id: workID },
+  });
   return deletedWork;
-}
+};
 
-
-//Work experience services
 const getSkills = async (professionalID: string): Promise<Skill[]> => {
   const arraySkills = await prisma.skill.findMany({
     where: { professional_info_id: professionalID },
@@ -248,22 +195,23 @@ const createSkill = async (professionalID: string): Promise<Skill> => {
   return createdSkill;
 };
 
-const updateSkill = async (skillID: string, skillData: Partial<Skill>): Promise<Skill> => {
-  const updatedSkill = await prisma.skill.update(
-    {
-      where : {skill_id : skillID},
-      data : skillData,
-    }
-  )
+const updateSkill = async (
+  skillID: string,
+  skillData: Partial<Skill>
+): Promise<Skill> => {
+  const updatedSkill = await prisma.skill.update({
+    where: { skill_id: skillID },
+    data: skillData,
+  });
   return updatedSkill;
 };
 
 const deleteSkill = async (skillID: string): Promise<Skill> => {
-  const deletedSkill  = await prisma.skill.delete({
-    where : {skill_id : skillID}
-  })
+  const deletedSkill = await prisma.skill.delete({
+    where: { skill_id: skillID },
+  });
   return deletedSkill;
-}
+};
 
 export {
   getGeneralInfo,

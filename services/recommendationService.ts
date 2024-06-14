@@ -1,25 +1,26 @@
 "use server";
-import prisma from '@/lib/prisma';
-import { Prisma, recommendation } from '@prisma/client';
+import prisma from "@/lib/prisma";
+import { Prisma, recommendation } from "@prisma/client";
 
-// Exportación individual de cada función
-export const createRecommendation = async (recommendationData: Prisma.recommendationCreateInput) => {
-    const recommendation = await prisma.recommendation.create({
-        data: {
-            ...recommendationData
-        }
-    });
+export const createRecommendation = async (
+  recommendationData: Prisma.recommendationCreateInput
+) => {
+  const recommendation = await prisma.recommendation.create({
+    data: {
+      ...recommendationData,
+    },
+  });
 
-    return recommendation;
-}
+  return recommendation;
+};
 
 export const findRecommendationById = async (recommendationId: string) => {
-    const recommendation = await prisma.recommendation.findUnique({
-        where: { recommendation_id: recommendationId }
-    });
+  const recommendation = await prisma.recommendation.findUnique({
+    where: { recommendation_id: recommendationId },
+  });
 
-    return recommendation;
-}
+  return recommendation;
+};
 
 export const findRecommendationsByCvId = async (cvId: string): Promise<recommendation[]> => {
     try {
@@ -33,7 +34,7 @@ export const findRecommendationsByCvId = async (cvId: string): Promise<recommend
     }
 };
 
-export const getAllRecommendation = async() => {
-    const recommendations = await prisma.recommendation.findMany();
-    return recommendations;
-}
+export const getAllRecommendation = async () => {
+  const recommendations = await prisma.recommendation.findMany();
+  return recommendations;
+};

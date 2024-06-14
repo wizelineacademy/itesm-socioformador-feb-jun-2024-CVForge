@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react"
-import {
-  createGeneralInfo,
-  getGeneralInfo,
-} from "@/services/professional_information/generalService"
+import { createGeneralInfo, getGeneralInfo } from "@/services/generalService"
 import { useSession } from "next-auth/react"
 import { getProfessionalByEmail } from "@/services/sessionService"
 /*I want to make a a form that gets the current data that is on the general_info table for an specific professional_info id and that can update that information.

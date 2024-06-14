@@ -17,12 +17,12 @@ import {
   getGeneralInfo,
   getProjects,
   getWorks,
-} from "@/services/professional_information/generalService"
+} from "@/services/generalService"
 
 // Types
 import { cv, desired_position } from "@prisma/client"
 import { useSession } from "next-auth/react"
-import { ProfessionalInfo } from "@/types/professionalInfo"
+import { ProfessionalInfo } from "@/types/ProfessionalInfoType"
 import GalleryLoading from "@/app/components/loading"
 
 interface GalleryProps {
