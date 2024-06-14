@@ -31,7 +31,7 @@ const ExistingCV: React.FC<ExistingCVProps> = ({ cvProp, deleteFunction }) => {
   }, [])
 
   return (
-    <div className="flex flex-col items-center mx-5">
+    <div className="flex flex-col items-center mx-5 existing-cv">
       <a
         href={`cv/${cvProp.cv_id}`}
         className="relative cursor-pointer"

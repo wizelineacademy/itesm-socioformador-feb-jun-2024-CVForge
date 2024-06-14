@@ -1,20 +1,23 @@
 describe('View Roadmap from Insight', () => {
   beforeEach(() => {
-    // Login to the application
-    cy.visit('http://localhost:3000/login');
+    cy.visit('http://localhost:3000/cv_gallery');
     cy.get('input[type="email"]').type('yuvanuber1@gmail.com');
-    cy.get('input[type="password"]').type('123');
+    cy.get('input[type=password]').type('123');
     cy.get('form').submit();
-
-    cy.url().should('match', /\/cv_gallery|\/homepage/);
   });
 
-  it('accesses the roadmap from the CV detail page', () => {
-    cy.visit('http://localhost:3000/cv/079a2caa-9600-4e9d-8de8-7384e68adffe');
+  it('accesses insight and then roadmap from there', () => {
+    cy.get('.existing-cv').should('have.length.at.least', 1);
 
+    cy.get('.existing-cv').first().within(() => {
+      cy.get('a').first().invoke('attr', 'href').then((href) => {
+        const roadmapUrl = `http://localhost:3000/${href}`;
+        cy.visit(roadmapUrl);
+      });
+    });
     cy.contains('button', 'Roadmap').click();
-
   });
+
 });
 
 export {};
