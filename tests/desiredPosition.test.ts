@@ -1,6 +1,5 @@
 import prisma from '@/lib/prisma';
 import desiredPositionService from '@/services/desiredPositionService';
-import { DesiredPosition } from '@/types/desiredPosition';
 import { expect } from '@jest/globals';
 
 jest.mock('@/lib/prisma', () => ({
