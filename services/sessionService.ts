@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma";
 const getUserIdByEmail = async (userEmail : string) => {
   const user = await prisma.users.findFirst(
     {
-      where : { email : userEmail},
+      where : { email : userEmail},
     }
   );
   return user.users_id;
@@ -22,7 +22,7 @@ const checkIfEmailInUse = async (userEmail : string) => {
 const getProfessionalByEmail = async (userEmail : string) => {
   const user = await prisma.users.findFirst(
     {
-      where : { email : userEmail},
+      where : { email : userEmail},
     }
   );
   
