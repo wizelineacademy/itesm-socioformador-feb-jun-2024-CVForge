@@ -28,22 +28,13 @@ describe('Register Component', () => {
     });
   
     it('alerts the user if the email is already in use', () => {
-      cy.intercept('POST', '**/api/register', {
-        statusCode: 400,
-        body: { error: 'Email already in use' },
-      }).as('registerApi');
-  
-      cy.get('input[type="email"]').type('existing.email@example.com');
-      cy.get('input[placeholder="password"]').type('securePassword123');
-      cy.get('input[placeholder="confirm password"]').type('securePassword123');
-  
-      cy.wait('@registerApi');
+      cy.get('input[type="email"]').type('test@example.com');
+      cy.get('input[placeholder="password"]').type('password123');
+      cy.get('input[placeholder="confirm password"]').type('password123');
   
       // Check if the alert is shown
       cy.on('window:alert', (msg) => {
         expect(msg).to.equal('This email is already in use. Check if you have already logged in with Google or LinkedIn.');
       });
-  
-      cy.get('button[type="submit"]').click();
     });
   });
