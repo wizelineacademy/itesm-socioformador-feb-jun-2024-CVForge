@@ -29,7 +29,7 @@ const getProfessionalByEmail = async (userEmail : string) => {
       where : {user_id : user.users_id}
     }
   );
-  return professional_info.professional_info_id;
+  return professional_info?.professional_info_id;
 };
 
 export { getUserIdByEmail, getProfessionalByEmail, checkIfEmailInUse };

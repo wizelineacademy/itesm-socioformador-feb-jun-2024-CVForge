@@ -1,7 +1,7 @@
 describe('View CV Insight', () => {
     beforeEach(() => {
       cy.visit('http://localhost:3000/cv_gallery');
-      cy.get('input[type="email"]').type('juan.lebrija02@gmail.com');
+      cy.get('input[type="email"]').type('yuvanuber1@gmail.com');
       cy.get('input[type=password]').type('123');
       cy.get('form').submit();
     });
