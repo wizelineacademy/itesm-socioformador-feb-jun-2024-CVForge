@@ -116,4 +116,15 @@ describe('Profile Service Tests', () => {
             where: { profile_id: profileId },
         });
     });
+
+    test('deleteProfile should return null if profile does not exist', async () => {
+        const profileId = 'profile3';
+
+        const profile = await deleteProfile(profileId);
+
+        expect(profile).toBeNull();
+        expect(prisma.profile.delete).toHaveBeenCalledWith({
+            where: { profile_id: profileId },
+        });
+    });
 });
