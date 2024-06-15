@@ -17,6 +17,7 @@ describe('Work Experience Editor Form Test', () => {
         });
     });
 
+    // E2E
     it ('Updates work experience section', () => {
         cy.get('ul.steps').find('button').contains('Work Experience').click();
         cy.get('button').contains('Add New Work Experience').click();

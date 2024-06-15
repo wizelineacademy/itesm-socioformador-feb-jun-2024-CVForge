@@ -7,6 +7,7 @@ describe('Login Component', () => {
     cy.get('.flex.items-center.justify-center.h-screen.w-screen').should('be.visible');
   });
 
+  // E2E
   it('should allow users to enter email and password', () => {
     cy.get('input[type="email"]').type('test@example.com');
     cy.get('input[type="password"]').type('password123');

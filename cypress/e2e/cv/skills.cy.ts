@@ -21,6 +21,7 @@ describe('Work Experience Editor Form Test', () => {
     cy.contains('Skills').should('exist');
   });
 
+  // E2E
   it('Updates Skills section', () => {
     cy.get('ul.steps').find('button').contains('Skills').click();
     cy.get('button').contains('Add Skill').click();
@@ -31,7 +32,6 @@ describe('Work Experience Editor Form Test', () => {
     cy.contains('Basic').should('be.visible');
   });
 
-  
   it('Validates Skills Form Fields', () => {
     cy.get('ul.steps').find('button').contains('Skills').click();
     cy.get('button').contains('Add Skill').click();

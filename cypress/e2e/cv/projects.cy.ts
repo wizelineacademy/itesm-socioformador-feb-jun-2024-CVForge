@@ -21,6 +21,7 @@ describe('Education Editor Form Test', () => {
       cy.contains('Projects').should('exist');
     });
 
+    // E2E
     it ('Updated Projects Section', () => {
         cy.get('ul.steps').find('button').contains('Projects').click();
         cy.get('button').contains('Add New Project').click();

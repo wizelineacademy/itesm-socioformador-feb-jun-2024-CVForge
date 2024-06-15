@@ -23,6 +23,7 @@ describe('General Information Test', () => {
         cy.contains('General Info').should('exist');
     });
 
+    // E2E
     it('loads the correct initial values', () => {
         cy.visit('http://localhost:3000/editor');
         // Asegurar que los campos se carguen con los valores esperados provenientes de la BD

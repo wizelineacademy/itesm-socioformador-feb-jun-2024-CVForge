@@ -16,6 +16,7 @@ describe('Education Editor Form Test', () => {
     });
   });
 
+  // E2E
   it('Updates the Education Section', () => {
     cy.get('ul.steps').find('button').contains('Education').click();
     cy.get('button').contains('Add New Education').click();
