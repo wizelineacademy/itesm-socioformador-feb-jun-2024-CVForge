@@ -154,4 +154,35 @@ describe('Education Services', () => {
       where: { education_id: mockEducationId },
     });
   });
+
+  test('getEducation should return all education records', async () => {
+    const expectedEducations = [
+      {
+        education_id: '1',
+        school: 'Tec de Monterrey',
+        education_degree: 'Computer Science',
+        gpa: 4.0,
+        start_date: new Date('2024-04-01'),
+        end_date: new Date('2027-06-01'),
+        relevant_coursework: 'Sample Coursework'
+      },
+      {
+        education_id: '2',
+        school: 'UDEM',
+        education_degree: 'Arts',
+        gpa: 3.5,
+        start_date: new Date('2018-05-12'),
+        end_date: new Date('2022-05-01'),
+        relevant_coursework: 'Another Coursework'
+      }
+    ];
+
+    // Perform the function call
+    const educations = await educationService.getEducation();
+
+    // Check that the returned value matches the expected mock value
+    expect(educations).toEqual(expectedEducations);
+    // Verify the method was called correctly
+    expect(prisma.education.findMany).toHaveBeenCalledWith();
+  });
 });
