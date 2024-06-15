@@ -21,6 +21,7 @@
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
     <li><a href="#stack">Stack</a></li>
+    <li><a href="#architecture-diagram">Architecture Diagram</a></li>
     <li><a href="#setup">Setup</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#features">Features</a></li>
@@ -35,7 +36,7 @@
 ## About The Project
 
 <div align="center">
-  <img src="public/assets/landingCVF.png" alt="Landing Page" style="max-width:100%;">
+  <img src="public/assets/landingCVF.png" alt="Diagram" >
 </div>
 
 CVForge.ai is a SaaS that helps users create a CV suitable for the position they want to apply for with the help of AI. This application uses our database to search for CVs that were accepted for the desired position by the user and utilizes the information provided by the user via uploading their CV, linking their LinkedIn account, or entering their information manually. CVForge.ai uses artificial intelligence to generate a CV tailored to the specific position the user wishes to apply for. Additionally, it provides feedback on the generated CV, helping the user improve their presentation. GPT and LinkedIn APIs are used.
@@ -55,6 +56,12 @@ CVForge.ai is a SaaS that helps users create a CV suitable for the position they
 - [![Jest][Jest.io]][Jest-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Architecture Diagram
+
+<div align="center">
+  <img src="public/assets/CVForge_Architecture.png" alt="Landing Page" style="max-width:100%;">
+</div>
 
 <!-- GETTING STARTED -->
 
