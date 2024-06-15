@@ -3,7 +3,7 @@ describe('Education Editor Form Test', () => {
         cy.visit('http://localhost:3000/login');
         cy.get('input[type=email]').type('francoelugo@live.com');
         cy.get('input[type=password]').type('123');
-        cy.get('form').submit();
+        cy.contains('Sign In').click();
 
         cy.url().should(url => {
             expect(url).to.match(/\/cv_gallery|\/editor/);
@@ -17,7 +17,11 @@ describe('Education Editor Form Test', () => {
         });
     });
 
-    it ('Updated Education Section', () => {
+    it ('Renders projects section correctly', () => {
+      cy.contains('Projects').should('exist');
+    });
+
+    it ('Updated Projects Section', () => {
         cy.get('ul.steps').find('button').contains('Projects').click();
         cy.get('button').contains('Add New Project').click();
 

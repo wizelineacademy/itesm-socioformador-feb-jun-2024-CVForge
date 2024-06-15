@@ -3,7 +3,7 @@ describe('Work Experience Editor Form Test', () => {
         cy.visit('http://localhost:3000/login');
         cy.get('input[type=email]').type('francoelugo@live.com');
         cy.get('input[type=password]').type('123');
-        cy.get('form').submit();
+        cy.contains('Sign In').click();
 
         cy.url().should(url => {
             expect(url).to.match(/\/cv_gallery|\/editor/);
@@ -15,6 +15,10 @@ describe('Work Experience Editor Form Test', () => {
               cy.visit('http://localhost:3000/editor');
             }
         });
+    });
+
+    it ('Renders skills section correctly', () => {
+      cy.contains('Skills').should('exist');
     });
 
     it ('Updates skills section', () => {

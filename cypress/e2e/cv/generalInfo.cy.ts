@@ -5,7 +5,7 @@ describe('General Information Test', () => {
         cy.visit('http://localhost:3000/login');
         cy.get('input[type="email"]').type('a00833951@tec.mx');
         cy.get('input[type=password]').type('123');
-        cy.get('form').submit();
+        cy.contains('Sign In').click();
 
         cy.url().should(url => {
             expect(url).to.match(/\/cv_gallery|\/editor/);
@@ -17,6 +17,10 @@ describe('General Information Test', () => {
               cy.visit('http://localhost:3000/editor');
             }
         });
+    });
+
+    it ('Renders general info section correctly', () => {
+        cy.contains('General Info').should('exist');
     });
 
     it('loads the correct initial values', () => {
